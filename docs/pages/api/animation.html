@@ -1,0 +1,22 @@
+<header>
+    动画
+</header>
+<h2>
+    引入
+</h2>
+<pre tag="javascript">
+import { animation } from "vislite"
+</pre>
+<h2>
+    语法
+</h2>
+<pre tag="javascript">
+let stop = animation(deep => {
+    // 轮询调用，必输
+}, duration = 400, deep => {
+    // 结束调用，可选
+})
+</pre>
+<p>
+    返回一个函数，调用该函数，可以提前结束动画。
+</p>

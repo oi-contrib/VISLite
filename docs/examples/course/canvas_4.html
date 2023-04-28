@@ -1,0 +1,122 @@
+<!-- 绘制图表 -->
+<div id="mycanvas"></div>
+
+<!-- 悬浮提示 -->
+<div id="tooltip" class="tooltip"></div>
+
+<script type="module">
+    import { Canvas } from 'vislite';
+
+    var el = document.getElementById('mycanvas');
+
+    var painter = new Canvas(el);
+
+    var data = {
+        date: ['2017-10-24', '2017-10-25', '2017-10-26', '2017-10-27'],
+        value: [
+
+            // 开盘、收盘、最低、最高
+            [20, 34, 10, 38],
+            [40, 35, 30, 50],
+            [31, 38, 33, 44],
+            [38, 15, 5, 42]
+        ]
+    }
+
+    var i, color, x, y, maxValue = 60;
+
+    var width = el.clientWidth, height = el.clientHeight;
+
+    var perH = height / maxValue;
+    var perW = width / data.date.length;
+
+    for (i = 0; i < data.value.length; i++) {
+
+        // 用颜色区分是涨还是跌
+        color = data.value[i][0] > data.value[i][1] ? "#5ab362" : "#ea5454";
+
+        y = height - data.value[i][0] * perH;
+        x = (i + 0.5) * perW;
+
+        painter.config({
+            "fillStyle": color,
+            "strokeStyle": color
+        })
+
+            // 登记区域
+            .setRegion(i + 1)
+
+            // 开盘收盘
+            .fillRect(x - perW * 0.25, y, perW * 0.5, perH * (data.value[i][0] - data.value[i][1]))
+
+            // 最高最低
+            .beginPath()
+            .moveTo(x, y + perH * (data.value[i][0] - data.value[i][2]))
+            .lineTo(x, y + perH * (data.value[i][0] - data.value[i][3]))
+            .stroke();
+    }
+
+    var hoverEl = document.getElementById("tooltip");
+    el.addEventListener('mousemove', function (event) {
+        painter.getRegion(event.offsetX, event.offsetY).then(function (index) {
+            if (!index) {
+                hoverEl.style.display = 'none';
+            } else {
+                hoverEl.style.display = "block";
+
+                // 修改悬浮位置
+                hoverEl.style.left = (event.offsetX + 20) + "px";
+                hoverEl.style.top = (event.offsetY + 20) + "px";
+
+                hoverEl.innerHTML = "<label>" + data.date[index - 1] + "</label>" +
+                    "<span>开盘:" + data.value[index - 1][0] + "</span>" +
+                    "<span>收盘:" + data.value[index - 1][1] + "</span>" +
+                    "<span>最低:" + data.value[index - 1][2] + "</span>" +
+                    "<span>最高:" + data.value[index - 1][3] + "</span>";
+            }
+        });
+    });
+
+</script>
+<style>
+    body {
+        margin: 0;
+    }
+
+    #mycanvas {
+        height: 100vh;
+    }
+
+    .tooltip {
+        position: absolute;
+        transition-duration: 300ms;
+        transition-timing-function: linear;
+        transition-property: left top;
+        pointer-events: none;
+        box-shadow: rgb(0 0 0 / 20%) 1px 2px 10px;
+        border-style: solid;
+        background-color: rgb(255, 255, 255);
+        border-width: 1px;
+        border-radius: 4px;
+        color: rgb(102, 102, 102);
+        font: 14px / 21px sans-serif;
+        padding: 10px;
+        text-align: left;
+        display: none;
+    }
+
+    .tooltip>label {
+        font-size: 15px;
+        color: #000000;
+        font-weight: 800;
+        line-height: 1.5;
+        white-space: nowrap;
+    }
+
+    .tooltip>span {
+        font-size: 14px;
+        color: #666;
+        font-weight: 400;
+        display: block;
+    }
+</style>

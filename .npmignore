@@ -1,0 +1,12 @@
+.git
+.DS_Store
+.project
+.github
+.gitignore
+node_modules
+package-lock.json
+test
+docs
+build
+tsconfig.json
+module.d.ts

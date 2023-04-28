@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>官方文档 | VISLite 灵活、快速、简单的数据可视化交互式跨端前端库</title>
+    <link rel="shortcut icon" href="./images/logo.png">
+    <meta name="keywords" content="zxl20070701 1904314465@qq.com vislite">
+    <link rel="stylesheet" href="./styles/normalize.css">
+    <link rel="stylesheet" href="./styles/common.css">
+    <script src="./js/system.js"></script>
+    <script src="./js/tool.js"></script>
+    <script src="./js/menu.js"></script>
+    <script src="./js/shader.js"></script>
+    <script>
+        // 控制是否需要缓存
+        var host = window.location.host;
+        window.needCache = !(/^127\.0\.0\.1/.test(host) || /^localhost/.test(host) || host == "");
+    </script>
+</head>
+
+<body menu-status="hidden">
+    <header>
+        <div class="menu-ctrl" onclick="toggleMenu()">
+            <svg width="24" height="24" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path fill="white" d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
+            </svg>
+        </div>
+        <h1 onclick="openBlankPage('https://github.com/oi-contrib')">
+            <div>OI开源</div>
+            <div>和你分享一些有趣的主意</div>
+        </h1>
+        <h2>
+            VISLite
+        </h2>
+    </header>
+
+    <!-- 导航 -->
+    <div class="nav" id="nav">
+        <span onclick="changeNav('begin')" id="nav-begin">开始</span>
+        <span onclick="changeNav('course')" id="nav-course">教程</span>
+        <span onclick="changeNav('api')" id="nav-api">文档</span>
+        <span onclick="changeNav('example')" id="nav-example">用例</span>
+        <span onclick="changeNav('question')" id="nav-question">答疑</span>
+        <span class="github" onclick="openBlankPage('https://github.com/oi-contrib/VISLite')">GitHub</span>
+    </div>
+
+    <!-- 菜单 -->
+    <div class="menu" id="menu"></div>
+    <div class="menu-mask" id="menu-mask"></div>
+
+    <!-- 内容 -->
+    <div class="content" id="content"></div>
+
+    <!-- 滚动定位 -->
+    <div class="fixed" id="fixed"></div>
+
+    <!-- 解释说明 -->
+    <div class="explain-view" id="explain-root">
+        <button id="explain-close-id">
+            关闭
+        </button>
+        <div class="content" id="explain-content-id">
+        </div>
+    </div>
+
+    <script>
+        var temp = window.location.hash.replace("#/", "").split("/");
+        window.__router = [temp[0] || "begin", temp[1] || ''];
+
+        for (var i = 2; i < temp.length; i++) {
+            window.__router[1] += "/" + temp[i];
+        }
+        changeNav(window.__router[0] || "begin", true);
+
+        var closeDialog = function (idName) {
+            document.getElementById(idName).style.display = "none";
+        };
+
+        // 关闭解释说明
+        document.getElementById('explain-close-id').addEventListener('click', function () {
+            closeDialog('explain-root');
+        });
+    </script>
+</body>
+
+</html>

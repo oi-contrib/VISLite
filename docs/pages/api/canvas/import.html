@@ -1,0 +1,130 @@
+<header>
+    引入和初始化
+</header>
+<h2>
+    Web端
+</h2>
+<pre tag="javascript">
+import { Canvas } from 'vislite'
+
+// 获取画笔
+let painter = new Canvas(el)
+</pre>
+<p>
+    其中el是画布的挂载点，比如可以是一个DIV节点。
+</p>
+<h2>
+    uni-app
+</h2>
+<p>
+    我们提供的是一个uni-app组件，引入以后需要进行注册：
+</p>
+<pre tag="javascript">
+import uiCanvas from 'vislite/uni-app/ui-canvas.vue'
+
+export default {
+    components:{
+        uiCanvas
+    }
+};
+</pre>
+<p>
+    注册完毕就可以在页面中使用了：
+</p>
+<pre tag="html">
+    <ui-canvas ref='mycanvas' :width='400' :height='300'></ui-canvas>
+</pre>
+<p>
+    然后获取画笔：
+</p>
+<pre tag="javascript">
+this.$refs.mycanvas.fetch().then(painter => {
+    // todo
+})
+</pre>
+<p>
+    此时，你就可以用这只画笔绘制你想要的内容了。
+</p>
+<p>
+    稍微特殊一点的是，每次全部绘制完毕以后，都需要额外调用下面的方法刷新画布：
+</p>
+<pre tag="javascript">
+painter.draw()
+</pre>
+<h3>
+    交互
+</h3>
+<p>
+    由于环境的特殊性，我们提供了跨端的方法来帮助你更简单的实现交互：
+</p>
+<pre tag="html">
+    <ui-canvas :touchstart='doit'></ui-canvas>
+</pre>
+<p>
+    其中doit是定义的方法：
+</p>
+<pre tag="javascript">
+methods: {
+    doit(regionName) {
+        console.log(regionName)
+    }
+}
+</pre>
+<p>
+    在你每次点击画笔的时候就会触发doit方法，此方法有一个行参，表示你点击的区域名称。
+</p>
+<h2>
+    微信小程序
+</h2>
+<p>
+    首先，你需要确定你进行了npm构建，如果不清楚如何构建，你可以：
+</p>
+<button tag="miniprogram-npm" type="explain">点击查看如何构建？</button>
+<p>
+    然后注册组件：
+</p>
+<pre tag="javascript">
+// page.json
+{
+    "usingComponents": {
+        "ui-canvas": "vislite/miniprogram/ui-canvas/index"
+    }
+}
+</pre>
+<p>
+    注册完毕就可以在页面中使用了：
+</p>
+<pre tag="html">
+    <ui-canvas id='mycanvas' :width='400' :height='300'></ui-canvas>
+</pre>
+<p>
+    然后获取画笔：
+</p>
+<pre tag="javascript">
+this.selectComponent('#mycanvas').fetch().then(painter => {
+    // todo
+})
+</pre>
+<p>
+    此时，你就可以用这只画笔绘制你想要的内容了。
+</p>
+
+<h3>
+    交互
+</h3>
+<pre tag="html">
+    <ui-canvas touchstart='{{doit}}'></ui-canvas>
+</pre>
+<p>
+    其中doit是定义data中的方法：
+</p>
+<pre tag="javascript">
+data: {
+    doit(regionName) {
+        console.log(regionName)
+    }
+}
+</pre>
+<p>
+    在你每次点击画笔的时候就会触发doit方法，此方法有一个形参，表示你点击的区域名称。
+</p>

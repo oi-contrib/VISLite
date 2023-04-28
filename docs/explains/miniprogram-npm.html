@@ -1,0 +1,37 @@
+<header>
+    构建 npm
+</header>
+<p>
+    在开始使用之前需要进行构建：
+</p>
+<pre>
+    通过在微信小程序开发工具界面的『工具』->『构建 npm』
+</pre>
+<h3>
+    指定npm位置
+</h3>
+<p>
+    如果你通过<span class="special">project.config.json</span>里面的
+    <span class="important">miniprogramRoot</span>属性修改了小程序根位置，比如：
+</p>
+<pre tag="javascript">
+{
+    "miniprogramRoot": "miniprogram/"
+}
+</pre>
+<p>
+    那么，你就需要在此文件中补充如下配置后再进行构建：
+</p>
+<pre tag="javascript">
+{
+    "setting": {
+        "packNpmManually": true,
+        "packNpmRelationList": [
+          {
+            "packageJsonPath": "./package.json",
+            "miniprogramNpmDistDir": "./miniprogram/"
+          }
+        ]
+    }
+}
+</pre>

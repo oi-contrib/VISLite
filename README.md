@@ -1,0 +1,39 @@
+<div style="background-image:url('./docs/images/logo.png');width:512px;height:200px;background-position:center"></div>
+
+# VISLite
+
+```VISLite```是一个使用```TypeScript```开发的可视化库。官网地址：[https://oi-contrib.github.io/VISLite](https://oi-contrib.github.io/VISLite)
+
+主要提供了跨端的画布和计算，开发人员只需要按照文档的描述就可以非常简单的完成包括Web、uni-app、微信小程序等平台的可视化开发，除了必要的初始化差异，主要的业务代码部分不同端完全一致。
+
+## VISLite的特点
+
+- 灵活的引入方式：包括npm安装后按照```ES Module```或```CommonJS```规范引入或直接使用script标签的```CDN```方式。
+- 按需引入或全局引入：支持源码TS引入、按需JS引入或者全量引入等多种方式。
+- 简单与复杂共存：一方面我们提供了可视化需要的基础功能，你可以按照自己的需要组合使用；另一方面，为了加速开发，我们针对常见的可视化业务场景进行了封装，可以帮助你快速完成，你可以根据实际情况进行选择。
+- 向下兼容：我们向你保证，始终向下兼容```（alpha和beta版本为测试版本，不包括）```，因此，无论何时，最新版本总是最好的选择。
+
+## 需求墙
+
+我们的目标是不断完善丰富可视化功能，非常希望获得你宝贵的建议和批评，无论任何想法，都可以给我们[留言](https://github.com/oi-contrib/VISLite/issues)告诉我们。
+
+你所提的任何建议我们都会在最长一周内进行反馈说明。
+
+## 更新日志
+
+详见[正式版更新日志](./CHANGELOG)，我们会在每次发布完正式版本后更新其内容。
+
+## 下一版本
+
+我们会在这里列出下一个版本可能会提供的功能：
+
+- 添加对WebGL 3D的支持
+- 为加速开发，提供常用坐标系和布局
+
+给我们[留言](https://github.com/oi-contrib/VISLite/issues)告诉我们你希望快速扩展的功能，我们会优先你的建议考虑哦～
+
+## 版权
+
+MIT License
+
+Copyright (c) [zxl20070701](https://zxl20070701.github.io/notebook/home.html) 走一步，再走一步

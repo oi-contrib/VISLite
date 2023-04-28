@@ -1,0 +1,15 @@
+<div id="mycanvas" style="width:300px;height:300px;outline: 1px solid red;"></div>
+<script type="module">
+    import { Canvas } from 'vislite';
+
+    var painter = new Canvas(document.getElementById('mycanvas'));
+
+    // 绘制文字
+    painter.fillText("我爱你，中国～", 50, 20)
+
+    // 绘制球
+    painter.config({
+        "fillStyle": "pink"
+    }).fillCircle(150, 150, 100)
+
+</script>

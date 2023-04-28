@@ -1,0 +1,5 @@
+/* 辅助的区域不应该可以看见 */
+.region {
+  position: fixed;
+  left: 50000px;
+}

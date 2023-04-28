@@ -1,0 +1,15 @@
+<div id="mysvg" style="width:300px;height:300px;outline: 1px solid red;"></div>
+<script type="module">
+    import { SVG } from 'vislite';
+
+    var painter = new SVG(document.getElementById("mysvg"));
+
+    // 绘制文字
+    painter.appendBoard('text').fillText("我爱你，中国～", 50, 20)
+
+    // 绘制球
+    painter.config({
+        "fillStyle": "pink"
+    }).appendBoard('circle').fillCircle(150, 150, 100)
+
+</script>

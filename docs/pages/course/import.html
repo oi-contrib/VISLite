@@ -1,0 +1,91 @@
+<header>
+    如何引入？
+</header>
+<h2>
+    安装
+</h2>
+<p>
+    首先，你需要使用npm安装此包：
+</p>
+<pre>
+npm install --save vislite
+</pre>
+<h2>
+    全量引入
+</h2>
+<p>
+    也就是引入后可以通过把柄<span class="special">VISLite</span>来调用其上的方法：
+</p>
+<h3>
+    ES Module
+</h3>
+<pre tag="javascript">
+import VISLite from 'vislite'
+</pre>
+<p>
+    当然，也可以指明具体的内容，比如：
+</p>
+<pre tag="javascript">
+import { Example } from 'vislite'
+</pre>
+<div class="warn">
+    温馨提示：上面的<span class="special">Example</span>只是一个占位符，使用的时候应该换成具体的，比如Canvas、SVG、rotate、Matrix4等，下同。
+</div>
+<h3>
+    Script 标签
+</h3>
+<p>
+    此外，你也可以使用Script标签引入：
+</p>
+<pre tag="html">
+<script src="./node_modules/vislite/lib/index.umd.min.js"></script>
+</pre>
+<p>
+    或直接使用在线的CDN引入：
+</p>
+<pre tag="html">
+<script src="https://unpkg.com/vislite"></script>
+</pre>
+<h2>
+    按需引入
+</h2>
+<p>
+    在大部分情况下，你可能不会用到所有能力，所以全量引入并不总是一个好的选择：
+</p>
+<pre tag="javascript">
+import Example from "vislite/lib/Example/index.umd.min.js"
+</pre>
+<h2>
+    TypeScript 源码引入
+</h2>
+<p>
+    如果你希望直接引入源码使用而不是打包后的js文件，你可以：
+</p>
+<h3>
+    全量引入
+</h3>
+<pre tag="javascript">
+import VISLite from 'vislite/package/index'
+</pre>
+<div class="warn">
+    温馨提示：这要求你的项目配置了TypeScript解析相关内容。
+</div>
+<h3>
+    按需引入
+</h3>
+<p>
+    同样的，按需引入例子：
+</p>
+<pre tag="javascript">
+import Example from "vislite/package/Example/index"
+</pre>
+<h2>
+    其它
+</h2>
+<h3>
+    微信小程序
+</h3>
+<p>
+    当我们使用npm安装好以后，在微信小程序里面还需要多一步构建，然后才可以正常使用：
+</p>
+<button tag="miniprogram-npm" type="explain">点击查看如何构建？</button>

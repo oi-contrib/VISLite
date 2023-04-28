@@ -1,0 +1,39 @@
+<header>
+    Cardinal
+</header>
+<h2>
+    引入
+</h2>
+<pre tag="javascript">
+import { Cardinal } from "vislite"
+</pre>
+<h2>
+    语法
+</h2>
+<pre tag="javascript">
+let cardinal = new Cardinal(t = 0)
+</pre>
+<p>
+    参数t用于调整曲线走势，默认数值t=0，分水岭t=-1，|t-(-1)|的值越大，曲线走势调整的越严重。
+</p>
+<h3>
+    setP
+</h3>
+<p>
+    设置点的位置：
+</p>
+<pre tag="javascript">
+cardinal.setP(points) 
+</pre>
+<p>
+    参数格式：[[x1, y1], [x2, y2], ... ]，至少两个点。
+</p>
+<h3>
+    use
+</h3>
+<p>
+    根据x值返回y值：
+</p>
+<pre tag="javascript">
+cardinal.use(x)
+</pre>

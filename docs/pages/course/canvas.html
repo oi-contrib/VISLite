@@ -1,0 +1,217 @@
+<header>
+    Canvas
+</header>
+<p>
+    这是一支可以兼容多端的画笔，我们这里获取的时候以Web端为例，别的端如何初始化请
+    <a href="#/api/canvas/import" target="_blank">点击此处</a>
+    进行查阅。
+</p>
+<div class="warn">
+    温馨提示：如果你当前的开发平台我们还没有进行支持，你可以
+    <a href="https://github.com/oi-contrib/VISLite/issues" target="_blank">提issue</a>
+    告诉我们，或者
+    <a href="https://github.com/oi-contrib/VISLite/pulls" target="_blank">New pull request</a>
+    帮助我们扩展。
+</div>
+<h2>
+    基本使用
+</h2>
+<h3>
+    准备画布
+</h3>
+<p>
+    使用之前，我们首先需要准备一个设置了大小的节点，具体是用的div还是span或者别的都可以：
+</p>
+<pre tag="html">
+<div id="mycanvas" style="width:300px;height:300px;"></div>
+</pre>
+<h3>
+    获取画笔
+</h3>
+<p>
+    准备好节点以后，就可以获取画笔了：
+</p>
+<pre tag="javascript">
+import { Canvas } from 'vislite';
+
+var painter = new Canvas(document.getElementById('mycanvas'));
+</pre>
+<h3>
+    绘制
+</h3>
+<p>
+    现在，画笔也有了，我们就可以直接用这支画笔绘制我们想要的内容了。
+</p>
+<p>
+    比如我们想在 <span class="special">(50, 20)处</span>
+    写段文字，然后在
+    <span class="special">(150, 150)处</span>
+    绘制一个
+    <span class="special">半径100</span>
+    的小球：
+</p>
+<pre tag="javascript">
+painter.fillText("我爱你，中国～", 50, 20);
+painter.fillCircle(150, 150, 100);
+</pre>
+<p>
+    当然，画笔的属性也是可以修改的，比如你可以设置小球的颜色：
+</p>
+<pre tag="javascript">
+painter.config({
+    "fillStyle": "pink"
+});
+</pre>
+<div class="warn">
+    温馨提示：具体的可以绘制的基础图形和可以设置的画笔属性，请
+    <a href="#/api/canvas/api" target="_blank">点击此处</a>
+    进行查阅。
+</div>
+<p>
+    下面是完整的例子代码：
+</p>
+<example tag="course/canvas_1" height="340px"></example>
+<p>
+    怎么样，是不是非常简单？具体的图表你只需要根据业务场景使用画笔上的API进行绘制即可。
+</p>
+<h2>
+    交互
+</h2>
+<p>
+    图表绘制好了以后，难免需要交互，比如下面的图表：
+</p>
+<example tag="course/canvas_2" height="400px"></example>
+<p>
+    现在，我们希望点击的时候，可以提示我们点击的是谁，怎么办？
+</p>
+<h3>
+    记录区域
+</h3>
+<div class="warn">
+    虽然你可以通过点击的位置，然后结合具体的图表，使用数学运算等来判断。比如通过计算到球心的位置来判断是否点击了某个小球，结合sin和cos就可以进一步判断弧形等，可是，这不能很好的解决下列问题：
+    <hr />
+    <ol>
+        <li>
+            不规则图形难度较大，比如五角星等，而如果是类似地图边境的，简直就是灾难；
+        </li>
+        <li>
+            即使你有很深厚的数学功底，可是大量的计算可能会消耗非常多的资源，当然，也包括运算本身的代码量。
+        </li>
+    </ol>
+</div>
+<p>
+    幸运的是，我们提供了
+    <span class="important">区域管理机制</span>，使用起来非常简单。
+</p>
+<p>
+    对于上面的图表，我们是通过
+    <span class="special">for循环</span>
+    来一个个绘制的，简化后的主要代码如下：
+</p>
+<pre tag="javascript">
+for (i = 0; i &lt; data.value.length; i++) {
+
+    // 开盘收盘
+    painter.fillRect(x - perW * 0.25, y, perW * 0.5, perH * (data.value[i][0] - data.value[i][1]))
+
+    // 最高最低
+    painter.beginPath()
+    .moveTo(x, y + perH * (data.value[i][0] - data.value[i][2]))
+    .lineTo(x, y + perH * (data.value[i][0] - data.value[i][3]))
+    .stroke();
+}
+</pre>
+<p>
+    因此，每一个<span class="special">for循环</span>就是一个独立的<span class="special">区域</span>，我们只需要在绘制前对区域进行登记：
+</p>
+<pre tag="javascript">
+for (i = 0; i &lt; data.value.length; i++) {
+
+    // 登记区域
+    painter.setRegion(i + 1);
+
+    // 开盘收盘
+    painter.fillRect(x - perW * 0.25, y, perW * 0.5, perH * (data.value[i][0] - data.value[i][1]))
+
+    // 最高最低
+    painter.beginPath()
+    .moveTo(x, y + perH * (data.value[i][0] - data.value[i][2]))
+    .lineTo(x, y + perH * (data.value[i][0] - data.value[i][3]))
+    .stroke();
+}
+</pre>
+<p>
+    很好，搞定。此时区域就已经被记录下来了，那怎么使用？当然是交互的时候了。
+</p>
+<h3>
+    反馈
+</h3>
+<p>
+    比如我们给画布添加一个点击事件，用来告诉我们点击的是谁：
+</p>
+<pre tag="javascript">
+el.addEventListener('click', function (event) {
+    painter.getRegion(event.offsetX, event.offsetY).then(function (index) {
+        if (index) {
+            alert("点击的区域编号：" + index);
+        }
+    });
+});
+</pre>
+<p>
+    这里的<span class="special">index</span>和前面<span class="special">painter.setRegion(i +
+        1)</span>传递的值是一样的（如果点击的不是区域，那就统一是空字符串）。
+</p>
+<p>
+    下面是完整代码：
+</p>
+<example tag="course/canvas_3" height="400px"></example>
+<h2>
+    悬浮提示
+</h2>
+<p>
+    现在我们已经从技术上解决了交互的问题，那么，我们就进一步演示一下如何添加悬浮提示。
+</p>
+<p>
+    悬浮提示本质上来说就是：根据鼠标的位置来判断悬浮框此时是否显示，以及显示的内容和位置。我们推荐使用div作为悬浮框，这样好控制：
+</p>
+<div class="warn">
+    针对小程序或者uni-app等，改成view标签后使用对应语法修改也类似。
+</div>
+<pre tag="html">
+<div id="tooltip" class="tooltip"></div>
+</pre>
+<p>
+    一般来说，悬浮提示触发的事件是鼠标移动，那么，js部分大概如下：
+</p>
+<pre tag="javascript">
+el.addEventListener('mousemove', function (event) {
+    painter.getRegion(event.offsetX, event.offsetY).then(function (index) {
+        if (!index) {
+           // 隐藏悬浮框
+        }else{
+           // 显示悬浮框，并修改内容和位置
+        }
+    });
+});
+</pre>
+<p>
+    当然，我们还需要添加css来美化悬浮框的样式，进一步，还可以借助transition优化悬浮框位置改变时候的动画效果，因为这些都属于css基础知识，这里就不再赘述了。
+</p>
+<p>
+    下面是完整的代码：
+</p>
+<example tag="course/canvas_4" height="400px"></example>
+<div class="warn">
+    实际项目中，上述的例子代码至少还有以下几点可以优化：
+    <hr />
+    <ol>
+        <li>
+            悬浮框的内容，只有改为新的区域才需要修改，不必如此频繁的DOM操作；
+        </li>
+        <li>
+            悬浮框的位置，可以根据是否越界进行调整，使得悬浮框始终完整的出现在视图窗口中。
+        </li>
+    </ol>
+    我们这里只是演示说明，这些无关紧要的细节就不那么细致了。
+</div>

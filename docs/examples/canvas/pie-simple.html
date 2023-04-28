@@ -1,0 +1,283 @@
+<div class="view">
+
+    <!-- 绘制图表 -->
+    <div id="content" class="content"></div>
+
+    <!-- 悬浮提示 -->
+    <div id="tooltip" class="tooltip"></div>
+
+</div>
+<script type="module">
+    import { Canvas, animation, rotate, getLoopColors } from "vislite";
+
+    var i;
+
+    var data = [
+        { value: 1048, name: 'Search Engine' },
+        { value: 735, name: 'Direct' },
+        { value: 580, name: 'Email' },
+        { value: 484, name: 'Union Ads' },
+        { value: 300, name: 'Video Ads' }
+    ];
+
+    var colors = getLoopColors(data.length);
+
+    var mycontent = document.getElementById("content");
+    var mytooltip = document.getElementById("tooltip");
+
+    var painter, updateView;
+
+    var beginDeg, deg, allValue = 0, cx, cy, radius;
+
+    // 求解值总数
+    for (i = 0; i < data.length; i++) {
+        allValue += data[i].value;
+    }
+
+    var doit = function () {
+
+        // 圆心和半径
+        cx = mycontent.clientWidth * 0.5;
+        cy = mycontent.clientHeight * 0.5 + 20;
+        radius = Math.max(Math.min(cx, cy) - 100, 0);
+
+        if (radius <= 0) return;
+
+        painter = new Canvas(mycontent).config({
+            shadowColor: "#555555"
+        });
+
+        /**
+         * 定义绘制方法
+         * @param deep 绘制进度
+         * @param up 被悬浮的
+         * @param down 取消悬浮的
+         */
+        updateView = function (deep, up, down) {
+            painter.setRegion(false).clearRect(0, 0, mycontent.clientWidth, mycontent.clientHeight);
+
+            // 绘制标题
+            painter.config({
+                "textAlign": "center",
+                "font-size": 20,
+                "font-weight": 600
+
+            }).fillText("Referer of a Website", cx, 30)
+                .config({
+                    "font-weight": 200,
+                    "font-size": 12
+                }).fillText("Fake Data", cx, 60);
+
+            // legend提示
+            painter.config({
+                "textAlign": "left"
+            });
+            for (i = 0; i < data.length; i++) {
+                painter.config({
+                    "fillStyle": "black"
+                }).fillText(data[i].name, 50, i * 24 + 50)
+                    .config({
+                        "fillStyle": colors[i]
+                    }).fillRect(20, i * 24 + 40, 25, 16);
+
+            }
+
+            beginDeg = Math.PI * -0.5;
+
+            var drawSelectPie;
+            for (i = 0; i < data.length; i++) {
+
+                deg = data[i].value / allValue * Math.PI * 2;
+                var drawPie = function (i, beginDeg, deg) {
+                    painter.setRegion("index" + i);
+
+                    // 根据动画修改半径
+                    var radiusMore = 0;
+                    if (up == "index" + i) {
+                        radiusMore = deep;
+                    } else if (down == "index" + i) {
+                        radiusMore = 1 - deep;
+                    }
+
+                    painter.config({
+                        fillStyle: colors[i],
+                        strokeStyle: colors[i],
+                        shadowBlur: up == "index" + i ? 10 : 0
+                    });
+
+                    var p1 = rotate(cx, cy, beginDeg + deg * 0.5, cx + radius, cy);
+                    var p2 = rotate(cx, cy, beginDeg + deg * 0.5, cx + radius + 20, cy);
+                    var p3 = [p2[0] + 15 * (p1[0] > cx ? 1 : -1), p2[1]];
+                    var p4 = [p2[0] + 20 * (p1[0] > cx ? 1 : -1), p2[1]];
+
+                    // 连线
+                    painter.beginPath().moveTo(p1[0], p1[1]).lineTo(p2[0], p2[1]).lineTo(p3[0], p3[1]).stroke();
+
+                    // 饼
+                    painter.fillArc(cx, cy, 0, radius + radiusMore * radius * 0.05, beginDeg, deg);
+
+                    // 文字
+                    painter.config({
+                        textAlign: p1[0] > cx ? "left" : "right",
+                        fillStyle: "black",
+                        shadowBlur: 0
+                    }).fillText(data[i].name, p4[0], p4[1]);
+
+                };
+
+                if (up != "index" + i) {
+                    drawPie(i, beginDeg, deg);
+                } else {
+                    drawSelectPie = (function (i, beginDeg, deg) {
+                        return function () {
+                            drawPie(i, beginDeg, deg);
+                        }
+                    })(i, beginDeg, deg);
+                }
+
+                beginDeg += deg;
+            }
+
+            if (drawSelectPie) drawSelectPie();
+
+        };
+
+        updateView(1);
+    };
+    doit();
+
+    // 监听画布大小改变
+    window.addEventListener("resize", doit);
+
+    // 当前被悬浮的区域
+    var currentRegion;
+
+    // 注册鼠标悬浮事件
+    var stop = function () { };
+    mycontent.addEventListener('mousemove', function (event) {
+        if (painter) {
+            painter.getRegion(event.offsetX, event.offsetY).then(function (regionName) {
+                if (regionName) {
+
+                    if (!currentRegion) {
+
+                        // 显示悬浮框
+                        mytooltip.style.display = "";
+
+                    }
+
+                    // 如果悬浮区域改变了
+                    if (regionName != currentRegion) {
+                        stop();
+
+                        var _currentRegion = currentRegion;
+                        currentRegion = regionName;
+
+                        stop = animation(function (deep) {
+                            updateView(deep, regionName, _currentRegion);
+                        }, 200);
+
+                        var index = regionName.replace('index', '');
+
+                        // 修改悬浮框内容
+                        mytooltip.innerHTML = "<div style='border-color:" + colors[index] + "'><label>Access From</label>" +
+                            "<i style='background-color:" + colors[index] + "'></i>" +
+                            "<span>" + data[index].name + "</span>" +
+                            "<span>" + data[index].value + "</span></div>";
+
+                    }
+
+                    // 修改悬浮框位置
+                    if (event.offsetX > cx) {
+                        mytooltip.style.left = (event.offsetX - 20 - mytooltip.clientWidth) + "px";
+                    } else {
+                        mytooltip.style.left = (event.offsetX + 20) + "px";
+                    }
+                    mytooltip.style.top = (event.offsetY + 20) + "px";
+
+                } else {
+
+                    // 如果当前存在悬浮区域
+                    if (currentRegion) {
+                        stop();
+
+                        var _currentRegion = currentRegion;
+                        currentRegion = undefined;
+
+                        // 隐藏悬浮框
+                        mytooltip.style.display = "none";
+
+                        stop = animation(function (deep) {
+                            updateView(deep, undefined, _currentRegion);
+                        }, 200);
+                    }
+
+                }
+
+            });
+        }
+    });
+
+</script>
+<style>
+    body {
+        margin: 0;
+    }
+
+    .content {
+        width: 100vw;
+        height: 100vh;
+    }
+
+    .view {
+        position: relative;
+    }
+
+    .tooltip {
+        position: absolute;
+        transition-duration: 300ms;
+        transition-timing-function: linear;
+        transition-property: left top;
+        pointer-events: none;
+    }
+
+    .tooltip>div {
+        box-shadow: rgb(0 0 0 / 20%) 1px 2px 10px;
+        border-style: solid;
+        background-color: rgb(255, 255, 255);
+        border-width: 1px;
+        border-radius: 4px;
+        color: rgb(102, 102, 102);
+        font: 14px / 21px sans-serif;
+        padding: 10px;
+        text-align: left;
+    }
+
+    .tooltip>div>label {
+        font-size: 14px;
+        color: #666;
+        font-weight: 400;
+        line-height: 1;
+        display: block;
+    }
+
+    .tooltip>div>i {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        vertical-align: middle;
+        margin: 0 5px;
+    }
+
+    .tooltip>div>span {
+        font-size: 14px;
+        color: #666;
+        font-weight: 400;
+    }
+
+    .tooltip>div>span:last-child {
+        padding-left: 30px;
+        font-weight: 900;
+    }
+</style>

@@ -1,0 +1,49 @@
+{
+  "name": "vislite",
+  "version": "0.1.0",
+  "description": "灵活、快速、简单的数据可视化交互式跨端前端库",
+  "main": "./lib/index.umd.min.js",
+  "typings": "./types/index.d.ts",
+  "unpkg": "./lib/index.umd.min.js",
+  "sideEffects": false,
+  "scripts": {
+    "dev": "webpack serve --config ./build/webpack.config.js",
+    "build": "devby -d ./lib && node ./build/pkg.js",
+    "server": "devby -s 30000",
+    "test": "karma start ./build/karma.config.js"
+  },
+  "miniprogram": ".",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oi-contrib/VISLite.git"
+  },
+  "keywords": [
+    "vislite"
+  ],
+  "author": {
+    "name": "zxl20070701",
+    "url": "https://zxl20070701.github.io/notebook/home.html"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oi-contrib/VISLite/issues"
+  },
+  "homepage": "https://oi-contrib.github.io/VISLite",
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^11.1.0",
+    "@types/jasmine": "^4.3.1",
+    "devby": "^0.3.0",
+    "karma": "^6.3.10",
+    "karma-chrome-launcher": "^3.1.0",
+    "karma-jasmine": "^4.0.1",
+    "karma-webpack": "^5.0.0",
+    "rollup": "^3.20.6",
+    "terser": "^5.17.1",
+    "ts-loader": "^9.2.8",
+    "tslib": "^2.5.0",
+    "typescript": "^4.6.2",
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4"
+  }
+}

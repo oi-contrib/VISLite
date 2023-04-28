@@ -1,0 +1,16 @@
+v0.1.0:
+    date:2023-04-29
+    changes:
+      - 初始化版本
+        1、Canvas
+          （支持平台：H5、uni-app(包括：H5、微信小程序、支付宝小程序)、微信小程序）
+        2、SVG
+          （支持平台：H5）
+        3、Eoap 等角斜方位投影
+        4、rotate 旋转
+        5、Matrix4 变换矩阵
+        6、插值函数
+          （包括：Hermite、Cardinal）
+        7、getLoopColors 循环色彩
+        8、animation 动画
+        9、ruler 刻度尺

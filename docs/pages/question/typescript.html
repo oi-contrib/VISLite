@@ -1,0 +1,64 @@
+<header>
+    TypeScript
+</header>
+<h2>
+    模块找不到
+</h2>
+<p>
+    比如你使用如下语句引入Canvas：
+</p>
+<pre tag="javascript">
+    import Canvas from 'vislite/lib/Canvas/index.umd.js'
+</pre>
+<p>
+    由于lib里面的是js代码，你可能会看见如下错误提示：
+</p>
+<p class="important">
+    Could not find a declaration file for module 'vislite/lib/Canvas/index.umd.js'.
+</p>
+<p>
+    怎么办？你可以在项目中找到
+    <span class="special">
+        env.d.ts
+    </span>
+    或
+    <span class="special">
+        module.d.ts
+    </span>
+    等类似文件后，在里面添加下面语句：
+</p>
+<pre tag="javascript">
+    declare module "*.js"
+</pre>
+<h2>
+    未指定类型
+</h2>
+<p>
+    比如我们定义一个painter变量，后续在时机恰当的时候给它赋值，大概代码如下：
+</p>
+<pre tag="javascript">
+let painter
+
+// 挂载后初始化画笔
+onMounted(() => {
+  painter = new Canvas(el)
+})
+</pre>
+<p>
+    此时，我们可能会在定义的地方看见错误提示：
+</p>
+<p class="important">
+    Variable 'painter' implicitly has type 'any' in some locations where its type cannot be determined.
+</p>
+<p>
+    非常幸运的是，你不必定义any类型来解决问题，我们在
+    <span class="special">vislite/types/</span>
+    中定义了你可能需要的类型文件。
+</p>
+<p>
+    比如这里，只需要：
+</p>
+<pre tag="javascript">
+import type CanvasType from "vislite/types/Canvas"
+let painter: CanvasType
+</pre>

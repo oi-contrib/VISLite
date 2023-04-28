@@ -1,0 +1,71 @@
+<div id="mycanvas"></div>
+<script type="module">
+    import { Canvas } from 'vislite';
+
+    var el = document.getElementById('mycanvas');
+
+    var painter = new Canvas(el);
+
+    var data = {
+        date: ['2017-10-24', '2017-10-25', '2017-10-26', '2017-10-27'],
+        value: [
+
+            // 开盘、收盘、最低、最高
+            [20, 34, 10, 38],
+            [40, 35, 30, 50],
+            [31, 38, 33, 44],
+            [38, 15, 5, 42]
+        ]
+    }
+
+    var i, color, x, y, maxValue = 60;
+
+    var width = el.clientWidth, height = el.clientHeight;
+
+    var perH = height / maxValue;
+    var perW = width / data.date.length;
+
+    for (i = 0; i < data.value.length; i++) {
+
+        // 用颜色区分是涨还是跌
+        color = data.value[i][0] > data.value[i][1] ? "#5ab362" : "#ea5454";
+
+        y = height - data.value[i][0] * perH;
+        x = (i + 0.5) * perW;
+
+        painter.config({
+            "fillStyle": color,
+            "strokeStyle": color
+        })
+
+            // 登记区域
+            .setRegion(i + 1)
+
+            // 开盘收盘
+            .fillRect(x - perW * 0.25, y, perW * 0.5, perH * (data.value[i][0] - data.value[i][1]))
+
+            // 最高最低
+            .beginPath()
+            .moveTo(x, y + perH * (data.value[i][0] - data.value[i][2]))
+            .lineTo(x, y + perH * (data.value[i][0] - data.value[i][3]))
+            .stroke();
+    }
+
+    el.addEventListener('click', function (event) {
+        painter.getRegion(event.offsetX, event.offsetY).then(function (index) {
+            if (index) {
+                alert("点击的区域编号：" + index);
+            }
+        });
+    });
+
+</script>
+<style>
+    body {
+        margin: 0;
+    }
+
+    #mycanvas {
+        height: 100vh;
+    }
+</style>

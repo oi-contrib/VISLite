@@ -1,0 +1,122 @@
+<header>
+    SVG
+</header>
+<p>
+    鉴于SVG的底层几乎全是DOM操作，虽然可以通过技术手段在多端模拟出来，不过目前看意义不大，因此，当前此画笔只支持Web端。
+</p>
+<p>
+    当然，如果后期发现多端是有意义的话，我们会进行兼容升级。
+</p>
+<h2>
+    基本使用
+</h2>
+<h3>
+    准备画布
+</h3>
+<p>
+    使用之前，我们首先需要准备一个设置了大小的节点，具体是用的div还是span或者别的都可以：
+</p>
+<pre tag="html">
+<div id="mysvg" style="width:300px;height:300px;"></div>
+</pre>
+<h3>
+    获取画笔
+</h3>
+<p>
+    准备好节点以后，就可以获取画笔了：
+</p>
+<pre tag="javascript">
+import { SVG } from 'vislite';
+
+var painter = new SVG(document.getElementById('mysvg'));
+</pre>
+<h3>
+    绘制
+</h3>
+<p>
+    现在，画笔也有了，我们就可以直接用这支画笔绘制我们想要的内容了。
+</p>
+<p>
+    比如我们想在 <span class="special">(50, 20)处</span>
+    写段文字，然后在
+    <span class="special">(150, 150)处</span>
+    绘制一个
+    <span class="special">半径100</span>
+    的小球：
+</p>
+<pre tag="javascript">
+painter.appendBoard('text').fillText("我爱你，中国～", 50, 20);
+painter.appendBoard('circle').fillCircle(150, 150, 100);
+</pre>
+<p>
+    当然，画笔的属性也是可以修改的，比如你可以设置小球的颜色：
+</p>
+<pre tag="javascript">
+painter.config({
+    "fillStyle": "pink"
+});
+</pre>
+<div class="warn">
+    温馨提示：具体的可以绘制的基础图形和可以设置的画笔属性，请
+    <a href="#/api/svg/api" target="_blank">点击此处</a>
+    进行查阅。
+</div>
+<p>
+    下面是完整的例子代码：
+</p>
+<example tag="course/svg_1" height="340px"></example>
+<p>
+    怎么了，是不是和Canvas画笔用起来差不多，很简单吧？
+</p>
+<div class="warn">
+    温馨提示：和canvas相比，svg在不同浏览器之间的表现实在是差强人意，我们在磨平这些差异上进行了一些探索，初见成效；所以，不推荐你直接使用浏览器的原始DOM操作来修改画布svg中的节点，虽然我们为你暴露了这个api，以备不时之需。
+</div>
+<p>
+    不过，聪明的你一定发现，比如绘制文字，在绘制内容之前，多了
+    <span class="special">painter.appendBoard('text')</span>
+    语句，这是什么东西，用来干什么的？别急，我们接下来将展开解释。
+</p>
+<h2>
+    灵活的画笔
+</h2>
+<p>
+    接上一小节结尾的问题，我们接着讲。
+</p>
+<h3>
+    原理
+</h3>
+<p>
+    我们来看看上述代码运行后的svg具体长什么样子：
+</p>
+<img src="./images/docs/svg_1.png">
+<p>
+    以上述绘制文字为例，本质上来说，就是在svg中添加一个text标签，然后设置好这个标签的内容和属性。
+</p>
+<p>
+    那既然如此，为什么不直接把：
+</p>
+<pre tag="javascript">
+    painter.appendBoard('text').fillText("我爱你，中国～", 50, 20);
+</pre>
+<p>
+    合并成：
+</p>
+<pre tag="javascript">
+    painter.fillText("我爱你，中国～", 50, 20);
+</pre>
+<p>
+    这样使用起来更简单，不是吗？反正
+    <span class="special">painter.fillText()</span>
+    方法内部肯定知道需要添加一个text标签。
+</p>
+<p>
+    哈哈哈，理想很丰满，现实～好像不合理。为什么？因为svg可以操作DOM，比如修改文字的时候，并不需要清空svg画布重绘，而只需要修改对应的text节点即可，而这，正是svg相比canvas优势所在，大概。
+</p>
+<div class="warn">
+    说是优势，其实也是缺点，毕竟DOM操作很消耗性能；当然，具体用svg还是canvas好，需要结合业务场景来判断。
+</div>
+<p>
+    所以，
+    <span class="special">painter.appendBoard()</span>
+    方法其实就是一个DOM操作，而为了更好的使用svg，我们提供了一组特殊的DOM操作方法。
+</p>

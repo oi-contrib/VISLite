@@ -1,0 +1,218 @@
+<header>
+    接口文档
+</header>
+<h2>
+    配置画笔
+</h2>
+<pre tag="javascript">
+painter.config({
+    // 填充色或图案
+    "fillStyle": 'black',
+
+    // 轮廓色或图案
+    "strokeStyle": 'black',
+
+    // 线条宽度(单位px，下同)
+    "lineWidth": 1,
+
+    // 文字水平对齐方式（"left"左对齐、"center"居中和"right"右对齐）
+    "textAlign": 'left',
+
+    // 文字垂直对齐方式（"middle"垂直居中、"top"上对齐和"bottom"下对齐）
+    "textBaseline": 'middle',
+
+    // 设置线条虚线，应该是一个数组[number,...]
+    "lineDash": [],
+
+    // 阴影的模糊系数，默认0，也就是无阴影
+    "shadowBlur": 0,
+
+    // 阴影的颜色
+    "shadowColor": "black",
+
+    // 文字大小
+    "font-size": 16,
+
+    // 字体
+    "font-family": "sans-serif",
+
+    // 字重
+    "font-weight": 400,
+
+    // 字类型
+    "font-style": "normal",
+
+    // 圆弧开始端闭合方式（"butt"直线闭合、"round"圆帽闭合）
+    "arc-start-cap": 'butt',
+
+    // 圆弧结束端闭合方式，和上一个类似
+    "arc-end-cap": 'butt'
+})
+</pre>
+<h2>
+    画笔方法
+</h2>
+<h3>
+    文字
+</h3>
+<p>
+    在点(x, y)处绘制填充的文字text；deg表示文字旋转角度，可选：
+</p>
+<pre tag="javascript">painter.fillText(text, x, y, deg)</pre>
+<div class="warn">
+    除非特别说明，角度全部采用弧度制。
+</div>
+<p>
+    在点(x, y)处绘制轮廓的文字text；deg表示文字旋转角度，可选：
+</p>
+<pre tag="javascript">painter.strokeText(text, x, y, deg)</pre>
+<p>
+    在点(x, y)处绘制轮廓并填充的文字text；deg表示文字旋转角度，可选：
+</p>
+<pre tag="javascript">painter.fullText(text, x, y, deg)</pre>
+<h3>
+    弧
+</h3>
+<p>
+    以(cx, cy)为圆心，内外半径分别是r1和r2，从弧度beginDeg开始，跨越弧度deg，绘制填充圆弧：
+</p>
+<pre tag="javascript">painter.fillArc(cx, cy, r1, r2, beginDeg, deg)</pre>
+<p>
+    和fillArc方法类似，只不过绘制的是轮廓圆弧：
+</p>
+<pre tag="javascript">painter.strokeArc(cx, cy, r1, r2, beginDeg, deg)</pre>
+<p>
+    和fillArc方法类似，只不过绘制的是轮廓并填充圆弧：
+</p>
+<pre tag="javascript">painter.fullArc(cx, cy, r1, r2, beginDeg, deg)</pre>
+<h3>
+    圆形
+</h3>
+<p>
+    以(cx, cy)为圆心，半径r绘制填充圆形：
+</p>
+<pre tag="javascript">painter.fillCircle(cx, cy, r)</pre>
+<p>
+    以(cx, cy)为圆心，半径r绘制轮廓圆形：
+</p>
+<pre tag="javascript">painter.strokeCircle(cx, cy, r)</pre>
+<p>
+    以(cx, cy)为圆心，半径r绘制轮廓并填充圆形：
+</p>
+<pre tag="javascript">painter.fullCircle(cx, cy, r)</pre>
+<h3>
+    矩形
+</h3>
+<p>
+    以(x, y)为左上角，宽width，高height绘制填充矩形：
+</p>
+<pre tag="javascript">
+    painter.fillRect(x, y, width, height);
+</pre>
+<p>
+    以(x, y)为左上角，宽width，高height绘制轮廓矩形：
+</p>
+<pre tag="javascript">painter.strokeRect(x, y, width, height)</pre>
+<p>
+    以(x, y)为左上角，宽width，高height绘制轮廓并填充矩形：
+</p>
+<pre tag="javascript">painter.fullRect(x, y, width, height)</pre>
+<h3>
+    路径
+</h3>
+<p>
+    基于路径可以绘制几乎大部分图形，非常类似画笔在纸上划动。
+</p>
+<h4>
+    基础
+</h4>
+<p>
+    开始一段独立的路径：
+</p>
+<pre tag="javascript">painter.beginPath()</pre>
+<p>
+    闭合当前路径，也就是路径首尾闭合：
+</p>
+<pre tag="javascript">painter.closePath()</pre>
+<p>
+    画笔移动到点(x, y)，此时笔离开了画布：
+</p>
+<pre tag="javascript">painter.moveTo(x, y)</pre>
+<p>
+    画笔移动到点(x, y)，此时笔没有离开画布：
+</p>
+<pre tag="javascript">painter.lineTo(x, y)</pre>
+<p>
+    以(cx, cy)为圆心，半径r，从弧度beginDeg开始，跨越弧度deg画弧，此时笔没有离开画布：
+</p>
+<pre tag="javascript">painter.arc(cx, cy, r, beginDeg, deg)</pre>
+<p>
+    把当前路径包裹的区域填充颜色：
+</p>
+<pre tag="javascript">painter.fill()</pre>
+<p>
+    把当前路径上色（轮廓线）：
+</p>
+<pre tag="javascript">painter.stroke()</pre>
+<p>
+    把当前路径画上轮廓线并填充颜色到当前路径所包裹的区域：
+</p>
+<pre tag="javascript">painter.full()</pre>
+<h4>
+    贝塞尔曲线
+</h4>
+<p>
+    二次贝塞尔曲线到：
+</p>
+<pre tag="javascript">painter.quadraticCurveTo(cpx, cpy, x, y)</pre>
+<div class="warn">
+    只有一个控制点p(cpx, cpy),画笔当前的位置和p(x, y)分别是起点和终点。
+</div>
+<p>
+    三次贝塞尔曲线到：
+</p>
+<pre tag="javascript">painter.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)</pre>
+<div class="warn">
+    有两个控制点p(cp1x, cp1y)和p(cp2x, cp2y),画笔当前的位置和p(x, y)分别是起点和终点。
+</div>
+<h4>
+    记录
+</h4>
+<p>
+    暂存当前路径：
+</p>
+<pre tag="javascript">painter.save()</pre>
+<p>
+    恢复上次暂存路径：
+</p>
+<pre tag="javascript">painter.restore()</pre>
+<h3>
+    擦除画面
+</h3>
+<pre tag="javascript">painter.clearRect(x, y, w, h)</pre>
+<h2>
+    区域管理
+</h2>
+<p>
+    有时候，我们可能需要和绘制的图表进行交互，比如点击的时候，需要知道点击的是哪个区域，就可以借助下面的方法：
+</p>
+<h3>
+    设置区域
+</h3>
+<p>
+    每次绘制一个区域前修改一下区域的名称，那么绘制的内容就会被记录起来：
+</p>
+<pre tag="javascript">
+painter.setRegion(regionName)
+</pre>
+<h3>
+    获取区域
+</h3>
+<p>
+    比如点击了画布后，传递点击的位置，就可以返回当前位置所在区域的名称：
+</p>
+<pre tag="javascript">
+painter.getRegion(x, y).then((regionName) => {
+    // todo
+}) 
+</pre>
