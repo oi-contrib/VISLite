@@ -1,4 +1,18 @@
-<div style="background-image:url('./docs/images/logo.png');width:512px;height:200px;background-position:center"></div>
+- 开源不易，去 <i>[Github给个Star](https://github.com/oi-contrib/VISLite) </i>吧！
+
+<img src='https://oi-contrib.github.io/VISLite/images/logo.png' height='300px'/>
+
+<p>
+    <a href="https://www.npmjs.com/package/vislite?activeTab=versions">
+        <img src="https://img.shields.io/npm/dm/vislite.svg" alt="downloads">
+    </a>
+    <a href="https://www.npmjs.com/package/vislite">
+        <img src="https://img.shields.io/npm/v/vislite.svg" alt="Version">
+    </a>
+    <a href="https://github.com/oi-contrib/VISLite" target='_blank'>
+        <img alt="GitHub repo stars" src="https://img.shields.io/github/stars/oi-contrib/VISLite?style=social">
+    </a>
+</p>
 
 # VISLite
 
@@ -6,7 +20,7 @@
 
 主要提供了跨端的画布和计算，开发人员只需要按照文档的描述就可以非常简单的完成包括Web、uni-app、微信小程序等平台的可视化开发，除了必要的初始化差异，主要的业务代码部分不同端完全一致。
 
-## VISLite的特点
+## 特点
 
 - 灵活的引入方式：包括npm安装后按照```ES Module```或```CommonJS```规范引入或直接使用script标签的```CDN```方式。
 - 按需引入或全局引入：支持源码TS引入、按需JS引入或者全量引入等多种方式。

@@ -14,3 +14,8 @@ v0.1.0:
         7、getLoopColors 循环色彩
         8、animation 动画
         9、ruler 刻度尺
+v0.1.1:
+    date:2023-05-07
+    changes:
+      - 修复bug
+        1、解决uni-app和微信小程序组件ui-canvas未绑定事件点击报错问题

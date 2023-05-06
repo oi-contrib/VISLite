@@ -67,14 +67,15 @@ Component({
             });
         },
         doit(event, doback) {
+            if (doback) {
 
-            let x = event.touches[0].x;
-            let y = event.touches[0].y;
+                let x = event.touches[0].x;
+                let y = event.touches[0].y;
 
-            this.data.help.instance.getRegion(x, y).then((regionName) => {
-                doback(regionName);
-            });
-
+                this.data.help.instance.getRegion(x, y).then((regionName) => {
+                    doback(regionName);
+                });
+            }
         },
         doitstart(event) {
             this.doit(event, this.data.touchstart);

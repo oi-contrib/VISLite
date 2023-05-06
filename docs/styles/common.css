@@ -1,5 +1,11 @@
 body {
     overflow: hidden;
+
+    /* 版本支持 */
+    --version-color: rgb(28, 2, 135);
+    /* 警告 */
+    --warn-color: #f66;
+
 }
 
 /* 滚动条 */
@@ -175,6 +181,22 @@ body>div.fixed {
     }
 }
 
+/* <=1000px */
+@media (max-width: 1000px) {
+    body>div.explain-view>div.content {
+        left: 10px;
+        top: 10px;
+        width: calc(100vw - 20px);
+        height: calc(100vh - 20px);
+        padding: 10px;
+    }
+
+    body>div.explain-view>button {
+        top: 30px;
+        right: 30px;
+    }
+}
+
 /* <=700px */
 @media (max-width: 700px) {
 
@@ -258,6 +280,7 @@ body>div.fixed {
     body>div.content>.example-view {
         margin: 0;
     }
+
 }
 
 /* 菜单 */
@@ -369,6 +392,7 @@ body>div.fixed {
     font-weight: 400;
     font-size: 14px;
     margin: 10px 0;
+    white-space: normal;
 }
 
 .content a {
@@ -408,8 +432,8 @@ body>div.fixed {
     font-family: cursive;
 }
 
+.content .version,
 .content .warn {
-    border-left-color: #f66;
     padding: 12px 24px 12px 30px;
     margin: 2em 0;
     border-left-width: 4px;
@@ -420,9 +444,8 @@ body>div.fixed {
     border-top-right-radius: 2px;
 }
 
+.content .version::before,
 .content .warn::before {
-    content: "!";
-    background-color: #f66;
     position: absolute;
     top: 14px;
     left: -12px;
@@ -435,6 +458,24 @@ body>div.fixed {
     font-weight: bold;
     font-family: "Dosis", "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
     font-size: 14px;
+}
+
+.content .version {
+    border-left-color: var(--version-color);
+}
+
+.content .warn {
+    border-left-color: var(--warn-color);
+}
+
+.content .version::before {
+    content: "V";
+    background-color: var(--version-color);
+}
+
+.content .warn::before {
+    content: "!";
+    background-color: var(--warn-color);
 }
 
 .content .gray {

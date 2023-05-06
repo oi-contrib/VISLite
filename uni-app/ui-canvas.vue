@@ -120,28 +120,30 @@ export default {
       });
     },
     doit(event, doback) {
-      let doRun = (x, y) => {
-        this.help.instance.getRegion(x, y).then((regionName) => {
-          doback(regionName);
-        });
-      };
+      if(doback){
+        let doRun = (x, y) => {
+          this.help.instance.getRegion(x, y).then((regionName) => {
+            doback(regionName);
+          });
+        };
 
-      // #ifdef MP-ALIPAY
-      uni
-        .createSelectorQuery()
-        .selectViewport()
-        .scrollOffset()
-        .exec((ret) => {
-          let x = event.touches[0].x + ret[0].scrollLeft;
-          let y = event.touches[0].y + ret[0].scrollTop;
-          doRun(x, y);
-        });
-      // #endif
-      // #ifndef MP-ALIPAY
-      let x = event.touches[0].x;
-      let y = event.touches[0].y;
-      doRun(x, y);
-      // #endif
+        // #ifdef MP-ALIPAY
+        uni
+          .createSelectorQuery()
+          .selectViewport()
+          .scrollOffset()
+          .exec((ret) => {
+            let x = event.touches[0].x + ret[0].scrollLeft;
+            let y = event.touches[0].y + ret[0].scrollTop;
+            doRun(x, y);
+          });
+        // #endif
+        // #ifndef MP-ALIPAY
+        let x = event.touches[0].x;
+        let y = event.touches[0].y;
+        doRun(x, y);
+        // #endif
+      }
     },
     doitstart(event) {
       this.doit(event, this.touchstart);
@@ -150,7 +152,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="css" scoped>
 /* 辅助的区域不应该可以看见 */
 .region {
   position: fixed;
