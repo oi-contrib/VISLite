@@ -1,12 +1,23 @@
+import CanvasConfigType from '../../../types/CanvasConfig'
 import PainterRender from './painter'
+import assemble from '../assemble'
+
+// 属性名向下兼容
+let oldAttrName = {
+    "font-size": "fontSize",
+    "font-family": "fontFamily",
+    "font-weight": "fontWeight",
+    "font-style": "fontStyle",
+    "arc-start-cap": "arcStartCap",
+    "arc-end-cap": "arcEndCap"
+}
 
 class Canvas extends PainterRender {
 
     readonly name: string = "Canvas"
 
     private __regionList = {} //区域映射表
-    private __rgb: number[] = [0, 0, 0] //区域标识色彩,rgb(0,0,0)表示空白区域
-    private __p: string = 'r' //色彩增值位置
+    private __regionAssemble = assemble(0, 255, 1, 3)
 
     constructor(ViewCanvas: HTMLCanvasElement, RegionCanvas: HTMLCanvasElement) {
         super(ViewCanvas, {}, new PainterRender(RegionCanvas, {
@@ -16,9 +27,10 @@ class Canvas extends PainterRender {
         this.setRegion("")
     }
 
-    config(configs: any) {
+    config(configs: CanvasConfigType) {
         for (let key in configs) {
-            this.useConfig(key, configs[key])
+            let _key = oldAttrName[key] || key
+            this.useConfig(_key, configs[key])
         }
 
         return this
@@ -26,33 +38,17 @@ class Canvas extends PainterRender {
 
     // 设置当前绘制区域名称
     setRegion(regionName: string | number) {
-        let _this = this
         if (regionName) {
-            if (this.__regionList[regionName as string] == undefined) {
-                this.__regionList[regionName as string] = {
-                    'r': function () {
-                        _this.__rgb[0] += 1
-                        _this.__p = 'g'
-                        return 'rgb(' + _this.__rgb[0] + ',' + _this.__rgb[1] + ',' + _this.__rgb[2] + ')'
-                    },
-                    'g': function () {
-                        _this.__rgb[1] += 1
-                        _this.__p = 'b'
-                        return 'rgb(' + _this.__rgb[0] + ',' + _this.__rgb[1] + ',' + _this.__rgb[2] + ')'
-                    },
-                    'b': function () {
-                        _this.__rgb[2] += 1
-                        _this.__p = 'r'
-                        return 'rgb(' + _this.__rgb[0] + ',' + _this.__rgb[1] + ',' + _this.__rgb[2] + ')'
-                    }
-                }[this.__p]()
+            if (this.__regionList[regionName] == undefined) {
+                let tempColor = this.__regionAssemble()
+                this.__regionList[regionName] = "rgb(" + tempColor[0] + "," + tempColor[1] + "," + tempColor[2] + ")"
             }
 
-            (this.__region as PainterRender).useConfig("fillStyle", this.__regionList[regionName as string]) &&
-                (this.__region as PainterRender).useConfig("strokeStyle", this.__regionList[regionName as string])
+            this.__region.useConfig("fillStyle", this.__regionList[regionName]) &&
+                this.__region.useConfig("strokeStyle", this.__regionList[regionName])
         } else {
-            (this.__region as PainterRender).useConfig("fillStyle", "#000000") &&
-                (this.__region as PainterRender).useConfig("strokeStyle", "#000000")
+            this.__region.useConfig("fillStyle", "#000000") &&
+                this.__region.useConfig("strokeStyle", "#000000")
         }
         return this
     }
@@ -60,7 +56,7 @@ class Canvas extends PainterRender {
     // 获取当前事件触发的区域名称
     getRegion(x: number, y: number): Promise<string> {
         return new Promise((resolve, reject) => {
-            let imgData = (this.__region as PainterRender).painter.getImageData(x - 0.5, y - 0.5, 1, 1)
+            let imgData = this.__region.painter.getImageData(x - 0.5, y - 0.5, 1, 1)
 
             // 获取点击点的颜色
             let currentRGBA = imgData.data
@@ -90,6 +86,11 @@ class Canvas extends PainterRender {
                 })
             }
         })
+    }
+
+    // 获取原始画笔
+    getContext(isRegion = false) {
+        return isRegion ? this.__region.painter : this.painter
     }
 }
 

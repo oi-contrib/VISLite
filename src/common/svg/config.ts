@@ -1,9 +1,10 @@
 import { setAttribute } from "./tool"
 import setStyle from "../setStyle"
 import arc from '../canvas/arc'
+import SVGConfigType from '../../../types/SVGConfig'
 
 // 文字统一设置方法
-export let initText = (el: SVGElement, config: any, x: number, y: number, deg: number) => {
+export let initText = (el: SVGElement, config: SVGConfigType, x: number, y: number, deg: number) => {
     if (el.nodeName.toLowerCase() !== 'text') throw new Error('Need a <text> !')
 
     // 垂直对齐采用dy实现
@@ -68,7 +69,7 @@ export let initRect = (el: SVGElement, x: number, y: number, width: number, heig
 }
 
 // 画弧统一设置方法
-export let initArc = (el: SVGElement, config: any, cx: number, cy: number, r1: number, r2: number, beginDeg: number, deg: number) => {
+export let initArc = (el: SVGElement, config: SVGConfigType, cx: number, cy: number, r1: number, r2: number, beginDeg: number, deg: number) => {
 
     if (el.nodeName.toLowerCase() !== 'path') throw new Error('Need a <path> !')
 

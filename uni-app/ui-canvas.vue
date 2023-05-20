@@ -1,7 +1,15 @@
 <template>
-  <view>
+  <view :class="cover || isH5 ? 'cover-view' : 'normal-view'">
+    <view :class="'view-img view-' + uniqueid" @touchstart="doitstart">
+      <image
+        :style="{ width: width + 'px', height: height + 'px' }"
+        :src="viewImg"
+      ></image>
+    </view>
+
     <!-- #ifdef MP-ALIPAY -->
     <canvas
+      class="painter"
       :id="'painter-' + uniqueid"
       @touchstart="doitstart"
       :style="{ width: width + 'px', height: height + 'px' }"
@@ -14,6 +22,7 @@
     <!-- #endif -->
     <!-- #ifdef MP-WEIXIN -->
     <canvas
+      class="painter"
       canvas-id="painter"
       @touchstart="doitstart"
       :style="{ width: width + 'px', height: height + 'px' }"
@@ -26,6 +35,7 @@
     <!-- #endif -->
     <!-- #ifndef MP-WEIXIN||MP-ALIPAY -->
     <canvas
+      class="painter"
       :canvas-id="'painter-' + uniqueid"
       @touchstart="doitstart"
       :style="{ width: width + 'px', height: height + 'px' }"
@@ -45,6 +55,13 @@ export default {
     return {
       uniqueid: (Math.random() * 10000).toFixed(0),
       help: {},
+      viewImg: "",
+      // #ifdef H5
+      isH5: true
+      // #endif
+      // #ifndef H5
+      isH5: false
+      // #endif
     };
   },
   props: {
@@ -58,19 +75,25 @@ export default {
     },
     touchstart: {
       type: Function,
-      default: () => {},
+      default: () => { },
     },
+    cover: {
+      type: Boolean,
+      default: true
+    }
   },
   methods: {
     fetch() {
       // #ifdef MP-WEIXIN
       let painter = uni.createCanvasContext("painter", this);
       let region = uni.createCanvasContext("region", this);
+      let painterid = "painter";
       let regionid = "region";
       // #endif
       // #ifndef MP-WEIXIN
       let painter = uni.createCanvasContext("painter-" + this.uniqueid, this);
       let region = uni.createCanvasContext("region-" + this.uniqueid, this);
+      let painterid = "painter-" + this.uniqueid;
       let regionid = "region-" + this.uniqueid;
       // #endif
 
@@ -114,18 +137,51 @@ export default {
       this.help.instance.draw = () => {
         painter.draw();
         region.draw();
+
+        // 如果不使用原生渲染
+        if (!this.cover && !this.isH5) {
+          uni.canvasToTempFilePath({
+            canvasId: painterid,
+            success: (e) => {
+              this.viewImg = e.tempFilePath;
+            }
+          }, this);
+        }
+
       };
       return new Promise((resolve, reject) => {
+        this.help.instance.toDataURL = () => {
+          return new Promise((resolveUrl) => {
+            uni.canvasToTempFilePath(
+              {
+                canvasId: painterid,
+                success: function (e) {
+                  resolveUrl(e.tempFilePath);
+                },
+              },
+              this
+            );
+          });
+        };
+
         resolve(this.help.instance);
       });
     },
     doit(event, doback) {
-      if(doback){
-        let doRun = (x, y) => {
-          this.help.instance.getRegion(x, y).then((regionName) => {
-            doback(regionName);
+      let doRun = (x, y) => {
+        this.help.instance.getRegion(x, y).then((regionName) => {
+          // 兼容旧语法
+          if (doback) doback(regionName);
+
+          this.$emit("dotouchstart", {
+            name: regionName,
+            x: x,
+            y: y,
           });
-        };
+        });
+      };
+
+      if (this.cover || this.isH5) {
 
         // #ifdef MP-ALIPAY
         uni
@@ -143,6 +199,13 @@ export default {
         let y = event.touches[0].y;
         doRun(x, y);
         // #endif
+
+      } else {
+
+        uni.createSelectorQuery().in(this).select('.view-' + this.uniqueid).boundingClientRect(data => {
+          doRun(event.touches[0].pageX - data.left, event.touches[0].pageY - data.top);
+        }).exec()
+
       }
     },
     doitstart(event) {
@@ -155,6 +218,15 @@ export default {
 <style lang="css" scoped>
 /* 辅助的区域不应该可以看见 */
 .region {
+  position: fixed;
+  left: 50000px;
+}
+
+.cover-view .view-img {
+  display: none;
+}
+
+.normal-view .painter {
   position: fixed;
   left: 50000px;
 }

@@ -41,7 +41,7 @@
 
 我们会在这里列出下一个版本可能会提供的功能：
 
-- 添加对WebGL 3D的支持
+- Canvas、SVG和WebGL画笔功能丰富
 - 为加速开发，提供常用坐标系和布局
 
 给我们[留言](https://github.com/oi-contrib/VISLite/issues)告诉我们你希望快速扩展的功能，我们会优先你的建议考虑哦～

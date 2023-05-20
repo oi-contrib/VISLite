@@ -2,6 +2,7 @@ import CanvasType from '../types/Canvas'
 import OralCanvas from './common/canvas/index'
 
 class Canvas extends OralCanvas implements CanvasType {
+    private __canvas: HTMLCanvasElement
     constructor(el: HTMLElement | null) {
         if (!el) {
             throw new Error("VISLite Canvas:The mount point requires an HTMLElement type but encountered null.")
@@ -28,7 +29,7 @@ class Canvas extends OralCanvas implements CanvasType {
 
             _el._vislite_canvas_ = [ViewCanvas, RegionCanvas]
 
-            el.setAttribute('vislite', 'inited')
+            el.setAttribute('vislite', 'Canvas')
         }
 
         // 设置画布大小
@@ -42,6 +43,14 @@ class Canvas extends OralCanvas implements CanvasType {
         }
 
         super(ViewCanvas, RegionCanvas)
+
+        this.__canvas = ViewCanvas
+    }
+
+    toDataURL(): Promise<string> {
+        return new Promise(resolve => {
+            resolve(this.__canvas.toDataURL())
+        })
     }
 }
 
