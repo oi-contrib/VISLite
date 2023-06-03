@@ -21,10 +21,15 @@ class WebGL extends OralWebGL implements WebGLType {
 
         // 否则就初始化
         else {
-            ViewCanvas = document.createElement('canvas')
-            el.appendChild(ViewCanvas)
 
             RegionCanvas = document.createElement('canvas')
+            el.appendChild(RegionCanvas)
+
+            RegionCanvas.style.position = 'absolute'
+            RegionCanvas.style.zIndex = "-1"
+
+            ViewCanvas = document.createElement('canvas')
+            el.appendChild(ViewCanvas)
 
             _el._vislite_canvas_ = [ViewCanvas, RegionCanvas]
 

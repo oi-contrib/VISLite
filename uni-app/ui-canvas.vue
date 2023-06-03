@@ -57,10 +57,10 @@ export default {
       help: {},
       viewImg: "",
       // #ifdef H5
-      isH5: true
+      isH5: true,
       // #endif
       // #ifndef H5
-      isH5: false
+      isH5: false,
       // #endif
     };
   },
@@ -75,26 +75,27 @@ export default {
     },
     touchstart: {
       type: Function,
-      default: () => { },
+      default: () => {},
     },
     cover: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
   methods: {
     fetch() {
+      let painter, region, painterid, regionid;
       // #ifdef MP-WEIXIN
-      let painter = uni.createCanvasContext("painter", this);
-      let region = uni.createCanvasContext("region", this);
-      let painterid = "painter";
-      let regionid = "region";
+      painter = uni.createCanvasContext("painter", this);
+      region = uni.createCanvasContext("region", this);
+      painterid = "painter";
+      regionid = "region";
       // #endif
       // #ifndef MP-WEIXIN
-      let painter = uni.createCanvasContext("painter-" + this.uniqueid, this);
-      let region = uni.createCanvasContext("region-" + this.uniqueid, this);
-      let painterid = "painter-" + this.uniqueid;
-      let regionid = "region-" + this.uniqueid;
+      painter = uni.createCanvasContext("painter-" + this.uniqueid, this);
+      region = uni.createCanvasContext("region-" + this.uniqueid, this);
+      painterid = "painter-" + this.uniqueid;
+      regionid = "region-" + this.uniqueid;
       // #endif
 
       let _this = this;
@@ -106,6 +107,9 @@ export default {
         },
         {
           getContext() {
+            // #ifdef MP-ALIPAY
+            let getImageData = region.getImageData;
+            // #endif
             region.getImageData = (x, y, width, height) => {
               return new Promise((resolve, reject) => {
                 let options = {
@@ -123,7 +127,7 @@ export default {
                 };
 
                 // #ifdef MP-ALIPAY
-                region.getImageData(options, _this);
+                getImageData(options, _this);
                 // #endif
                 // #ifndef MP-ALIPAY
                 uni.canvasGetImageData(options, _this);
@@ -140,14 +144,16 @@ export default {
 
         // 如果不使用原生渲染
         if (!this.cover && !this.isH5) {
-          uni.canvasToTempFilePath({
-            canvasId: painterid,
-            success: (e) => {
-              this.viewImg = e.tempFilePath;
-            }
-          }, this);
+          uni.canvasToTempFilePath(
+            {
+              canvasId: painterid,
+              success: (e) => {
+                this.viewImg = e.tempFilePath;
+              },
+            },
+            this
+          );
         }
-
       };
       return new Promise((resolve, reject) => {
         this.help.instance.toDataURL = () => {
@@ -171,7 +177,7 @@ export default {
       let doRun = (x, y) => {
         this.help.instance.getRegion(x, y).then((regionName) => {
           // 兼容旧语法
-          if (doback) doback(regionName);
+          if (typeof doback == "function") doback(regionName);
 
           this.$emit("dotouchstart", {
             name: regionName,
@@ -182,30 +188,27 @@ export default {
       };
 
       if (this.cover || this.isH5) {
-
-        // #ifdef MP-ALIPAY
+        let x = event.touches[0].x;
+        let y = event.touches[0].y;
+        doRun(x, y);
+      } else {
         uni
           .createSelectorQuery()
           .selectViewport()
           .scrollOffset()
           .exec((ret) => {
-            let x = event.touches[0].x + ret[0].scrollLeft;
-            let y = event.touches[0].y + ret[0].scrollTop;
-            doRun(x, y);
+            uni
+              .createSelectorQuery()
+              .in(this)
+              .select(".view-" + this.uniqueid)
+              .boundingClientRect((data) => {
+                doRun(
+                  event.touches[0].pageX - data.left - ret[0].scrollLeft,
+                  event.touches[0].pageY - data.top - ret[0].scrollTop
+                );
+              })
+              .exec();
           });
-        // #endif
-        // #ifndef MP-ALIPAY
-        let x = event.touches[0].x;
-        let y = event.touches[0].y;
-        doRun(x, y);
-        // #endif
-
-      } else {
-
-        uni.createSelectorQuery().in(this).select('.view-' + this.uniqueid).boundingClientRect(data => {
-          doRun(event.touches[0].pageX - data.left, event.touches[0].pageY - data.top);
-        }).exec()
-
       }
     },
     doitstart(event) {

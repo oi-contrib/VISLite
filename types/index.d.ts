@@ -14,6 +14,8 @@ import WebGLType from './WebGL'
 
 import MapType from './Map'
 
+import viewHandlerType from './viewHandler'
+
 // 插值
 interface NewCardinalType extends CardinalType {
     new(t?: number): this
@@ -35,7 +37,7 @@ interface NewCanvasType extends CanvasType {
     new(el: HTMLElement | null): this
 }
 interface NewWebGLType extends WebGLType {
-    new(): this
+    new(el: HTMLElement | null): this
 }
 
 // 投影
@@ -69,6 +71,9 @@ export default class VISLite {
     // 投影
     static Eoap: NewEoapType
     static Mercator: NewMercatorType
+
+    // 辅助
+    static viewHandler: viewHandlerType
 }
 
 // 插值
@@ -92,3 +97,6 @@ export let WebGL: NewWebGLType
 // 投影
 export let Eoap: NewEoapType
 export let Mercator: NewMercatorType
+
+// 辅助
+export let viewHandler: viewHandlerType

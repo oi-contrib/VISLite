@@ -20,12 +20,13 @@ v0.1.1:
       - 修复bug
         1、解决uni-app和微信小程序组件ui-canvas未绑定事件点击报错问题
 v0.2.0:
-    date:
+    date:2023-06-03
     changes:
       - 修复bug
         1、为解决this问题，同时优化参数内容，修改了uni-app和微信小程序组件ui-canvas事件语法
           （对旧语法进行了向下兼容）
         2、校对types中定义的类型信息
+        3、修复uni-app组件ui-canvas在支付宝小程序区域计算相关错误
       - 优化改造
         1、针对Canvas和SVG的画笔配置config的属性名，统一使用小驼峰
           （对旧语法进行了向下兼容）

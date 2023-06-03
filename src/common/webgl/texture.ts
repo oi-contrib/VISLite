@@ -78,6 +78,7 @@ class TextureObject {
 
         // 配置纹理
         painter.texParameteri(this.__type, painter.TEXTURE_MIN_FILTER, painter.NEAREST)
+        painter.texParameteri(this.__type, painter.TEXTURE_MAG_FILTER, painter.NEAREST)
         painter.texParameteri(this.__type, painter.TEXTURE_WRAP_S, painter.CLAMP_TO_EDGE)
         painter.texParameteri(this.__type, painter.TEXTURE_WRAP_T, painter.CLAMP_TO_EDGE)
     }

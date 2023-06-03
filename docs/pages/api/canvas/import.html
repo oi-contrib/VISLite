@@ -52,26 +52,93 @@ this.$refs.mycanvas.fetch().then(painter => {
 painter.draw()
 </pre>
 <h3>
+    属性说明
+</h3>
+<table>
+    <thead>
+        <tr>
+            <td>
+                属性名
+            </td>
+            <td>
+                类型
+            </td>
+            <td>
+                默认值
+            </td>
+            <td>
+                说明
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                width
+            </td>
+            <td>
+                Number
+            </td>
+            <td>
+                300
+            </td>
+            <td>
+                画布的宽
+            </td>
+        </tr>
+        <tr>
+            <td>
+                height
+            </td>
+            <td>
+                Number
+            </td>
+            <td>
+                150
+            </td>
+            <td>
+                画布的高
+            </td>
+        </tr>
+        <tr>
+            <td>
+                cover
+            </td>
+            <td>
+                Boolean
+            </td>
+            <td>
+                true
+            </td>
+            <td>
+                是否使用原生canvas渲染（v0.2.0开始支持）
+            </td>
+        </tr>
+    </tbody>
+</table>
+<h3>
     交互
 </h3>
 <p>
     由于环境的特殊性，我们提供了跨端的方法来帮助你更简单的实现交互：
 </p>
 <pre tag="html">
-    <ui-canvas :touchstart='doit'></ui-canvas>
+    <ui-canvas @dotouchstart='doit'></ui-canvas>
 </pre>
 <p>
     其中doit是定义的方法：
 </p>
 <pre tag="javascript">
 methods: {
-    doit(regionName) {
-        console.log(regionName)
+    doit(region) {
+        
+        // {"name":string,"x":number,"y":number}
+        console.log(region)
     }
 }
 </pre>
 <p>
-    在你每次点击画笔的时候就会触发doit方法，此方法有一个行参，表示你点击的区域名称。
+    在你每次点击画笔的时候就会触发doit方法，此方法有一个行参，记录着你点击的区域信息。
 </p>
 <h2>
     微信小程序
@@ -108,23 +175,75 @@ this.selectComponent('#mycanvas').fetch().then(painter => {
 <p>
     此时，你就可以用这只画笔绘制你想要的内容了。
 </p>
-
+<h3>
+    属性说明
+</h3>
+<table>
+    <thead>
+        <tr>
+            <td>
+                属性名
+            </td>
+            <td>
+                类型
+            </td>
+            <td>
+                默认值
+            </td>
+            <td>
+                说明
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                width
+            </td>
+            <td>
+                Number
+            </td>
+            <td>
+                300
+            </td>
+            <td>
+                画布的宽
+            </td>
+        </tr>
+        <tr>
+            <td>
+                height
+            </td>
+            <td>
+                Number
+            </td>
+            <td>
+                150
+            </td>
+            <td>
+                画布的高
+            </td>
+        </tr>
+    </tbody>
+</table>
 <h3>
     交互
 </h3>
 <pre tag="html">
-    <ui-canvas touchstart='{{doit}}'></ui-canvas>
+    <ui-canvas bind:dotouchstart="doit"></ui-canvas>
 </pre>
 <p>
-    其中doit是定义data中的方法：
+    其中doit是定义的方法：
 </p>
 <pre tag="javascript">
-data: {
-    doit(regionName) {
-        console.log(regionName)
+Page({
+    doit(event) {
+
+        // {"name":string,"x":number,"y":number}
+        console.log(event.detail)
     }
-}
+})
 </pre>
 <p>
-    在你每次点击画笔的时候就会触发doit方法，此方法有一个形参，表示你点击的区域名称。
+    在你每次点击画笔的时候就会触发doit方法，此方法的形参有一个属性detail，记录着你点击的区域信息。
 </p>

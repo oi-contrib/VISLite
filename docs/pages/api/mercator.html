@@ -1,0 +1,28 @@
+<header>
+    墨卡托投影
+</header>
+<div class="version">
+    0.2.0 新增
+</div>
+<h2>
+    引入
+</h2>
+<pre tag="javascript">
+import { Mercator } from 'vislite'
+</pre>
+<h2>
+    使用
+</h2>
+<p>
+    通过传递一个配置信息即可获取最终的实例函数：
+</p>
+<pre tag="javascript">
+let mercator = new Mercator(scale = 7, center = [107, 36])
+</pre>
+<p>
+    传递给上面的方法一个点的经纬度即可返回该点的绘图坐标：
+</p>
+<pre tag="javascript">
+// 特别需要注意，计算出来的位置是偏离中心点的距离
+let d_xyz = mercator.use(longitude, latitude)
+</pre>

@@ -15,6 +15,8 @@ import WebGL from "./WebGL/index"
 import Eoap from "./Eoap/index"
 import Mercator from "./Mercator/index"
 
+import viewHandler from "./viewHandler/index"
+
 export default {
 
     // 插值
@@ -37,5 +39,8 @@ export default {
 
     // 投影
     Eoap,
-    Mercator
+    Mercator,
+
+    // 辅助
+    viewHandler
 }

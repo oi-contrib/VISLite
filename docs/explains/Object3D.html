@@ -1,7 +1,28 @@
-import Matrix4Type from './Matrix4'
+<header>
+    Object3D 格式
+</header>
+<p>
+    主体结构如下：
+</p>
+<pre tag="javascript">
+{
+    // 区域名称，不设置或设置为空字符串，表示此区域无需记录
+    region?: string
 
-export interface meshType {
+    // 变换矩阵
+    matrix?: Matrix4Type
 
+    // 图形
+    mesh: meshType[]
+}
+</pre>
+<p>
+    其中Matrix4Type就是
+    <a href="#/api/matrix4" target="_blank">变换矩阵 Matrix4</a>
+    ，而mesh表示组成当前对象的具体几何体组，单个几何体格式如下：
+</p>
+<pre tag="javascript">
+{
     // 形状
     geometry: {
         attributes: {
@@ -37,8 +58,7 @@ export interface meshType {
         }
 
         // 点、线、还是三角形
-        // "POINTS" | "LINES" | "INE_STRIP" | "LINE_LOOP" | "TRIANGLES" | "TRIANGLE_STRIP" | "TRIANGLE_FAN"
-        type: string
+        type: "POINTS" | "LINES" | "LINE_STRIP" | "LINE_LOOP" | "TRIANGLES" | "TRIANGLE_STRIP" | "TRIANGLE_FAN"
     }
 
     // 材质
@@ -93,15 +113,4 @@ export interface meshType {
 
     }
 }
-
-export default interface Object3D {
-
-    // 区域名称，不设置或设置为空字符串，表示此区域无需记录
-    region?: string
-
-    // 变换矩阵
-    matrix?: Matrix4Type
-
-    // 图形
-    mesh: meshType[]
-}
+</pre>
