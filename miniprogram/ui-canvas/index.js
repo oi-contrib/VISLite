@@ -60,6 +60,16 @@ Component({
                             }
                         });
 
+                        this.data.help.instance.toDataURL = () => {
+                            return new Promise((resolveUrl) => {
+                                wx.canvasToTempFilePath({
+                                    canvasId: "painter",
+                                    success: function (e) {
+                                        resolveUrl(e.tempFilePath);
+                                    },
+                                }, this);
+                            })
+                        };
                         resolve(this.data.help.instance);
                     });
                 });
@@ -67,15 +77,19 @@ Component({
             });
         },
         doit(event, doback) {
-            if (doback) {
+            let x = event.touches[0].x;
+            let y = event.touches[0].y;
 
-                let x = event.touches[0].x;
-                let y = event.touches[0].y;
+            this.data.help.instance.getRegion(x, y).then((regionName) => {
+                // 兼容旧语法
+                if (doback) doback(regionName);
 
-                this.data.help.instance.getRegion(x, y).then((regionName) => {
-                    doback(regionName);
-                });
-            }
+                this.triggerEvent('dotouchstart', {
+                    name: regionName,
+                    x: x,
+                    y: y
+                })
+            });
         },
         doitstart(event) {
             this.doit(event, this.data.touchstart);

@@ -1,17 +1,18 @@
 import arc from './arc'
+import CanvasConfigType from '../../../types/CanvasConfig'
 
 // 文字统一设置方法
-export let initText = function (painter: CanvasRenderingContext2D, config: any, x: number, y: number, deg: number) {
+export let initText = function (painter: CanvasRenderingContext2D, config: CanvasConfigType, x: number, y: number, deg: number) {
 
     painter.beginPath()
     painter.translate(x, y)
     painter.rotate(deg)
-    painter.font = config['font-style'] + " " + config["font-weight"] + " " + config['font-size'] + "px " + config['font-family']
+    painter.font = config.fontStyle + " " + config.fontWeight + " " + config.fontSize + "px " + config.fontFamily
     return painter
 };
 
 // 画弧统一设置方法
-export let initArc = function (painter: CanvasRenderingContext2D, config: any, cx: number, cy: number, r1: number, r2: number, beginDeg: number, deg: number) {
+export let initArc = function (painter: CanvasRenderingContext2D, config: CanvasConfigType, cx: number, cy: number, r1: number, r2: number, beginDeg: number, deg: number) {
 
     if (r1 > r2) {
         let temp = r1
@@ -44,18 +45,18 @@ export let initArc = function (painter: CanvasRenderingContext2D, config: any, c
             // (圆心x，圆心y，半径，开始角度，结束角度，true逆时针/false顺时针)
             cx, cy, r1, beginA, endA, false)
         // 结尾
-        if (config["arc-end-cap"] != 'round')
+        if (config.arcEndCap != 'round')
             painter.lineTo(endOuterX, endOuterY)
         else
             painter.arc((endInnerX + endOuterX) * 0.5, (endInnerY + endOuterY) * 0.5, r, endA - Math.PI, endA, true)
         painter.arc(cx, cy, r2, endA, beginA, true)
         // 开头
-        if (config["arc-start-cap"] != 'round')
+        if (config.arcStartCap != 'round')
             painter.lineTo(begInnerX, begInnerY);
         else
             painter.arc((begInnerX + begOuterX) * 0.5, (begInnerY + begOuterY) * 0.5, r, beginA, beginA - Math.PI, true)
     })
-    if (config["arc-start-cap"] == 'butt') painter.closePath()
+    if (config.arcStartCap == 'butt') painter.closePath()
     return painter
 }
 

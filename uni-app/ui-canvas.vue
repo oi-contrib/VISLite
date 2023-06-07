@@ -1,7 +1,15 @@
 <template>
-  <view>
+  <view :class="cover || isH5 ? 'cover-view' : 'normal-view'">
+    <view :class="'view-img view-' + uniqueid" @touchstart="doitstart">
+      <image
+        :style="{ width: width + 'px', height: height + 'px' }"
+        :src="viewImg"
+      ></image>
+    </view>
+
     <!-- #ifdef MP-ALIPAY -->
     <canvas
+      class="painter"
       :id="'painter-' + uniqueid"
       @touchstart="doitstart"
       :style="{ width: width + 'px', height: height + 'px' }"
@@ -14,6 +22,7 @@
     <!-- #endif -->
     <!-- #ifdef MP-WEIXIN -->
     <canvas
+      class="painter"
       canvas-id="painter"
       @touchstart="doitstart"
       :style="{ width: width + 'px', height: height + 'px' }"
@@ -26,6 +35,7 @@
     <!-- #endif -->
     <!-- #ifndef MP-WEIXIN||MP-ALIPAY -->
     <canvas
+      class="painter"
       :canvas-id="'painter-' + uniqueid"
       @touchstart="doitstart"
       :style="{ width: width + 'px', height: height + 'px' }"
@@ -45,6 +55,13 @@ export default {
     return {
       uniqueid: (Math.random() * 10000).toFixed(0),
       help: {},
+      viewImg: "",
+      // #ifdef H5
+      isH5: true,
+      // #endif
+      // #ifndef H5
+      isH5: false,
+      // #endif
     };
   },
   props: {
@@ -60,18 +77,25 @@ export default {
       type: Function,
       default: () => {},
     },
+    cover: {
+      type: Boolean,
+      default: true,
+    },
   },
   methods: {
     fetch() {
+      let painter, region, painterid, regionid;
       // #ifdef MP-WEIXIN
-      let painter = uni.createCanvasContext("painter", this);
-      let region = uni.createCanvasContext("region", this);
-      let regionid = "region";
+      painter = uni.createCanvasContext("painter", this);
+      region = uni.createCanvasContext("region", this);
+      painterid = "painter";
+      regionid = "region";
       // #endif
       // #ifndef MP-WEIXIN
-      let painter = uni.createCanvasContext("painter-" + this.uniqueid, this);
-      let region = uni.createCanvasContext("region-" + this.uniqueid, this);
-      let regionid = "region-" + this.uniqueid;
+      painter = uni.createCanvasContext("painter-" + this.uniqueid, this);
+      region = uni.createCanvasContext("region-" + this.uniqueid, this);
+      painterid = "painter-" + this.uniqueid;
+      regionid = "region-" + this.uniqueid;
       // #endif
 
       let _this = this;
@@ -83,6 +107,9 @@ export default {
         },
         {
           getContext() {
+            // #ifdef MP-ALIPAY
+            let getImageData = region.getImageData;
+            // #endif
             region.getImageData = (x, y, width, height) => {
               return new Promise((resolve, reject) => {
                 let options = {
@@ -100,7 +127,7 @@ export default {
                 };
 
                 // #ifdef MP-ALIPAY
-                region.getImageData(options, _this);
+                getImageData(options, _this);
                 // #endif
                 // #ifndef MP-ALIPAY
                 uni.canvasGetImageData(options, _this);
@@ -114,35 +141,74 @@ export default {
       this.help.instance.draw = () => {
         painter.draw();
         region.draw();
+
+        // 如果不使用原生渲染
+        if (!this.cover && !this.isH5) {
+          uni.canvasToTempFilePath(
+            {
+              canvasId: painterid,
+              success: (e) => {
+                this.viewImg = e.tempFilePath;
+              },
+            },
+            this
+          );
+        }
       };
       return new Promise((resolve, reject) => {
+        this.help.instance.toDataURL = () => {
+          return new Promise((resolveUrl) => {
+            uni.canvasToTempFilePath(
+              {
+                canvasId: painterid,
+                success: function (e) {
+                  resolveUrl(e.tempFilePath);
+                },
+              },
+              this
+            );
+          });
+        };
+
         resolve(this.help.instance);
       });
     },
     doit(event, doback) {
-      if(doback){
-        let doRun = (x, y) => {
-          this.help.instance.getRegion(x, y).then((regionName) => {
-            doback(regionName);
-          });
-        };
+      let doRun = (x, y) => {
+        this.help.instance.getRegion(x, y).then((regionName) => {
+          // 兼容旧语法
+          if (typeof doback == "function") doback(regionName);
 
-        // #ifdef MP-ALIPAY
+          this.$emit("dotouchstart", {
+            name: regionName,
+            x: x,
+            y: y,
+          });
+        });
+      };
+
+      if (this.cover || this.isH5) {
+        let x = event.touches[0].x;
+        let y = event.touches[0].y;
+        doRun(x, y);
+      } else {
         uni
           .createSelectorQuery()
           .selectViewport()
           .scrollOffset()
           .exec((ret) => {
-            let x = event.touches[0].x + ret[0].scrollLeft;
-            let y = event.touches[0].y + ret[0].scrollTop;
-            doRun(x, y);
+            uni
+              .createSelectorQuery()
+              .in(this)
+              .select(".view-" + this.uniqueid)
+              .boundingClientRect((data) => {
+                doRun(
+                  event.touches[0].pageX - data.left - ret[0].scrollLeft,
+                  event.touches[0].pageY - data.top - ret[0].scrollTop
+                );
+              })
+              .exec();
           });
-        // #endif
-        // #ifndef MP-ALIPAY
-        let x = event.touches[0].x;
-        let y = event.touches[0].y;
-        doRun(x, y);
-        // #endif
       }
     },
     doitstart(event) {
@@ -155,6 +221,15 @@ export default {
 <style lang="css" scoped>
 /* 辅助的区域不应该可以看见 */
 .region {
+  position: fixed;
+  left: 50000px;
+}
+
+.cover-view .view-img {
+  display: none;
+}
+
+.normal-view .painter {
   position: fixed;
   left: 50000px;
 }

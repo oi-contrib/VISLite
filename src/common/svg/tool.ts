@@ -1,4 +1,5 @@
 import { XLINK_ATTRIBUTE } from "./dictionary"
+import SVGConfigType from '../../../types/SVGConfig'
 
 // 新建节点
 export function toNode(tagname: string) {
@@ -26,17 +27,17 @@ export function getAttribute(el: SVGElement, key: string) {
     return el.getAttribute(key)
 }
 
-export function full(el: SVGElement, config: any) {
+export function full(el: SVGElement, config: SVGConfigType) {
     _setAttribute(el, "stroke", config.strokeStyle)
     _setAttribute(el, "fill", config.fillStyle)
     _setAttribute(el, "stroke-dasharray", config.lineDash.join(','))
 }
 
-export function fill(el: SVGElement, config: any) {
+export function fill(el: SVGElement, config: SVGConfigType) {
     _setAttribute(el, "fill", config.fillStyle)
 }
 
-export function stroke(el: SVGElement, config: any) {
+export function stroke(el: SVGElement, config: SVGConfigType) {
     _setAttribute(el, "stroke", config.strokeStyle)
     _setAttribute(el, "fill", "none")
     _setAttribute(el, "stroke-dasharray", config.lineDash.join(','))

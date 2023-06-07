@@ -1,0 +1,23 @@
+<h3>
+    Tips：点击页面的红色区域会提示你点击的区域名称
+</h3>
+<div id="mycanvas" style="width:300px;height:120px;outline:1px solid red;"></div>
+<script type="module">
+    import { Canvas } from 'vislite';
+
+    var painter = new Canvas(document.getElementById('mycanvas'));
+
+    painter.setRegion("原生画笔");
+
+    let ctx = painter.getContext();
+    ctx.fillRect(0, 0, 100, 50);
+
+    let ctxRegion = painter.getContext(true);
+    ctxRegion.fillRect(0, 0, 100, 50);
+
+    document.getElementById('mycanvas').addEventListener('click', function (event) {
+        painter.getRegion(event.offsetX, event.offsetY).then(function (regionName) {
+            alert("区域名称：" + regionName);
+        });
+    });
+</script>

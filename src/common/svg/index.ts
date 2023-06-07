@@ -1,6 +1,15 @@
 import { initText, initCircle, initPath, initRect, initArc } from "./config"
 import { toNode, setAttribute, getAttribute, full, fill, stroke } from "./tool"
 import rotate from "../../rotate"
+import SVGConfigType from '../../../types/SVGConfig'
+
+// 属性名向下兼容
+let oldAttrName = {
+    "font-size": "fontSize",
+    "font-family": "fontFamily",
+    "arc-start-cap": "arcStartCap",
+    "arc-end-cap": "arcEndCap"
+}
 
 class SVG {
     readonly name: string = "SVG"
@@ -42,12 +51,13 @@ class SVG {
     }
 
     // 属性设置或获取
-    config(params: any) {
+    config(params: SVGConfigType) {
         if (typeof params !== 'object') {
-            return this.__config[params]
+            return this.__config[oldAttrName[params] || params]
         } else {
             for (let key in params) {
-                this.__config[key] = params[key]
+                let _key = oldAttrName[key] || key
+                this.__config[_key] = params[key]
             }
         }
         return this

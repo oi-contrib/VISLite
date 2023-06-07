@@ -7,9 +7,9 @@ let painter = new Canvas(el)
 console.log(painter)
 
 painter.config({
-    "font-size": 50,
+    "fontSize": 50,
     "textAlign": "center"
-}).setRegion("【这是文字】").fillText("这是文字", 200, 200, 45)
+}).setRegion("【这是文字】").strokeText("这是文字", 200, 200, 45)
 
 painter
     .config({
@@ -31,3 +31,23 @@ el.addEventListener("click", event => {
         console.log(data)
     })
 })
+
+// 多行文字
+let textH = painter.strokeRect(50, 250, 100, 100).config({
+    "textAlign": "left",
+    "fontSize": 20,
+    "strokeStyle": "green",
+    "lineWidth": 1
+}).fillTexts("如果文字特别多，是需要换行的，那么，你就可以考虑使用这个方法！", 50, 250, 100)
+
+painter.fillCircle(50, 250 + textH, 2)
+
+// 原生画笔
+
+painter.setRegion("原生画笔")
+
+let ctx = painter.getContext()
+ctx.fillRect(0, 0, 100, 50)
+
+let ctxRegion = painter.getContext(true)
+ctxRegion.fillRect(0, 0, 100, 50)

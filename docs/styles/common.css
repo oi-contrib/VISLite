@@ -504,35 +504,38 @@ body>div.fixed {
     text-indent: 1em;
 }
 
-.content>table {
+.content table {
     width: 100%;
-    line-height: 20px;
-    font-size: 14px;
 }
 
-.content>table>tbody>tr>* {
+.content table>tbody>tr>* {
     border-width: 0 1px 1px 0;
     border-style: solid;
     border-color: #c1bcbc;
 }
 
-.content>table>*>tr>td {
-    padding-left: 1em;
+.content table>*>tr>td,
+.content table>*>tr>th {
+    padding: 0 5px;
+    color: #3c3939;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 1.6em;
 }
 
-.content>table>tbody>tr>*:first-child {
+.content table>tbody>tr>*:first-child {
     border-width: 0 1px 1px 1px;
 }
 
-.content>table>tbody>tr:nth-child(2n) {
+.content table>tbody>tr:nth-child(2n) {
     background-color: #F5F5F5;
 }
 
-.content>table>tbody>tr:nth-child(2n+1) {
+.content table>tbody>tr:nth-child(2n+1) {
     background-color: #fff;
 }
 
-.content>table>thead>tr {
+.content table>thead>tr {
     background-color: #c1bcbc;
     border: 1px solid #c1bcbc;
     color: #fff;

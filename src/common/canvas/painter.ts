@@ -1,4 +1,5 @@
 import { initText, initArc, initCircle, initRect } from './config'
+import texts from './texts'
 
 interface OptsType {
 
@@ -20,22 +21,22 @@ class Painter {
     private __specialConfig = {
 
         // 文字大小
-        "font-size": 16,
+        "fontSize": 16,
 
         // 字体
-        "font-family": "sans-serif",
+        "fontFamily": "sans-serif",
 
         // 字重
-        "font-weight": 400,
+        "fontWeight": 400,
 
         // 字类型
-        "font-style": "normal",
+        "fontStyle": "normal",
 
         // 圆弧开始端闭合方式（"butt"直线闭合、"round"圆帽闭合）
-        "arc-start-cap": 'butt',
+        "arcStartCap": 'butt',
 
         // 圆弧结束端闭合方式，和上一个类似
-        "arc-end-cap": 'butt'
+        "arcEndCap": 'butt'
     }
 
     private __initConfig = {
@@ -129,7 +130,7 @@ class Painter {
         if (this.__region) this.__region.strokeText(text, x, y, deg)
 
         this.painter.save()
-        initText(this.painter, this.__specialConfig, x, y, deg || 0).strokeText(text, 0, 0)
+        initText(this.painter, this.__specialConfig, x, y, deg).strokeText(text, 0, 0)
         this.painter.restore()
         return this
     }
@@ -137,11 +138,53 @@ class Painter {
         if (this.__region) this.__region.fullText(text, x, y, deg)
 
         this.painter.save()
-        initText(this.painter, this.__specialConfig, x, y, deg || 0)
+        initText(this.painter, this.__specialConfig, x, y, deg)
         this.painter.fillText(text, 0, 0)
         this.painter.strokeText(text, 0, 0)
         this.painter.restore()
         return this
+    }
+
+    // 多行文字
+    fillTexts(contents: string, x: number, y: number, width: number, lineHeight: number = 1.2, deg: number = 0) {
+        if (this.__region) this.__region.fillTexts(contents, x, y, width, lineHeight)
+
+        this.painter.save()
+        initText(this.painter, this.__specialConfig, x, y, deg)
+
+        let height = texts(this.painter, contents, width, this.__specialConfig.fontSize * lineHeight, (content, top) => {
+            this.painter.fillText(content, 0, top)
+        })
+
+        this.painter.restore()
+        return height
+    }
+    strokeTexts(contents: string, x: number, y: number, width: number, lineHeight: number = 1.2, deg: number = 0) {
+        if (this.__region) this.__region.fillTexts(contents, x, y, width, lineHeight)
+
+        this.painter.save()
+        initText(this.painter, this.__specialConfig, x, y, deg)
+
+        let height = texts(this.painter, contents, width, this.__specialConfig.fontSize * lineHeight, (content, top) => {
+            this.painter.strokeText(content, 0, top)
+        })
+
+        this.painter.restore()
+        return height
+    }
+    fullTexts(contents: string, x: number, y: number, width: number, lineHeight: number = 1.2, deg: number = 0) {
+        if (this.__region) this.__region.fillTexts(contents, x, y, width, lineHeight)
+
+        this.painter.save()
+        initText(this.painter, this.__specialConfig, x, y, deg)
+
+        let height = texts(this.painter, contents, width, this.__specialConfig.fontSize * lineHeight, (content, top) => {
+            this.painter.fillText(content, 0, top)
+            this.painter.strokeText(content, 0, top)
+        })
+
+        this.painter.restore()
+        return height
     }
 
     // 路径

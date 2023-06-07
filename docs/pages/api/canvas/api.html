@@ -31,22 +31,22 @@ painter.config({
     "shadowColor": "black",
 
     // 文字大小
-    "font-size": 16,
+    "fontSize": 16,
 
     // 字体
-    "font-family": "sans-serif",
+    "fontFamily": "sans-serif",
 
     // 字重
-    "font-weight": 400,
+    "fontWeight": 400,
 
     // 字类型
-    "font-style": "normal",
+    "fontStyle": "normal",
 
     // 圆弧开始端闭合方式（"butt"直线闭合、"round"圆帽闭合）
-    "arc-start-cap": 'butt',
+    "arcStartCap": 'butt',
 
     // 圆弧结束端闭合方式，和上一个类似
-    "arc-end-cap": 'butt'
+    "arcEndCap": 'butt'
 })
 </pre>
 <h2>
@@ -70,6 +70,36 @@ painter.config({
     在点(x, y)处绘制轮廓并填充的文字text；deg表示文字旋转角度，可选：
 </p>
 <pre tag="javascript">painter.fullText(text, x, y, deg)</pre>
+<h3>
+    多行文字
+</h3>
+<p>
+    简单的理解就是设置了文本显示的宽以后，如果文本超过一行，会自动换行显示。
+</p>
+<div class="version">
+    0.2.0 新增
+</div>
+<p>
+    在点(x, y)处绘制填充的文字contents，且其宽不超过width；lineHeight表示行高，默认1.2，可选；deg表示文字旋转角度，可选：
+</p>
+<pre tag="javascript">painter.fillTexts(contents, x, y, width, lineHeight, deg)</pre>
+<p>
+    返回一个数字，表示实际文字所占的高。
+</p>
+<p>
+    在点(x, y)处绘制轮廓的文字contents，且其宽不超过width；lineHeight表示行高，默认1.2，可选；deg表示文字旋转角度，可选：
+</p>
+<pre tag="javascript">painter.strokeTexts(contents, x, y, width, lineHeight, deg)</pre>
+<p>
+    返回一个数字，表示实际文字所占的高。
+</p>
+<p>
+    在点(x, y)处绘制轮廓并填充的文字contents，且其宽不超过width；lineHeight表示行高，默认1.2，可选；deg表示文字旋转角度，可选：
+</p>
+<pre tag="javascript">painter.fullTexts(contents, x, y, width, lineHeight, deg)</pre>
+<p>
+    返回一个数字，表示实际文字所占的高。
+</p>
 <h3>
     弧
 </h3>
@@ -190,6 +220,15 @@ painter.config({
     擦除画面
 </h3>
 <pre tag="javascript">painter.clearRect(x, y, w, h)</pre>
+<h3>
+    toDataURL
+</h3>
+<div class="version">
+    0.2.0 新增
+</div>
+<pre tag="javascript">painter.toDataURL().then(url=>{
+    // todo    
+})</pre>
 <h2>
     区域管理
 </h2>
@@ -216,3 +255,51 @@ painter.getRegion(x, y).then((regionName) => {
     // todo
 }) 
 </pre>
+<h2>
+    原生画笔
+</h2>
+<div class="version">
+    0.2.0 新增
+</div>
+<p>
+    也就是canvas上的原生画笔，没有经过任何修饰的：
+</p>
+<pre tag="javascript">
+let ctx = painter.getContext(isRegion = false)
+</pre>
+<p>
+    可以传递一个参数isRegion，默认false表示返回的是画布的，如果设置true返回的就是区域的。
+</p>
+<h3>
+    如何配合区域控制？
+</h3>
+<p>
+    如果你使用此处的原生画笔绘制，默认是无法自动与区域管理机制配合运行的，不过，你可以手动使其一致。
+</p>
+<p>
+    比如你用下面的方法获取了画布的原生画笔并绘制了一个矩形：
+</p>
+<pre tag="javascript">
+let ctx = painter.getContext()
+ctx.fillRect(0, 0, 100, 50)
+</pre>
+<p>
+    那么，你如果给画布添加了点击事件，并使用setRegion设置区域名称，然后在点击的时候通过getRegion来获取是否点击在这个矩形上的。
+</p>
+<p>
+    非常不幸，你会发现机制失灵了。
+</p>
+<p>
+    怎么办？非常简单，只需要再加一段代码：
+</p>
+<pre tag="javascript">
+let ctxRegion = painter.getContext(true)
+ctxRegion.fillRect(0, 0, 100, 50)
+</pre>
+<p>
+    下面是完整的例子代码：
+</p>
+<example tag="api/oral-canvas" height="200px"></example>
+<div class="warn">
+    温馨提示：ctxRegion永远都不应该修改fillStyle、strokeStyle、shadowColor等色彩相关的属性。
+</div>

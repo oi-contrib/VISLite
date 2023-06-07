@@ -1,6 +1,6 @@
 {
   "name": "vislite",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "灵活、快速、简单的数据可视化交互式跨端前端库",
   "main": "./lib/index.umd.min.js",
   "typings": "./types/index.d.ts",
@@ -18,6 +18,15 @@
     "url": "git+https://github.com/oi-contrib/VISLite.git"
   },
   "keywords": [
+    "svg",
+    "webgl",
+    "typescript",
+    "canvas",
+    "vue",
+    "uniapp",
+    "miniprogram",
+    "image2d",
+    "image3d",
     "vislite"
   ],
   "author": {

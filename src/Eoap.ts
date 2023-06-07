@@ -1,4 +1,4 @@
-import EoapType from '../types/Eoap'
+import MapType from '../types/Map'
 
 // 围绕X轴旋转
 let rotateX = function (deg: number, x: number, y: number, z: number) {
@@ -19,7 +19,7 @@ let rotateZ = function (deg: number, x: number, y: number, z: number) {
 }
 
 /* 等角斜方位投影 */
-class Eoap implements EoapType {
+class Eoap implements MapType {
     readonly name: string = 'Eoap'
 
     private __scale: number // 缩放比例
@@ -30,7 +30,7 @@ class Eoap implements EoapType {
         this.__center = center
     }
 
-    use(longitude: number, latitude: number) {
+    use(λ: number, φ: number) {
         /**
          * 通过旋转的方法
          * 先旋转出点的位置
@@ -50,8 +50,8 @@ class Eoap implements EoapType {
          * 【除了经度为0的位置，不然纬度的旋转会改变原来的经度值，反过来不会】
          *
          */
-        let p = rotateY((360 - latitude) / 180 * Math.PI, 100 * this.__scale, 0, 0)
-        p = rotateZ(longitude / 180 * Math.PI, p[0], p[1], p[2])
+        let p = rotateY((360 - φ) / 180 * Math.PI, 100 * this.__scale, 0, 0)
+        p = rotateZ(λ / 180 * Math.PI, p[0], p[1], p[2])
         p = rotateZ((90 - this.__center[0]) / 180 * Math.PI, p[0], p[1], p[2])
         p = rotateX((90 - this.__center[1]) / 180 * Math.PI, p[0], p[1], p[2])
 

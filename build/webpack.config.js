@@ -19,6 +19,8 @@ module.exports = {
     animation: './test/animation/index.ts',
     cardinal: './test/cardinal/index.ts',
     help: './test/help/index.ts',
+    webgl: './test/webgl/index.ts',
+    mercator: './test/mercator/index.ts',
 
     // 基准测试
     benchmark: './test/benchmark/index.ts'
