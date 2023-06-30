@@ -1,50 +1,24 @@
 <template>
   <view :class="cover || isH5 ? 'cover-view' : 'normal-view'">
     <view :class="'view-img view-' + uniqueid" @touchstart="doitstart">
-      <image
-        :style="{ width: width + 'px', height: height + 'px' }"
-        :src="viewImg"
-      ></image>
+      <image :style="{ width: width + 'px', height: height + 'px' }" :src="viewImg"></image>
     </view>
 
     <!-- #ifdef MP-ALIPAY -->
-    <canvas
-      class="painter"
-      :id="'painter-' + uniqueid"
-      @touchstart="doitstart"
-      :style="{ width: width + 'px', height: height + 'px' }"
-    ></canvas>
-    <canvas
-      class="region"
-      :id="'region-' + uniqueid"
-      :style="{ width: width + 'px', height: height + 'px' }"
-    ></canvas>
+    <canvas class="painter" :id="'painter-' + uniqueid" @touchstart="doitstart"
+      :style="{ width: width + 'px', height: height + 'px' }"></canvas>
+    <canvas class="region" :id="'region-' + uniqueid" :style="{ width: width + 'px', height: height + 'px' }"></canvas>
     <!-- #endif -->
     <!-- #ifdef MP-WEIXIN -->
-    <canvas
-      class="painter"
-      canvas-id="painter"
-      @touchstart="doitstart"
-      :style="{ width: width + 'px', height: height + 'px' }"
-    ></canvas>
-    <canvas
-      class="region"
-      canvas-id="region"
-      :style="{ width: width + 'px', height: height + 'px' }"
-    ></canvas>
+    <canvas class="painter" canvas-id="painter" @touchstart="doitstart"
+      :style="{ width: width + 'px', height: height + 'px' }"></canvas>
+    <canvas class="region" canvas-id="region" :style="{ width: width + 'px', height: height + 'px' }"></canvas>
     <!-- #endif -->
     <!-- #ifndef MP-WEIXIN||MP-ALIPAY -->
-    <canvas
-      class="painter"
-      :canvas-id="'painter-' + uniqueid"
-      @touchstart="doitstart"
-      :style="{ width: width + 'px', height: height + 'px' }"
-    ></canvas>
-    <canvas
-      class="region"
-      :canvas-id="'region-' + uniqueid"
-      :style="{ width: width + 'px', height: height + 'px' }"
-    ></canvas>
+    <canvas class="painter" :canvas-id="'painter-' + uniqueid" @touchstart="doitstart"
+      :style="{ width: width + 'px', height: height + 'px' }"></canvas>
+    <canvas class="region" :canvas-id="'region-' + uniqueid"
+      :style="{ width: width + 'px', height: height + 'px' }"></canvas>
     <!-- #endif -->
   </view>
 </template>
@@ -75,7 +49,7 @@ export default {
     },
     touchstart: {
       type: Function,
-      default: () => {},
+      default: () => { },
     },
     cover: {
       type: Boolean,
@@ -144,15 +118,17 @@ export default {
 
         // 如果不使用原生渲染
         if (!this.cover && !this.isH5) {
-          uni.canvasToTempFilePath(
-            {
-              canvasId: painterid,
-              success: (e) => {
-                this.viewImg = e.tempFilePath;
+          setTimeout(() => {
+            uni.canvasToTempFilePath(
+              {
+                canvasId: painterid,
+                success: (e) => {
+                  this.viewImg = e.tempFilePath;
+                },
               },
-            },
-            this
-          );
+              this
+            );
+          }, 300);
         }
       };
       return new Promise((resolve, reject) => {

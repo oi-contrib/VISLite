@@ -1,7 +1,46 @@
-let el1 = document.getElementById("root1")
-
 import WebGL from '../../src/WebGL'
 import viewHandler from '../../src/viewHandler'
+
+let el0 = document.getElementById("root0")
+
+let painter0 = new WebGL(el0)
+painter0.render({
+    mesh: [{
+        geometry: {
+            attributes: {
+                position: {
+                    array: [
+                        1, -1,
+                        -1, -1,
+                        0, 1
+                    ],
+                    count: 3,
+                    itemSize: 2
+                }
+            },
+            type: "TRIANGLES"
+        },
+        material: {
+            // color: {
+            //     r: 1,
+            //     g: 0,
+            //     b: 1,
+            //     alpha: 1
+            // }
+            colors: {
+                array: [
+                    1, 0, 0,
+                    0, 1, 0,
+                    0, 0, 1
+                ],
+                count: 3,
+                itemSize: 3
+            }
+        }
+    }]
+})
+
+let el1 = document.getElementById("root1")
 
 let painter1 = new WebGL(el1)
 

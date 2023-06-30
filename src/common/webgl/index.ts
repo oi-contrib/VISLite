@@ -165,6 +165,10 @@ class WebGL {
                 mesh.geometry.index.array = new Uint8Array(mesh.geometry.index.array)
             }
 
+            if (mesh.material.colors && Array.isArray(mesh.material.colors.array)) {
+                mesh.material.colors.array = new Float32Array(mesh.material.colors.array)
+            }
+
         }
 
         this.__scene.children.push(object3D)

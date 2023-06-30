@@ -12,6 +12,11 @@ import SVG from "./SVG/index"
 import Canvas from "./Canvas/index"
 import WebGL from "./WebGL/index"
 
+import getWebGLContext from "./getWebGLContext/index"
+import Shader from "./Shader/index"
+import Texture from "./Texture/index"
+import Buffer from "./Buffer/index"
+
 import Eoap from "./Eoap/index"
 import Mercator from "./Mercator/index"
 
@@ -36,6 +41,12 @@ export default {
     SVG,
     Canvas,
     WebGL,
+
+    // WebGL
+    getWebGLContext,
+    Shader,
+    Texture,
+    Buffer,
 
     // 投影
     Eoap,

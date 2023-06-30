@@ -46,11 +46,29 @@ class Cardinal implements CardinalType {
             this.__HS.x[flag] = points[flag][0]
 
             // 求点斜率
-            temp = flag < points.length - 1 ?
-                (points[flag + 1][1] - points[flag - 1][1]) / (points[flag + 1][0] - points[flag - 1][0]) :
-                (points[flag][1] - points[flag - 1][1]) / (points[flag][0] - points[flag - 1][0])
 
-            // 求解两个点直接的拟合方程
+            // temp = flag < points.length - 1 ?
+            //     (points[flag + 1][1] - points[flag - 1][1]) / (points[flag + 1][0] - points[flag - 1][0]) :
+            //     (points[flag][1] - points[flag - 1][1]) / (points[flag][0] - points[flag - 1][0])
+
+            // 修复超过界限的值问题
+            // 2023年6月25日 于南京
+            if (flag < points.length - 1) {
+                if (
+                    (points[flag + 1][1] > points[flag][1] && points[flag - 1][1] > points[flag][1]) ||
+                    (points[flag + 1][1] < points[flag][1] && points[flag - 1][1] < points[flag][1]) ||
+                    points[flag + 1][1] == points[flag][1] ||
+                    points[flag - 1][1] == points[flag][1]
+                ) {
+                    temp = 0
+                } else {
+                    temp = (points[flag + 1][1] - points[flag - 1][1]) / (points[flag + 1][0] - points[flag - 1][0])
+                }
+            } else {
+                temp = (points[flag][1] - points[flag - 1][1]) / (points[flag][0] - points[flag - 1][0])
+            }
+
+            // 求解两个点直接的插值方程
             // 第一个点的前一个点直接取第一个点
             // 最后一个点的后一个点直接取最后一个点
             this.__HS.h[flag - 1] = new Hermite((1 - this.__t) * 0.5).setP(points[flag - 1][0], points[flag - 1][1], points[flag][0], points[flag][1], slope, temp)

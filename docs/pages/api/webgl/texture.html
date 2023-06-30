@@ -1,0 +1,70 @@
+<header>
+    纹理
+</header>
+<div class="version">
+    0.3.0 新增
+</div>
+<h2>
+    引入
+</h2>
+<pre tag="javascript">
+    import { Texture } from 'vislite'
+</pre>
+<h2>
+    语法
+</h2>
+<p>
+    获取纹理实例：
+</p>
+<pre tag="javascript">
+    let texture = new Texture(painter, type, unit)
+</pre>
+<p>
+    其中参数解释如下：
+</p>
+<ol>
+    <li>
+        painter：WebGLRenderingContext类型
+    </li>
+    <li>
+        type：string类型，可以是"2d"或"cube"，分别表示是二维纹理还是立方纹理
+    </li>
+    <li>
+        unit：number类型，表示纹理单元，默认0
+    </li>
+</ol>
+<h2>
+    方法
+</h2>
+<h3>
+    useImage
+</h3>
+<p>
+    链接图片资源(单一)，表示纹理图片，TexImageSource类型：
+</p>
+<pre tag="javascript">
+    texture.useImage(image)
+</pre>
+<h3>
+    useCube
+</h3>
+<p>
+    链接图片资源（多张）：
+</p>
+<pre tag="javascript">
+    texture.useCube(images, width, height)
+</pre>
+<p>
+    其中参数解释如下：
+</p>
+<ol>
+    <li>
+        images：纹理图片集，是一个数组，里面的元素是TexImageSource类型
+    </li>
+    <li>
+        width：图片宽
+    </li>
+    <li>
+        height：图片高
+    </li>
+</ol>

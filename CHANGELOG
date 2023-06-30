@@ -38,3 +38,34 @@ v0.2.0:
             * 多行文字:fillTexts、strokeTexts、fullTexts
             * 获取原始画笔:getContext
         4、uni-app平台的ui-canvas新增cover属性配置，支持非原生渲染模式
+        5、控制信息捕获 viewHandler
+          （支持平台：H5）
+v0.3.0:
+    date:2023-07-01
+    changes:
+      - 修复bug
+        1、Canvas画笔
+            * 在部分安卓手机上可能绘制失败问题
+        2、SVG画笔
+            * 部分情况下文字大小设置失败问题
+            * 配置失效问题
+            * 圆弧系列（fillArc、strokeArc、fullArc）和路径arc角度未正确使用角度值问题
+        3、WebGL画笔
+            * render方法中itemSize设置无效问题
+        4、修复Cardinal插值超过界限的值问题
+      - 新增功能
+        1、丰富Canvas画笔方法
+            * createLinearGradient 线性渐变色
+            * createRadialGradient 环形渐变色
+            * clip 裁剪
+            * 绘制圆弧系列（fillArc、strokeArc、fullArc）的闭合方式添加```-round```选项
+            * getColor 获取指定位置颜色
+        2、丰富SVG画笔方法
+            * 绘制圆弧系列（fillArc、strokeArc、fullArc）的闭合方式添加```-round```选项
+        3、丰富WebGL画笔丰富
+            * 材料material新增多颜色值colors
+        4、朴素的WebGL接口集合
+            * getWebGLContext 画笔
+            * Shader 着色器
+            * Buffer 缓冲区
+            * Texture 纹理

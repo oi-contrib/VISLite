@@ -681,7 +681,7 @@ pre>.copy-icon {
 }
 
 /* 例子界面 */
-.example-view {
+body div.example-view {
     outline: 1px solid rgb(135, 133, 133);
     background: #fff;
     overflow: auto;

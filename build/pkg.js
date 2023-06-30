@@ -25,11 +25,7 @@ let banner = `/*!
 * Released under the ${package.license} license
 * ${package.author.url}
 * 
-* ${/^\d+\.\d+\.\d+$/.test(package.version) ? ('Publish Date: ' + new Date()) : `本版本系测试版本，请认真阅读下述说明再使用：
-*
-*【测试版本细则】
-* alpha：内测版本，仅供开发人员提供测试环境而发布，后续的修改可能极具破坏性，非有明确了解前请勿直接用于项目中
-* beta：外测版本，正式发布前的确认测试，或者新功能紧急发布，一般可以直接用于实际项目，因为即使后续发现了问题，直接使用正式版即可，不会有破坏性`}
+* Publish Date:  ${new Date()}
 */`
 
 error(`

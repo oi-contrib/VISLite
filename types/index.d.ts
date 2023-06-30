@@ -12,6 +12,11 @@ import SVGType from './SVG'
 import CanvasType from './Canvas'
 import WebGLType from './WebGL'
 
+import getWebGLContextType from './getWebGLContext'
+import ShaderType from './Shader'
+import BufferType from './Buffer'
+import TextureType from './Texture'
+
 import MapType from './Map'
 
 import viewHandlerType from './viewHandler'
@@ -38,6 +43,17 @@ interface NewCanvasType extends CanvasType {
 }
 interface NewWebGLType extends WebGLType {
     new(el: HTMLElement | null): this
+}
+
+// WebGL
+interface NewShaderType extends ShaderType {
+    new(painter: WebGLRenderingContext): this
+}
+interface NewBufferType extends BufferType {
+    new(painter: WebGLRenderingContext, isElement?: boolean): this
+}
+interface NewTextureType extends TextureType {
+    new(painter: WebGLRenderingContext, type: string, unit?: number): this
 }
 
 // 投影
@@ -68,6 +84,12 @@ export default class VISLite {
     static Canvas: NewCanvasType
     static WebGL: NewWebGLType
 
+    // WebGL
+    static getWebGLContext: getWebGLContextType
+    static Shader: NewShaderType
+    static Buffer: NewBufferType
+    static Texture: NewTextureType
+
     // 投影
     static Eoap: NewEoapType
     static Mercator: NewMercatorType
@@ -93,6 +115,12 @@ export let ruler: rulerType
 export let SVG: NewSVGType
 export let Canvas: NewCanvasType
 export let WebGL: NewWebGLType
+
+// WebGL
+export let getWebGLContext: getWebGLContextType
+export let Shader: NewShaderType
+export let Buffer: NewBufferType
+export let Texture: NewTextureType
 
 // 投影
 export let Eoap: NewEoapType

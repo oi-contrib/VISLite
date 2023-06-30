@@ -130,7 +130,7 @@ function fetchData(url) {
                 }
 
                 resolve(res);
-            }).catch(err => {
+            }).catch(function (err) {
                 reject(err);
             });
         }

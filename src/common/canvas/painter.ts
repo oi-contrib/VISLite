@@ -101,6 +101,12 @@ class Painter {
 
         // 如果已经存在默认配置中，说明只需要缓存起来即可
         else if (key in this.__specialConfig) {
+
+            // 文字非整数可能存在问题，修复一下
+            if (key == 'fontSize') {
+                value = Math.round(value)
+            }
+
             this.__specialConfig[key] = value
         }
 
@@ -249,6 +255,12 @@ class Painter {
         if (this.__region) this.__region.restore()
 
         this.painter.restore()
+        return this
+    }
+    clip() {
+        if (this.__region) this.__region.clip()
+
+        this.painter.clip()
         return this
     }
 

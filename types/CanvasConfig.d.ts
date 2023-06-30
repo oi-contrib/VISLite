@@ -3,12 +3,12 @@ export default interface CanvasConfigType {
     /**
      * 填充色或图案，默认"#000"
      */
-    fillStyle?: string
+    fillStyle?: string | CanvasGradient
 
     /**
      * 轮廓色或图案，默认"#000"
      */
-    strokeStyle?: string
+    strokeStyle?: string | CanvasGradient
 
     /**
      * 线条宽度，默认1(单位px)
@@ -40,7 +40,7 @@ export default interface CanvasConfigType {
     /**
      * 阴影的颜色
      */
-    shadowColor?: string
+    shadowColor?: string | CanvasGradient
 
     /**
      * 文字大小，默认16

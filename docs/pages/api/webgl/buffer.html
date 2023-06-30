@@ -1,0 +1,82 @@
+<header>
+    缓冲区
+</header>
+<div class="version">
+    0.3.0 新增
+</div>
+<h2>
+    引入
+</h2>
+<pre tag="javascript">
+    import { Buffer } from 'vislite'
+</pre>
+<h2>
+    语法
+</h2>
+<p>
+    获取缓冲区实例：
+</p>
+<pre tag="javascript">
+    let buffer = new Buffer(painter, isElement)
+</pre>
+<p>
+    其中参数解释如下：
+</p>
+<ol>
+    <li>
+        painter：WebGLRenderingContext类型
+    </li>
+    <li>
+        isElement：boolean类型，默认false，表示不是索引缓冲区
+    </li>
+</ol>
+<h2>
+    方法
+</h2>
+<h3>
+    use
+</h3>
+<p>
+    使用这个缓冲区对象：
+</p>
+<pre tag="javascript">
+    buffer.use()
+</pre>
+<div class="warn">
+    温馨提示：应该先于写入write和分配divide。
+</div>
+<h3>
+    write
+</h3>
+<p>
+    写入数据，数据data类型可以是 Uint8Array | Int16Array | Uint16Array | Int32Array | Uint32Array | Float32Array：
+</p>
+<pre tag="javascript">
+    buffer.write(data)
+</pre>
+<h3>
+    divide
+</h3>
+<p>
+    分配使用
+</p>
+<pre tag="javascript">
+    buffer.divide(location, size, stride, offset)
+</pre>
+<p>
+    其中参数解释如下：
+</p>
+<ol>
+    <li>
+        location：number类型，表示变量位置
+    </li>
+    <li>
+        size：number类型，表示一个数据的长度
+    </li>
+    <li>
+        stride：number类型，表示一组数据的长度(可能包含多组)
+    </li>
+    <li>
+        offset：number类型，表示读取位置偏移，可选，默认0
+    </li>
+</ol>

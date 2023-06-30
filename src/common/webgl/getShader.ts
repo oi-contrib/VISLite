@@ -9,12 +9,13 @@ export default function (type: string, painter: WebGLRenderingContext, mesh: mes
         (mesh.geometry.attributes.normal ? "1" : "0") +
         (mesh.material.image ? "1" : "0") +
         (mesh.material.color ? "1" : "0") +
+        (mesh.material.colors ? "1" : "0") +
         (mesh.material.cube ? "1" : "0")
     if (shaders[uniqueName]) return shaders[uniqueName].use()
 
     // 顶点着色器
     let vertexShader = `
-     attribute vec4 a_position;
+    attribute vec4 a_position;
 
      ${mesh.geometry.attributes.normal ? 'attribute vec4 a_normal;varying vec3 v_normal;' : ''}
 
@@ -23,6 +24,8 @@ export default function (type: string, painter: WebGLRenderingContext, mesh: mes
     uniform mat4 u_matrix_proporion;
 
     ${mesh.material.image ? 'attribute vec2 a_textcoord;varying vec2 v_textcoord;' : ''}
+
+    ${mesh.material.colors ? 'attribute vec4 a_color;varying vec4 v_color;' : ''}
 
     void main(){
         vec4 temp = a_position;
@@ -43,6 +46,7 @@ export default function (type: string, painter: WebGLRenderingContext, mesh: mes
 
         ${mesh.geometry.attributes.normal ? 'v_normal = normalize(vec3(a_normal));' : ''}
         ${mesh.material.image ? 'v_textcoord = a_textcoord;' : ''}
+        ${mesh.material.colors ? 'v_color=a_color;' : ''}
      }
  `
 
@@ -54,11 +58,13 @@ export default function (type: string, painter: WebGLRenderingContext, mesh: mes
     ${mesh.material.color ? 'uniform vec4 u_color;' : ''}
     ${mesh.material.cube ? 'uniform samplerCube u_texture;' : ''}
     ${mesh.material.image ? 'uniform sampler2D u_sampler;varying vec2 v_textcoord;' : ''}
+    ${mesh.material.colors ? 'varying vec4 v_color;' : ''}
 
     void main(){
         ${mesh.material.color ? 'gl_FragColor = u_color;' : ''}
         ${mesh.material.cube ? 'gl_FragColor = textureCube(u_texture,normalize(v_normal));' : ''}
         ${mesh.material.image ? 'gl_FragColor = texture2D(u_sampler,v_textcoord);' : ''}
+        ${mesh.material.colors ? 'gl_FragColor=v_color;' : ''}
     }
  `
 

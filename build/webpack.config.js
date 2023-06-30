@@ -20,6 +20,7 @@ module.exports = {
     cardinal: './test/cardinal/index.ts',
     help: './test/help/index.ts',
     webgl: './test/webgl/index.ts',
+    "webgl-single": './test/webgl-single/index.ts',
     mercator: './test/mercator/index.ts',
 
     // 基准测试

@@ -1,0 +1,54 @@
+<header>
+    着色器
+</header>
+<div class="version">
+    0.3.0 新增
+</div>
+<h2>
+    引入
+</h2>
+<pre tag="javascript">
+    import { Shader } from 'vislite'
+</pre>
+<h2>
+    语法
+</h2>
+<p>
+    传递一个WebGLRenderingContext类型的参数painter即可获取着色器实例：
+</p>
+<pre tag="javascript">
+let shader = new Shader(painter)
+</pre>
+<h2>
+    属性
+</h2>
+<h3>
+    program
+</h3>
+<p>
+    着色器程序。
+</p>
+<h2>
+    方法
+</h2>
+<h3>
+    use
+</h3>
+<p>
+    使得当前的着色器程序启用：
+</p>
+<pre tag="javascript">
+    shader.use()
+</pre>
+<div class="warn">
+    温馨提示：需要在编译compile完成后再调用这个方法。
+</div>
+<h3>
+    compile
+</h3>
+<p>
+    编译具体的着色器程序，需要传递的是两个参数，分别是顶点着色器和片段（元）着色器的字符串代码：
+</p>
+<pre tag="javascript">
+    shader.compile(vshaderSource, fshaderSource)
+</pre>

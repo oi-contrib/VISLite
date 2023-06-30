@@ -20,7 +20,7 @@ export default function (type: string, painter: WebGLRenderingContext, mesh: mes
     // 点数据写入缓冲区
     new BufferObject(painter).use()
         .write(mesh.geometry.attributes.position.array as Float32Array)
-        .divide(painter.getAttribLocation(shader.program, "a_position"), mesh.geometry.attributes.position.itemSize, 3, 0)
+        .divide(painter.getAttribLocation(shader.program, "a_position"), mesh.geometry.attributes.position.itemSize, mesh.geometry.attributes.position.itemSize, 0)
 
     // 写入矩阵
     painter.uniformMatrix4fv(painter.getUniformLocation(shader.program, "u_matrix_world"), false, globalWorld.matrix)
@@ -31,7 +31,7 @@ export default function (type: string, painter: WebGLRenderingContext, mesh: mes
     if (mesh.geometry.attributes.normal) {
         new BufferObject(painter).use()
             .write(mesh.geometry.attributes.normal.array as Float32Array)
-            .divide(painter.getAttribLocation(shader.program, "a_normal"), mesh.geometry.attributes.normal.itemSize, 3, 0)
+            .divide(painter.getAttribLocation(shader.program, "a_normal"), mesh.geometry.attributes.normal.itemSize, mesh.geometry.attributes.normal.itemSize, 0)
     }
 
     // 颜色
@@ -45,10 +45,20 @@ export default function (type: string, painter: WebGLRenderingContext, mesh: mes
             , mesh.material.color.alpha)
     }
 
+    // 多颜色
+    if ("colors" in mesh.material) {
+
+        // 写入颜色序列
+        new BufferObject(painter).use()
+            .write(mesh.material.colors.array as Float32Array)
+            .divide(painter.getAttribLocation(shader.program, "a_color"), mesh.material.colors.itemSize, mesh.material.colors.itemSize, 0)
+
+    }
+
     // 立方纹理
     else if ("cube" in mesh.material) {
 
-        let size = mesh.material.cube.right.image.value.width
+        let size = (mesh.material.cube.right.image.value as any).width
 
         getTexture(type, painter, 'cube').useCube([
             mesh.material.cube.right.image.value,

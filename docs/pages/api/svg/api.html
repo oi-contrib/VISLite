@@ -30,13 +30,22 @@ painter.config({
     // 字体，默认"sans-serif"
     "fontFamily": "sans-serif",
 
-    // 圆弧开始端闭合方式（"butt"直线闭合、"round"圆帽闭合）
+    // 圆弧开始端闭合方式（"butt"直线闭合、"round"圆帽闭合、"-round"反圆帽闭合）
     "arcStartCap": 'butt',
 
     // 圆弧结束端闭合方式，和上一个类似
     "arcEndCap": 'butt'
 });
 </pre>
+<div class="version">
+    丰富日志
+    <hr />
+    <ul>
+        <li>
+            arcStartCap的-round  0.3.0 新增
+        </li>
+    </ul>
+</div>
 <h2>
     基础方法
 </h2>
@@ -105,7 +114,7 @@ painter.config({
     弧
 </h3>
 <p>
-    以(cx, cy)为圆心，内外半径分别是r1和r2，从弧度beginDeg开始，跨越弧度deg，绘制填充圆弧：
+    以(cx, cy)为圆心，内外半径分别是r1和r2，从角度beginDeg开始，跨越角度deg，绘制填充圆弧：
 </p>
 <pre tag="javascript">painter.fillArc(cx, cy, r1, r2, beginDeg, deg)</pre>
 <p>
@@ -171,7 +180,7 @@ painter.config({
 </p>
 <pre tag="javascript">painter.lineTo(x, y)</pre>
 <p>
-    以(cx, cy)为圆心，半径r，从弧度beginDeg开始，跨越弧度deg画弧，此时笔没有离开画布：
+    以(cx, cy)为圆心，半径r，从角度beginDeg开始，跨越角度deg画弧，此时笔没有离开画布：
 </p>
 <pre tag="javascript">painter.arc(cx, cy, r, beginDeg, deg)</pre>
 <p>
