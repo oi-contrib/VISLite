@@ -7,7 +7,7 @@ export default function (begin: number, end: number, step: number, count: number
         for (let i = 0; i < count; i++) {
 
             // 如果当前位可以进1
-            if (val[i] < end) {
+            if (val[i] + step < end) {
                 val[i] = +(val[i] + step).toFixed(7)
                 break
             }

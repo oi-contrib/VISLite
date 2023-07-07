@@ -69,3 +69,9 @@ v0.3.0:
             * Shader 着色器
             * Buffer 缓冲区
             * Texture 纹理
+v0.3.1:
+    date:2023-07-08
+    changes:
+      - 修复bug
+        1、Canvas画笔
+            * 优化区域计算有时候出错问题

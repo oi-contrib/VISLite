@@ -17,7 +17,10 @@ class Canvas extends PainterRender {
   readonly name: string = "Canvas"
 
   private __regionList = {} //区域映射表
-  private __regionAssemble = assemble(0, 255, 1, 3)
+
+  // 步长由1改为10是为了优化区域计算有时候出错问题
+  // 2023年7月6日 于南京
+  private __regionAssemble = assemble(0, 255, 10, 3)
 
   constructor(ViewCanvas: HTMLCanvasElement, RegionCanvas: HTMLCanvasElement) {
     super(
@@ -71,12 +74,12 @@ class Canvas extends PainterRender {
         for (let key in this.__regionList) {
           if (
             "rgb(" +
-              currentRGBA[0] +
-              "," +
-              currentRGBA[1] +
-              "," +
-              currentRGBA[2] +
-              ")" ==
+            currentRGBA[0] +
+            "," +
+            currentRGBA[1] +
+            "," +
+            currentRGBA[2] +
+            ")" ==
             this.__regionList[key]
           ) {
             resolve(key)
