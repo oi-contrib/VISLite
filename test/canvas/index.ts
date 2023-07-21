@@ -117,3 +117,7 @@ painter
     arcStartCap: "-round",
   })
   .fillArc(100, 100, 10, 50, 0, Math.PI)
+
+console.log(painter.config({
+  fontSize: 10
+}).textWidth('看看宽度0'))

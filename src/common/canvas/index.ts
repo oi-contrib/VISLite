@@ -2,6 +2,7 @@ import CanvasConfigType from "../../../types/CanvasConfig"
 import PainterRender from "./painter"
 import assemble from "../assemble"
 import { linearGradient, radialGradient } from "./gradient"
+import { initText } from './config'
 
 // 属性名向下兼容
 let oldAttrName = {
@@ -103,6 +104,19 @@ class Canvas extends PainterRender {
         })
       }
     })
+  }
+
+  textWidth(text: string) {
+    this.painter.save()
+
+    initText(this.painter, this.__specialConfig, 0, 0, 0)
+
+    // 虽然我们限制了只可以输入字符串，可是不代表所有环境都可以保证，为了确保方法不失效，强转成字符串
+    let width = this.painter.measureText(text + "").width
+
+    this.painter.restore()
+
+    return width
   }
 
   // 获取原始画笔

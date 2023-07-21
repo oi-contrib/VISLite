@@ -1,6 +1,6 @@
 {
   "name": "vislite",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "灵活、快速、简单的数据可视化交互式跨端前端库",
   "main": "./lib/index.umd.min.js",
   "typings": "./types/index.d.ts",
@@ -41,7 +41,7 @@
   "devDependencies": {
     "@rollup/plugin-typescript": "^11.1.0",
     "@types/jasmine": "^4.3.1",
-    "devby": "^0.4.0",
+    "devby": "^0.3.1",
     "karma": "^6.3.10",
     "karma-chrome-launcher": "^3.1.0",
     "karma-jasmine": "^4.0.1",

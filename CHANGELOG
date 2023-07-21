@@ -75,3 +75,9 @@ v0.3.1:
       - 修复bug
         1、Canvas画笔
             * 优化区域计算有时候出错问题
+v0.4.0:
+    date:2023-07-22
+    changes:
+      - 新增功能
+        1、丰富Canvas画笔方法
+            * textWidth 计算文字宽 

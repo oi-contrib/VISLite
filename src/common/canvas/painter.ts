@@ -18,7 +18,7 @@ class Painter {
 
     // 用于记录配置
     // 因为部分配置的设置比较特殊，只先记录意图
-    private __specialConfig = {
+     __specialConfig = {
 
         // 文字大小
         "fontSize": 16,

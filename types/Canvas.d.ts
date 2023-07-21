@@ -35,6 +35,12 @@ export default interface CanvasType {
   fullText(text: any, x: number, y: number, deg?: number): this
 
   /**
+   * 计算文字宽
+   * @param text 需要计算宽的文字
+   */
+  textWidth(text: string): number
+
+  /**
    * 绘制一个实心的圆弧
    * @param cx 圆弧的圆心x坐标
    * @param cy 圆弧的圆心y坐标
