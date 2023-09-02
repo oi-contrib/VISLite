@@ -15,7 +15,6 @@ let $timerId: any
  */
 export default function (doback: (deep: number) => void, duration: number = 400, callback: (deep: number) => void = () => { }): Function {
 
-
     let clock = {
         //把tick函数推入堆栈
         "timer": function (tick: (deep: number) => void, duration: number, callback: (deep: number) => void) {
@@ -78,7 +77,7 @@ export default function (doback: (deep: number) => void, duration: number = 400,
                 $timerId = null
             }
         }
-    };
+    }
 
     let id = clock.timer(function (deep: number) {
         //其中deep为0-1，表示改变的程度
@@ -91,7 +90,7 @@ export default function (doback: (deep: number) => void, duration: number = 400,
         let i: string
         for (i in $timers) {
             if ($timers[i].id == id) {
-                $timers[i].id = undefined
+                $timers[i].id = void 0
                 return
             }
         }

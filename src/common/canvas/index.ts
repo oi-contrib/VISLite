@@ -1,4 +1,5 @@
-import CanvasConfigType from "../../../types/CanvasConfig"
+import type CanvasConfigType from "../../../types/CanvasConfig"
+
 import PainterRender from "./painter"
 import assemble from "../assemble"
 import { linearGradient, radialGradient } from "./gradient"
@@ -27,9 +28,9 @@ class Canvas extends PainterRender {
     super(
       ViewCanvas,
       {},
-      new PainterRender(RegionCanvas, {
+      RegionCanvas ? new PainterRender(RegionCanvas, {
         willReadFrequently: true,
-      })
+      }) : null, true
     )
 
     this.setRegion("")
@@ -44,20 +45,28 @@ class Canvas extends PainterRender {
     return this
   }
 
+  // 是否绘制的内容只需要进行区域记录
+  onlyRegion(flag: boolean) {
+    this.__onlyRegion = flag
+    return this
+  }
+
   // 设置当前绘制区域名称
   setRegion(regionName: string | number) {
-    if (regionName) {
-      if (this.__regionList[regionName] == undefined) {
-        let tempColor = this.__regionAssemble()
-        this.__regionList[regionName] =
-          "rgb(" + tempColor[0] + "," + tempColor[1] + "," + tempColor[2] + ")"
-      }
+    if (this.__region) {
+      if (regionName) {
+        if (this.__regionList[regionName] == void 0) {
+          let tempColor = this.__regionAssemble()
+          this.__regionList[regionName] =
+            "rgb(" + tempColor[0] + "," + tempColor[1] + "," + tempColor[2] + ")"
+        }
 
-      this.__region.useConfig("fillStyle", this.__regionList[regionName]) &&
-        this.__region.useConfig("strokeStyle", this.__regionList[regionName])
-    } else {
-      this.__region.useConfig("fillStyle", "#000000") &&
-        this.__region.useConfig("strokeStyle", "#000000")
+        this.__region.useConfig("fillStyle", this.__regionList[regionName]) &&
+          this.__region.useConfig("strokeStyle", this.__regionList[regionName])
+      } else {
+        this.__region.useConfig("fillStyle", "#000000") &&
+          this.__region.useConfig("strokeStyle", "#000000")
+      }
     }
     return this
   }
@@ -65,26 +74,31 @@ class Canvas extends PainterRender {
   // 获取当前事件触发的区域名称
   getRegion(x: number, y: number): Promise<string> {
     return new Promise((resolve, reject) => {
-      let imgData = this.__region.painter.getImageData(x - 0.5, y - 0.5, 1, 1)
+      let imgData = this.__region ? this.__region.painter.getImageData(x - 0.5, y - 0.5, 1, 1) : {
+        data: [0, 0, 0, 0]
+      }
 
       // 获取点击点的颜色
       let currentRGBA = imgData.data
 
       let doit = () => {
-        // 查找当前点击的区域
-        for (let key in this.__regionList) {
-          if (
-            "rgb(" +
-            currentRGBA[0] +
-            "," +
-            currentRGBA[1] +
-            "," +
-            currentRGBA[2] +
-            ")" ==
-            this.__regionList[key]
-          ) {
-            resolve(key)
-            break
+        if (this.__region) {
+
+          // 查找当前点击的区域
+          for (let key in this.__regionList) {
+            if (
+              "rgb(" +
+              currentRGBA[0] +
+              "," +
+              currentRGBA[1] +
+              "," +
+              currentRGBA[2] +
+              ")" ==
+              this.__regionList[key]
+            ) {
+              resolve(key)
+              break
+            }
           }
         }
 
@@ -121,7 +135,7 @@ class Canvas extends PainterRender {
 
   // 获取原始画笔
   getContext(isRegion = false) {
-    return isRegion ? this.__region.painter : this.painter
+    return isRegion ? (this.__region ? this.__region.painter : null) : this.painter
   }
 
   // 线性渐变

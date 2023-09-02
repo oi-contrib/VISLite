@@ -1,4 +1,4 @@
 <view>
     <canvas type="2d" id="painter" style='width:{{width}}px;height:{{height}}px;' bindtouchstart="doitstart"></canvas>
-    <canvas type="2d" id="region" style='width:{{width}}px;height:{{height}}px;' class="region"></canvas>
+    <canvas wx:if="{{region}}" type="2d" id="region" style='width:{{width}}px;height:{{height}}px;' class="region"></canvas>
 </view>

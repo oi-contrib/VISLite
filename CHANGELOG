@@ -3,8 +3,8 @@ v0.1.0:
     changes:
       - 初始化版本
         1、Canvas
-          （支持平台：H5、uni-app(包括：H5、微信小程序、支付宝小程序)、微信小程序）
-        2、SVG
+          （支持平台：H5、uni-app（包括：H5、微信小程序、支付宝小程序）、微信小程序）
+        2、SVG画笔
           （支持平台：H5）
         3、Eoap 等角斜方位投影
         4、rotate 旋转
@@ -31,7 +31,7 @@ v0.2.0:
         1、针对Canvas和SVG的画笔配置config的属性名，统一使用小驼峰
           （对旧语法进行了向下兼容）
       - 新增功能
-        1、WebGL
+        1、WebGL画笔
           （支持平台：H5）
         2、Mercator 墨卡托投影
         3、Canvas新增功能
@@ -54,15 +54,15 @@ v0.3.0:
             * render方法中itemSize设置无效问题
         4、修复Cardinal插值超过界限的值问题
       - 新增功能
-        1、丰富Canvas画笔方法
+        1、Canvas画笔
             * createLinearGradient 线性渐变色
             * createRadialGradient 环形渐变色
             * clip 裁剪
             * 绘制圆弧系列（fillArc、strokeArc、fullArc）的闭合方式添加```-round```选项
             * getColor 获取指定位置颜色
-        2、丰富SVG画笔方法
+        2、SVG画笔
             * 绘制圆弧系列（fillArc、strokeArc、fullArc）的闭合方式添加```-round```选项
-        3、丰富WebGL画笔丰富
+        3、WebGL画笔
             * 材料material新增多颜色值colors
         4、朴素的WebGL接口集合
             * getWebGLContext 画笔
@@ -79,5 +79,38 @@ v0.4.0:
     date:2023-07-22
     changes:
       - 新增功能
-        1、丰富Canvas画笔方法
-            * textWidth 计算文字宽 
+        1、Canvas画笔
+            * textWidth 计算文字宽
+v0.4.1:
+    date:2023-09-03
+    changes:
+      - 修复bug
+        1、uni-app平台的ui-canvas在微信小程序环境下有时会绘制失败并渲染过慢问题
+        2、Canvas画笔
+            * 多行文字（fillTexts、strokeTexts、fullTexts）在处理有换行文字时的未正确处理
+        3、SVG画笔
+            * 部分默认值失效
+      - 优化改造
+        1、优化WebGL区域计算设计
+        2、丰富types并暴露更多有用的类型对象
+      - 新增功能
+        1、Canvas画笔
+            * 添加region配置，可以控制是否支持区域管理
+            * onlyRegion 区域模式
+        2、WebGL画笔
+            * 添加region配置，可以控制是否支持区域管理
+        3、uni-app平台的ui-canvas
+            * 画笔的draw方法对外暴露更丰富的参数
+            * 添加region属性，可以控制是否支持区域管理
+        4、微信小程序平台的ui-canvas
+            * 添加region属性，可以控制是否支持区域管理
+        5、viewHandler新增对悬浮hover事件的捕获并统一添加event参数
+        6、刻度尺算法ruler新增可选上下界约束
+        7、颜色格式化 formatColor
+          （支持平台：H5）
+        8、节点缩放监听 resizeObserver
+          （支持平台：H5）
+        9、节流函数 throttle
+        10、布局
+            * 树布局 treeLayout
+        11、着色器compile方法丰富参数（添加color、colors、image、cube四种内置着色器程序）

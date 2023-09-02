@@ -9,7 +9,7 @@ console.log(painter)
 painter
   .appendBoard("text")
   .config({
-    fontSize: 50,
+    // fontSize: 50,
     textAlign: "center",
   })
   .fillText("这是文字", 200, 200, 45)

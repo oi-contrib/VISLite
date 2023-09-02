@@ -1,0 +1,118 @@
+<header>
+    VISLite 贡献指南
+</header>
+<h2>
+    环境搭建
+</h2>
+<ul>
+    <li>
+        需要安装 <a href="http://nodejs.org/" target="_blank">Node.js</a> 。
+    </li>
+    <li>
+        克隆仓库到本地后，执行 <span class="special">npm install</span> 安装开发依赖。
+    </li>
+    <li>
+        安装EditorConfig插件来规范编辑器。
+    </li>
+</ul>
+<h2>
+    开发
+</h2>
+<p>
+    直接执行 <span class="special">npm run dev</span> 即可启动开发环境。
+</p>
+<ul>
+    <li>
+        如果是编辑文档，访问： http://127.0.0.1:20000/docs/index.html 。
+    </li>
+    <li>
+        如果是调试功能，访问： http://127.0.0.1:20000/test/ 后选择对应的用例即可。
+    </li>
+</ul>
+<p>
+    新增调试页面，只需要在test项目中新建即可，比如：
+</p>
+<pre>
+- test
+    - newApi
+        - index.html
+        - index.ts
+</pre>
+<p>
+    然后在 <span class="special">build/webpack.config.js</span> 中添加配置：
+</p>
+<pre tag="javascript">
+entry: {
+    newApi: './test/newApi/index.ts'
+}
+</pre>
+<p>
+    然后记得重新启动后就可以正常访问了。
+</p>
+<h3>
+    新增功能
+</h3>
+<p>
+    主体代码写在 <span class="special">src</span> 目录中，按照功能分类，对外暴露则在 <span class="special">package</span> 目录中，结构如下：
+</p>
+<pre>
+- package
+    - newApi
+        - index.ts
+</pre>
+<p>
+    此外，还需要在 <span class="special">package/index.ts</span> 中进行注册。
+</p>
+<p>
+    接着，在 <span class="special">types/index.d.ts</span> 中定义类型，大体格式如下：
+</p>
+<pre tag="javascript">
+export default class VISLite {
+    static newApi: newApiType
+}
+
+export let newApi: newApiType
+</pre>
+<p>
+    比如，上面的具体类型 <span class="special">newApiType</span> 或相关参数的类型可以在 <span class="special">types</span> 中独立定义，方便项目中引入。
+</p>
+<p>
+    一切完毕后，最后在 <span class="special">docs</span> 中添加文档，并在 <span class="special">CHANGELOG</span> 中登记就完成了所有内容。
+</p>
+<h2>
+    测试
+</h2>
+<p>
+    除了开发时候的调试外，如果必要，还需要添加如下测试：
+</p>
+<ul>
+    <li>
+        基准测试：在 <span class="special">test/benchmark/index.ts</span> 中添加。
+    </li>
+    <li>
+        单元测试：直接新建文件 <span class="special">test/newApi.spec.ts</span> 即可。
+    </li>
+</ul>
+<p>
+    上述测试都根据实际情况添加即可，除了调试的测试文件外，都非必需项。
+</p>
+<h2>
+    提交 PR
+</h2>
+<ul>
+    <li>
+        fork 本仓库，在自己仓库基于 dev 分支创建专用分支用于提交更改。
+    </li>
+    <li>
+        commit 内容请说明清楚本次 PR 的主要目的和改动，描述清楚即可。
+    </li>
+    <li>
+        提交之前确保进行了完善的测试。
+    </li>
+    <li>
+        确保 PR 提交到 dev 分支。
+    </li>
+    <li>
+        修复 Bug 请提供详细的描述信息，或链接到对应的 issue。
+    </li>
+</ul>

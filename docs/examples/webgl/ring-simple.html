@@ -9,20 +9,7 @@
 </div>
 <script type="module">
 
-    import { WebGL, Canvas, animation, rotate, getLoopColors } from "vislite";
-
-    // 把颜色转成3d颜色
-    var formatColor = function (rgba) {
-        var rgbaArray = rgba
-            .replace("rgba(", "").replace(")", "")
-            .split(",");
-        return [
-            +rgbaArray[0] / 255,
-            +rgbaArray[1] / 255,
-            +rgbaArray[2] / 255,
-            rgbaArray[3] === undefined ? 1 : +rgbaArray[3],
-        ];
-    };
+    import { WebGL, Canvas, animation, rotate, getLoopColors, formatColor } from "vislite";
 
     var i, j;
 
@@ -38,14 +25,14 @@
 
     var colors3d = [];
     for (i = 0; i < colors.length; i++) {
-        colors3d.push(formatColor(colors[i]));
+        colors3d.push(formatColor(colors[i], "3d"));
     }
 
-    var colors_gray = getLoopColors(data.length, 0.6);
+    var colors_gray = getLoopColors(data.length, 0.9);
 
     var colors3d_gray = [];
     for (i = 0; i < colors.length; i++) {
-        colors3d_gray.push(formatColor(colors_gray[i]));
+        colors3d_gray.push(formatColor(colors_gray[i], "3d"));
     }
 
     var mycontent = document.getElementById("content");
@@ -55,8 +42,8 @@
 
     var beginDeg, deg, allValue = 0;
 
-    var innerRadius = 0.6, outerRadius = 1;
-    var deepLen = 0.06;
+    var innerRadius = 1, outerRadius = 1.6;
+    var deepLen = 0.1;
 
     // 求解值总数
     for (i = 0; i < data.length; i++) {
@@ -223,7 +210,6 @@
         }
     };
     doit();
-    painter.getRegion(0, 0);
 
     // 监听画布大小改变
     window.addEventListener("resize", doit);

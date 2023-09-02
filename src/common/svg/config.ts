@@ -1,7 +1,8 @@
+import type SVGConfigType from "../../../types/SVGConfig"
+
 import { setAttribute } from "./tool"
 import setStyle from "../setStyle"
 import arc from "../canvas/arc"
-import SVGConfigType from "../../../types/SVGConfig"
 
 // 文字统一设置方法
 export let initText = (

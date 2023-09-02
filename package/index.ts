@@ -5,6 +5,7 @@ import Matrix4 from "./Matrix4/index"
 import rotate from "./rotate/index"
 
 import getLoopColors from "./getLoopColors/index"
+import formatColor from "./formatColor/index"
 import animation from "./animation/index"
 import ruler from "./ruler/index"
 
@@ -21,6 +22,10 @@ import Eoap from "./Eoap/index"
 import Mercator from "./Mercator/index"
 
 import viewHandler from "./viewHandler/index"
+import resizeObserver from "./resizeObserver/index"
+import throttle from "./throttle/index"
+
+import TreeLayout from "./TreeLayout/index"
 
 export default {
 
@@ -34,6 +39,7 @@ export default {
 
     // 工具
     getLoopColors,
+    formatColor,
     animation,
     ruler,
 
@@ -53,5 +59,10 @@ export default {
     Mercator,
 
     // 辅助
-    viewHandler
+    viewHandler,
+    resizeObserver,
+    throttle,
+
+    // 布局
+    TreeLayout
 }

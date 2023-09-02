@@ -1,4 +1,4 @@
-import HermiteType from '../../types/Hermite'
+import type HermiteType from '../../types/Hermite'
 
 class Hermite implements HermiteType {
     readonly name: string = 'Hermite'

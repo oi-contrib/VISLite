@@ -1,7 +1,8 @@
 export interface paramsType {
     type: string
     value: number,
-    normal: number[]
+    normal: number[],
+    event: Event
 }
 
 export interface callbackFun {

@@ -1,0 +1,28 @@
+<header>
+    节点缩放监听
+</header>
+<div class="version">
+    0.4.1 新增，且只支持Web端，如果后续有需要会进行兼容扩展
+</div>
+<h2>
+    引入
+</h2>
+<pre tag="javascript">
+import { resizeObserver } from "vislite"
+</pre>
+<h2>
+    语法
+</h2>
+<pre tag="javascript">
+let stop = resizeObserver(el, function(){
+    // todo
+})
+</pre>
+<p>
+    如果监听的节点el的大小发生了改变，就会触发回调；同时，返回一个函数，调用该函数，可以结束监听。
+</p>
+<div class="warn">
+    温馨提示：缩放的时候，节点监听的回调执行可能非常频繁，如果可以，请和
+    <a href="#/api/throttle" target="_blank">节流函数 throttle</a>
+    配合使用。
+</div>

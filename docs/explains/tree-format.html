@@ -1,0 +1,32 @@
+<header>
+    TreeLayout 数据格式
+</header>
+<h2>
+    类型定义
+</h2>
+<pre tag="javascript">
+{
+
+    // 树的层数
+    deep: number
+
+    node: {
+        [id: string]: {
+            children: Array<string> // 当前结点的孩子结点id
+            data: any // 当前结点的原始数据
+            id: string // 当前结点的id
+            pid: string // 当前结点的父结点id
+            left: number // 当前结点的横坐标
+            top: number, // 当前结点的纵坐标
+            isOpen: boolean, // 当前结点的打开还是关闭
+            show: boolean // 当前结点本身是否显示
+        }
+    }
+
+    // 根结点id
+    root: string
+
+    // 树的宽数
+    size: number
+}
+</pre>

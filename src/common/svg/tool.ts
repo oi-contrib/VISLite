@@ -1,5 +1,6 @@
+import type SVGConfigType from '../../../types/SVGConfig'
+
 import { XLINK_ATTRIBUTE } from "./dictionary"
-import SVGConfigType from '../../../types/SVGConfig'
 
 // 新建节点
 export function toNode(tagname: string) {

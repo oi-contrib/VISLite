@@ -13,4 +13,10 @@ export default interface ShaderType {
      */
     compile(vshaderSource: string, fshaderSource: string): this
 
+    /**
+     * 编译内置定义好的着色器程序
+     * @param shaderName 着色器名称，可选值有：color、colors、image、cube
+     */
+    compile(shaderName: string): this
+
 }

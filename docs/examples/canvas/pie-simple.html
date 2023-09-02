@@ -54,7 +54,7 @@
          * @param down 取消悬浮的
          */
         updateView = function (deep, up, down) {
-            painter.setRegion(false).clearRect(0, 0, mycontent.clientWidth, mycontent.clientHeight);
+            painter.setRegion("").clearRect(0, 0, mycontent.clientWidth, mycontent.clientHeight);
 
             // 绘制标题
             painter.config({

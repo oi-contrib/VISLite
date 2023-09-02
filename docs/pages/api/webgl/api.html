@@ -17,6 +17,13 @@
     传递的json我们称为Object3D类型，有固定的格式：
 </p>
 <button tag="Object3D" type="explain">点击查看如何构建？</button>
+<p>
+    上述格式中的
+    <span class="special">geometry.type</span>
+    可以选择的值及其解释你可以
+    <button tag="painter3D" type="explain">点击查看</button>
+    。
+</p>
 <div class="warn">
     温馨提示：我们通过映射把原生的WebGL使用的左手坐标系变成了
     <span class="special">右手坐标系</span>
@@ -87,7 +94,7 @@ painter.setRegion(regionName)
 <pre tag="javascript">
 painter.getRegion(x, y).then((regionName) => {
     // todo
-}) 
+})
 </pre>
 <h2>
     获取

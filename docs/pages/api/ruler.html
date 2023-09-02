@@ -16,3 +16,21 @@ let rulerArray = ruler(maxValue, minValue, num)
 <p>
     返回一个数组，表示刻度尺上应该显示的刻度。
 </p>
+<h3>
+    约束
+</h3>
+<div class="version">
+    0.4.1 新增
+</div>
+<p>
+    此外，还可以约束上下界：
+</p>
+<pre tag="javascript">
+let rulerArray = ruler(maxValue, minValue, num, {
+    max: number,
+    min: number
+})
+</pre>
+<p>
+    你可以只传递max或min来约束上界或下界，也可以同时传递来约束上下界。
+</p>

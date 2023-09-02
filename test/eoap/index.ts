@@ -3,7 +3,7 @@ let el = document.getElementById("root")
 import Canvas from '../../src/Canvas'
 import Eoap from '../../src/Eoap'
 
-fetch("../data/中华人民共和国.json", {
+fetch("/docs/data/china.json", {
     method: "GET"
 }).then(res => {
     if (res.status === 200) {

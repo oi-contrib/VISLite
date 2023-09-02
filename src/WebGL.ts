@@ -1,11 +1,18 @@
-import WebGLType from '../types/WebGL'
+import type WebGLOptionType from '../types/WebGLOption'
+import type WebGLType from '../types/WebGL'
+
 import OralWebGL from './common/webgl/index'
+import mergeOption from './common/mergeOption'
 
 class WebGL extends OralWebGL implements WebGLType {
-    constructor(el: HTMLElement | null) {
+    constructor(el: HTMLElement | null, option: WebGLOptionType = {}) {
         if (!el) {
             throw new Error("VISLite WebGL:The mount point requires an HTMLElement type but encountered null.")
         }
+
+        option = mergeOption(option, {
+            region: true
+        })
 
         let width = el.clientWidth, height = el.clientHeight
 
@@ -22,11 +29,16 @@ class WebGL extends OralWebGL implements WebGLType {
         // 否则就初始化
         else {
 
-            RegionCanvas = document.createElement('canvas')
-            el.appendChild(RegionCanvas)
+            if (option.region) {
 
-            RegionCanvas.style.position = 'absolute'
-            RegionCanvas.style.zIndex = "-1"
+                RegionCanvas = document.createElement('canvas')
+                el.appendChild(RegionCanvas)
+
+                RegionCanvas.style.position = 'absolute'
+                RegionCanvas.style.zIndex = "-1"
+                RegionCanvas.style.opacity = "0"
+
+            }
 
             ViewCanvas = document.createElement('canvas')
             el.appendChild(ViewCanvas)
@@ -39,11 +51,13 @@ class WebGL extends OralWebGL implements WebGLType {
         // 设置画布大小
         for (let canvas of [ViewCanvas, RegionCanvas]) {
 
-            canvas.style.width = width + "px"
-            canvas.setAttribute('width', width + "")
+            if (canvas) {
+                canvas.style.width = width + "px"
+                canvas.setAttribute('width', width + "")
 
-            canvas.style.height = height + "px"
-            canvas.setAttribute('height', height + "")
+                canvas.style.height = height + "px"
+                canvas.setAttribute('height', height + "")
+            }
         }
 
         super(ViewCanvas, RegionCanvas)

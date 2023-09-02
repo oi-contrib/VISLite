@@ -1,0 +1,115 @@
+<div class="view">
+    <div class="tips">
+        严肃声明：未绘制出来的南海和钓鱼岛等岛屿或区域属于中国。
+    </div>
+
+    <!-- 绘制图表 -->
+    <div id="content" class="content"></div>
+</div>
+<script type="module">
+    import { Canvas, Mercator } from "vislite";
+
+    fetch('./data/china.json').then(function (res) {
+        if (res.status === 200) {
+            return res.json();
+        }
+    }).then(function (res) {
+        var mycontent = document.getElementById("content");
+
+        var width = mycontent.clientWidth;
+        var height = mycontent.clientHeight;
+
+        var mercator = new Mercator(6), cx = width * 0.5, cy = height * 0.5;
+
+        var painter = new Canvas(mycontent);
+        var t, p, i, j, k;
+
+        var drawPolygon = function (data) {
+            for (t = 0; t < data.length; t++) {
+                painter.beginPath();
+                for (p = 0; p < data[t].length; p++) {
+                    var point = mercator.use(data[t][p][0], data[t][p][1]);
+                    painter.lineTo(point[0] + cx, point[1] + cy);
+                }
+                painter.closePath().full();
+            }
+        };
+
+        var drawRegion = function (feature) {
+            painter.setRegion(feature.properties.name);
+
+            for (j = 0; j < feature.geometry.coordinates.length; j++) {
+                if (feature.geometry.type == "Polygon") {
+                    drawPolygon(feature.geometry.coordinates);
+                } else {
+                    for (k = 0; k < feature.geometry.coordinates.length; k++) {
+                        drawPolygon(feature.geometry.coordinates[k]);
+                    }
+                }
+            }
+        };
+
+        var updateView = function (regionName) {
+            painter.config({
+                fillStyle: '#dedccf',
+                strokeStyle: '#fff'
+            }).clearRect(0, 0, width, height);
+
+            for (i = 0; i < res.features.length; i++) {
+                if (res.features[i].properties.name == regionName) {
+                    (function (feature) {
+                        setTimeout(function () {
+                            painter.config({
+                                strokeStyle: "#f00",
+                                fillStyle: '#fff',
+                            });
+
+                            drawRegion(feature);
+                        }, 0);
+                    })(res.features[i]);
+                } else {
+                    drawRegion(res.features[i]);
+                }
+            }
+
+        };
+
+        updateView();
+
+        var preRegionName;
+        mycontent.addEventListener("mousemove", function (event) {
+            painter.getRegion(event.offsetX, event.offsetY).then((regionName) => {
+                if (preRegionName != regionName) {
+                    preRegionName = regionName;
+
+                    mycontent.setAttribute('title', regionName);
+                    updateView(regionName);
+                }
+            });
+        });
+
+    });
+
+</script>
+<style>
+    body {
+        margin: 0;
+    }
+
+    .content {
+        width: 100vw;
+        height: 100vh;
+    }
+
+    .tips {
+        position: fixed;
+        width: 400px;
+        line-height: 30px;
+        background-color: rgb(0, 0, 0);
+        color: white;
+        text-align: center;
+        font-size: 12px;
+        left: 0;
+        top: 0;
+    }
+</style>

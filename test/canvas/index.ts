@@ -2,7 +2,9 @@ let el = document.getElementById("root")
 
 import Canvas from "../../src/Canvas"
 
-let painter = new Canvas(el)
+let painter = new Canvas(el, {
+  // region: false
+})
 
 console.log(painter)
 
@@ -67,7 +69,8 @@ let textH = painter
     lineWidth: 1,
   })
   .fillTexts(
-    "如果文字特别多，是需要换行的，那么，你就可以考虑使用这个方法！",
+    `  如果文字特别多，是需要换行的，那么，你就可以考虑使用这个方法！
+   tips：这是新的一行 `,
     50,
     250,
     100
@@ -83,7 +86,7 @@ let ctx = painter.getContext()
 ctx.fillRect(0, 0, 100, 50)
 
 let ctxRegion = painter.getContext(true)
-ctxRegion.fillRect(0, 0, 100, 50)
+ctxRegion?.fillRect(0, 0, 100, 50)
 
 // 渐变色
 
@@ -118,6 +121,16 @@ painter
   })
   .fillArc(100, 100, 10, 50, 0, Math.PI)
 
-console.log(painter.config({
+console.log(painter
+  // .onlyRegion(true)
+  .config({
   fontSize: 10
-}).textWidth('看看宽度0'))
+})
+// .onlyRegion(true)
+.textWidth('看看宽度0'))
+
+painter
+  .onlyRegion(true)
+  .setRegion('看不见的蓝色球').config({
+    fillStyle: "blue"
+  }).fillCircle(900, 100, 100).onlyRegion(false).setRegion("").fillCircle(700, 100, 100).strokeCircle(900, 100, 100)

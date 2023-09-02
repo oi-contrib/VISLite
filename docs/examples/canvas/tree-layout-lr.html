@@ -1,0 +1,111 @@
+<div class="view">
+
+    <!-- 绘制图表 -->
+    <div id="content" class="content"></div>
+</div>
+<script type="module">
+    import { Canvas, TreeLayout } from "vislite";
+
+    fetch('./data/flare.json').then(function (res) {
+        if (res.status === 200) {
+            return res.json();
+        }
+    }).then(function (data) {
+        var mycontent = document.getElementById("content");
+
+        var width = mycontent.clientWidth;
+        var height = mycontent.clientHeight;
+
+        var painter = new Canvas(mycontent).config({
+            fontSize: 9
+        }), pid, dist;
+
+        var uniqueId = 0
+        var treeLayout = new TreeLayout({
+            "id": function (treedata) {
+
+                // 由于原始数据的name有相同的，加个唯一后缀
+                return treedata.name + "-" + uniqueId++
+            }
+        }).setOption({
+            type: "rect",
+            direction: "LR",
+            x: 10,
+            y: height * 0.5,
+            width: width - 140,
+            height: height - 20
+        }).bind(data, function (tree) {
+            painter.clearRect(0, 0, width, height);
+
+            // 绘制连线
+            painter.setRegion("").config({
+                strokeStyle: '#cccccc'
+            });
+            for (var key in tree.node) {
+                if (tree.node[key].show && key != tree.root) {
+                    pid = tree.node[key].pid
+
+                    dist = (tree.node[key].left - tree.node[pid].left) * 0.5
+
+                    painter
+                        .beginPath()
+                        .moveTo(tree.node[key].left, tree.node[key].top)
+                        .bezierCurveTo(
+                            tree.node[key].left - dist, tree.node[key].top,
+                            tree.node[pid].left + dist, tree.node[pid].top,
+                            tree.node[pid].left, tree.node[pid].top
+                        ).stroke()
+                }
+            }
+
+            // 绘制节点和文字
+            painter.config({
+                strokeStyle: '#b0c4de'
+            });
+            for (var key in tree.node) {
+                if (tree.node[key].show) {
+                    if (!tree.node[key].isOpen && tree.node[key].children.length > 0) {
+                        painter.config({
+                            fillStyle: "#b0c4de"
+                        });
+                    } else {
+                        painter.config({
+                            fillStyle: "#ffffff"
+                        });
+                    }
+                    painter.setRegion(key).fullCircle(tree.node[key].left, tree.node[key].top, 4)
+
+                    painter.setRegion("").config({
+                        fillStyle: "black"
+                    }).fillText(key.replace(/\-\d+$/, ''), tree.node[key].left + 10, tree.node[key].top)
+                }
+            }
+
+        });
+
+        mycontent.addEventListener('click', event => {
+            painter.getRegion(event.offsetX, event.offsetY).then(regionName => {
+                if (regionName) {
+
+                    // 复位，保证id每次一致
+                    uniqueId = 0;
+
+                    treeLayout.toggleNode(regionName);
+                }
+            });
+
+        });
+
+    });
+
+</script>
+<style>
+    body {
+        margin: 0;
+    }
+
+    .content {
+        width: 100vw;
+        height: 100vh;
+    }
+</style>

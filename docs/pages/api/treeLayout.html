@@ -1,0 +1,219 @@
+<header>
+    树布局
+</header>
+<div class="version">
+    0.4.1 新增
+</div>
+<h2>
+    引入
+</h2>
+<pre tag="javascript">
+import { TreeLayout } from "vislite"
+</pre>
+<h2>
+    语法
+</h2>
+<p>
+    通过传递一个配置项即可创建布局对象：
+</p>
+<pre tag="javascript">
+let treeLayout = new TreeLayout(config)
+</pre>
+<p>
+    其中config表示布局求解的原始数据格式，如果你的格式类似下面：
+</p>
+<pre tag="javascript">
+{
+    name:"编程",
+    children:[{
+        name:"前端",
+        children:[]
+    },...]
+}
+</pre>
+<p>
+    则config可以不传递，直接使用默认值，否则就需要自己配置不满足默认格式的部分，具体config是一个json，可选属性如下：
+</p>
+<h3>
+    root
+</h3>
+<p>
+    获取根结点的方法，以默认格式为例（下同）：
+</p>
+<pre tag="javascript">
+"root": function(initTree){
+    return initTree
+}
+</pre>
+<h3>
+    children
+</h3>
+<p>
+    获取子结点的方法：
+</p>
+<pre tag="javascript">
+"children": function(parentTree, initTree){
+    return parentTree.children
+}
+</pre>
+<h3>
+    id
+</h3>
+<p>
+    获取结点ID方法：
+</p>
+<pre tag="javascript">
+"id": function(treedata){
+    return treedata.name
+}
+</pre>
+<h2>
+    方法
+</h2>
+<h3>
+    setOption
+</h3>
+<p>
+    设置布局的行为：
+</p>
+<pre tag="javascript">
+    treeLayout.setOption(option)
+</pre>
+<p>
+    其中option应该是一个json，用以规范树图的行为，可选属性如下：
+</p>
+<h4>
+    offsetX
+</h4>
+<p>
+    水平方向隐藏结点偏差值，number类型，默认0。
+</p>
+<h4>
+    offsetY
+</h4>
+<p>
+    垂直方向隐藏结点偏差值，number类型，默认0。
+</p>
+<h4>
+    type
+</h4>
+<p>
+    树图类型，string类型，默认plain，还可以设置成rect矩形树图、circle圆树。
+</p>
+<h4>
+    direction
+</h4>
+<p>
+    设置成矩形树图（rect）时有效，表示树图方向，字符串类型，可选值为：
+</p>
+<ul>
+    <li>
+        LR：默认值，表示从左往右的树；
+    </li>
+    <li>
+        RL：默认值，表示从右往左的树；
+    </li>
+    <li>
+        TB：默认值，表示从上往下的树；
+    </li>
+    <li>
+        BT：默认值，表示从下往上的树。
+    </li>
+</ul>
+<h4>
+    x
+</h4>
+<p>
+    树图x坐标，非type不是plain时有效，表示树图根一侧的中间位置（圆树的话就是圆心位置），下同。
+</p>
+<h4>
+    y
+</h4>
+<p>
+    树图y坐标。
+</p>
+<h4>
+    width
+</h4>
+<p>
+    设置成矩形树图（rect）时有效，表示矩形宽。
+</p>
+<h4>
+    height
+</h4>
+<p>
+    设置成矩形树图（rect）时有效，表示矩形高。
+</p>
+<h4>
+    radius
+</h4>
+<p>
+    设置成圆树图（circle）时有效，表示圆树的半径。
+</p>
+<h4>
+    duration
+</h4>
+<p>
+    切换时长，number类型，默认500（即0.5s）。
+</p>
+<h3>
+    use
+</h3>
+<p>
+    单纯的树图坐标计算：
+</p>
+<pre tag="javascript">
+    let tree = treeLayout.use(initTree)
+</pre>
+<h3>
+    bind
+</h3>
+<p>
+    绑定新的数据和渲染方法：
+</p>
+<pre tag="javascript">
+treeLayout.bind(initTree, function(tree){
+    // 绘制出树图
+})
+</pre>
+<div class="warn">
+    温馨提示：上述形参tree的格式你可以点击
+    <button tag="tree-format" type="explain">TreeLayout 数据格式</button>
+    进行查阅。
+</div>
+<h3>
+    unbind
+</h3>
+<p>
+    解除绑定：
+</p>
+<pre tag="javascript">
+    treeLayout.unbind()
+</pre>
+<h3>
+    closeNode
+</h3>
+<p>
+    闭合指定节点：
+</p>
+<pre tag="javascript">
+    treeLayout.closeNode(id)
+</pre>
+<h3>
+    openNode
+</h3>
+<p>
+    展开指定节点：
+</p>
+<pre tag="javascript">
+    treeLayout.openNode(id)
+</pre>
+<h3>
+    toggleNode
+</h3>
+<p>
+    闭合或展开指定节点：
+</p>
+<pre tag="javascript">
+    treeLayout.toggleNode(id)
+</pre>

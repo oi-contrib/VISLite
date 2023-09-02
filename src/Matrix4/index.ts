@@ -1,4 +1,4 @@
-import Matrix4Type from '../../types/Matrix4'
+import type Matrix4Type from '../../types/Matrix4'
 
 // 两个4x4矩阵相乘
 // 或矩阵和齐次坐标相乘

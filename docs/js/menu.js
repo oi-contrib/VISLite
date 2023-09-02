@@ -60,7 +60,10 @@ function changeNav(_navName, isInit) {
 
                 // 如果有孩子，只需要控制菜单打开关闭即可
                 if (spans[i].parentElement.getElementsByTagName('li').length > 0) {
-                    spans[i].parentElement.setAttribute('is-open', 'no');
+
+                    if (!spans[i].parentElement.getAttribute('is-open'))
+                        spans[i].parentElement.setAttribute('is-open', 'no');
+
                     spans[i].addEventListener('click', function () {
                         spans[i].parentElement.setAttribute('is-open', spans[i].parentElement.getAttribute('is-open') == 'no' ? 'yes' : 'no');
                     });
@@ -68,191 +71,194 @@ function changeNav(_navName, isInit) {
 
                 // 否则就要控制打开关闭页面了
                 else {
-                    spans[i].addEventListener('click', function () {
 
-                        var isOpenEl = spans[i];
-                        while (isOpenEl) {
-                            if (isOpenEl.getAttribute('is-open')) {
-                                isOpenEl.setAttribute('is-open', 'yes');
-                            }
-                            isOpenEl = isOpenEl.parentElement;
-                        }
+                    if (spans[i].getAttribute('tag')) {
+                        spans[i].addEventListener('click', function () {
 
-                        // 打开页面
-                        var tag = spans[i].getAttribute('tag');
-                        window.__router[1] = tag;
-
-                        fetchData("./pages/" + window.__router[0] + "/" + window.__router[1] + ".html").then(function (res) {
-                            window.location.href = "#/" + window.__router[0] + "/" + window.__router[1];
-
-                            if (clickHidden) {
-                                menuVisibility = "hidden";
-                                document.body.setAttribute('menu-status', menuVisibility);
-                            } else {
-                                clickHidden = true;
+                            var isOpenEl = spans[i];
+                            while (isOpenEl) {
+                                if (isOpenEl.getAttribute('is-open')) {
+                                    isOpenEl.setAttribute('is-open', 'yes');
+                                }
+                                isOpenEl = isOpenEl.parentElement;
                             }
 
-                            docEl.innerHTML = res + getFooterTemplate("docs/pages/" + window.__router[0] + "/" + window.__router[1] + ".html");
-                            window.doShader(docEl);
+                            // 打开页面
+                            var tag = spans[i].getAttribute('tag');
+                            window.__router[1] = tag;
 
-                            docEl.scrollTop = 0;
+                            fetchData("./pages/" + window.__router[0] + "/" + window.__router[1] + ".html").then(function (res) {
+                                window.location.href = "#/" + window.__router[0] + "/" + window.__router[1];
 
-                            // 弹框
-                            var buttons = document.getElementsByTagName('button'), index;
-                            for (index = 0; index < buttons.length; index++) {
-                                (function (index) {
-                                    var pageName = buttons[index].getAttribute('tag');
-                                    var pageType = buttons[index].getAttribute('type');
-                                    if (pageName) {
+                                if (clickHidden) {
+                                    menuVisibility = "hidden";
+                                    document.body.setAttribute('menu-status', menuVisibility);
+                                } else {
+                                    clickHidden = true;
+                                }
 
-                                        buttons[index].addEventListener('click', function () {
+                                docEl.innerHTML = res + getFooterTemplate("docs/pages/" + window.__router[0] + "/" + window.__router[1] + ".html");
+                                window.doShader(docEl);
 
-                                            // 解释说明
-                                            if (pageType == "explain") {
-                                                var explainEl = document.getElementById('explain-content-id');
-                                                fetchData("./explains/" + pageName + ".html").then(function (data) {
-                                                    document.getElementById('explain-root').style.display = "block";
-                                                    explainEl.innerHTML = data;
+                                docEl.scrollTop = 0;
 
-                                                    window.doShader(explainEl);
+                                // 弹框
+                                var buttons = document.getElementsByTagName('button'), index;
+                                for (index = 0; index < buttons.length; index++) {
+                                    (function (index) {
+                                        var pageName = buttons[index].getAttribute('tag');
+                                        var pageType = buttons[index].getAttribute('type');
+                                        if (pageName) {
 
-                                                    explainEl.scrollTop = 0;
-                                                });
-                                            }
+                                            buttons[index].addEventListener('click', function () {
 
-                                        });
-                                    }
+                                                // 解释说明
+                                                if (pageType == "explain") {
+                                                    var explainEl = document.getElementById('explain-content-id');
+                                                    fetchData("./explains/" + pageName + ".html").then(function (data) {
+                                                        document.getElementById('explain-root').style.display = "block";
+                                                        explainEl.innerHTML = data;
 
-                                })(index);
-                            }
+                                                        window.doShader(explainEl);
 
-                            // 例子
-                            var exampleEls = document.getElementsByTagName('example'), index;
-                            for (index = exampleEls.length - 1; index >= 0; index--) {
-                                (function (index) {
-                                    var exampleEl = document.createElement("div");
-                                    exampleEl.setAttribute("class", "example-view");
+                                                        explainEl.scrollTop = 0;
+                                                    });
+                                                }
 
-                                    var exampleRunHeight = exampleEls[index].getAttribute("height");
-                                    var examplePath = exampleEls[index].getAttribute("tag");
+                                            });
+                                        }
 
-                                    exampleEls[index].replaceWith(exampleEl);
+                                    })(index);
+                                }
 
-                                    fetchData("./examples/" + examplePath + ".html").then(function (data) {
+                                // 例子
+                                var exampleEls = document.getElementsByTagName('example'), index;
+                                for (index = exampleEls.length - 1; index >= 0; index--) {
+                                    (function (index) {
+                                        var exampleEl = document.createElement("div");
+                                        exampleEl.setAttribute("class", "example-view");
 
-                                        // 运行区域
-                                        var exampleViewEl = document.createElement("iframe");
-                                        exampleEl.appendChild(exampleViewEl);
+                                        var exampleRunHeight = exampleEls[index].getAttribute("height");
+                                        var examplePath = exampleEls[index].getAttribute("tag");
 
-                                        exampleViewEl.style.height = exampleRunHeight;
+                                        exampleEls[index].replaceWith(exampleEl);
 
-                                        var exampleCodeEl, exampleCopyEl, exampleRunEl;
+                                        fetchData("./examples/" + examplePath + ".html").then(function (data) {
 
-                                        // 打开/关闭 按钮
-                                        var exampleToggleEl = document.createElement("div");
-                                        exampleEl.appendChild(exampleToggleEl);
+                                            // 运行区域
+                                            var exampleViewEl = document.createElement("iframe");
+                                            exampleEl.appendChild(exampleViewEl);
 
-                                        exampleToggleEl.setAttribute("class", "toggle-btn");
+                                            exampleViewEl.style.height = exampleRunHeight;
 
-                                        var exampleIsOpen = false;
-                                        exampleToggleEl.innerText = "查看源码";
-                                        exampleToggleEl.addEventListener("click", function () {
-                                            if (exampleIsOpen) {
-                                                exampleToggleEl.innerText = "查看源码";
+                                            var exampleCodeEl, exampleCopyEl, exampleRunEl;
 
-                                                exampleCodeEl.style.display = 'none';
-                                                exampleCopyEl.style.display = 'none';
-                                                exampleRunEl.style.display = 'none';
+                                            // 打开/关闭 按钮
+                                            var exampleToggleEl = document.createElement("div");
+                                            exampleEl.appendChild(exampleToggleEl);
 
-                                            } else {
-                                                exampleToggleEl.innerText = "隐藏源码";
+                                            exampleToggleEl.setAttribute("class", "toggle-btn");
 
-                                                exampleCodeEl.style.display = 'block';
-                                                exampleCopyEl.style.display = 'block';
-                                                exampleRunEl.style.display = 'block';
+                                            var exampleIsOpen = false;
+                                            exampleToggleEl.innerText = "查看源码";
+                                            exampleToggleEl.addEventListener("click", function () {
+                                                if (exampleIsOpen) {
+                                                    exampleToggleEl.innerText = "查看源码";
 
-                                            }
-                                            exampleIsOpen = !exampleIsOpen;
-                                        });
+                                                    exampleCodeEl.style.display = 'none';
+                                                    exampleCopyEl.style.display = 'none';
+                                                    exampleRunEl.style.display = 'none';
 
-                                        // 代码区域
-                                        exampleCodeEl = document.createElement("textarea");
-                                        exampleEl.appendChild(exampleCodeEl);
+                                                } else {
+                                                    exampleToggleEl.innerText = "隐藏源码";
 
-                                        exampleCodeEl.setAttribute("spellcheck", false);
-                                        exampleCodeEl.style.resize = "none";
-                                        exampleCodeEl.value = data;
+                                                    exampleCodeEl.style.display = 'block';
+                                                    exampleCopyEl.style.display = 'block';
+                                                    exampleRunEl.style.display = 'block';
 
-                                        // 复制按钮
-                                        exampleCopyEl = document.createElement("button");
-                                        exampleEl.appendChild(exampleCopyEl);
-
-                                        exampleCopyEl.setAttribute('class', 'copy-btn');
-                                        exampleCopyEl.innerText = "复制";
-
-                                        exampleCopyEl.style.top = exampleRunHeight;
-
-                                        exampleCopyEl.addEventListener("click", function () {
-                                            execCopy(exampleCodeEl.value);
-                                        });
-
-                                        // 运行按钮
-                                        exampleRunEl = document.createElement("button");
-                                        exampleEl.appendChild(exampleRunEl);
-
-                                        exampleRunEl.setAttribute('class', 'run-btn');
-                                        exampleRunEl.innerText = "运行";
-
-                                        exampleRunEl.style.top = exampleRunHeight;
-
-                                        exampleRunEl.addEventListener("click", function () {
-                                            var iframeDocument = exampleViewEl.contentWindow.document;
-                                            iframeDocument.open();
-                                            iframeDocument.write(compilerImport(exampleCodeEl.value, window.needCache));
-                                            iframeDocument.close();
-                                        });
-
-                                        exampleRunEl.click();
-
-                                    });
-
-                                })(index);
-                            }
-
-                            // 分析fixed
-                            var els = docEl.children;
-                            fixedEl.innerHTML = "<h1>导航</h1>";
-                            for (index = 0; index < els.length; index++) {
-                                (function (index) {
-
-                                    if (["H2", "H3", "H4"].indexOf(els[index].nodeName) > -1) {
-
-                                        var fixedItemEl = document.createElement(els[index].nodeName);
-                                        fixedEl.appendChild(fixedItemEl);
-                                        fixedItemEl.innerHTML = els[index].innerHTML;
-                                        fixedItemEl.addEventListener('click', function () {
-
-                                            var offsetTop = els[index].offsetTop;
-                                            var currentScrollTop = docEl.scrollTop || 0;
-
-                                            animation(function (deep) {
-                                                docEl.scrollTop = (offsetTop - currentScrollTop) * deep + currentScrollTop;
-                                            }, 500, function () {
-                                                docEl.scrollTop = offsetTop;
+                                                }
+                                                exampleIsOpen = !exampleIsOpen;
                                             });
 
+                                            // 代码区域
+                                            exampleCodeEl = document.createElement("textarea");
+                                            exampleEl.appendChild(exampleCodeEl);
+
+                                            exampleCodeEl.setAttribute("spellcheck", false);
+                                            exampleCodeEl.style.resize = "none";
+                                            exampleCodeEl.value = data;
+
+                                            // 复制按钮
+                                            exampleCopyEl = document.createElement("button");
+                                            exampleEl.appendChild(exampleCopyEl);
+
+                                            exampleCopyEl.setAttribute('class', 'copy-btn');
+                                            exampleCopyEl.innerText = "复制";
+
+                                            exampleCopyEl.style.top = exampleRunHeight;
+
+                                            exampleCopyEl.addEventListener("click", function () {
+                                                execCopy(exampleCodeEl.value);
+                                            });
+
+                                            // 运行按钮
+                                            exampleRunEl = document.createElement("button");
+                                            exampleEl.appendChild(exampleRunEl);
+
+                                            exampleRunEl.setAttribute('class', 'run-btn');
+                                            exampleRunEl.innerText = "运行";
+
+                                            exampleRunEl.style.top = exampleRunHeight;
+
+                                            exampleRunEl.addEventListener("click", function () {
+                                                var iframeDocument = exampleViewEl.contentWindow.document;
+                                                iframeDocument.open();
+                                                iframeDocument.write(compilerImport(exampleCodeEl.value, window.needCache));
+                                                iframeDocument.close();
+                                            });
+
+                                            exampleRunEl.click();
+
                                         });
 
-                                    }
-                                })(index);
-                            }
+                                    })(index);
+                                }
+
+                                // 分析fixed
+                                var els = docEl.children;
+                                fixedEl.innerHTML = "<h1>导航</h1>";
+                                for (index = 0; index < els.length; index++) {
+                                    (function (index) {
+
+                                        if (["H2", "H3", "H4", "H5"].indexOf(els[index].nodeName) > -1) {
+
+                                            var fixedItemEl = document.createElement(els[index].nodeName);
+                                            fixedEl.appendChild(fixedItemEl);
+                                            fixedItemEl.innerHTML = els[index].innerHTML;
+                                            fixedItemEl.addEventListener('click', function () {
+
+                                                var offsetTop = els[index].offsetTop;
+                                                var currentScrollTop = docEl.scrollTop || 0;
+
+                                                animation(function (deep) {
+                                                    docEl.scrollTop = (offsetTop - currentScrollTop) * deep + currentScrollTop;
+                                                }, 500, function () {
+                                                    docEl.scrollTop = offsetTop;
+                                                });
+
+                                            });
+
+                                        }
+                                    })(index);
+                                }
+                            });
+
                         });
 
-                    });
-
-                    // 如果是第一个或者路由记录的
-                    if (!autoClickBtn || window.__router[1] == spans[i].getAttribute('tag')) {
-                        autoClickBtn = spans[i];
+                        // 如果是第一个或者路由记录的
+                        if (!autoClickBtn || window.__router[1] == spans[i].getAttribute('tag')) {
+                            autoClickBtn = spans[i];
+                        }
                     }
                 }
 

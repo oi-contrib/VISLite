@@ -1,4 +1,5 @@
-import SVGType from '../types/SVG'
+import type SVGType from '../types/SVG'
+
 import OralSVG from './common/svg/index'
 
 class SVG extends OralSVG implements SVGType {

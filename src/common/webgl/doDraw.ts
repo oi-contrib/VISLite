@@ -60,6 +60,8 @@ export default function (type: string, painter: WebGLRenderingContext, mesh: mes
 
         let size = (mesh.material.cube.right.image.value as any).width
 
+        painter.uniform1i(painter.getUniformLocation(shader.program, "u_texture"), 0)
+
         getTexture(type, painter, 'cube').useCube([
             mesh.material.cube.right.image.value,
             mesh.material.cube.left.image.value,

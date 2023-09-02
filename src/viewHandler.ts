@@ -1,4 +1,4 @@
-import { callbackFun } from '../types/viewHandler'
+import type { callbackFun } from '../types/viewHandler'
 
 let mousePosition = (el: HTMLElement, event: any) => {
     let bounding = el.getBoundingClientRect()
@@ -30,7 +30,8 @@ export default function (callback: callbackFun) {
             callback({
                 type: "lookUp",
                 normal: [],
-                value: 0.1
+                value: 0.1,
+                event
             })
         }
 
@@ -39,7 +40,8 @@ export default function (callback: callbackFun) {
             callback({
                 type: "lookDown",
                 normal: [],
-                value: 0.1
+                value: 0.1,
+                event
             })
         }
 
@@ -48,7 +50,8 @@ export default function (callback: callbackFun) {
             callback({
                 type: "lookLeft",
                 normal: [],
-                value: 0.1
+                value: 0.1,
+                event
             })
         }
 
@@ -57,7 +60,8 @@ export default function (callback: callbackFun) {
             callback({
                 type: "lookRight",
                 normal: [],
-                value: 0.1
+                value: 0.1,
+                event
             })
         }
 
@@ -66,30 +70,44 @@ export default function (callback: callbackFun) {
     // 鼠标控制
     let mouseP = null;
     let doMove = function (event) {
-        if (mouseP == null) return
 
-        let tempMouseP = mousePosition(el, event)
+        // 单纯移动
+        if (mouseP == null) {
+            callback({
+                type: "hover",
+                normal: [],
+                value: 0,
+                event
+            })
+        }
 
-        // 先求解出轨迹向量
-        let normal = [tempMouseP.x - mouseP.x, tempMouseP.y - mouseP.y]
+        // 按下移动
+        else {
 
-        // 方向向量旋转90deg得到旋转向量
-        let rotateNormal = [
-            normal[1],
-            normal[0],
-            0
-        ]
+            let tempMouseP = mousePosition(el, event)
 
-        // 非法射线忽略
-        if (rotateNormal[0] == 0 && rotateNormal[1] == 0) return
+            // 先求解出轨迹向量
+            let normal = [tempMouseP.x - mouseP.x, tempMouseP.y - mouseP.y]
 
-        callback({
-            type: "rotate",
-            normal: rotateNormal,
-            value: (Math.abs(tempMouseP.x - mouseP.x) + Math.abs(tempMouseP.y - mouseP.y)) * 0.01
-        })
+            // 方向向量旋转90deg得到旋转向量
+            let rotateNormal = [
+                normal[1],
+                normal[0],
+                0
+            ]
 
-        mouseP = tempMouseP
+            // 非法射线忽略
+            if (rotateNormal[0] == 0 && rotateNormal[1] == 0) return
+
+            callback({
+                type: "rotate",
+                normal: rotateNormal,
+                value: (Math.abs(tempMouseP.x - mouseP.x) + Math.abs(tempMouseP.y - mouseP.y)) * 0.01,
+                event
+            })
+
+            mouseP = tempMouseP
+        }
     }
 
     el.addEventListener("mousedown", (event) => {
@@ -113,27 +131,28 @@ export default function (callback: callbackFun) {
         doMove(event.touches[0])
     })
 
-    let doScale = function (value: number) {
+    let doScale = function (value: number, event: Event) {
         if (value == 0) return
 
         let baseTimes = 0.899
         callback({
             type: "scale",
             value: value < 0 ? baseTimes : 2 - baseTimes,
-            normal: []
+            normal: [],
+            event
         })
     }
 
     // 滚轮控制
     el.addEventListener("mousewheel", function (event: any) {
-        doScale(event.wheelDelta)
+        doScale(event.wheelDelta, event)
     })
 
     if (window.addEventListener) {
 
         // 针对火狐浏览器
         window.addEventListener('DOMMouseScroll', function (event: any) {
-            doScale(-1 * event.detail)
+            doScale(-1 * event.detail, event)
         }, false)
     }
 

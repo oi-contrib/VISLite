@@ -1,3 +1,5 @@
+import type { arcCapType } from '../../../types/painterConfig'
+
 import { initText, initArc, initCircle, initRect } from './config'
 import texts from './texts'
 
@@ -16,9 +18,12 @@ class Painter {
     painter: CanvasRenderingContext2D
     __region: Painter | null | undefined = null
 
+    __onlyRegion: boolean = false
+    __isPainter: boolean
+
     // 用于记录配置
     // 因为部分配置的设置比较特殊，只先记录意图
-     __specialConfig = {
+    __specialConfig = {
 
         // 文字大小
         "fontSize": 16,
@@ -33,10 +38,10 @@ class Painter {
         "fontStyle": "normal",
 
         // 圆弧开始端闭合方式（"butt"直线闭合、"round"圆帽闭合）
-        "arcStartCap": 'butt',
+        "arcStartCap": <arcCapType>'butt',
 
         // 圆弧结束端闭合方式，和上一个类似
-        "arcEndCap": 'butt'
+        "arcEndCap": <arcCapType>'butt'
     }
 
     private __initConfig = {
@@ -67,9 +72,10 @@ class Painter {
 
     }
 
-    constructor(canvas: HTMLCanvasElement, opts: OptsType = {}, region?: Painter) {
+    constructor(canvas: HTMLCanvasElement, opts: OptsType = {}, region?: Painter, isPainter = false) {
         this.painter = canvas.getContext("2d", opts) as CanvasRenderingContext2D
         this.__region = region
+        this.__isPainter = isPainter
 
         // 默认配置canvas2D对象已经存在的属性
         this.painter.textBaseline = 'middle'
@@ -82,6 +88,8 @@ class Painter {
                 this.__region.useConfig(key, value)
             }
         }
+
+        if (this.__isPainter && this.__onlyRegion) return this
 
         /**
         * -----------------------------
@@ -127,6 +135,8 @@ class Painter {
     fillText(text: string, x: number, y: number, deg: number = 0) {
         if (this.__region) this.__region.fillText(text, x, y, deg)
 
+        if (this.__isPainter && this.__onlyRegion) return this
+
         this.painter.save()
         initText(this.painter, this.__specialConfig, x, y, deg).fillText(text, 0, 0)
         this.painter.restore()
@@ -135,6 +145,8 @@ class Painter {
     strokeText(text: string, x: number, y: number, deg: number = 0) {
         if (this.__region) this.__region.strokeText(text, x, y, deg)
 
+        if (this.__isPainter && this.__onlyRegion) return this
+
         this.painter.save()
         initText(this.painter, this.__specialConfig, x, y, deg).strokeText(text, 0, 0)
         this.painter.restore()
@@ -142,6 +154,8 @@ class Painter {
     }
     fullText(text: string, x: number, y: number, deg: number = 0) {
         if (this.__region) this.__region.fullText(text, x, y, deg)
+
+        if (this.__isPainter && this.__onlyRegion) return this
 
         this.painter.save()
         initText(this.painter, this.__specialConfig, x, y, deg)
@@ -153,7 +167,10 @@ class Painter {
 
     // 多行文字
     fillTexts(contents: string, x: number, y: number, width: number, lineHeight: number = 1.2, deg: number = 0) {
-        if (this.__region) this.__region.fillTexts(contents, x, y, width, lineHeight)
+        let h = 0
+        if (this.__region) h = this.__region.fillTexts(contents, x, y, width, lineHeight)
+
+        if (this.__isPainter && this.__onlyRegion) return h
 
         this.painter.save()
         initText(this.painter, this.__specialConfig, x, y, deg)
@@ -166,7 +183,10 @@ class Painter {
         return height
     }
     strokeTexts(contents: string, x: number, y: number, width: number, lineHeight: number = 1.2, deg: number = 0) {
-        if (this.__region) this.__region.fillTexts(contents, x, y, width, lineHeight)
+        let h = 0
+        if (this.__region) h = this.__region.fillTexts(contents, x, y, width, lineHeight)
+
+        if (this.__isPainter && this.__onlyRegion) return h
 
         this.painter.save()
         initText(this.painter, this.__specialConfig, x, y, deg)
@@ -179,7 +199,10 @@ class Painter {
         return height
     }
     fullTexts(contents: string, x: number, y: number, width: number, lineHeight: number = 1.2, deg: number = 0) {
-        if (this.__region) this.__region.fillTexts(contents, x, y, width, lineHeight)
+        let h = 0
+        if (this.__region) h = this.__region.fillTexts(contents, x, y, width, lineHeight)
+
+        if (this.__isPainter && this.__onlyRegion) return h
 
         this.painter.save()
         initText(this.painter, this.__specialConfig, x, y, deg)
@@ -197,17 +220,23 @@ class Painter {
     beginPath() {
         if (this.__region) this.__region.beginPath()
 
+        if (this.__isPainter && this.__onlyRegion) return this
+
         this.painter.beginPath()
         return this
     }
     closePath() {
         if (this.__region) this.__region.closePath()
 
+        if (this.__isPainter && this.__onlyRegion) return this
+
         this.painter.closePath()
         return this
     }
     moveTo(x: number, y: number) {
         if (this.__region) this.__region.moveTo(x, y)
+
+        if (this.__isPainter && this.__onlyRegion) return this
 
         // 解决1px模糊问题，别的地方类似原因
         this.painter.moveTo(Math.round(x) + 0.5, Math.round(y) + 0.5)
@@ -216,11 +245,15 @@ class Painter {
     lineTo(x: number, y: number) {
         if (this.__region) this.__region.lineTo(x, y)
 
+        if (this.__isPainter && this.__onlyRegion) return this
+
         this.painter.lineTo(Math.round(x) + 0.5, Math.round(y) + 0.5)
         return this
     }
     arc(x: number, y: number, r: number, beginDeg: number, deg: number) {
         if (this.__region) this.__region.arc(x, y, r, beginDeg, deg)
+
+        if (this.__isPainter && this.__onlyRegion) return this
 
         this.painter.arc(x, y, r, beginDeg, beginDeg + deg, deg < 0)
         return this
@@ -228,17 +261,23 @@ class Painter {
     fill() {
         if (this.__region) this.__region.fill()
 
+        if (this.__isPainter && this.__onlyRegion) return this
+
         this.painter.fill()
         return this
     }
     stroke() {
         if (this.__region) this.__region.stroke()
 
+        if (this.__isPainter && this.__onlyRegion) return this
+
         this.painter.stroke()
         return this
     }
     full() {
         if (this.__region) this.__region.full()
+
+        if (this.__isPainter && this.__onlyRegion) return this
 
         this.painter.fill()
         this.painter.stroke()
@@ -248,17 +287,23 @@ class Painter {
     save() {
         if (this.__region) this.__region.save()
 
+        if (this.__isPainter && this.__onlyRegion) return this
+
         this.painter.save()
         return this
     }
     restore() {
         if (this.__region) this.__region.restore()
 
+        if (this.__isPainter && this.__onlyRegion) return this
+
         this.painter.restore()
         return this
     }
     clip() {
         if (this.__region) this.__region.clip()
+
+        if (this.__isPainter && this.__onlyRegion) return this
 
         this.painter.clip()
         return this
@@ -268,11 +313,15 @@ class Painter {
     quadraticCurveTo(cpx: number, cpy: number, x: number, y: number) {
         if (this.__region) this.__region.quadraticCurveTo(cpx, cpy, x, y)
 
+        if (this.__isPainter && this.__onlyRegion) return this
+
         this.painter.quadraticCurveTo(cpx, cpy, x, y)
         return this
     }
     bezierCurveTo(cp1x: number, cp1y: number, cp2x: number, cp2y: number, x: number, y: number) {
         if (this.__region) this.__region.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)
+
+        if (this.__isPainter && this.__onlyRegion) return this
 
         this.painter.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)
         return this
@@ -282,6 +331,8 @@ class Painter {
     clearRect(x: number, y: number, w: number, h: number) {
         if (this.__region) this.__region.clearRect(x, y, w, h)
 
+        if (this.__isPainter && this.__onlyRegion) return this
+
         this.painter.clearRect(x, y, w, h)
         return this
     }
@@ -290,17 +341,23 @@ class Painter {
     fillArc(cx: number, cy: number, r1: number, r2: number, beginDeg: number, deg: number) {
         if (this.__region) this.__region.fillArc(cx, cy, r1, r2, beginDeg, deg)
 
+        if (this.__isPainter && this.__onlyRegion) return this
+
         initArc(this.painter, this.__specialConfig, cx, cy, r1, r2, beginDeg, deg).fill()
         return this
     }
     strokeArc(cx: number, cy: number, r1: number, r2: number, beginDeg: number, deg: number) {
         if (this.__region) this.__region.strokeArc(cx, cy, r1, r2, beginDeg, deg)
 
+        if (this.__isPainter && this.__onlyRegion) return this
+
         initArc(this.painter, this.__specialConfig, cx, cy, r1, r2, beginDeg, deg).stroke()
         return this
     }
     fullArc(cx: number, cy: number, r1: number, r2: number, beginDeg: number, deg: number) {
         if (this.__region) this.__region.fullArc(cx, cy, r1, r2, beginDeg, deg)
+
+        if (this.__isPainter && this.__onlyRegion) return this
 
         initArc(this.painter, this.__specialConfig, cx, cy, r1, r2, beginDeg, deg)
         this.painter.fill()
@@ -312,17 +369,23 @@ class Painter {
     fillCircle(cx: number, cy: number, r: number) {
         if (this.__region) this.__region.fillCircle(cx, cy, r)
 
+        if (this.__isPainter && this.__onlyRegion) return this
+
         initCircle(this.painter, cx, cy, r).fill()
         return this
     }
     strokeCircle(cx: number, cy: number, r: number) {
         if (this.__region) this.__region.strokeCircle(cx, cy, r)
 
+        if (this.__isPainter && this.__onlyRegion) return this
+
         initCircle(this.painter, cx, cy, r).stroke()
         return this
     }
     fullCircle(cx: number, cy: number, r: number) {
         if (this.__region) this.__region.fullCircle(cx, cy, r)
+
+        if (this.__isPainter && this.__onlyRegion) return this
 
         initCircle(this.painter, cx, cy, r)
         this.painter.fill()
@@ -334,11 +397,15 @@ class Painter {
     fillRect(x: number, y: number, width: number, height: number) {
         if (this.__region) this.__region.fillRect(x, y, width, height)
 
+        if (this.__isPainter && this.__onlyRegion) return this
+
         initRect(this.painter, x, y, width, height).fill()
         return this
     }
     strokeRect(x: number, y: number, width: number, height: number) {
         if (this.__region) this.__region.strokeRect(x, y, width, height)
+
+        if (this.__isPainter && this.__onlyRegion) return this
 
         initRect(this.painter, x, y, width, height).stroke()
         return this
@@ -346,11 +413,15 @@ class Painter {
     fullRect(x: number, y: number, width: number, height: number) {
         if (this.__region) this.__region.fullRect(x, y, width, height)
 
+        if (this.__isPainter && this.__onlyRegion) return this
+
         initRect(this.painter, x, y, width, height)
         this.painter.fill()
         this.painter.stroke()
         return this
     }
+
+    draw() { }
 }
 
 export default Painter

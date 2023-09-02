@@ -1,5 +1,6 @@
+import type CanvasConfigType from "../../../types/CanvasConfig"
+
 import arc from "./arc"
-import CanvasConfigType from "../../../types/CanvasConfig"
 
 // 文字统一设置方法
 export let initText = function (

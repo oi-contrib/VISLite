@@ -1,12 +1,19 @@
-import CanvasType from '../types/Canvas'
+import type CanvasType from '../types/Canvas'
+import type CanvasOptionType from '../types/CanvasOption'
+
 import OralCanvas from './common/canvas/index'
+import mergeOption from './common/mergeOption'
 
 class Canvas extends OralCanvas implements CanvasType {
     private __canvas: HTMLCanvasElement
-    constructor(el: HTMLElement | null) {
+    constructor(el: HTMLElement | null, option: CanvasOptionType = {}) {
         if (!el) {
             throw new Error("VISLite Canvas:The mount point requires an HTMLElement type but encountered null.")
         }
+
+        option = mergeOption(option, {
+            region: true
+        })
 
         let width = el.clientWidth, height = el.clientHeight
 
@@ -25,7 +32,9 @@ class Canvas extends OralCanvas implements CanvasType {
             ViewCanvas = document.createElement('canvas')
             el.appendChild(ViewCanvas)
 
-            RegionCanvas = document.createElement('canvas')
+            if (option.region) {
+                RegionCanvas = document.createElement('canvas')
+            }
 
             _el._vislite_canvas_ = [ViewCanvas, RegionCanvas]
 
@@ -35,11 +44,13 @@ class Canvas extends OralCanvas implements CanvasType {
         // 设置画布大小
         for (let canvas of [ViewCanvas, RegionCanvas]) {
 
-            canvas.style.width = width + "px"
-            canvas.setAttribute('width', width + "")
+            if (canvas) {
+                canvas.style.width = width + "px"
+                canvas.setAttribute('width', width + "")
 
-            canvas.style.height = height + "px"
-            canvas.setAttribute('height', height + "")
+                canvas.style.height = height + "px"
+                canvas.setAttribute('height', height + "")
+            }
         }
 
         super(ViewCanvas, RegionCanvas)

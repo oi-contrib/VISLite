@@ -13,6 +13,20 @@ let painter = new Canvas(el)
 <p>
     其中el是画布的挂载点，比如可以是一个DIV节点。
 </p>
+<h3>
+    配置
+</h3>
+<p>
+    创建画笔的时候，你还可以传递一个参数来进行更精细的控制：
+</p>
+<pre tag="javascript">
+new Canvas(el, {
+
+    // Boolean类型，默认true，表示是否支持区域管理（v0.4.1开始支持）
+    "region": boolean
+
+})
+</pre>
 <h2>
     uni-app
 </h2>
@@ -49,8 +63,14 @@ this.$refs.mycanvas.fetch().then(painter => {
     稍微特殊一点的是，每次全部绘制完毕以后，都需要额外调用下面的方法刷新画布：
 </p>
 <pre tag="javascript">
-painter.draw()
+painter.draw(reserve, callback)
 </pre>
+<div class="version">
+    上述方法参数(reserve, callback) 0.4.1 新增
+</div>
+<p>
+    均为可选参数：reserve默认false，如果设置为true，则保留当前画布上的内容；callback是一个函数，表示绘制完成后回调。
+</p>
 <h3>
     属性说明
 </h3>
@@ -114,6 +134,20 @@ painter.draw()
                 是否使用原生canvas渲染（v0.2.0开始支持）
             </td>
         </tr>
+        <tr>
+            <td>
+                region
+            </td>
+            <td>
+                Boolean
+            </td>
+            <td>
+                true
+            </td>
+            <td>
+                是否支持区域管理（v0.4.1开始支持）
+            </td>
+        </tr>
     </tbody>
 </table>
 <h3>
@@ -140,6 +174,13 @@ methods: {
 <p>
     在你每次点击画笔的时候就会触发doit方法，此方法有一个行参，记录着你点击的区域信息。
 </p>
+<h3>
+    完整用例
+</h3>
+<p>
+    具体的例子可以直接访问：
+    <a class="link" href="https://github.com/fragement-contrib/uni-app/blob/master/pages/example/line.vue" target="_blank">https://github.com/fragement-contrib/uni-app/blob/master/pages/example/line.vue</a>
+</p>
 <h2>
     微信小程序
 </h2>
@@ -162,7 +203,7 @@ methods: {
     注册完毕就可以在页面中使用了：
 </p>
 <pre tag="html">
-    <ui-canvas id='mycanvas' :width='400' :height='300'></ui-canvas>
+    <ui-canvas id='mycanvas' width='400' height='300'></ui-canvas>
 </pre>
 <p>
     然后获取画笔：
@@ -224,6 +265,20 @@ this.selectComponent('#mycanvas').fetch().then(painter => {
                 画布的高
             </td>
         </tr>
+        <tr>
+            <td>
+                region
+            </td>
+            <td>
+                Boolean
+            </td>
+            <td>
+                true
+            </td>
+            <td>
+                是否支持区域管理（v0.4.1开始支持）
+            </td>
+        </tr>
     </tbody>
 </table>
 <h3>
@@ -246,4 +301,11 @@ Page({
 </pre>
 <p>
     在你每次点击画笔的时候就会触发doit方法，此方法的形参有一个属性detail，记录着你点击的区域信息。
+</p>
+<h3>
+    完整用例
+</h3>
+<p>
+    具体的例子可以直接访问：
+    <a class="link" href="https://github.com/fragement-contrib/WeChat-Miniprogram/blob/master/miniprogram/pages/example/line" target="_blank">https://github.com/fragement-contrib/WeChat-Miniprogram/blob/master/miniprogram/pages/example/line</a>
 </p>

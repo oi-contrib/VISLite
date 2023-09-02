@@ -237,6 +237,11 @@ export default interface CanvasType {
   clearRect(x: number, y: number, w: number, h: number): this
 
   /**
+   * 是否绘制的内容只需要进行区域记录
+   */
+  onlyRegion(flag: boolean): this
+
+  /**
    * 设置区域
    */
   setRegion(regionName: string | number): this
@@ -285,4 +290,11 @@ export default interface CanvasType {
    * @param y
    */
   getColor(x: number, y: number): string
+
+  /**
+   * 渲染绘制（uniapp独有）
+   * @param reserve 是否保留当前画布上的内容
+   * @param callback 绘制完成后回调
+   */
+  draw(reserve?: boolean, callback?: Function): void
 }

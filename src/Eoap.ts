@@ -1,4 +1,4 @@
-import MapType from '../types/Map'
+import type MapType from '../types/Map'
 
 // 围绕X轴旋转
 let rotateX = function (deg: number, x: number, y: number, z: number) {

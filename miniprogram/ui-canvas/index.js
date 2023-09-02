@@ -12,6 +12,10 @@ Component({
             type: Number,
             default: 150
         },
+        region: {
+            type: Boolean,
+            default: true
+        },
         touchstart: {
             type: Function,
             default: () => { }
@@ -30,22 +34,26 @@ Component({
             return new Promise((resolve, reject) => {
 
                 let getCanvasContext = (idName, doback) => {
-                    const query = wx.createSelectorQuery().in(this);
-                    query.select('#' + idName)
-                        .fields({ node: true, size: true })
-                        .exec((res) => {
-                            const canvas = res[0].node;
-                            const ctx = canvas.getContext('2d');
+                    if (idName != 'region' || this.data.region) {
+                        const query = wx.createSelectorQuery().in(this);
+                        query.select('#' + idName)
+                            .fields({ node: true, size: true })
+                            .exec((res) => {
+                                const canvas = res[0].node;
+                                const ctx = canvas.getContext('2d');
 
-                            canvas.width = res[0].width * (idName == "region" ? 1 : dpr);
-                            canvas.height = res[0].height * (idName == "region" ? 1 : dpr);
+                                canvas.width = res[0].width * (idName == "region" ? 1 : dpr);
+                                canvas.height = res[0].height * (idName == "region" ? 1 : dpr);
 
-                            if (idName != "region") {
-                                ctx.scale(dpr, dpr);
-                            }
+                                if (idName != "region") {
+                                    ctx.scale(dpr, dpr);
+                                }
 
-                            doback(ctx);
-                        });
+                                doback(ctx);
+                            });
+                    } else {
+                        doback(null);
+                    }
                 };
 
                 getCanvasContext("painter", painter => {
@@ -54,11 +62,11 @@ Component({
                             getContext() {
                                 return painter;
                             }
-                        }, {
+                        }, this.data.region ? {
                             getContext() {
                                 return region;
                             }
-                        });
+                        } : null);
 
                         this.data.help.instance.toDataURL = () => {
                             return new Promise((resolveUrl) => {

@@ -1,6 +1,6 @@
 {
   "name": "vislite",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "灵活、快速、简单的数据可视化交互式跨端前端库",
   "main": "./lib/index.umd.min.js",
   "typings": "./types/index.d.ts",
@@ -9,7 +9,6 @@
   "scripts": {
     "dev": "webpack serve --config ./build/webpack.config.js",
     "build": "devby --delete ./lib && node ./build/pkg.js",
-    "server": "devby -s 30000",
     "test": "karma start ./build/karma.config.js"
   },
   "miniprogram": ".",
@@ -27,7 +26,14 @@
     "miniprogram",
     "image2d",
     "image3d",
-    "vislite"
+    "vislite",
+    "d3",
+    "three",
+    "echarts",
+    "datav",
+    "webgpu",
+    "layout",
+    "algorithm"
   ],
   "author": {
     "name": "zxl20070701",
@@ -41,7 +47,7 @@
   "devDependencies": {
     "@rollup/plugin-typescript": "^11.1.0",
     "@types/jasmine": "^4.3.1",
-    "devby": "^0.3.1",
+    "devby": "^0.4.6",
     "karma": "^6.3.10",
     "karma-chrome-launcher": "^3.1.0",
     "karma-jasmine": "^4.0.1",

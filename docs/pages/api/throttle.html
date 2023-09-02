@@ -1,0 +1,85 @@
+<header>
+    节流函数
+</header>
+<div class="version">
+    0.4.1 新增
+</div>
+<h2>
+    引入
+</h2>
+<pre tag="javascript">
+import { throttle } from "vislite"
+</pre>
+<h2>
+    语法
+</h2>
+<pre tag="javascript">
+let newFunction = throttle(function(){
+    // todo
+}, option)
+</pre>
+<p>
+    返回一个节流函数，具体的行为受第二个参数option控制，option是一个json，可选，其属性如下：
+</p>
+<table>
+    <thead>
+        <tr>
+            <td>
+                属性名
+            </td>
+            <td>
+                类型
+            </td>
+            <td>
+                默认值
+            </td>
+            <td>
+                说明
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                time
+            </td>
+            <td>
+                number
+            </td>
+            <td>
+                200
+            </td>
+            <td>
+                节流时长，单位毫秒
+            </td>
+        </tr>
+        <tr>
+            <td>
+                keep
+            </td>
+            <td>
+                boolean
+            </td>
+            <td>
+                false
+            </td>
+            <td>
+                是否持续节流，如果设置true，那个在一个持续时间内函数只会最后执行一次
+            </td>
+        </tr>
+        <tr>
+            <td>
+                opportunity
+            </td>
+            <td>
+                string
+            </td>
+            <td>
+                end
+            </td>
+            <td>
+                执行时机，可选值为：begin（开始触发）、end（结束触发）、wide（第一次开始触发，其余结束触发）
+            </td>
+        </tr>
+    </tbody>
+</table>

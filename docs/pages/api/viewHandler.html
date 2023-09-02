@@ -2,7 +2,7 @@
     控制信息捕获
 </header>
 <div class="version">
-    0.2.0 新增，且只支持Web端
+    0.2.0 新增，且只支持Web端，如果后续有需要会进行兼容扩展
 </div>
 <h2>
     引入
@@ -25,7 +25,10 @@ viewHandler(function(params){
 params: {
     type: string
     value: number
-    normal: number[]   
+    normal: number[],
+
+    // v0.4.1开始支持
+    event: Event   
 }
 </pre>
 <p>
@@ -99,6 +102,17 @@ params: {
             </td>
             <td>
                 使用鼠标左键按下拖动的时候触发，此时normal表示滚动法向量，满足右手螺旋法则，value表示旋转弧度
+            </td>
+        </tr>
+        <tr>
+            <td>
+                hover
+            </td>
+            <td>
+                悬浮
+            </td>
+            <td>
+                在鼠标左键没有按下的情况下移动鼠标的时候触发（v0.4.1开始支持）
             </td>
         </tr>
         <tr>

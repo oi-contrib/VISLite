@@ -19,6 +19,40 @@
     我们通过提供可视化常用的算法来帮助你绘制复杂图表。比如下面的树图，通过简单的配置就可以把任意格式的数据变成任意绘制的带坐标的数据：
 </p>
 <img src="./images/docs/what_1.png">
+<div class="warn">
+    上述例子的运行地址：
+    <a href="#/example/canvas/tree-layout-lr" target="_blank">
+        从左到右树状图
+    </a>
+    。
+</div>
+<p>
+    除了
+    <a target="_blank" href="#/api/treeLayout">
+        树布局
+    </a>
+    外，我们还提供了：
+    <a target="_blank" href="#/api/ruler">
+        刻度尺算法
+    </a>
+    来帮助你计算刻度应该如何确定、
+    <a target="_blank" href="#/api/eoap">
+        等角斜方位投影
+    </a>
+    和
+    <a target="_blank" href="#/api/mercator">
+        墨卡托投影
+    </a>
+    来绘制地图、
+    <a target="_blank" href="#/api/cardinal">
+        Cardinal插值函数
+    </a>
+    来完成折线变光滑的曲线、
+    <a target="_blank" href="#/api/matrix4">
+        变换矩阵
+    </a>
+    提供各种坐标变换等。
+</p>
 <h2>
     画笔加强
 </h2>
@@ -26,6 +60,20 @@
     我们对画笔进行了加强，使得其更简单好用。比如canvas、webgl，抽象出区域的概念，使得无论你绘制的图形多么的不规则，都可以很轻松的实现交互功能：
 </p>
 <img src="./images/docs/what_2.png">
+<div class="warn">
+    上述例子的运行地址：
+    <a href="#/example/canvas/china" target="_blank">
+        中国地图
+    </a>
+    。
+</div>
+<p>
+    画笔除了像上面那样为了方便交互而补充区域的设计外，还对原来的API进行了一次抽象，使得API更友好简单
+    <span class="special">
+        （比如WebGL，即使不会3D的人也可以轻松使用，而SVG的使用，你无需去记忆那些晦涩难懂的属性）
+    </span>
+    ，同时，我们还抹平了不同版本浏览器等之间的差异。
+</p>
 <h2>
     支持跨端开发
 </h2>
@@ -33,3 +81,24 @@
     除了Web端外，我们还针对uni-app、微信小程序等端进行了支持，并且不同端API保持一致，大大提高了代码的复用性：
 </p>
 <img src="./images/docs/what_3.png">
+<div class="warn">
+    上述例子的运行地址：
+    <a href="#/example/svg/money-schedule" target="_blank">
+        金额波浪球
+    </a>
+    。
+    <hr />
+    （我们提供的是Web端的SVG版本，其余端运行效果可以保持一致）
+</div>
+<p>
+    基于实际需要，我们目前对
+    <span class="important">Canvas</span>
+    提供了跨端支持，除
+    <span class="special">Web端</span>
+    外，还支持
+    <span class="special">原生微信小程序</span>
+    和
+    <span class="special">uni-app端</span>
+    （编译成H5、微信小程序、支付宝小程序等）
+    ，如果后续有必要，我们会对Canvas支持的端或SVG、WebGL等画笔进行更多端扩展。
+</p>

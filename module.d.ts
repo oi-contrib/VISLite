@@ -1,3 +1,5 @@
 interface Window {
-    JSLitmus: any;
+    JSLitmus: any
 }
+
+declare module "*.c"

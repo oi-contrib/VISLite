@@ -9,6 +9,15 @@ module.exports = {
         format: "umd"
     },
     plugins: [
-        typescript(tsconfig)
+        typescript(tsconfig),
+        (function () {
+            return {
+                transform(source, path) {
+                    if (/\.c$/.test(path)) {
+                        return require('./shader-loader.js')(source)
+                    } return
+                }
+            }
+        })()
     ]
-};
+}

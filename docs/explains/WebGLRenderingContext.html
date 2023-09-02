@@ -1,0 +1,189 @@
+<header>
+    WebGL画笔（WebGLRenderingContext）方法
+</header>
+<div class="warn">
+    温馨提示：这里说明的方法并不是全，只说明当前项目可能需要了解的部分（我们会根据实际情况进行维护）。
+</div>
+<h2>
+    基础
+</h2>
+<h3>
+    开启深度计算
+</h3>
+<pre tag="javascript">
+    painter.enable(painter.DEPTH_TEST)
+</pre>
+<h2>
+    数据
+</h2>
+<h3>
+    attribue
+</h3>
+<h4>
+    获取存储位置
+</h4>
+<pre tag="javascript">
+let location = painter.getAttribLocation(painter.program, name)
+</pre>
+<h4>
+    传递数据给变量
+</h4>
+<pre tag="javascript">
+// 浮点数
+painter.vertexAttrib1f(location, v0)
+painter.vertexAttrib2f(location, v0, v1)
+painter.vertexAttrib3f(location, v0, v1, v2)
+painter.vertexAttrib4f(location, v0, v1, v2, v3)
+
+// 整数
+painter.vertexAttrib1i(location, v0)
+painter.vertexAttrib2i(location, v0, v1)
+painter.vertexAttrib3i(location, v0, v1, v2)
+painter.vertexAttrib4i(location, v0, v1, v2, v3)
+</pre>
+<h3>
+    uniform
+</h3>
+<h4>
+    获取存储位置
+</h4>
+<pre tag="javascript">
+let location = painter.getUniformLocation(painter.program, name)
+</pre>
+<h4>
+    传递数据给变量
+</h4>
+<pre tag="javascript">
+// 浮点数
+painter.uniform1f(location, v0)
+painter.uniform2f(location, v0, v1)
+painter.uniform3f(location, v0, v1, v2)
+painter.uniform4f(location, v0, v1, v2, v3)
+
+// 整数
+painter.uniform1i(location, v0)
+painter.uniform2i(location, v0, v1)
+painter.uniform3i(location, v0, v1, v2)
+painter.uniform4i(location, v0, v1, v2, v3)
+
+// 矩阵
+painter.uniformMatrix2fv(location, false, value)
+painter.uniformMatrix3fv(location, false, value)
+painter.uniformMatrix4fv(location, false, value)
+
+</pre>
+<h2>
+    画笔
+</h2>
+<h3>
+    普通画笔
+</h3>
+<pre tag="javascript">
+    painter.drawArrays(method, first, count)
+</pre>
+<h3>
+    索引画笔
+</h3>
+<pre tag="javascript">
+    painter.drawElements(method, count, type, first)
+</pre>
+<p>
+    type表示数据类型，可选值有：
+    <span class="special">painter.UNSIGNED_BYTE</span>
+    和
+    <span class="special">painter.UNSIGNED_SHORT</span>
+    ，分别对应：
+    <span class="special">Uint8Array</span>
+    和
+    <span class="special">Uint16Array</span>
+    。
+</p>
+<h3>
+    绘制方法
+</h3>
+<p>
+    无论是普通绘制还是索引，其中方法都第一个参数都有如下可选值：
+</p>
+<table style="margin-top:10px;">
+    <thead>
+        <tr>
+            <th>
+                值
+            </th>
+            <th>
+                描述
+            </th>
+            <th>
+                解释
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>
+                painter.LINES
+            </th>
+            <th>
+                直线
+            </th>
+            <th>
+                两个点为一个线段，比如你设置了四个点，那就会绘制两个线段
+            </th>
+        </tr>
+        <tr>
+            <th>
+                painter.LINE_STRIP
+            </th>
+            <th>
+                连续直线
+            </th>
+            <th>
+                首尾相连的线段，比如你设置了四个点，那就会绘制三个线段，依次首尾相连
+            </th>
+        </tr>
+        <tr>
+            <th>
+                painter.LINE_LOOP
+            </th>
+            <th>
+                闭合直线
+            </th>
+            <th>
+                和LINE_STRIP类似，只不过第一个和最后一个点会连起来
+            </th>
+        </tr>
+        <tr>
+            <th>
+                painter.TRIANGLES
+            </th>
+            <th>
+                三角形
+            </th>
+            <th>
+                三个点为一个三角形，比如你设置了六个点，那就会绘制两个三角形
+            </th>
+        </tr>
+        <tr>
+            <th>
+                painter.TRIANGLE_STRIP
+            </th>
+            <th>
+                共边三角形
+            </th>
+            <th>
+                前三个点围成第一个三角形，以后，比如第n个点，会和第n-1和第n-2个点围成一个新的三角形，依此类推
+            </th>
+        </tr>
+        <tr>
+            <th>
+                painter.TRIANGLE_FAN
+            </th>
+            <th>
+                旋转围绕三角形
+            </th>
+            <th>
+                前三个点围成第一个三角形，以后，比如第n个点，会和第n-1和第1个点围成一个新的三角形，依此类推
+            </th>
+        </tr>
+    </tbody>
+</table>

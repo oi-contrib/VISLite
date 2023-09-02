@@ -16,3 +16,17 @@ let painter = new WebGL(el)
 <p>
     其中el是画布的挂载点，比如可以是一个DIV节点。
 </p>
+<h3>
+    配置
+</h3>
+<p>
+    创建画笔的时候，你还可以传递一个参数来进行更精细的控制：
+</p>
+<pre tag="javascript">
+new WebGL(el, {
+
+    // Boolean类型，默认true，表示是否支持区域管理（v0.4.1开始支持）
+    "region": boolean
+
+})
+</pre>

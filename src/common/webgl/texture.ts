@@ -7,11 +7,8 @@ let initTexture = (painter: WebGLRenderingContext, type: number, unit: number) =
     // 创建纹理对象
     let texture = painter.createTexture()
 
-    if (type == painter.TEXTURE_2D) {
-
-        // 开启纹理单元，unit表示开启的编号
-        painter.activeTexture(painter['TEXTURE' + unit])
-    }
+    // 开启纹理单元，unit表示开启的编号
+    painter.activeTexture(painter['TEXTURE' + unit])
 
     // 绑定纹理对象到目标上
     painter.bindTexture(type, texture)

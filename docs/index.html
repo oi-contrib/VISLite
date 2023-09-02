@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>官方文档 | VISLite 灵活、快速、简单的数据可视化交互式跨端前端库</title>
     <link rel="shortcut icon" href="./images/logo.png">
-    <meta name="keywords" content="zxl20070701 1904314465@qq.com vislite svg webgl typescript canvas vue uniapp miniprogram image2d image3d">
+    <meta name="keywords"
+        content="zxl20070701 1904314465@qq.com vislite svg webgl typescript canvas vue uniapp miniprogram image2d image3d">
     <link rel="stylesheet" href="./styles/normalize.css">
     <link rel="stylesheet" href="./styles/common.css">
     <script src="./js/system.js"></script>
@@ -25,7 +26,7 @@
     <header>
         <div class="menu-ctrl" onclick="toggleMenu()">
             <svg width="24" height="24" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path fill="white" d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
+                <path fill="black" d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
             </svg>
         </div>
         <h1 onclick="openBlankPage('https://github.com/oi-contrib')">
@@ -67,14 +68,16 @@
     </div>
 
     <script>
-        var temp = window.location.hash.replace("#/", "").split("/");
-        window.__router = [temp[0] || "begin", temp[1] || ''];
 
-        for (var i = 2; i < temp.length; i++) {
-            window.__router[1] += "/" + temp[i];
+        function loadPageByHash() {
+            var temp = window.location.hash.replace("#/", "").split("/");
+            window.__router = [temp[0] || "begin", temp[1] || ''];
+
+            for (var i = 2; i < temp.length; i++) {
+                window.__router[1] += "/" + temp[i];
+            }
+            changeNav(window.__router[0] || "begin", true);
         }
-        changeNav(window.__router[0] || "begin", true);
-
         var closeDialog = function (idName) {
             document.getElementById(idName).style.display = "none";
         };
@@ -83,6 +86,8 @@
         document.getElementById('explain-close-id').addEventListener('click', function () {
             closeDialog('explain-root');
         });
+
+        loadPageByHash();
     </script>
 </body>
 

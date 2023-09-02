@@ -2,7 +2,7 @@ export default function (painter: CanvasRenderingContext2D, contents: string, wi
 
     let lineNumber = 0, content = ""
     for (let i = 0; i < contents.length; i++) {
-        if (painter.measureText(content + contents[i]).width > width) {
+        if (painter.measureText(content + contents[i]).width > width || /\n$/.test(content)) {
             lineNumber += 1
             doback(content, (lineNumber - 0.5) * height)
 

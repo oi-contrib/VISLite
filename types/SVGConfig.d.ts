@@ -1,3 +1,5 @@
+import { arcCapType, textAlignType, textBaselineType } from './painterConfig'
+
 export default interface SVGConfigType {
 
     /**
@@ -18,12 +20,12 @@ export default interface SVGConfigType {
     /**
      * 文字水平对齐方式，默认"left"左对齐（还有"center"居中和"right"右对齐）
      */
-    textAlign?: string
+    textAlign?: textAlignType
 
     /**
      * 文字垂直对齐方式，默认"middle"垂直居中（还有"top"上对齐和"bottom"下对齐）
      */
-    textBaseline?: string
+    textBaseline?: textBaselineType
 
     /**
      * 设置线条虚线，默认为[]表示使用实线绘制
@@ -47,13 +49,13 @@ export default interface SVGConfigType {
     /**
      * 圆弧开始端闭合方式，默认"butt"直线闭合（还有"round"圆帽闭合,"-round"反圆帽闭合）
      */
-    "arcStartCap"?: string
+    "arcStartCap"?: arcCapType
     "arc-start-cap"?: string // 向下兼容
 
     /**
      * 圆弧结束端闭合方式，默认"butt"直线闭合（还有"round"圆帽闭合,"-round"反圆帽闭合）
      */
-    "arcEndCap"?: string
+    "arcEndCap"?: arcCapType
     "arc-end-cap"?: string // 向下兼容
 
 }

@@ -1,8 +1,9 @@
+import type Object3DType from '../../../types/Object3D'
+import type Scene3DType from '../../../types/Scene3D'
+
 import getWebGLContext from './getWebGLContext'
-import Object3DType from '../../../types/Object3D'
-import Scene3DType from '../../../types/Scene3D'
 import getColorFactory from './getColorFactory'
-import Matrix4 from '..//../Matrix4/index'
+import Matrix4 from '../../Matrix4/index'
 import doDraw from './doDraw'
 import assemble from '../assemble'
 
@@ -45,11 +46,13 @@ class WebGL {
         this.__unique = new Date().valueOf()
 
         this.painter = getWebGLContext(ViewCanvas, scale)
-        this.__regionPainter = getWebGLContext(RegionCanvas, scale, {
+        if (RegionCanvas) {
+            this.__regionPainter = getWebGLContext(RegionCanvas, scale, {
 
-            // 如果不设置，涉及到缓冲区的情况可能无法获取颜色
-            // preserveDrawingBuffer: true
-        })
+                // 如果不设置，涉及到缓冲区的情况可能无法获取颜色
+                // preserveDrawingBuffer: true
+            })
+        }
 
         let proportion = this.painter.canvas.width / this.painter.canvas.height
 
@@ -88,8 +91,10 @@ class WebGL {
     review(isUpdateRegion = false) {
 
         if (isUpdateRegion) {
-            this.__regionPainter.clearColor(1, 1, 1, 1)
-            this.__regionPainter.clear(this.__regionPainter.COLOR_BUFFER_BIT)
+            if (this.__regionPainter) {
+                this.__regionPainter.clearColor(1, 1, 1, 1)
+                this.__regionPainter.clear(this.__regionPainter.COLOR_BUFFER_BIT)
+            }
         } else {
             this.painter.clearColor(1, 1, 1, 1)
             this.painter.clear(this.painter.COLOR_BUFFER_BIT)
@@ -119,20 +124,22 @@ class WebGL {
         for (let index = 0; index < object3D.mesh.length; index++) {
 
             if (isUpdateRegion) {
-                // 区域上
-                doDraw("painter" + this.__unique, this.__regionPainter, {
-                    geometry: object3D.mesh[index].geometry,
-                    material: {
-                        color: {
-                            r: this.__regionColor[0],
-                            g: this.__regionColor[1],
-                            b: this.__regionColor[2],
-                            alpha: this.__regionColor[3]
+                if (this.__regionPainter) {
+                    // 区域上
+                    doDraw("painter" + this.__unique, this.__regionPainter, {
+                        geometry: object3D.mesh[index].geometry,
+                        material: {
+                            color: {
+                                r: this.__regionColor[0],
+                                g: this.__regionColor[1],
+                                b: this.__regionColor[2],
+                                alpha: this.__regionColor[3]
+                            }
                         }
-                    }
-                }, meshWorld, globalWorld)
+                    }, meshWorld, globalWorld)
 
-                this.__getColor = getColorFactory(this.__regionPainter)
+                    this.__getColor = getColorFactory(this.__regionPainter)
+                }
             } else {
                 // 画布上
                 doDraw("region" + this.__unique, this.painter, object3D.mesh[index], meshWorld, globalWorld)
@@ -180,7 +187,7 @@ class WebGL {
         this.__regionName = regionName + ""
 
         if (regionName) {
-            if (this.__regionList[regionName] == undefined) {
+            if (this.__regionList[regionName] == void 0) {
                 this.__regionList[regionName] = [... this.__regionAssemble(), 1]
             }
             this.__regionColor = this.__regionList[regionName]

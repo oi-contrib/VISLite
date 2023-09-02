@@ -1,5 +1,7 @@
 import Matrix4Type from './Matrix4'
 
+export type geometryType = "LINES" | "INE_STRIP" | "LINE_LOOP" | "TRIANGLES" | "TRIANGLE_STRIP" | "TRIANGLE_FAN"
+
 export interface meshType {
 
     // 形状
@@ -36,9 +38,8 @@ export interface meshType {
             itemSize: number
         }
 
-        // 点、线、还是三角形
-        // "POINTS" | "LINES" | "INE_STRIP" | "LINE_LOOP" | "TRIANGLES" | "TRIANGLE_STRIP" | "TRIANGLE_FAN"
-        type: string
+        // 线、还是三角形
+        type: geometryType
     }
 
     // 材质

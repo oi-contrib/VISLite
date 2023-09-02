@@ -352,6 +352,18 @@ painter.getRegion(x, y).then((regionName) => {
     // todo
 }) 
 </pre>
+<h3>
+    区域模式
+</h3>
+<p>
+    是否绘制的内容只需要进行区域记录：
+</p>
+<pre tag="javascript">
+painter.onlyRegion(flag)
+</pre>
+<p>
+    如果flag为true，那么或许所有的操作都不会同步到画布中，只会被区域记录，重新设置成false即可退出区域模式。
+</p>
 <h2>
     原生画笔
 </h2>

@@ -1,4 +1,4 @@
-import MapType from '../types/Map'
+import type MapType from '../types/Map'
 
 /* 墨卡托投影 */
 class Mercator implements MapType {

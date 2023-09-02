@@ -116,105 +116,10 @@ geometry: {
 <p>
     比如这里设置的TRIANGLES，表示3个点组成一个三角形，然后这些三角形拼接最终几何体。因为这里就3个点，所以最终就是1个三角形。
 </p>
-<h4>
-    点、线段、三角形
-</h4>
 <div class="warn">
-    温馨提示：type可以选择的值及其解释如下：
-    <table style="margin-top:10px;">
-        <thead>
-            <tr>
-                <th>
-                    值
-                </th>
-                <th>
-                    描述
-                </th>
-                <th>
-                    解释
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th>
-                    POINTS
-                </th>
-                <th>
-                    点
-                </th>
-                <th>
-                    也就是一个个点，比如你设置了4个点，那就会绘制4个点
-                </th>
-            </tr>
-            <tr>
-                <th>
-                    LINES
-                </th>
-                <th>
-                    直线
-                </th>
-                <th>
-                    2个点为一个线段，比如你设置了4个点，那就会绘制2个线段
-                </th>
-            </tr>
-            <tr>
-                <th>
-                    LINE_STRIP
-                </th>
-                <th>
-                    连续直线
-                </th>
-                <th>
-                    首尾相连的线段，比如你设置了4个点，那就会绘制3个线段，依次首尾相连
-                </th>
-            </tr>
-            <tr>
-                <th>
-                    LINE_LOOP
-                </th>
-                <th>
-                    闭合直线
-                </th>
-                <th>
-                    和LINE_STRIP类似，只不过第1个和最后一个点会连起来
-                </th>
-            </tr>
-            <tr>
-                <th>
-                    TRIANGLES
-                </th>
-                <th>
-                    三角形
-                </th>
-                <th>
-                    3个点为一个三角形，比如你设置了6个点，那就会绘制2个三角形
-                </th>
-            </tr>
-            <tr>
-                <th>
-                    TRIANGLE_STRIP
-                </th>
-                <th>
-                    共边三角形
-                </th>
-                <th>
-                    前3个点围成第1个三角形，以后，比如第n个点，会和第n-1和第n-2个点围成一个新的三角形，依此类推
-                </th>
-            </tr>
-            <tr>
-                <th>
-                    TRIANGLE_FAN
-                </th>
-                <th>
-                    旋转围绕三角形
-                </th>
-                <th>
-                    前3个点围成第1个三角形，以后，比如第n个点，会和第n-1和第1个点围成一个新的三角形，依此类推
-                </th>
-            </tr>
-        </tbody>
-    </table>
+    温馨提示：type可以选择的值及其解释你可以
+    <button tag="painter3D" type="explain">点击查看</button>
+    。
 </div>
 <h3>
     材质

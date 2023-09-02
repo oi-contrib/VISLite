@@ -9,7 +9,8 @@
  * 第二个点的斜率由第一个点和第二个点的后一个点的斜率确定
  */
 
-import CardinalType from '../../types/Cardinal'
+import type CardinalType from '../../types/Cardinal'
+
 import Hermite from './Hermite'
 
 class Cardinal implements CardinalType {
