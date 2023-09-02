@@ -1,6 +1,6 @@
 - 开源不易，去 <i>[Github给个Star](https://github.com/oi-contrib/VISLite) </i>吧！
 
-<img src='./docs/images/logo.png' height='300px'/>
+<img src='https://oi-contrib.github.io/VISLite/images/logo.png' height='300px'/>
 
 <p>
     <a href="https://zxl20070701.github.io/toolbox/#/npm-download?packages=vislite&interval=7">
