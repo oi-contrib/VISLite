@@ -1,0 +1,182 @@
+<header>
+    树布局
+</header>
+<h2>
+    基础用法
+</h2>
+<p>
+    首先，我们需要创建布局对象，并配置意图：
+</p>
+<pre tag="javascript">
+import { TreeLayout } from 'vislite';
+
+// 创建布局对象
+var treeLayout = new TreeLayout();
+
+// 配置意图
+treeLayout.setOption({
+    type: "rect",
+    direction: "TB",
+    x: 250,
+    y: 20,
+    width: 500,
+    height: 260
+});
+</pre>
+<p>
+    我们这里想绘制一个从上往下的树，大小为500*260，所以根在顶部中心，也就是(250,20)。
+</p>
+<div class="warn">
+    温馨提示：为什么根的位置不是(250,0)？这是因为结点是个球，球心稍微下一点，不然绘制不全。
+</div>
+<p>
+    然后我们就可以把需要的数据变成方便绘图的格式了：
+</p>
+<pre tag="javascript">
+var data = {
+    "name": "前端",
+    "children": [{
+        "name": "基础",
+        "children": [{
+            "name": "HTML"
+        }, {
+            "name": "CSS"
+        }, {
+            "name": "JavaScript"
+        }, {
+            "name": "DOM"
+        }]
+    }, {
+        "name": "框架"
+    }, {
+        "name": "小技术"
+    }]
+};
+
+var tree = treeLayout.use(data);
+</pre>
+<p>
+    这里的tree就是我们要的绘图数据，看一下内容：
+</p>
+<img src="./images/docs/tree_data1.jpg">
+<p>
+    可以看到，这是一个json，其中有个属性node，里面包含了所有结点的信息，其中最重要的就是left和top，表示当前结点的位置。
+</p>
+<p>
+    那么我们应该怎么样？是的，把一个个结点按照这个位置绘制出来（也就是一个个小球）：
+</p>
+<pre tag="javascript">
+for (var key in tree.node) {
+    painter.fullCircle(tree.node[key].left, tree.node[key].top, 10);
+}
+</pre>
+<p>
+    当然，为了好看，你应该在小球旁边画上结点名称、然后把自己和父结点连接起来。
+</p>
+<div class="warn">
+    温馨提示：通过pid就知道自己的父结点是谁了，如果pid=null，说明是根结点，没有父结点，自然什么也不用做。
+</div>
+<p>
+    最终效果如下：
+</p>
+<example tag="course/tree-layout_1" height="320px"></example>
+<h2>
+    添加交互
+</h2>
+<p>
+    因为是需要交互（也就是点击结点可以控制孩子结点显示和隐藏），我们就不能直接使用返回的数据tree来绘制了，而是需要告诉布局如何绘制，如何告诉？如下：
+</p>
+<pre tag="javascript">
+treeLayout.bind(data, function (tree) {
+    // todo
+});
+</pre>
+<p>
+    第二个参数的写法和上面的类似，只不过有一点不同：你需要判断当前结点是否应该显示。如何判断？
+</p>
+<p>
+    非常幸运的是，我们提供了两个属性来告诉你当前结点显示情况（可以上滑一下看看上面的数据截图）：
+    <span class="special">isOpen来记录当前结点的孩子结点是否显示，show来记录当前结点是否显示</span>。
+</p>
+<p>
+    所以你在具体绘制的时候，需要多些判断，别的也就并无差别了。
+</p>
+<p>
+    聪明的你肯定可以猜到，默认这两个属性一定都是true，那如果我们可以动态修改它们的值，然后布局重新绘制，不就实现了交互了吗。是的，我们也是这样想的，因此提供了一个结点的孩子显示隐藏的方法：
+</p>
+<pre tag="javascript">
+    treeLayout.toggleNode(id);
+</pre>
+<p>
+    其中id就是需要显示隐藏孩子结点的结点id。
+</p>
+<p>
+    当然，我们这里是用canvas绘制的，所以最终控制代码应该如下：
+</p>
+<div class="warn">
+    温馨提示：绘制的时候，别忘了记录区域哦~
+</div>
+<pre tag="javascript">
+el.addEventListener('click', function (event) {
+    painter.getRegion(event.offsetX, event.offsetY).then(function (regionName) {
+        if (regionName) {
+            treeLayout.toggleNode(regionName);
+        }
+    });
+});
+</pre>
+<p>
+    最终效果如下：
+</p>
+<example tag="course/tree-layout_2" height="320px"></example>
+<h2>
+    特殊数据格式
+</h2>
+<p>
+    你可能会想，我们用来绘图的原始数据，一定要按照例子的给出吗？答案当然是否定的，比如我们现在的原始数据如下：
+</p>
+<pre tag="javascript">
+var data = [
+    // 结点名称、父节点名称
+    ["手绘", null],
+    ["水粉", "手绘"],
+    ["油画", "手绘"],
+    ['题材', '油画'],
+    ['画法', '油画'],
+    ["素描", "手绘"],
+    ["中国画", "手绘"],
+    ["空间透视", "素描"],
+    ["色彩五大调", "素描"]
+];
+</pre>
+<p>
+    怎么办？我们只需要在创建布局的时候告诉布局对象我们的数据格式如何解析即可：
+</p>
+<pre tag="javascript">
+var treeLayout = new TreeLayout({
+
+    // 根结点是谁
+    root: function (initTree) {
+        return initTree[0];
+    },
+
+    // 已知当前结点，如何知道它的孩子结点是谁
+    children: function (parentTree, initTree) {
+        var children = [];
+        for (var i = 0; i < initTree.length; i++) {
+            if (initTree[i][1] == parentTree[0])
+                children.push(initTree[i]);
+        }
+        return children;
+    },
+
+    // 当前结点的id如何生成
+    id: function (initTree) {
+        return initTree[0];
+    }
+});
+</pre>
+<p>
+    最终效果如下：
+</p>
+<example tag="course/tree-layout_3" height="320px"></example>

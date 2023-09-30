@@ -30,7 +30,7 @@ class Eoap implements MapType {
         this.__center = center
     }
 
-    use(λ: number, φ: number) {
+    use(λ: number, φ: number): [number, number, number] {
         /**
          * 通过旋转的方法
          * 先旋转出点的位置

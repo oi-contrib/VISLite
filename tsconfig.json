@@ -3,6 +3,6 @@
     "sourceMap": true,
     "target": "es5",
     "module": "es6",
-    "moduleResolution": "nodenext"
+    "moduleResolution": "node"
   }
 }

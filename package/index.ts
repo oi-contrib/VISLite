@@ -27,6 +27,8 @@ import throttle from "./throttle/index"
 
 import TreeLayout from "./TreeLayout/index"
 
+import Geometry from "./Geometry/index"
+
 export default {
 
     // 插值
@@ -64,5 +66,8 @@ export default {
     throttle,
 
     // 布局
-    TreeLayout
+    TreeLayout,
+
+    // 几何&模型数据
+    Geometry
 }

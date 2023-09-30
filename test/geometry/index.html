@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>几何&模型数据 / Geometry</title>
+
+    <!-- 顶点着色器 -->
+    <script type='x-shader/x-vertex' id='vs'>
+        attribute vec4 a_position;
+        uniform mat4 u_matrix;
+        void main(){
+            gl_Position=u_matrix * a_position;
+        }
+    </script>
+
+    <!-- 片段着色器 -->
+    <script type='x-shader/x-fragment' id='fs'>
+        precision mediump float;
+        uniform vec4 u_color;
+        void main(){
+            gl_FragColor=u_color;
+        }
+    </script>
+</head>
+
+<body>
+    <div id="root" style="width:300px;height:300px;"></div>
+    <script src="./dist.js"></script>
+</body>
+
+</html>

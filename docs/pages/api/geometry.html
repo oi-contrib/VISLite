@@ -1,0 +1,111 @@
+<header>
+    几何体运算
+</header>
+<div class="version">
+    0.5.0 新增
+</div>
+<h2>
+    引入
+</h2>
+<pre tag="javascript">
+import { Geometry } from 'vislite'
+</pre>
+<h2>
+    语法
+</h2>
+<pre tag="javascript">
+let geometry = new Geometry(option)
+</pre>
+<p>
+    返回几何体对象，其中option是一个json，可选，其属性如下：
+</p>
+<table>
+    <thead>
+        <tr>
+            <td>
+                属性名
+            </td>
+            <td>
+                类型
+            </td>
+            <td>
+                默认值
+            </td>
+            <td>
+                说明
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                precision
+            </td>
+            <td>
+                number
+            </td>
+            <td>
+                0.1
+            </td>
+            <td>
+                精度
+            </td>
+        </tr>
+        <tr>
+            <td>
+                normal
+            </td>
+            <td>
+                boolean
+            </td>
+            <td>
+                false
+            </td>
+            <td>
+                是否需要法向量
+            </td>
+        </tr>
+    </tbody>
+</table>
+<h2>
+    修改配置
+</h2>
+<p>
+    你创建对象的时候的属性值，后续都可以通过下面方法修改：
+</p>
+<pre tag="javascript">
+    geometry.config(option)
+</pre>
+<h2>
+    几何体
+</h2>
+<p>
+    所有的方法返回的
+    <span class="special">数据result</span>
+    的格式都一致，如下：
+</p>
+<pre tag="javascript">
+Array&lt;{
+    points: number[]
+    length: number
+    method: "LINES" | "INE_STRIP" | "LINE_LOOP" | "TRIANGLES" | "TRIANGLE_STRIP" | "TRIANGLE_FAN"
+}&gt;
+</pre>
+<h3>
+    圆柱体
+</h3>
+<pre tag="javascript">
+let result = geometry.cylinder(x, y, z, radius, height)
+</pre>
+<h3>
+    棱柱体
+</h3>
+<pre tag="javascript">
+let result = geometry.prism(x, y, z, radius, height, num)
+</pre>
+<h3>
+    球体
+</h3>
+<pre tag="javascript">
+let result = geometry.sphere(cx, cy, cz, radius)
+</pre>

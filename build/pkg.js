@@ -24,7 +24,7 @@ let banner = `/*!
 * Copyright ${package.author.name}
 * Released under the ${package.license} license
 * ${package.author.url}
-* 
+*
 * Publish Date:  ${new Date()}
 */`
 
@@ -32,16 +32,22 @@ error(`
 > Rollup 打包
 `)
 
-let rollupPromise_rollup = []
-fs.readdirSync("./package").forEach((folder, index) => {
+let sourceFiles = fs.readdirSync("./package")
+new Promise((resolve, reject) => {
+    (function doRollup(index) {
+        if (index >= sourceFiles.length) {
+            resolve()
+            return
+        }
 
-    let folderPath = folder == 'index.ts' ? "" : (folder + "/")
-    let folderName = folder == 'index.ts' ? "" : ("_" + folder)
+        let folder = sourceFiles[index]
 
-    let sourceFile = "./package/" + folderPath + "index.ts"
-    let targetFile = "./lib/" + folderPath + "index." + getFormat(folder, rollupConfig.output.format) + ".js"
+        let folderPath = folder == 'index.ts' ? "" : (folder + "/")
+        let folderName = folder == 'index.ts' ? "" : ("_" + folder)
 
-    rollupPromise_rollup.push(new Promise((resolve, reject) => {
+        let sourceFile = "./package/" + folderPath + "index.ts"
+        let targetFile = "./lib/" + folderPath + "index." + getFormat(folder, rollupConfig.output.format) + ".js"
+
         rollup({
             input: sourceFile,
             plugins: rollupConfig.plugins
@@ -53,61 +59,54 @@ fs.readdirSync("./package").forEach((folder, index) => {
                 file: targetFile
             }).then(() => {
                 log(`✔ [${index}] ${sourceFile} → ${targetFile}`)
-                resolve([index, folder])
+                doRollup(index + 1)
             }).catch((e) => {
-                error(`✘ [${index}] ${sourceFile} → ${targetFile} [2]`)
-                resolve([-1, e])
+                console.log(e)
+                reject(`✘ [${index}] ${sourceFile} → ${targetFile} [2]`)
             })
         }).catch((e) => {
-            error(`✘ [${index}] ${sourceFile} → ${targetFile} [1]`)
-            resolve([-1, e])
+            console.log(e)
+            reject(`✘ [${index}] ${sourceFile} → ${targetFile} [1]`)
         })
-    }))
-})
-
-let rollupPromise_terser = []
-Promise.all(rollupPromise_rollup).then((folders) => {
-
+    })(0)
+}).then((msg) => {
 
     error(`
 > Terser 压缩混淆
 `)
 
-    folders.forEach(folderInfo => {
+    new Promise((resolve, reject) => {
 
-        let folder = folderInfo[1]
-        let index = folderInfo[0]
+        (function doTerser(index) {
+            if (index >= sourceFiles.length) {
+                resolve()
+                return
+            }
 
-        if (index == -1) {
-            rollupPromise_terser.push(Promise.reject(folder))
-        } else {
+            let folder = sourceFiles[index]
 
             let folderPath = folder == 'index.ts' ? "" : (folder + "/")
 
             let sourceFile = "./lib/" + folderPath + "index." + getFormat(folder, rollupConfig.output.format) + ".js"
             let targetFile = "./lib/" + folderPath + "index." + getFormat(folder, rollupConfig.output.format) + ".min.js"
 
-            rollupPromise_terser.push(new Promise((resolve, reject) => {
 
-                minify(fs.readFileSync(sourceFile, "utf-8"), {
-                    toplevel: true,
-                }).then((data) => {
-                    fs.writeFileSync(targetFile, data.code)
+            minify(fs.readFileSync(sourceFile, "utf-8"), {
+                toplevel: true,
+            }).then((data) => {
+                fs.writeFileSync(targetFile, data.code)
 
-                    log(`✔ [${index}] ${sourceFile} → ${targetFile}`);
-                    resolve()
-                }).catch(() => {
-                    error(`✘ [${index}] ${sourceFile} → ${targetFile} [3]`);
-                    reject()
-                })
+                log(`✔ [${index}] ${sourceFile} → ${targetFile}`)
+                doTerser(index + 1)
+            }).catch((e) => {
+                console.log(e)
+                error(`✘ [${index}] ${sourceFile} → ${targetFile} [3]`)
+                reject()
+            })
 
-            }))
+        })(0)
 
-        }
-
-    })
-
-    Promise.all(rollupPromise_terser).then(() => {
+    }).then(() => {
 
         warn(`
 ✔ 完毕
@@ -120,4 +119,6 @@ Promise.all(rollupPromise_rollup).then((folders) => {
         console.log(e)
     })
 
+}).catch((e) => {
+    console.log(e)
 })

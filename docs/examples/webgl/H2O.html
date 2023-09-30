@@ -1,0 +1,120 @@
+<div class="view">
+    <!-- 顶点着色器 -->
+    <script type='x-shader/x-vertex' id='vs'>
+        attribute vec4 a_position;
+        uniform mat4 u_camera;
+        uniform mat4 u_matrix;
+        void main(){
+            vec4 temp = u_camera * u_matrix * a_position;
+            temp.z = -1.0 * temp.z;
+            float dist = 4.0;
+            gl_Position = vec4((dist + 1.0) * temp.x, (dist + 1.0) * temp.y, dist * (dist + temp.z) + 1.0 - dist * dist, temp.w * 2.0 * (dist + temp.z));
+        }
+    </script>
+
+    <!-- 片段着色器 -->
+    <script type='x-shader/x-fragment' id='fs'>
+        precision mediump float;
+        uniform vec4 u_color;
+        void main(){
+            gl_FragColor = u_color;
+        }
+    </script>
+
+    <!-- 绘制图表 -->
+    <div id="content" class="content"></div>
+</div>
+<script type="module">
+
+    import { getWebGLContext, Shader, Buffer, Matrix4, Geometry } from "vislite";
+
+    var geometry = new Geometry();
+
+    var painter = getWebGLContext(document.getElementById("content"));
+    var shader = new Shader(painter).compile(document.getElementById("vs").innerText, document.getElementById("fs").innerText).use();
+    var buffer = new Buffer(painter).use();
+
+    painter.enable(painter.DEPTH_TEST);
+
+    // 氢原子
+    var H1_Geometry = geometry.sphere(-0.7, 0, 0, 0.36);
+    var H2_Geometry = geometry.sphere(0.7, 0, 0, 0.36);
+
+    // 氧原子
+    var O_Geometry = geometry.sphere(0, 0.7, 0, 0.5);
+
+    // 化学键（左）
+    var L_left_Geometry = geometry.prism(-0.7, 0, 0, 0.16, 0.6, 20);
+
+    // 化学键（右）
+    var L_right_Geometry = geometry.prism(0.7, 0, 0, 0.16, 0.6, 20);
+
+    var globalMatrix4 = new Matrix4();
+    var leftMatrix4_value = new Matrix4().rotate(0.75, -0.7, 0, 0, -0.7, 0, -1).value();
+    var rightMatrix4_value = new Matrix4().rotate(0.75, 0.7, 0, 0, 0.7, 0, 1).value();
+
+    var u_camera = painter.getUniformLocation(shader.program, "u_camera");
+    var u_matrix = painter.getUniformLocation(shader.program, "u_matrix");
+    var a_position = painter.getAttribLocation(shader.program, "a_position");
+    var u_color = painter.getUniformLocation(shader.program, "u_color");
+
+    var drawGeometry = function (geometryData) {
+        for (var index = 0; index < geometryData.length; index++) {
+            buffer.write(new Float32Array(geometryData[index].points)).divide(a_position, 3, 3, 0);
+            painter.drawArrays(painter[geometryData[index].method], 0, geometryData[index].length);
+        }
+    };
+
+    function freshView() {
+
+        // 首先，每次围绕x轴旋转一点点
+        painter.uniformMatrix4fv(u_camera, false, globalMatrix4.rotate(0.05, -1, 0.2, 0, 1, 0.2, 0).value());
+
+        // 对于变换矩阵，只有个别需要，因此先使用单位矩阵E初始化
+        painter.uniformMatrix4fv(u_matrix, false, [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]);
+
+        // 设置为绘制氧原子颜色
+        painter.uniform4f(u_color, 1, 0.2, 0.2, 1.0);
+
+        // 绘制氧原子
+        drawGeometry(O_Geometry);
+
+        // 设置为绘制氢原子颜色
+        painter.uniform4f(u_color, 0.6, 0.6, 0.6, 1.0);
+
+        // 绘制氢原子（左）
+        drawGeometry(H1_Geometry);
+
+        // 绘制氢原子（右）
+        drawGeometry(H2_Geometry);
+
+        // 设置为绘制化学键颜色
+        painter.uniform4f(u_color, 0.2, 0.3, 0.1, 0.4);
+
+        // 绘制化学键（左）
+        painter.uniformMatrix4fv(u_matrix, false, leftMatrix4_value);
+        drawGeometry(L_left_Geometry);
+
+        // 绘制化学键（右）
+        painter.uniformMatrix4fv(u_matrix, false, rightMatrix4_value);
+        drawGeometry(L_right_Geometry);
+
+    }
+
+    (function doit() {
+        freshView();
+        requestAnimationFrame(doit);
+    })();
+
+</script>
+<style>
+    body {
+        margin: 0;
+    }
+
+    .content {
+        width: 500px;
+        height: 500px;
+        margin: auto;
+    }
+</style>

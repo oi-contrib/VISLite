@@ -62,3 +62,38 @@ onMounted(() => {
 import type CanvasType from "vislite/types/Canvas"
 let painter: CanvasType
 </pre>
+<h2>
+    类型不对
+</h2>
+<p>
+    比如我们有如下代码：
+</p>
+<pre tag="javascript">
+let painter= new Canvas(el)
+
+let config = {
+  arcEndCap : "butt"
+}
+
+painter.config(config)
+</pre>
+<p>
+    此时，我们可能会在定义的地方看见错误提示：
+</p>
+<p class="important">
+    Argument of type '{ arcEndCap: string; }' is not assignable to parameter of type 'CanvasConfigType'.
+</p>
+<p>
+    这是因为类型检查认为"butt"是字符串类型，其实我们要求的是：
+</p>
+<pre tag="javascript">
+    export type arcCapType = "butt" | "round" | "-round"
+</pre>
+<p>
+    怎么办？最简单的就是声明成常量，需要改造的部分如下：
+</p>
+<pre tag="javascript">
+let config = {
+    arcEndCap : "butt" as const
+}
+</pre>

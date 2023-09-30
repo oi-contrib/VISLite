@@ -163,7 +163,20 @@ let treeLayout = new TreeLayout(config)
     单纯的树图坐标计算：
 </p>
 <pre tag="javascript">
-    let tree = treeLayout.use(initTree)
+    let tree = treeLayout.use(initTree, noOpens = {})
+</pre>
+<div class="version">
+    参数 <span class="special">noOpens</span> 0.5.0 新增
+</div>
+<p>
+    其中noOpens表示一个结点是打开还是闭合，比如我们有结点id分别为：“node1”和“node2”，第一个打开第二个关闭，那么就可以传递：
+</p>
+<pre tag="javascript">
+// 由于默认值是false，因此node1其实不传递也可以
+treeLayout.use(initTree, {
+    node1: false,
+    node2: true
+})
 </pre>
 <h3>
     bind
@@ -174,8 +187,11 @@ let treeLayout = new TreeLayout(config)
 <pre tag="javascript">
 treeLayout.bind(initTree, function(tree){
     // 绘制出树图
-})
+}, noOpens = {})
 </pre>
+<div class="version">
+    参数 <span class="special">noOpens</span> 0.5.0 新增
+</div>
 <div class="warn">
     温馨提示：上述形参tree的格式你可以点击
     <button tag="tree-format" type="explain">TreeLayout 数据格式</button>

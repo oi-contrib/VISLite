@@ -114,3 +114,19 @@ v0.4.1:
         10、布局
             * 树布局 treeLayout
         11、着色器compile方法丰富参数（添加color、colors、image、cube四种内置着色器程序）
+v0.5.0:
+    date:2023-10-01
+    changes:
+      - 修复bug
+        1、SVG画笔
+            * 修改文字默认值错误（50恢复成16）
+      - 优化改造
+        1、一些types定义优化（比如 Array<number> 改成更具体的 [number, number] 类型）
+      - 新增功能
+        1、Geometry 几何体运算
+            * cylinder 圆柱体
+            * prism 棱柱体
+            * sphere 球体
+        2、SVG画笔
+            * bind 绑定事件
+        3、布局的bind和use方法新增第二个可选参数noOpens，用于控制结点默认是否闭合

@@ -40,12 +40,13 @@
 
     <!-- 导航 -->
     <div class="nav" id="nav">
-        <span onclick="changeNav('begin')" id="nav-begin">开始</span>
-        <span onclick="changeNav('course')" id="nav-course">教程</span>
-        <span onclick="changeNav('api')" id="nav-api">文档</span>
-        <span onclick="changeNav('example')" id="nav-example">用例</span>
-        <span onclick="changeNav('question')" id="nav-question">答疑</span>
-        <span class="github" onclick="openBlankPage('https://github.com/oi-contrib/VISLite')">GitHub</span>
+        <span onclick="changeNav('begin')" id="nav-begin" title="写在前面和一些说明、介绍等">开始</span>
+        <span onclick="changeNav('course')" id="nav-course" title="教会你本项目如何使用以及一些经验之谈">教程</span>
+        <span onclick="changeNav('api')" id="nav-api" title="接口文档">文档</span>
+        <span onclick="changeNav('example')" id="nav-example" title="基于本项目开发的一些例子">用例</span>
+        <span onclick="changeNav('question')" id="nav-question" title="使用本项目的时候需要注意的点，以及遇到问题如何解决">答疑</span>
+        <span class="github" onclick="openBlankPage('https://github.com/oi-contrib/VISLite')"
+            title="项目仓库地址，包含源码、文档、例子、测试等">GitHub</span>
     </div>
 
     <!-- 菜单 -->
@@ -65,6 +66,18 @@
         </button>
         <div class="content" id="explain-content-id">
         </div>
+    </div>
+
+    <!-- 猫 -->
+    <div class='cat' id="cat">
+
+        <!-- 对话框 -->
+        <div class="top-tips">
+            有任何需要，都可以
+            <a href="https://github.com/oi-contrib/VISLite/issues" target="_blank">提issue</a>
+            获得帮助哦～
+        </div>
+
     </div>
 
     <script>
@@ -88,6 +101,9 @@
         });
 
         loadPageByHash();
+
+        // 给猫拖动能力
+        bindDragMove(document.getElementById('cat'));
     </script>
 </body>
 
