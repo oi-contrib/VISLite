@@ -4,7 +4,7 @@ import type MapType from '../types/Map'
 class Mercator implements MapType {
     readonly name: string = 'Mercator'
 
-    use: (λ: number, φ: number) => number[]
+    use: (λ: number, φ: number) => [number, number, number]
     constructor(scale: number = 7, center: number[] = [107, 36]) {
 
         let perimeter = 100 * scale * Math.PI // 半周长
@@ -17,7 +17,8 @@ class Mercator implements MapType {
         this.use = (λ: number, φ: number) => {
             return [
                 (help * λ - cx) * 0.8,
-                -1 * help * φ - cy
+                -1 * help * φ - cy,
+                0
             ]
         }
     }

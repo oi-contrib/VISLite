@@ -38,24 +38,40 @@ export default interface SVGConfigType {
      * 文字大小，默认16
      */
     "fontSize"?: number
+
+    /**
+     * 已废弃，向下兼容，请用 fontSize 代替
+     */
     "font-size"?: number // 向下兼容
 
     /**
      * 字体，默认"sans-serif"
      */
     "fontFamily"?: string
+
+    /**
+     * 已废弃，向下兼容，请用 fontFamily 代替
+     */
     "font-family"?: string // 向下兼容
 
     /**
      * 圆弧开始端闭合方式，默认"butt"直线闭合（还有"round"圆帽闭合,"-round"反圆帽闭合）
      */
     "arcStartCap"?: arcCapType
+
+    /**
+     * 已废弃，向下兼容，请用 arcStartCap 代替
+     */
     "arc-start-cap"?: string // 向下兼容
 
     /**
      * 圆弧结束端闭合方式，默认"butt"直线闭合（还有"round"圆帽闭合,"-round"反圆帽闭合）
      */
     "arcEndCap"?: arcCapType
+
+    /**
+     * 已废弃，向下兼容，请用 arcEndCap 代替
+     */
     "arc-end-cap"?: string // 向下兼容
 
 }

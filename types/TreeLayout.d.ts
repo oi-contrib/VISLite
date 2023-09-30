@@ -13,15 +13,21 @@ export default interface TreeLayoutType extends TreeType {
     /**
      * 单纯的树图坐标计算
      * @param initTree 原始数据
+     * @param noOpens 可选，结点初始是否闭合控制
      */
-    use(initTree: any, noOpens?: {}): TreeResultType
+    use(initTree: any, noOpens?: {
+        [id: string]: boolean
+    }): TreeResultType
 
     /**
      * 绑定新的数据和渲染方法
      * @param initTree 原始数据
      * @param renderBack 渲染方法
+     * @param noOpens 可选，结点初始是否闭合控制
      */
-    bind(initTree: any, renderBack: (tree: TreeResultType) => void): this
+    bind(initTree: any, renderBack: (tree: TreeResultType) => void, noOpens?: {
+        [id: string]: boolean
+    }): this
 
     /**
      * 解除绑定

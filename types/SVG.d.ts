@@ -65,14 +65,14 @@ export default interface SVGType {
     fullText(text: any, x: number, y: number, deg?: number): this
 
     /**
-  * 绘制一个实心的圆弧
-  * @param cx 圆弧的圆心x坐标
-  * @param cy 圆弧的圆心y坐标
-  * @param r1 圆弧的内半径
-  * @param r2 圆弧的外半径
-  * @param beginDeg 开始弧度
-  * @param deg 跨越弧度
-  */
+     * 绘制一个实心的圆弧
+     * @param cx 圆弧的圆心x坐标
+     * @param cy 圆弧的圆心y坐标
+     * @param r1 圆弧的内半径
+     * @param r2 圆弧的外半径
+     * @param beginDeg 开始弧度
+     * @param deg 跨越弧度
+     */
     fillArc(cx: number, cy: number, r1: number, r2: number, beginDeg: number, deg: number): this
 
     /**
@@ -98,11 +98,11 @@ export default interface SVGType {
     fullArc(cx: number, cy: number, r1: number, r2: number, beginDeg: number, deg: number): this
 
     /**
-        * 绘制一个实心的圆
-        * @param cx 圆心x坐标
-        * @param cy 圆心y坐标
-        * @param r 圆的半径
-        */
+     * 绘制一个实心的圆
+     * @param cx 圆心x坐标
+     * @param cy 圆心y坐标
+     * @param r 圆的半径
+     */
     fillCircle(cx: number, cy: number, r: number): this
 
     /**
@@ -207,5 +207,10 @@ export default interface SVGType {
      * 把当前路径画上轮廓线并填充颜色到当前路径所包裹的区域
      */
     full(): this
+
+    /**
+     * 绑定事件
+     */
+    bind(eventType: string, callback: (event: Event, target: SVGElement) => void): this
 
 }

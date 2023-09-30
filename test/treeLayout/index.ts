@@ -130,7 +130,9 @@ treeLayout.setOption({
     // x: 350,
     // y: 500,
 
-}).bind(oralData, doDraw)
+}).bind(oralData, doDraw, {
+    "油画": true
+})
 
 el.addEventListener('click', event => {
     painter.getRegion(event.offsetX, event.offsetY).then(regionName => {

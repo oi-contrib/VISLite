@@ -7,40 +7,53 @@ let painter = new SVG(el)
 console.log(painter)
 
 painter
-  .appendBoard("text")
-  .config({
-    // fontSize: 50,
-    textAlign: "center",
-  })
-  .fillText("这是文字", 200, 200, 45)
+    .appendBoard("text")
+    .config({
+        fontSize: 50,
+        textAlign: "center",
+    })
+    .fillText("这是文字", 200, 200, 45)
 
 painter
-  .config({
-    strokeStyle: "red",
-  })
-  .appendBoard("path")
-  .beginPath()
-  .moveTo(0, 200)
-  .lineTo(400, 200)
-  .stroke()
-  .appendBoard("path")
-  .beginPath()
-  .moveTo(200, 0)
-  .lineTo(200, 400)
-  .stroke()
+    .config({
+        strokeStyle: "red",
+    })
+    .appendBoard("path")
+    .beginPath()
+    .moveTo(0, 200)
+    .lineTo(400, 200)
+    .stroke()
+    .appendBoard("path")
+    .beginPath()
+    .moveTo(200, 0)
+    .lineTo(200, 400)
+    .stroke()
 
-painter.appendBoard("circle").fullCircle(100, 300, 100)
+painter.appendBoard("circle").fullCircle(100, 300, 100).bind('click', (event, target) => {
+    console.log(event, this, target)
+})
+
+class Demo {
+    constructor() {
+        console.log(this)
+
+        painter
+            .config({
+                fillStyle: "blue",
+            })
+            .appendBoard("rect")
+            .fillRect(300, 100, 50, 200).bind('click', (event, target) => {
+                console.log(event, this, target)
+            })
+    }
+}
+
+new Demo()
 
 painter
-  .config({
-    fillStyle: "blue",
-  })
-  .appendBoard("rect")
-  .fillRect(300, 100, 50, 200)
-
-painter
-  .appendBoard("arc")
-  .config({
-    arcStartCap: "-round",
-  })
-  .fillArc(100, 100, 10, 50, 45, 180)
+    .appendBoard("arc")
+    .config({
+        arcStartCap: "-round",
+        arcEndCap: "round"
+    })
+    .fullArc(100, 100, 30, 50, 45, 180)

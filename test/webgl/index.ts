@@ -2,11 +2,12 @@ import WebGL from '../../src/WebGL'
 import viewHandler from '../../src/viewHandler'
 
 import type { geometryType } from '../../types/Object3D'
+import Object3D from '../../types/Object3D'
 
 let el0 = document.getElementById("root0")
 
 let painter0 = new WebGL(el0)
-painter0.render({
+let obj3d = {
     mesh: [{
         geometry: {
             attributes: {
@@ -40,7 +41,10 @@ painter0.render({
             }
         }
     }]
-})
+} as Object3D
+// } satisfies Object3D
+
+painter0.render(obj3d)
 
 let el1 = document.getElementById("root1")
 

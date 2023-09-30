@@ -32,6 +32,7 @@ module.exports = {
         tree: './test/tree/index.ts',
         treeLayout: './test/treeLayout/index.ts',
         'webgl-shader': './test/webgl-shader/index.ts',
+        geometry: './test/geometry/index.ts',
 
         // 基准测试
         benchmark: './test/benchmark/index.ts'

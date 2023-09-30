@@ -63,9 +63,9 @@ class Matrix4 implements Matrix4Type {
 
     // 对一个坐标应用变换
     // 齐次坐标(x,y,z,w)
-    use(x: number, y: number, z: number = 0, w: number = 1) {
+    use(x: number, y: number, z: number = 0, w: number = 1): [number, number, number, number] {
         // w为0表示点位于无穷远处，忽略
-        return _multiply(this.__matrix4, [x, y, z, w])
+        return _multiply(this.__matrix4, [x, y, z, w]) as [number, number, number, number]
     }
 
     // 矩阵的值

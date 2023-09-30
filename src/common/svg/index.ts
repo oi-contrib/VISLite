@@ -28,7 +28,7 @@ class SVG {
         textBaseline: <textBaselineType>"middle",
 
         // 文字设置
-        "fontSize": 50,
+        "fontSize": 16,
         "fontFamily": "sans-serif",
 
         // arc二端闭合方式['butt':直线闭合,'round':圆帽闭合]
@@ -329,6 +329,14 @@ class SVG {
     ) {
         this.__path +=
             "C" + cp1x + " " + cp1y + "," + cp2x + " " + cp2y + "," + x + " " + y
+        return this
+    }
+
+    // 绑定事件
+    bind(eventType: string, callback: (event: Event, target: SVGElement) => void) {
+        this.__useEl.addEventListener(eventType, function (event: Event) {
+            callback.call(this, event, this)
+        }, false)
         return this
     }
 }

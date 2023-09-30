@@ -103,7 +103,7 @@
     // 启动wave动画
     var renderWave = function (rate) {
 
-        stop = animation(function (deep) {
+        animation(function (deep) {
             fullWave(rate, deep);
         }, 2000, function () {
             renderWave(rate);

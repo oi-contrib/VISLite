@@ -8,6 +8,50 @@ body {
 
 }
 
+.cat {
+    width: 70px;
+    height: 56px;
+    background-image: url('../images/cat.gif');
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    cursor: move;
+}
+
+.top-tips {
+    position: absolute;
+    right: 20px;
+    bottom: 70px;
+    background-color: #d7d7ee;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 12px;
+    filter: drop-shadow(2px 4px 6px gray);
+    white-space: nowrap;
+    user-select: none;
+}
+
+.top-tips::after {
+    content: " ";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: #d7d7ee;
+    right: 18px;
+    bottom: -5px;
+    transform: rotate(45deg);
+}
+
+.top-tips>a {
+    text-decoration: underline;
+    color: #0b92e0;
+    font-weight: 800;
+    cursor: pointer;
+}
+
 /* 滚动条 */
 ::-webkit-scrollbar {
     width: 5px;
@@ -112,7 +156,7 @@ body>div.fixed {
 
 body>div.nav {
     top: 10px;
-    right: 50px;
+    right: 20px;
     color: black;
     position: fixed;
     z-index: 2;
@@ -150,7 +194,7 @@ body>div.menu {
     width: 220px;
     background-color: #f2f2f2;
     border-right: 1px solid #DBDBDB;
-    padding-top: 15px;
+    padding-top: 30px;
     padding-bottom: 30px;
 }
 
@@ -518,10 +562,6 @@ body>div.fixed {
     text-indent: 1em;
 }
 
-.content table {
-    width: 100%;
-}
-
 .content table>tbody>tr>* {
     border-width: 0 1px 1px 0;
     border-style: solid;
@@ -534,7 +574,7 @@ body>div.fixed {
     color: #3c3939;
     font-weight: 400;
     font-size: 12px;
-    line-height: 1.6em;
+    line-height: 2em;
 }
 
 .content table>tbody>tr>*:first-child {

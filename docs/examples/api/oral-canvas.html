@@ -10,6 +10,7 @@
     painter.setRegion("原生画笔");
 
     let ctx = painter.getContext();
+    ctx.fillStyle = "red";
     ctx.fillRect(0, 0, 100, 50);
 
     let ctxRegion = painter.getContext(true);

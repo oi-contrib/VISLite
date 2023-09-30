@@ -7,7 +7,7 @@ export default interface Matrix4Type {
 
     /**
      * 两个矩阵相乘
-     * @param newMatrix4 
+     * @param newMatrix4
      * @param flag 可选，表示相乘位置，默认false，表示左乘
      */
     multiply(newMatrix4: number[], flag?: boolean): this
@@ -15,7 +15,7 @@ export default interface Matrix4Type {
     /**
      * 把变换矩阵作用在具体的点上
      */
-    use(x: number, y: number, z?: number, w?: number): number[]
+    use(x: number, y: number, z?: number, w?: number): [number, number, number, number]
 
     /**
      * 沿着向量(a, b, c)方向移动距离dis
@@ -32,9 +32,9 @@ export default interface Matrix4Type {
     /**
      * 围绕射线(a1, b1, c1) -> (a2, b2, c2)旋转deg度
      * （方向由右手法则确定）
-     * 
+     *
      * a1、b1、c1、a2、b2和c2这6个值在设置的时候，不是一定需要全部设置，还有以下可选：
-     * 
+     *
      *      1）只设置了a1和b1，表示在xoy平面围绕（a1, b1）旋转
      *      2）设置三个点(设置不足六个点都认为只设置了三个点)，表示围绕从原点出发的射线旋转
      */

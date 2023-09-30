@@ -34,7 +34,7 @@ class TreeLayout extends Tree implements TreeLayoutType {
         return this
     }
 
-    use(initTree: any, noOpens?: {}) {
+    use(initTree: any, noOpens = {}) {
         let tree = super.use(initTree, noOpens)
 
         // 校对偏差
@@ -115,11 +115,12 @@ class TreeLayout extends Tree implements TreeLayoutType {
         return tree
     }
 
-    bind(initTree: any, renderBack: (tree: TreeResultType) => void) {
+    bind(initTree: any, renderBack: (tree: TreeResultType) => void, noOpens = {}) {
         this.__rback = renderBack
         this.__oralTree = initTree
+        this.__noOpens = noOpens
 
-        this.__preTree = this.use(this.__oralTree)
+        this.__preTree = this.use(this.__oralTree, this.__noOpens)
         this.__rback(this.__preTree)
 
         return this

@@ -1,0 +1,105 @@
+<div id="mycanvas" style="width:500px;height:300px;"></div>
+<script type="module">
+    import { Canvas, TreeLayout } from 'vislite';
+
+    var el = document.getElementById('mycanvas');
+    var painter = new Canvas(el);
+
+    var treeLayout = new TreeLayout({
+        root: function (initTree) {
+            return initTree[0];
+        },
+        children: function (parentTree, initTree) {
+            var children = [];
+            for (var i = 0; i < initTree.length; i++) {
+                if (initTree[i][1] == parentTree[0])
+                    children.push(initTree[i]);
+            }
+            return children;
+        },
+        id: function (initTree) {
+            return initTree[0];
+        }
+    });
+
+    treeLayout.setOption({
+        type: "rect",
+        direction: "TB",
+        x: 250,
+        y: 20,
+        width: 500,
+        height: 260
+    });
+
+    var data = [
+        // 结点名称、父节点名称
+        ["手绘", null],
+        ["水粉", "手绘"],
+        ["油画", "手绘"],
+        ['题材', '油画'],
+        ['画法', '油画'],
+        ["素描", "手绘"],
+        ["中国画", "手绘"],
+        ["空间透视", "素描"],
+        ["色彩五大调", "素描"]
+    ];
+
+    treeLayout.bind(data, function (tree) {
+
+        painter.clearRect(0, 0, 500, 300);
+
+        // 绘制连线
+        painter.setRegion("").config({
+            strokeStyle: 'red'
+        });
+        for (var key in tree.node) {
+            if (tree.node[key].show && key != tree.root) {
+                var pid = tree.node[key].pid;
+
+                var dist = (tree.node[key].top - tree.node[pid].top) * 0.5;
+
+                painter
+                    .beginPath()
+                    .moveTo(tree.node[key].left, tree.node[key].top)
+                    .bezierCurveTo(
+                        tree.node[key].left, tree.node[key].top - dist,
+                        tree.node[pid].left, tree.node[pid].top + dist,
+                        tree.node[pid].left, tree.node[pid].top
+                    ).stroke();
+            }
+        }
+
+        // 绘制节点和文字
+        painter.config({
+            strokeStyle: 'red',
+            fontSize: 12
+        });
+        for (var key in tree.node) {
+            if (tree.node[key].show) {
+                if (!tree.node[key].isOpen && tree.node[key].children.length > 0) {
+                    painter.config({
+                        fillStyle: "red"
+                    });
+                } else {
+                    painter.config({
+                        fillStyle: "#ffffff"
+                    });
+                }
+                painter.setRegion(key).fullCircle(tree.node[key].left, tree.node[key].top, 10);
+
+                painter.setRegion("").config({
+                    fillStyle: "black"
+                }).fillText(key.replace(/\-\d+$/, ''), tree.node[key].left + 15, tree.node[key].top);
+            }
+        }
+
+    });
+
+    el.addEventListener('click', function (event) {
+        painter.getRegion(event.offsetX, event.offsetY).then(function (regionName) {
+            if (regionName) {
+                treeLayout.toggleNode(regionName);
+            }
+        });
+    });
+</script>

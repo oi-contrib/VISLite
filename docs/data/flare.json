@@ -62,7 +62,7 @@
     ]
    },
    {
-    "name": "data",
+    "name": "data3",
     "children": [
      {
       "name": "converters",
@@ -171,7 +171,7 @@
      {"name": "Minimum", "value": 843},
      {"name": "Not", "value": 1554},
      {"name": "Or", "value": 970},
-     {"name": "Query", "value": 13896},
+     {"name": "Query2", "value": 13896},
      {"name": "Range", "value": 1594},
      {"name": "StringUtil", "value": 4130},
      {"name": "Sum", "value": 791},
@@ -272,7 +272,7 @@
      {
       "name": "data",
       "children": [
-       {"name": "Data", "value": 20544},
+       {"name": "Data2", "value": 20544},
        {"name": "DataList", "value": 19788},
        {"name": "DataSprite", "value": 10349},
        {"name": "EdgeSprite", "value": 3301},
