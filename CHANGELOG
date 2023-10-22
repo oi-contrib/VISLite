@@ -130,3 +130,8 @@ v0.5.0:
         2、SVG画笔
             * bind 绑定事件
         3、布局的bind和use方法新增第二个可选参数noOpens，用于控制结点默认是否闭合
+v0.5.2:
+    date:
+    changes:
+      - 修复bug
+        1、修复ui-canvas在支付宝小程序模拟器中的错误
