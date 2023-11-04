@@ -4,6 +4,9 @@
 <h2>
     配置画笔
 </h2>
+<h3>
+    可配置项
+</h3>
 <pre tag="javascript">
 painter.config({
     // 填充色或图案
@@ -46,6 +49,62 @@ painter.config({
         </li>
     </ul>
 </div>
+<h3>
+    渐变色
+</h3>
+<div class="version">
+    0.5.2 新增
+</div>
+<p>
+    上述配置颜色的地方，除了可以配置纯色外，还可以使用下面的渐变色。
+</p>
+<h4>
+    线性渐变
+</h4>
+<p>
+    使用画笔的createLinearGradient创建线性渐变对象，四个参数分别表示渐变的起点P(x1, y1)和终点P(x2, y2)：
+</p>
+<pre tag="javascript">
+    let gradient = painter.createLinearGradient(x1, y1, x2, y2)
+</pre>
+<div class="warn">
+    温馨提示：画笔上述参数的单位是%（下同）。
+</div>
+<h4>
+    环形渐变
+</h4>
+<p>
+    使用画笔的createRadialGradient创建环形渐变对象，三个参数分别表示渐变的圆心P(cx, cy)和半径r：
+</p>
+<pre tag="javascript">
+    let gradient = painter.createRadialGradient(cx, cy, r1, r2)
+</pre>
+<div class="warn">
+    温馨提示：渐变的起点是圆心。
+</div>
+<h4>
+    设置与使用
+</h4>
+<p>
+    设置渐变范围以后，你需要在渐变范围中添加渐变色，可以添加任意多个：
+</p>
+<pre tag="javascript">
+    gradient.setColor(deep, color)
+</pre>
+<p>
+    上述deep取值为闭区间[0, 1]，color可以是任意合法的颜色值。
+</p>
+<p>
+    渐变如何使用，直接调用渐变的value方法即可：
+</p>
+<pre tag="javascript">
+painter.config({
+    "fillStyle": gradient.value()
+})
+</pre>
+<p>
+    如上面，我们给画笔设置填充色就是使用了我们刚刚获取的渐变色。
+</p>
 <h2>
     基础方法
 </h2>

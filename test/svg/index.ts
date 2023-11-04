@@ -57,3 +57,28 @@ painter
         arcEndCap: "round"
     })
     .fullArc(100, 100, 30, 50, 45, 180)
+
+
+// 渐变色
+
+painter
+    .appendBoard("circle")
+    .config({
+        fillStyle: painter
+            .createRadialGradient(50, 25, 100)
+            .setColor(0, "white")
+            .setColor(1, "red")
+            .value(),
+    })
+    .fillCircle(300, 120, 70)
+
+painter
+    .appendBoard("circle")
+    .config({
+        fillStyle: painter
+            .createLinearGradient(0, 0, 100, 100)
+            .setColor(0, "white")
+            .setColor(1, "green")
+            .value(),
+    })
+    .fillCircle(300, 240, 100)

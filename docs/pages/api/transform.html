@@ -19,3 +19,45 @@ import { rotate } from "vislite"
 <pre tag="javascript">
 let p = rotate(cx, cy, deg, x, y)
 </pre>
+<h2>
+    移动
+</h2>
+<div class="version">
+    0.5.2 新增
+</div>
+<h3>
+    引入
+</h3>
+<pre tag="javascript">
+import { move } from "vislite"
+</pre>
+<h3>
+    语法
+</h3>
+<p>
+    点（x,y）沿着向量（ax,ay）方向移动距离d：
+</p>
+<pre tag="javascript">
+let p = move(ax, ay, d, x, y)
+</pre>
+<h2>
+    缩放
+</h2>
+<div class="version">
+    0.5.2 新增
+</div>
+<h3>
+    引入
+</h3>
+<pre tag="javascript">
+import { scale } from "vislite"
+</pre>
+<h3>
+    语法
+</h3>
+<p>
+    点（x,y）围绕中心（cx,cy）缩放times倍：
+</p>
+<pre tag="javascript">
+let p = scale(cx, cy, times, x, y)
+</pre>

@@ -3,6 +3,8 @@ import HermiteType from './Hermite'
 
 import Matrix4Type from './Matrix4'
 import rotateType from './rotate'
+import moveType from './move'
+import scaleType from './scale'
 
 import getLoopColorsType from './getLoopColors'
 import formatColorType from './formatColor'
@@ -95,6 +97,8 @@ export default class VISLite {
     // 变换
     static Matrix4: NewMatrix4Type
     static rotate: rotateType
+    static move: moveType
+    static scale: scaleType
 
     // 工具
     static getLoopColors: getLoopColorsType
@@ -136,6 +140,8 @@ export let Hermite: NewHermiteType
 // 变换
 export let Matrix4: NewMatrix4Type
 export let rotate: rotateType
+export let move: moveType
+export let scale: scaleType
 
 // 工具
 export let getLoopColors: getLoopColorsType

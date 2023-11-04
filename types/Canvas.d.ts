@@ -274,7 +274,7 @@ export default interface CanvasType {
         y0: number,
         x1: number,
         y1: number
-    ): GradientType
+    ): GradientType<CanvasGradient>
 
     /**
      * 创建环形渐变
@@ -282,7 +282,7 @@ export default interface CanvasType {
      * @param cy
      * @param r 半径
      */
-    createRadialGradient(cx: number, cy: number, r: number): GradientType
+    createRadialGradient(cx: number, cy: number, r: number): GradientType<CanvasGradient>
 
     /**
      * 获取指定位置颜色

@@ -4,6 +4,7 @@ import type { arcCapType, textAlignType, textBaselineType } from "../../../types
 import { initText, initCircle, initPath, initRect, initArc } from "./config"
 import { toNode, setAttribute, getAttribute, full, fill, stroke } from "./tool"
 import rotate from "../../rotate"
+import { linearGradient, radialGradient } from "./gradient"
 
 // 属性名向下兼容
 let oldAttrName = {
@@ -338,6 +339,17 @@ class SVG {
             callback.call(this, event, this)
         }, false)
         return this
+    }
+
+
+    // 线性渐变
+    createLinearGradient(x0: number, y0: number, x1: number, y1: number) {
+        return linearGradient(this.__svg, x0, y0, x1, y1)
+    }
+
+    // 环形渐变
+    createRadialGradient(cx: number, cy: number, r: number) {
+        return radialGradient(this.__svg, cx, cy, r)
     }
 }
 

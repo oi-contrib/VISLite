@@ -3,6 +3,8 @@ import Hermite from "./Hermite/index"
 
 import Matrix4 from "./Matrix4/index"
 import rotate from "./rotate/index"
+import move from "./move/index"
+import scale from "./scale/index"
 
 import getLoopColors from "./getLoopColors/index"
 import formatColor from "./formatColor/index"
@@ -38,6 +40,8 @@ export default {
     // 变换
     Matrix4,
     rotate,
+    move,
+    scale,
 
     // 工具
     getLoopColors,

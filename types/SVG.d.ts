@@ -1,4 +1,5 @@
 import SVGConfigType from './SVGConfig'
+import GradientType from "./Gradient"
 
 export default interface SVGType {
 
@@ -212,5 +213,27 @@ export default interface SVGType {
      * 绑定事件
      */
     bind(eventType: string, callback: (event: Event, target: SVGElement) => void): this
+
+    /**
+    * 创建线性渐变
+    * @param x0 起点
+    * @param y0
+    * @param x1 终点
+    * @param y1
+    */
+    createLinearGradient(
+        x0: number,
+        y0: number,
+        x1: number,
+        y1: number
+    ): GradientType<string>
+
+    /**
+     * 创建环形渐变
+     * @param cx 中心
+     * @param cy
+     * @param r 半径
+     */
+    createRadialGradient(cx: number, cy: number, r: number): GradientType<string>
 
 }
