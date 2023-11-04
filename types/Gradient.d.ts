@@ -1,4 +1,4 @@
-export default interface GradientType {
+export default interface GradientType<T> {
 
     /**
      * 设置程度颜色
@@ -10,6 +10,6 @@ export default interface GradientType {
     /**
      * 返回渐变色值
      */
-    value(): CanvasGradient
+    value(): T
 
 }

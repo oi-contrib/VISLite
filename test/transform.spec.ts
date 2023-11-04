@@ -1,10 +1,21 @@
 import { toFixed7 } from './tool'
 import rotate from "../src/rotate"
+import move from "../src/move"
+import scale from '../src/scale'
 
 describe('坐标变换(简单)', function () {
 
     it('rotate', function () {
         expect(toFixed7(rotate(0, 0, Math.PI, 1, 0))).toEqual([-1, 0])
+    })
+
+    it('move', function () {
+        expect(toFixed7(move(0, 1, 2, 0, 0))).toEqual([0, 2])
+        expect(toFixed7(move(3, 4, 5, 3, 4))).toEqual([6, 8])
+    })
+
+    it('scale', function () {
+        expect(toFixed7(scale(0, 0, 3, 1, 1))).toEqual([3, 3])
     })
 
 })
