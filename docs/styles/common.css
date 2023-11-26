@@ -665,6 +665,27 @@ pre>.copy-icon {
     outline: none;
     border: none;
 }
+.copy-icon.copied {
+    outline: 1px solid #343848;
+    border-radius: 0 4px 4px 0;
+}
+.copy-icon.copied:before {
+    position: relative;
+    left: -70px;
+    top: -2px;
+    display: block;
+    border-radius: 4px 0 0 4px;
+    padding-top: 10px;
+    width: 64px;
+    height: 22px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+    color: #ebebeb99;
+    background-color: #343848;
+    white-space: nowrap;
+    content: attr(data-before);
+}
 
 /* 导航 */
 .fixed {

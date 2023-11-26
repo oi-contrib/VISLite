@@ -149,12 +149,12 @@ function execCopy(source) {
         var result = window.document.execCommand("copy", false, null);
 
         if (result) {
-            alert('复制成功');
+            prompt('copied');
         } else {
-            alert('复制失败');
+            prompt('copy failed');
         }
     } catch (e) {
-        alert('复制失败');
+        prompt('copy failed');
         console.error(e);
     }
 
@@ -222,4 +222,17 @@ function bindDragMove(el) {
         isDown = false;
     });
 
+}
+
+// copy提醒
+function prompt(content) {
+    const el = window.event.target;
+    el.classList.add(content);
+    el.setAttribute('data-before', content);
+    const t = setTimeout((()=>{
+        el.classList.remove("copied");
+        el.removeAttribute('data-before');
+        el.blur();
+    }
+    ), 2000);
 }
