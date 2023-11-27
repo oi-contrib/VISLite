@@ -227,7 +227,7 @@ function bindDragMove(el) {
 // copy提醒
 function prompt(content) {
     const el = window.event.target;
-    el.classList.add(content);
+    el.classList.add('copied');
     el.setAttribute('data-before', content);
     const t = setTimeout((()=>{
         el.classList.remove("copied");

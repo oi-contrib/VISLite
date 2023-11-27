@@ -670,13 +670,13 @@ pre>.copy-icon {
     border-radius: 0 4px 4px 0;
 }
 .copy-icon.copied:before {
-    position: relative;
-    left: -70px;
-    top: -2px;
-    display: block;
+    position: absolute;
+    right: 31px;
+    top: -1px;
+    display: inline-block;
     border-radius: 4px 0 0 4px;
     padding-top: 10px;
-    width: 64px;
+    padding: 10px 14px 0;
     height: 22px;
     text-align: center;
     font-size: 12px;
