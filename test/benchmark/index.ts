@@ -1,3 +1,30 @@
+// ruler
+
+import ruler from '../../src/ruler'
+window.JSLitmus.test('ruler / 需要小数对齐', function () {
+    ruler(1.45, 1.17, 4)
+})
+
+window.JSLitmus.test('ruler / 小数不需要对齐', function () {
+    ruler(1.4, 1.17, 4)
+})
+
+window.JSLitmus.test('ruler / 整数', function () {
+    ruler(2, 98, 5)
+})
+
+window.JSLitmus.test('ruler / 控制界对照组', function () {
+    ruler(23.97, 97, 6, {
+
+    })
+})
+
+window.JSLitmus.test('ruler / 控制界', function () {
+    ruler(23.97, 97, 6, {
+        max: 98,
+        min: 22
+    })
+})
 
 // Eoap
 

@@ -39,7 +39,15 @@ console.log(ruler(5, 83.03, 5, {
     min: 5
 })
 
-// import assemble from "../../src/common/assemble"
+console.log(ruler(1.4, 1.17, 4, {
+
+}), [1.45, 1.17, 4])
+
+console.log(ruler(1.45, 1.17, 4, {
+
+}), [1.45, 1.17, 4])
+
+import assemble from "../../src/common/assemble"
 
 // let assembleFun = assemble(0, 1, 0.2, 3)
 // for (let i = 0; i < 6 * 6 * 6 - 1; i++) {

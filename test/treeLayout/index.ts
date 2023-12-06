@@ -6,7 +6,7 @@ let painter = new Canvas(el, {
     // region: false
 })
 
-import TreeLayout from "../../src/TreeLayout"
+import TreeLayout from "../../src/layout/TreeLayout"
 
 let treeLayout = new TreeLayout()
 console.log(treeLayout)

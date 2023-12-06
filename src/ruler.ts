@@ -184,5 +184,27 @@ export default function (maxValue: number, minValue: number, num: number, option
             }
         }
     }
+
+    // 对结果进行对齐
+    // 2023年11月15日 于南京
+    for (let index = 0; index < rulerArray.length; index++) {
+        let valStr = rulerArray[index] + ""
+
+        // 只有小数需要处理
+        if (/\./.test(valStr)) {
+
+            // 1.0999999999999999
+            if (/9{7,}$/.test(valStr)) {
+                valStr = valStr.replace(/9{7,}$/, '')
+                rulerArray[index] = +(valStr.substring(0, valStr.length - 1) + ((+valStr[valStr.length - 1]) + 1))
+            }
+
+            // 0.30000000000000004
+            else if (/0{7,}\d$/.test(valStr)) {
+                rulerArray[index] = +(valStr.replace(/0{7,}\d$/, ''))
+            }
+        }
+    }
+
     return rulerArray
 }

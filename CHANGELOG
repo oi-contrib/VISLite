@@ -141,3 +141,13 @@ v0.5.2:
         3、SVG画笔
             * createLinearGradient 线性渐变色
             * createRadialGradient 环形渐变色
+v0.6.0:
+    date:
+    changes:
+      - 修复bug
+        1、修复ruler值出现浮点“不精确”问题
+      - 优化改造
+        1、uni-app平台的ui-canvas明确为inline-block盒子
+      - 新增功能
+        1、Canvas画笔
+            * getInfo 获取画布信息

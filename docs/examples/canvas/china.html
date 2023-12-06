@@ -55,21 +55,21 @@
                 strokeStyle: '#fff'
             }).clearRect(0, 0, width, height);
 
+            var currentIndex = -1;
             for (i = 0; i < res.features.length; i++) {
                 if (res.features[i].properties.name == regionName) {
-                    (function (feature) {
-                        setTimeout(function () {
-                            painter.config({
-                                strokeStyle: "#f00",
-                                fillStyle: '#fff',
-                            });
-
-                            drawRegion(feature);
-                        }, 0);
-                    })(res.features[i]);
+                    currentIndex = i;
                 } else {
                     drawRegion(res.features[i]);
                 }
+            }
+
+            if (currentIndex != -1) {
+                painter.config({
+                    strokeStyle: "#f00",
+                    fillStyle: '#fff'
+                });
+                drawRegion(res.features[currentIndex]);
             }
 
         };

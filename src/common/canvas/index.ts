@@ -7,162 +7,170 @@ import { initText } from './config'
 
 // 属性名向下兼容
 let oldAttrName = {
-  "font-size": "fontSize",
-  "font-family": "fontFamily",
-  "font-weight": "fontWeight",
-  "font-style": "fontStyle",
-  "arc-start-cap": "arcStartCap",
-  "arc-end-cap": "arcEndCap",
+    "font-size": "fontSize",
+    "font-family": "fontFamily",
+    "font-weight": "fontWeight",
+    "font-style": "fontStyle",
+    "arc-start-cap": "arcStartCap",
+    "arc-end-cap": "arcEndCap",
 }
 
 class Canvas extends PainterRender {
-  readonly name: string = "Canvas"
+    readonly name: string = "Canvas"
 
-  private __regionList = {} //区域映射表
+    private __regionList = {} //区域映射表
 
-  // 步长由1改为10是为了优化区域计算有时候出错问题
-  // 2023年7月6日 于南京
-  private __regionAssemble = assemble(0, 255, 10, 3)
+    // 步长由1改为10是为了优化区域计算有时候出错问题
+    // 2023年7月6日 于南京
+    private __regionAssemble = assemble(0, 255, 10, 3)
 
-  constructor(ViewCanvas: HTMLCanvasElement, RegionCanvas: HTMLCanvasElement) {
-    super(
-      ViewCanvas,
-      {},
-      RegionCanvas ? new PainterRender(RegionCanvas, {
-        willReadFrequently: true,
-      }) : null, true
-    )
+    constructor(ViewCanvas: HTMLCanvasElement, RegionCanvas: HTMLCanvasElement) {
+        super(
+            ViewCanvas,
+            {},
+            RegionCanvas ? new PainterRender(RegionCanvas, {
+                willReadFrequently: true,
+            }) : null, true
+        )
 
-    this.setRegion("")
-  }
-
-  config(configs: CanvasConfigType) {
-    for (let key in configs) {
-      let _key = oldAttrName[key] || key
-      this.useConfig(_key, configs[key])
+        this.setRegion("")
     }
 
-    return this
-  }
-
-  // 是否绘制的内容只需要进行区域记录
-  onlyRegion(flag: boolean) {
-    this.__onlyRegion = flag
-    return this
-  }
-
-  // 设置当前绘制区域名称
-  setRegion(regionName: string | number) {
-    if (this.__region) {
-      if (regionName) {
-        if (this.__regionList[regionName] == void 0) {
-          let tempColor = this.__regionAssemble()
-          this.__regionList[regionName] =
-            "rgb(" + tempColor[0] + "," + tempColor[1] + "," + tempColor[2] + ")"
+    config(configs: CanvasConfigType) {
+        for (let key in configs) {
+            let _key = oldAttrName[key] || key
+            this.useConfig(_key, configs[key])
         }
 
-        this.__region.useConfig("fillStyle", this.__regionList[regionName]) &&
-          this.__region.useConfig("strokeStyle", this.__regionList[regionName])
-      } else {
-        this.__region.useConfig("fillStyle", "#000000") &&
-          this.__region.useConfig("strokeStyle", "#000000")
-      }
+        return this
     }
-    return this
-  }
 
-  // 获取当前事件触发的区域名称
-  getRegion(x: number, y: number): Promise<string> {
-    return new Promise((resolve, reject) => {
-      let imgData = this.__region ? this.__region.painter.getImageData(x - 0.5, y - 0.5, 1, 1) : {
-        data: [0, 0, 0, 0]
-      }
+    // 是否绘制的内容只需要进行区域记录
+    onlyRegion(flag: boolean) {
+        this.__onlyRegion = flag
+        return this
+    }
 
-      // 获取点击点的颜色
-      let currentRGBA = imgData.data
-
-      let doit = () => {
+    // 设置当前绘制区域名称
+    setRegion(regionName: string | number) {
         if (this.__region) {
+            if (regionName) {
+                if (this.__regionList[regionName] == void 0) {
+                    let tempColor = this.__regionAssemble()
+                    this.__regionList[regionName] =
+                        "rgb(" + tempColor[0] + "," + tempColor[1] + "," + tempColor[2] + ")"
+                }
 
-          // 查找当前点击的区域
-          for (let key in this.__regionList) {
-            if (
-              "rgb(" +
-              currentRGBA[0] +
-              "," +
-              currentRGBA[1] +
-              "," +
-              currentRGBA[2] +
-              ")" ==
-              this.__regionList[key]
-            ) {
-              resolve(key)
-              break
+                this.__region.useConfig("fillStyle", this.__regionList[regionName]) &&
+                    this.__region.useConfig("strokeStyle", this.__regionList[regionName])
+            } else {
+                this.__region.useConfig("fillStyle", "#000000") &&
+                    this.__region.useConfig("strokeStyle", "#000000")
             }
-          }
         }
+        return this
+    }
 
-        resolve("")
-      }
+    // 获取当前事件触发的区域名称
+    getRegion(x: number, y: number): Promise<string> {
+        return new Promise((resolve, reject) => {
+            let imgData = this.__region ? this.__region.painter.getImageData(x - 0.5, y - 0.5, 1, 1) : {
+                data: [0, 0, 0, 0]
+            }
 
-      // 如果有值
-      if (currentRGBA) {
-        doit()
-      }
+            // 获取点击点的颜色
+            let currentRGBA = imgData.data
 
-      // 否则就是在Promise中
-      else {
-        (imgData as any).then((data: Uint8ClampedArray) => {
-          currentRGBA = data
-          doit()
+            let doit = () => {
+                if (this.__region) {
+
+                    // 查找当前点击的区域
+                    for (let key in this.__regionList) {
+                        if (
+                            "rgb(" +
+                            currentRGBA[0] +
+                            "," +
+                            currentRGBA[1] +
+                            "," +
+                            currentRGBA[2] +
+                            ")" ==
+                            this.__regionList[key]
+                        ) {
+                            resolve(key)
+                            break
+                        }
+                    }
+                }
+
+                resolve("")
+            }
+
+            // 如果有值
+            if (currentRGBA) {
+                doit()
+            }
+
+            // 否则就是在Promise中
+            else {
+                (imgData as any).then((data: Uint8ClampedArray) => {
+                    currentRGBA = data
+                    doit()
+                })
+            }
         })
-      }
-    })
-  }
+    }
 
-  textWidth(text: string) {
-    this.painter.save()
+    textWidth(text: string) {
+        this.painter.save()
 
-    initText(this.painter, this.__specialConfig, 0, 0, 0)
+        initText(this.painter, this.__specialConfig, 0, 0, 0)
 
-    // 虽然我们限制了只可以输入字符串，可是不代表所有环境都可以保证，为了确保方法不失效，强转成字符串
-    let width = this.painter.measureText(text + "").width
+        // 虽然我们限制了只可以输入字符串，可是不代表所有环境都可以保证，为了确保方法不失效，强转成字符串
+        let width = this.painter.measureText(text + "").width
 
-    this.painter.restore()
+        this.painter.restore()
 
-    return width
-  }
+        return width
+    }
 
-  // 获取原始画笔
-  getContext(isRegion = false) {
-    return isRegion ? (this.__region ? this.__region.painter : null) : this.painter
-  }
+    // 获取原始画笔
+    getContext(isRegion = false) {
+        return isRegion ? (this.__region ? this.__region.painter : null) : this.painter
+    }
 
-  // 线性渐变
-  createLinearGradient(x0: number, y0: number, x1: number, y1: number) {
-    return linearGradient(this.painter, x0, y0, x1, y1)
-  }
+    // 获取画布信息
+    getInfo() {
+        return {
+            width: this.painter.canvas.width,
+            height: this.painter.canvas.height
+        }
+    }
 
-  // 环形渐变
-  createRadialGradient(cx: number, cy: number, r: number) {
-    return radialGradient(this.painter, cx, cy, r)
-  }
+    // 线性渐变
+    createLinearGradient(x0: number, y0: number, x1: number, y1: number) {
+        return linearGradient(this.painter, x0, y0, x1, y1)
+    }
 
-  // 获取指定位置颜色
-  getColor(x: number, y: number) {
-    let currentRGBA = this.painter.getImageData(x - 0.5, y - 0.5, 1, 1).data
-    return (
-      "rgba(" +
-      currentRGBA[0] +
-      "," +
-      currentRGBA[1] +
-      "," +
-      currentRGBA[2] +
-      "," +
-      currentRGBA[3] +
-      ")"
-    )
-  }
+    // 环形渐变
+    createRadialGradient(cx: number, cy: number, r: number) {
+        return radialGradient(this.painter, cx, cy, r)
+    }
+
+    // 获取指定位置颜色
+    getColor(x: number, y: number) {
+        let currentRGBA = this.painter.getImageData(x - 0.5, y - 0.5, 1, 1).data
+        return (
+            "rgba(" +
+            currentRGBA[0] +
+            "," +
+            currentRGBA[1] +
+            "," +
+            currentRGBA[2] +
+            "," +
+            currentRGBA[3] +
+            ")"
+        )
+    }
 }
 
 export default Canvas

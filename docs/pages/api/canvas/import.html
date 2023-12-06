@@ -131,7 +131,9 @@ painter.draw(reserve, callback)
                 true
             </td>
             <td>
-                是否使用原生canvas渲染（v0.2.0开始支持）
+                是否使用原生canvas渲染，如果设置为false，画布上就无需使用
+                <span class="important">可以覆盖在原生组件上的cover-view等特殊组件</span>
+                才可以作为悬浮框存在（v0.2.0开始支持）
             </td>
         </tr>
         <tr>
@@ -150,6 +152,13 @@ painter.draw(reserve, callback)
         </tr>
     </tbody>
 </table>
+<div class="warn">
+    特别注意：设置
+    <span class="special">cover= false</span>
+    可能会降低效率，在部分安卓或低版本手机的小程序中会出现绘制错误的情况，请慎重关闭。
+    <hr />
+    我们将持续寻找改进方案，也欢迎任何人给出改进建议。
+</div>
 <h3>
     交互
 </h3>
@@ -165,7 +174,7 @@ painter.draw(reserve, callback)
 <pre tag="javascript">
 methods: {
     doit(region) {
-        
+
         // {"name":string,"x":number,"y":number}
         console.log(region)
     }
@@ -179,7 +188,8 @@ methods: {
 </h3>
 <p>
     具体的例子可以直接访问：
-    <a class="link" href="https://github.com/fragement-contrib/uni-app/blob/master/pages/example/line.vue" target="_blank">https://github.com/fragement-contrib/uni-app/blob/master/pages/example/line.vue</a>
+    <a class="link" href="https://github.com/fragement-contrib/uni-app/blob/master/pages/example/line.vue"
+        target="_blank">https://github.com/fragement-contrib/uni-app/blob/master/pages/example/line.vue</a>
 </p>
 <h2>
     微信小程序
@@ -307,5 +317,7 @@ Page({
 </h3>
 <p>
     具体的例子可以直接访问：
-    <a class="link" href="https://github.com/fragement-contrib/WeChat-Miniprogram/blob/master/miniprogram/pages/example/line" target="_blank">https://github.com/fragement-contrib/WeChat-Miniprogram/blob/master/miniprogram/pages/example/line</a>
+    <a class="link"
+        href="https://github.com/fragement-contrib/WeChat-Miniprogram/blob/master/miniprogram/pages/example/line"
+        target="_blank">https://github.com/fragement-contrib/WeChat-Miniprogram/blob/master/miniprogram/pages/example/line</a>
 </p>

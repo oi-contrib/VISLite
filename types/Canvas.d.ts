@@ -263,6 +263,14 @@ export default interface CanvasType {
     getContext(isRegion?: boolean): CanvasRenderingContext2D
 
     /**
+     * 获取画布信息
+     */
+    getInfo(): {
+        width: number
+        height: number
+    }
+
+    /**
      * 创建线性渐变
      * @param x0 起点
      * @param y0

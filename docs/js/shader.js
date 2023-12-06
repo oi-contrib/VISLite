@@ -651,7 +651,7 @@ window.doShader = function (el) {
                     var filterEl = document.createElement('div');
                     filterEl.innerHTML = copyEl.parentElement.innerHTML.replace(/\<br\>/g, '\n');
 
-                    execCopy(filterEl.innerText);
+                    execCopy(filterEl.innerText, copyEl);
 
                 });
             })(copyEl);

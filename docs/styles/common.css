@@ -175,10 +175,11 @@ body>div.nav>span.github {
 
 body>div.nav>span {
     line-height: 40px;
-    padding: 0 20px;
+    padding: 0 15px;
     display: inline-block;
     cursor: pointer;
     margin: 0 5px;
+    border-radius: 5px;
 }
 
 body>div.nav>span:hover {
@@ -192,6 +193,13 @@ body>div.nav>span[active='yes'] {
 body>div.menu {
     left: 0;
     width: 220px;
+}
+
+body>div.menu[fullview='yes'] {
+    width: 100vw;
+}
+
+body>div.menu[fullview='no'] {
     background-color: #f2f2f2;
     border-right: 1px solid #DBDBDB;
     padding-top: 30px;
@@ -205,6 +213,11 @@ body>div.menu-mask {
 body>div.content {
     left: 220px;
     width: calc(100vw - 420px);
+}
+
+body>div.content[fullview="yes"] {
+    width: calc(100vw - 220px);
+    padding-top: 50px;
 }
 
 body>div.fixed {
@@ -270,7 +283,7 @@ body>div.fixed {
 
     body>div.content {
         left: 0;
-        width: 100vw;
+        width: 100vw !important;
     }
 
     body>div.menu-mask {
@@ -294,19 +307,31 @@ body>div.fixed {
         z-index: 3;
     }
 
+    body>div.nav>span {
+        display: block;
+        padding: 0;
+        margin: 5px;
+    }
+
     body>div.menu {
         z-index: 2;
         width: 320px;
         padding-left: 100px;
     }
 
+    body>div.menu h2,
+    body>div.menu span {
+        font-size: 12px;
+    }
+
     body>div.menu-mask,
     body>div.nav,
-    body>div.menu {
+    body>div.menu[fullview="no"] {
         visibility: hidden;
         transition-duration: 400ms;
         transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
         transition-property: background-color, visibility;
+        font-size: 12px;
     }
 
     body[menu-status='visible']>div.menu-mask,
@@ -324,7 +349,7 @@ body>div.fixed {
     }
 
     body>div.content {
-        padding: 10px;
+        padding: 10px !important;
     }
 
     body>div.content>.example-view {
@@ -593,6 +618,7 @@ body>div.fixed {
     background-color: #c1bcbc;
     border: 1px solid #c1bcbc;
     color: #fff;
+    white-space: nowrap;
 }
 
 .content>button[tag] {
@@ -665,26 +691,47 @@ pre>.copy-icon {
     outline: none;
     border: none;
 }
-.copy-icon.copied {
+
+.copy-icon[copied] {
     outline: 1px solid #343848;
     border-radius: 0 4px 4px 0;
 }
-.copy-icon.copied:before {
+
+.copy-icon[copied='no'] {
+    outline: 1px solid #ff0000;
+}
+
+.copy-btn[copied]:before,
+.copy-icon[copied]:before {
     position: absolute;
-    right: 31px;
-    top: -1px;
-    display: inline-block;
+    left: -64px;
+    top: 0;
+    display: block;
     border-radius: 4px 0 0 4px;
-    padding-top: 10px;
-    padding: 10px 14px 0;
-    height: 22px;
+    width: 64px;
     text-align: center;
     font-size: 12px;
     font-weight: 500;
-    color: #ebebeb99;
+    color: #ffffff;
     background-color: #343848;
     white-space: nowrap;
     content: attr(data-before);
+}
+
+.copy-btn[copied='no']:before,
+.copy-icon[copied='no']:before {
+    background-color: #ff0000;
+}
+
+.copy-btn[copied]:before {
+    height: 26px;
+    line-height: 26px;
+}
+
+.copy-icon[copied]:before {
+    height: 32px;
+    line-height: 32px;
+    top: -1px;
 }
 
 /* 导航 */
@@ -835,6 +882,7 @@ body div.example-view {
     outline: none;
     width: 55px;
     line-height: 26px;
+    height: 26px;
     color: white;
     cursor: pointer;
     user-select: none;

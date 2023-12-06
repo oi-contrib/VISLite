@@ -324,7 +324,28 @@ painter.config({
     获取画布上指定位置的颜色：
 </p>
 <pre tag="javascript">
-    var rgba = getColor(x, y)
+    var rgba = painter.getColor(x, y)
+</pre>
+<h3>
+    getInfo
+</h3>
+<div class="version">
+    0.6.0 新增
+</div>
+<p>
+    获取画布信息：
+</p>
+<pre tag="javascript">
+    var info = painter.getInfo()
+</pre>
+<p>
+    返回信息info格式如下：
+</p>
+<pre tag="javascript">
+{
+    width: number // 画布的宽
+    height: number // 画布的高
+}
 </pre>
 <h2>
     区域管理

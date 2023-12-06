@@ -1,4 +1,4 @@
-- 开源不易，去 <i>[Github给个Star](https://github.com/oi-contrib/VISLite) </i>吧！
+- 💘 开源不易，去 <i>[Github给个Star](https://github.com/oi-contrib/VISLite) </i>吧！
 
 <img src='https://oi-contrib.github.io/VISLite/images/logo.png' height='300px'/>
 
@@ -19,6 +19,42 @@
 ```VISLite```是一个使用```TypeScript```开发的可视化库。官网地址：[https://oi-contrib.github.io/VISLite](https://oi-contrib.github.io/VISLite)
 
 主要提供了跨端的画布和计算，开发人员只需要按照文档的描述就可以非常简单的完成包括Web、uni-app、微信小程序等平台的可视化开发，除了必要的初始化差异，主要的业务代码部分不同端完全一致。
+
+## 简介
+
+这是一个轻量级的数据可视化资源库，目标是：帮助你更快速、简单、高效的开发出任意的可视化业务产品。
+
+> 本项目已在[开源中国](https://www.oschina.net/p/vislite)中开源，欢迎关注和留言。
+
+### 常用的算法
+
+我们通过提供可视化常用的算法来帮助你绘制复杂图表。比如下面的树图，通过简单的配置就可以把任意格式的数据变成任意绘制的带坐标的数据：
+
+<img src="https://oscimg.oschina.net/oscnet/up-cde6b9299d2b75fddf4dda203eb326837ac.png" width="400" height="300"/>
+
+> 上述例子的运行地址：[从左到右树状图](https://oi-contrib.github.io/VISLite/#/example/canvas/tree-layout-lr)。
+
+除了[树布局](https://oi-contrib.github.io/VISLite/#/api/treeLayout)外，我们还提供了：[刻度尺算法](https://oi-contrib.github.io/VISLite/#/api/ruler)来帮助你计算刻度应该如何确定、[等角斜方位投影](https://oi-contrib.github.io/VISLite/#/api/eoap)和[墨卡托投影](https://oi-contrib.github.io/VISLite/#/api/mercator)来绘制地图、[插值函数](https://oi-contrib.github.io/VISLite/#/api/cardinal)来完成折线变光滑的曲线、[变换矩阵](https://oi-contrib.github.io/VISLite/#/api/matrix4)提供各种坐标变换等。
+
+### 画笔加强
+
+我们对画笔进行了加强，使得其更简单好用。比如canvas、webgl，抽象出区域的概念，使得无论你绘制的图形多么的不规则，都可以很轻松的实现交互功能：
+
+<img src="https://oscimg.oschina.net/oscnet/up-187ac2002dfa4805608cdf8b82440186580.png" width="400" height="300"/>
+
+> 上述例子的运行地址：[中国地图](https://oi-contrib.github.io/VISLite/#/example/canvas/china)。
+
+画笔除了像上面那样为了方便交互而补充区域的设计外，还对原来的API进行了一次抽象，使得API更友好简单```（比如WebGL，即使不会3D的人也可以轻松使用，而SVG的使用，你无需去记忆那些晦涩难懂的属性）```，同时，我们还抹平了不同版本浏览器等之间的差异。
+
+### 支持跨端开发
+
+除了Web端外，我们还针对uni-app、微信小程序等端进行了支持，并且不同端API保持一致，大大提高了代码的复用性：
+
+<img src="https://oscimg.oschina.net/oscnet/up-3cd13a65d6384a938c7a0accabc62ad787d.png" width="600" height="300"/>
+
+> 上述例子的运行地址：[金额波浪球](https://oi-contrib.github.io/VISLite/#/example/svg/money-schedule)。
+
+基于实际需要，我们目前对 ```Canvas``` 提供了跨端支持，除 ```Web端``` 外，还支持 ```原生微信小程序``` 和 ```uni-app端``` （编译成H5、微信小程序、支付宝小程序等） ，如果后续有必要，我们会对Canvas支持的端或SVG、WebGL等画笔进行更多端扩展。
 
 ## 特点
 

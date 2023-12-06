@@ -138,23 +138,34 @@ function fetchData(url) {
 }
 
 // 复制到剪切板
-function execCopy(source) {
+function execCopy(source, el) {
     var textareaEl = document.createElement('textarea');
     textareaEl.innerHTML = source;
 
     document.body.appendChild(textareaEl);
     textareaEl.select();
 
+    // copy提醒
+    function prompt(isOk) {
+        el.setAttribute("copied", isOk ? "yes" : "no")
+        el.setAttribute('data-before', isOk ? "复制成功" : "复制失败");
+        setTimeout(function () {
+            el.removeAttribute("copied");
+            el.removeAttribute('data-before');
+            el.blur();
+        }, 700);
+    }
+
     try {
         var result = window.document.execCommand("copy", false, null);
 
         if (result) {
-            prompt('copied');
+            prompt(true);
         } else {
-            prompt('copy failed');
+            prompt(false);
         }
     } catch (e) {
-        prompt('copy failed');
+        prompt(false);
         console.error(e);
     }
 
@@ -182,7 +193,7 @@ function compilerImport(source, isOnline) {
 
 // 生成底部统一内容
 function getFooterTemplate(path) {
-    path = "https://github.com/oi-contrib/VISLite/edit/master/" + path;
+    path = "https://github.com/oi-contrib/VISLite/edit/master/" + path.replace('pages/example', 'examples');
     return '<br /><a class="to-editor-btn" href="' + path + '" target="_blank"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>在 GitHub 上编辑此页</a>';
 }
 
@@ -222,17 +233,4 @@ function bindDragMove(el) {
         isDown = false;
     });
 
-}
-
-// copy提醒
-function prompt(content) {
-    const el = window.event.target;
-    el.classList.add('copied');
-    el.setAttribute('data-before', content);
-    const t = setTimeout((()=>{
-        el.classList.remove("copied");
-        el.removeAttribute('data-before');
-        el.blur();
-    }
-    ), 2000);
 }
