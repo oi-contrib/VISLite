@@ -4,15 +4,15 @@
 
 // 获取一个新的缓冲区
 // isElement默认false，创建第一种缓冲区，为true创建第二种
-let newBuffer = (painter: WebGLRenderingContext) => {
+const newBuffer = (painter: WebGLRenderingContext) => {
     return painter.createBuffer()
 }
 
 // 数据写入缓冲区
 // data是一个类型化数组，表示写入的数据
 // usage表示程序如何使用存储在缓冲区的数据
-let writeBuffer = (painter: WebGLRenderingContext, data: ArrayBuffer, isElement: boolean, usage: number) => {
-    let TYPE = isElement ? painter.ELEMENT_ARRAY_BUFFER : painter.ARRAY_BUFFER
+const writeBuffer = (painter: WebGLRenderingContext, data: ArrayBuffer, isElement: boolean, usage: number) => {
+    const TYPE = isElement ? painter.ELEMENT_ARRAY_BUFFER : painter.ARRAY_BUFFER
     painter.bufferData(TYPE, data, usage)
 }
 
@@ -29,7 +29,7 @@ let writeBuffer = (painter: WebGLRenderingContext, data: ArrayBuffer, isElement:
 // stride相邻两个数据项的字节数
 // offset数据的起点字节位置
 // normalized是否把非浮点型的数据归一化到[0,1]或[-1,1]区间
-let useBuffer = (painter: WebGLRenderingContext, location: number, size: number, type: number, stride: number, offset: number, normalized: boolean) => {
+const useBuffer = (painter: WebGLRenderingContext, location: number, size: number, type: number, stride: number, offset: number, normalized: boolean) => {
 
     // 把缓冲区对象分配给目标变量
     painter.vertexAttribPointer(location, size, type, normalized, stride, offset)

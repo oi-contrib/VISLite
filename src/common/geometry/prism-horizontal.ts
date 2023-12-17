@@ -6,7 +6,7 @@ export default function (normal: boolean, x: number, y: number, z: number, radiu
 
     let beginX: number, beginZ: number
     if (num == 4) {
-        let temp = radius / 1.414
+        const temp = radius / 1.414
         beginX = x + temp
         beginZ = z + temp
 
@@ -15,7 +15,9 @@ export default function (normal: boolean, x: number, y: number, z: number, radiu
         beginZ = z
     }
 
-    let point = [beginX, beginZ], points = [], deg = Math.PI * 2 / num
+    let point = [beginX, beginZ]
+    const points = []
+    const deg = Math.PI * 2 / num
     for (let i = 0; i < num; i++) {
 
         points.push(x, y, z)

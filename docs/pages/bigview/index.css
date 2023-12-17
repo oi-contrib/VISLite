@@ -50,7 +50,7 @@
     .bigview>.dots {
         position: fixed;
         top: 0;
-        right: 30px;
+        right: 10px;
         margin-top: 13px;
     }
 }

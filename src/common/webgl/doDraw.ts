@@ -15,7 +15,7 @@ interface GlobalWorldType {
 import { meshType } from '../../../types/Object3D'
 
 export default function (type: string, painter: WebGLRenderingContext, mesh: meshType, meshWorld: MeshWorldType, globalWorld: GlobalWorldType) {
-    let shader = getShader(type, painter, mesh)
+    const shader = getShader(type, painter, mesh)
 
     // 点数据写入缓冲区
     new BufferObject(painter).use()
@@ -58,7 +58,7 @@ export default function (type: string, painter: WebGLRenderingContext, mesh: mes
     // 立方纹理
     else if ("cube" in mesh.material) {
 
-        let size = (mesh.material.cube.right.image.value as any).width
+        const size = (mesh.material.cube.right.image.value as any).width
 
         painter.uniform1i(painter.getUniformLocation(shader.program, "u_texture"), 0)
 

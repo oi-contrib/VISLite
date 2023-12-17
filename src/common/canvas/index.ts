@@ -1,4 +1,5 @@
 import type CanvasConfigType from "../../../types/CanvasConfig"
+import type CanvasOptsType from '../../../types/CanvasOpts'
 
 import PainterRender from "./painter"
 import assemble from "../assemble"
@@ -6,7 +7,7 @@ import { linearGradient, radialGradient } from "./gradient"
 import { initText } from './config'
 
 // 属性名向下兼容
-let oldAttrName = {
+const oldAttrName = {
     "font-size": "fontSize",
     "font-family": "fontFamily",
     "font-weight": "fontWeight",
@@ -24,10 +25,10 @@ class Canvas extends PainterRender {
     // 2023年7月6日 于南京
     private __regionAssemble = assemble(0, 255, 10, 3)
 
-    constructor(ViewCanvas: HTMLCanvasElement, RegionCanvas: HTMLCanvasElement) {
+    constructor(ViewCanvas: HTMLCanvasElement, RegionCanvas: HTMLCanvasElement, opts: CanvasOptsType = {}) {
         super(
             ViewCanvas,
-            {},
+            opts,
             RegionCanvas ? new PainterRender(RegionCanvas, {
                 willReadFrequently: true,
             }) : null, true
@@ -37,8 +38,8 @@ class Canvas extends PainterRender {
     }
 
     config(configs: CanvasConfigType) {
-        for (let key in configs) {
-            let _key = oldAttrName[key] || key
+        for (const key in configs) {
+            const _key = oldAttrName[key] || key
             this.useConfig(_key, configs[key])
         }
 
@@ -56,7 +57,7 @@ class Canvas extends PainterRender {
         if (this.__region) {
             if (regionName) {
                 if (this.__regionList[regionName] == void 0) {
-                    let tempColor = this.__regionAssemble()
+                    const tempColor = this.__regionAssemble()
                     this.__regionList[regionName] =
                         "rgb(" + tempColor[0] + "," + tempColor[1] + "," + tempColor[2] + ")"
                 }
@@ -73,19 +74,19 @@ class Canvas extends PainterRender {
 
     // 获取当前事件触发的区域名称
     getRegion(x: number, y: number): Promise<string> {
-        return new Promise((resolve, reject) => {
-            let imgData = this.__region ? this.__region.painter.getImageData(x - 0.5, y - 0.5, 1, 1) : {
+        return new Promise((resolve) => {
+            const imgData = this.__region ? this.__region.painter.getImageData(x - 0.5, y - 0.5, 1, 1) : {
                 data: [0, 0, 0, 0]
             }
 
             // 获取点击点的颜色
             let currentRGBA = imgData.data
 
-            let doit = () => {
+            const doit = () => {
                 if (this.__region) {
 
                     // 查找当前点击的区域
-                    for (let key in this.__regionList) {
+                    for (const key in this.__regionList) {
                         if (
                             "rgb(" +
                             currentRGBA[0] +
@@ -126,7 +127,7 @@ class Canvas extends PainterRender {
         initText(this.painter, this.__specialConfig, 0, 0, 0)
 
         // 虽然我们限制了只可以输入字符串，可是不代表所有环境都可以保证，为了确保方法不失效，强转成字符串
-        let width = this.painter.measureText(text + "").width
+        const width = this.painter.measureText(text + "").width
 
         this.painter.restore()
 
@@ -158,7 +159,7 @@ class Canvas extends PainterRender {
 
     // 获取指定位置颜色
     getColor(x: number, y: number) {
-        let currentRGBA = this.painter.getImageData(x - 0.5, y - 0.5, 1, 1).data
+        const currentRGBA = this.painter.getImageData(x - 0.5, y - 0.5, 1, 1).data
         return (
             "rgba(" +
             currentRGBA[0] +

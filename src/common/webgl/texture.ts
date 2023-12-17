@@ -2,10 +2,10 @@
 // type = gl.TEXTURE_2D 二维纹理
 // type = gl.TEXTURE_CUBE_MAP 立方体纹理
 // unit表示开启的纹理单元编号
-let initTexture = (painter: WebGLRenderingContext, type: number, unit: number) => {
+const initTexture = (painter: WebGLRenderingContext, type: number, unit: number) => {
 
     // 创建纹理对象
-    let texture = painter.createTexture()
+    const texture = painter.createTexture()
 
     // 开启纹理单元，unit表示开启的编号
     painter.activeTexture(painter['TEXTURE' + unit])
@@ -29,20 +29,21 @@ let initTexture = (painter: WebGLRenderingContext, type: number, unit: number) =
 //      gl.UNSIGNED_SHORT_5_6_5: 表示RGB，每一个分量分别占据占据5, 6, 5比特
 //      gl.UNSIGNED_SHORT_4_4_4_4: 表示RGBA，每一个分量分别占据占据4, 4, 4, 4比特
 //      gl.UNSIGNED_SHORT_5_5_5_1: 表示RGBA，每一个分量分别占据占据5比特，A分量占据1比特
-let linkImage = (painter: WebGLRenderingContext, type: number, level: number, format: number, textureType: number, image: TexImageSource) => {
+const linkImage = (painter: WebGLRenderingContext, type: number, level: number, format: number, textureType: number, image: TexImageSource) => {
     painter.texImage2D(type, level, format, format, textureType, image)
 }
 
-let linkCube = (painter: WebGLRenderingContext, type: number, level: number, format: number, textureType: number, images: TexImageSource[], width: number, height: number, texture: WebGLTexture) => {
+const linkCube = (painter: WebGLRenderingContext, type: number, level: number, format: number, textureType: number, images: TexImageSource[], width: number, height: number, texture: WebGLTexture) => {
 
-    let types = [
+    const types = [
         painter.TEXTURE_CUBE_MAP_POSITIVE_X, // 右
         painter.TEXTURE_CUBE_MAP_NEGATIVE_X, // 左
         painter.TEXTURE_CUBE_MAP_POSITIVE_Y, // 上
         painter.TEXTURE_CUBE_MAP_NEGATIVE_Y, // 下
         painter.TEXTURE_CUBE_MAP_POSITIVE_Z, // 后
         painter.TEXTURE_CUBE_MAP_NEGATIVE_Z // 前
-    ], target: number
+    ]
+    let target: number
 
     for (let i = 0; i < types.length; i++) {
         if (images[i]) {

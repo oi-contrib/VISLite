@@ -179,13 +179,13 @@ function compilerImport(source, isOnline) {
     }
 
     // 根据开发环境和生产环境区别lib地址
-    var libSrc = isOnline ? "https://unpkg.com/vislite@" + window.VISLite_system.version + "/lib/" : "../lib/";
+    var libSrc = isOnline ? "https://cdn.jsdelivr.net/npm/vislite@" + window.VISLite_system.version + "/lib/" : "../lib/";
 
     var items = execResult[1].trim().split(","), item, index, importCode = "";
     for (index = 0; index < items.length; index++) {
         item = items[index].trim();
 
-        importCode += "import '" + libSrc + item + "/index.umd.js';var " + item + " = window.VISLite_" + item + ";\n"
+        importCode += "import '" + libSrc + item + "/index.umd.min.js';var " + item + " = window.VISLite_" + item + ";\n"
     }
 
     return source.replace(execResult[0], importCode);

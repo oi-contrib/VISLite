@@ -3,7 +3,7 @@ import rotate from '../../rotate'
 // 棱柱垂直部分
 
 export default function (normal: boolean, x: number, y: number, z: number, radius: number, height: number, num: number) {
-    let points = []
+    const points = []
     let beginPosition: [number, number]
 
     if (num == 4) {
@@ -12,7 +12,7 @@ export default function (normal: boolean, x: number, y: number, z: number, radiu
         beginPosition = [x + radius, z]
     }
 
-    let deg = Math.PI * 2 / num, degHalf = Math.PI * 2 / (num * 2)
+    const deg = Math.PI * 2 / num, degHalf = Math.PI * 2 / (num * 2)
 
     let endPosition: [number, number], normalPosition = []
     for (let i = 0; i < num; i++) {
@@ -20,7 +20,7 @@ export default function (normal: boolean, x: number, y: number, z: number, radiu
         endPosition = rotate(x, z, deg, ...beginPosition)
 
         if (normal) {
-            let halfPosition = rotate(x, z, degHalf, ...beginPosition)
+            const halfPosition = rotate(x, z, degHalf, ...beginPosition)
             normalPosition = [halfPosition[0], 0, halfPosition[1]]
         }
 

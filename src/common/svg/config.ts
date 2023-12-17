@@ -5,10 +5,10 @@ import setStyle from "../setStyle"
 import arc from "../canvas/arc"
 import { toNode } from "./tool"
 
-export let initDefs = (el: SVGElement) => {
-    let defs = el.getElementsByTagName('defs')
+export const initDefs = (el: SVGElement) => {
+    const defs = el.getElementsByTagName('defs')
     if (defs.length <= 0) {
-        let newDefs = toNode("defs")
+        const newDefs = toNode("defs")
         el.appendChild(newDefs)
         return newDefs
     } else {
@@ -17,7 +17,7 @@ export let initDefs = (el: SVGElement) => {
 }
 
 // 文字统一设置方法
-export let initText = (
+export const initText = (
     el: SVGElement,
     config: SVGConfigType,
     x: number,
@@ -63,7 +63,7 @@ export let initText = (
 }
 
 // 画圆统一设置方法
-export let initCircle = (el: SVGElement, cx: number, cy: number, r: number) => {
+export const initCircle = (el: SVGElement, cx: number, cy: number, r: number) => {
     if (el.nodeName.toLowerCase() !== "circle")
         throw new Error("Need a <circle> !")
     setAttribute(el, "cx", cx)
@@ -72,13 +72,13 @@ export let initCircle = (el: SVGElement, cx: number, cy: number, r: number) => {
 }
 
 // 路径统一设置方法
-export let initPath = (el: SVGElement, path: string) => {
+export const initPath = (el: SVGElement, path: string) => {
     if (el.nodeName.toLowerCase() !== "path") throw new Error("Need a <path> !")
     setAttribute(el, "d", path)
 }
 
 // 画矩形统一设置方法
-export let initRect = (
+export const initRect = (
     el: SVGElement,
     x: number,
     y: number,
@@ -104,7 +104,7 @@ export let initRect = (
 }
 
 // 画弧统一设置方法
-export let initArc = (
+export const initArc = (
     el: SVGElement,
     config: SVGConfigType,
     cx: number,
@@ -122,7 +122,7 @@ export let initArc = (
     beginDeg = beginDeg % (Math.PI * 2)
 
     if (r1 > r2) {
-        let temp = r1
+        const temp = r1
         r1 = r2
         r2 = temp
     }
@@ -154,8 +154,8 @@ export let initArc = (
             endOuterY: number,
             r: number
         ) {
-            let f = endA - beginA > Math.PI ? 1 : 0,
-                d = "M" + begInnerX + " " + begInnerY
+            const f = endA - beginA > Math.PI ? 1 : 0
+            let d = "M" + begInnerX + " " + begInnerY
             if (r < 0) r = -r
 
             d +=

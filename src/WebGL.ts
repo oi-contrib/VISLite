@@ -14,11 +14,11 @@ class WebGL extends OralWebGL implements WebGLType {
             region: true
         })
 
-        let width = el.clientWidth, height = el.clientHeight
+        const width = el.clientWidth, height = el.clientHeight
 
         let ViewCanvas: HTMLCanvasElement, RegionCanvas: HTMLCanvasElement
 
-        let _el = el as any
+        const _el = el as any
 
         // 如果已经初始化过了
         if (_el._vislite_canvas_) {
@@ -49,7 +49,7 @@ class WebGL extends OralWebGL implements WebGLType {
         }
 
         // 设置画布大小
-        for (let canvas of [ViewCanvas, RegionCanvas]) {
+        for (const canvas of [ViewCanvas, RegionCanvas]) {
 
             if (canvas) {
                 canvas.style.width = width + "px"

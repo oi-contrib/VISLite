@@ -1,20 +1,20 @@
 import type MapType from '../types/Map'
 
 // 围绕X轴旋转
-let rotateX = function (deg: number, x: number, y: number, z: number) {
-    let cos = Math.cos(deg), sin = Math.sin(deg)
+const rotateX = function (deg: number, x: number, y: number, z: number) {
+    const cos = Math.cos(deg), sin = Math.sin(deg)
     return [x, y * cos - z * sin, y * sin + z * cos]
 }
 
 // 围绕Y轴旋转
-let rotateY = function (deg: number, x: number, y: number, z: number) {
-    let cos = Math.cos(deg), sin = Math.sin(deg)
+const rotateY = function (deg: number, x: number, y: number, z: number) {
+    const cos = Math.cos(deg), sin = Math.sin(deg)
     return [z * sin + x * cos, y, z * cos - x * sin]
 }
 
 // 围绕Z轴旋转
-let rotateZ = function (deg: number, x: number, y: number, z: number) {
-    let cos = Math.cos(deg), sin = Math.sin(deg)
+const rotateZ = function (deg: number, x: number, y: number, z: number) {
+    const cos = Math.cos(deg), sin = Math.sin(deg)
     return [x * cos - y * sin, x * sin + y * cos, z]
 }
 

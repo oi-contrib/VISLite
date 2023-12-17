@@ -1,8 +1,8 @@
 
 // 点（x,y）围绕中心（cx,cy）旋转deg度
 
-let rotate = function (cx: number, cy: number, deg: number, x: number, y: number) {
-    let cos = Math.cos(deg), sin = Math.sin(deg)
+const rotate = function (cx: number, cy: number, deg: number, x: number, y: number) {
+    const cos = Math.cos(deg), sin = Math.sin(deg)
     return [
         +((x - cx) * cos - (y - cy) * sin + cx).toFixed(7),
         +((x - cx) * sin + (y - cy) * cos + cy).toFixed(7)
@@ -20,7 +20,8 @@ export default function (beginA: number, rotateA: number, cx: number, cy: number
         rotateA *= -1
     }
 
-    let temp: number[] = [], p: number[]
+    const temp: number[] = []
+    let p: number[]
 
     // 内部
     p = rotate(0, 0, beginA, r1, 0)

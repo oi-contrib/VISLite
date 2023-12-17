@@ -84,6 +84,10 @@ body>header {
     position: relative;
 }
 
+body>header>.tips {
+    display: none;
+}
+
 body>header>h1,
 body>header>h2 {
     display: inline-block;
@@ -262,6 +266,19 @@ body>div.fixed {
 
 /* <=700px */
 @media (max-width: 700px) {
+
+    body>header>.tips {
+        display: block;
+        line-height: 60px;
+        padding-right: 10px;
+        font-weight: 800;
+        font-size: 12px;
+        position: fixed;
+        left: 100px;
+        top: 0;
+        font-style: italic;
+        font-family: cursive;
+    }
 
     body>div.nav>span.github {
         text-indent: 0;
@@ -871,6 +888,7 @@ body div.example-view {
     display: none;
     font-size: 12px;
     padding: 20px;
+    font-family: "monospace";
 }
 
 .example-view>.copy-btn,

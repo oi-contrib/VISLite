@@ -1,7 +1,7 @@
 //当前正在运动的动画的tick函数堆栈
 let $timers: any[] = []
 //唯一定时器的定时间隔
-let $interval = 13
+const $interval = 13
 //定时器ID
 let $timerId: any
 
@@ -15,13 +15,13 @@ let $timerId: any
  */
 export default function (doback: (deep: number) => void, duration: number = 400, callback: (deep: number) => void = () => { }): Function {
 
-    let clock = {
+    const clock = {
         //把tick函数推入堆栈
         "timer": function (tick: (deep: number) => void, duration: number, callback: (deep: number) => void) {
             if (!tick) {
                 throw new Error('Tick is required!')
             }
-            let id = new Date().valueOf() + "_" + (Math.random() * 1000).toFixed(0)
+            const id = new Date().valueOf() + "_" + (Math.random() * 1000).toFixed(0)
             $timers.push({
                 "id": id,
                 "createTime": new Date(),
@@ -42,8 +42,8 @@ export default function (doback: (deep: number) => void, duration: number = 400,
 
         //被定时器调用，遍历timers堆栈
         "tick": function () {
-            let createTime: Date, flag: number, tick: (deep: number) => void, callback: (deep: number) => void, timer: any, duration: number, passTime: number,
-                timers: any[] = $timers
+            let createTime: Date, flag: number, tick: (deep: number) => void, callback: (deep: number) => void, timer: any, duration: number, passTime: number
+            const timers: any[] = $timers
             $timers = []
             $timers.length = 0
             for (flag = 0; flag < timers.length; flag++) {
@@ -79,7 +79,7 @@ export default function (doback: (deep: number) => void, duration: number = 400,
         }
     }
 
-    let id = clock.timer(function (deep: number) {
+    const id = clock.timer(function (deep: number) {
         //其中deep为0-1，表示改变的程度
         doback(deep)
     }, duration, callback)

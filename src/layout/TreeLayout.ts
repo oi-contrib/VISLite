@@ -35,11 +35,11 @@ class TreeLayout extends Tree implements TreeLayoutType {
     }
 
     use(initTree: any, noOpens = {}) {
-        let tree = super.use(initTree, noOpens)
+        const tree = super.use(initTree, noOpens)
 
         // 校对偏差
         if (this.__option.offsetX != 0 || this.__option.offsetY != 0) {
-            for (let key in tree.node) {
+            for (const key in tree.node) {
                 if (!tree.node[key].show) {
 
                     let deep = 0, pid = key
@@ -57,13 +57,13 @@ class TreeLayout extends Tree implements TreeLayoutType {
         if (this.__option.type == 'rect') {
             if (this.__option.direction == 'LR' || this.__option.direction == "RL") {
 
-                let perW = this.__option.height / tree.size
-                let perD = this.__option.width / (tree.deep - 1)
+                const perW = this.__option.height / tree.size
+                const perD = this.__option.width / (tree.deep - 1)
 
-                let balanceW = this.__option.y - this.__option.height * 0.5
-                let flag = this.__option.direction == 'LR' ? 1 : -1
+                const balanceW = this.__option.y - this.__option.height * 0.5
+                const flag = this.__option.direction == 'LR' ? 1 : -1
 
-                for (let key in tree.node) {
+                for (const key in tree.node) {
                     if (tree.deep == 1) {
                         tree.node[key].left = this.__option.x + this.__option.width * 0.5 * flag
                         tree.node[key].top = this.__option.y
@@ -74,18 +74,18 @@ class TreeLayout extends Tree implements TreeLayoutType {
                 }
             } else if (this.__option.direction == 'TB' || this.__option.direction == "BT") {
 
-                let perW = this.__option.width / tree.size
-                let perD = this.__option.height / (tree.deep - 1)
+                const perW = this.__option.width / tree.size
+                const perD = this.__option.height / (tree.deep - 1)
 
-                let balanceW = this.__option.x - this.__option.width * 0.5
-                let flag = this.__option.direction == 'TB' ? 1 : -1
+                const balanceW = this.__option.x - this.__option.width * 0.5
+                const flag = this.__option.direction == 'TB' ? 1 : -1
 
-                for (let key in tree.node) {
+                for (const key in tree.node) {
                     if (tree.deep == 1) {
                         tree.node[key].left = this.__option.x
                         tree.node[key].top = this.__option.y + this.__option.height * 0.5 * flag
                     } else {
-                        let left = tree.node[key].left
+                        const left = tree.node[key].left
 
                         tree.node[key].left = tree.node[key].top * perW + balanceW
                         tree.node[key].top = this.__option.y + (left - 0.5) * perD * flag
@@ -95,16 +95,16 @@ class TreeLayout extends Tree implements TreeLayoutType {
             }
 
         } else if (this.__option.type == 'circle') {
-            let cx = this.__option.x, cy = this.__option.y
-            let deg = Math.PI * 2 / tree.size
-            let per = this.__option.radius / (tree.deep - 1)
+            const cx = this.__option.x, cy = this.__option.y
+            const deg = Math.PI * 2 / tree.size
+            const per = this.__option.radius / (tree.deep - 1)
 
-            for (let key in tree.node) {
+            for (const key in tree.node) {
                 if (tree.node[key].left == 0.5) {
                     tree.node[key].left = cx
                     tree.node[key].top = cy
                 } else {
-                    let position = rotate(cx, cy, deg * tree.node[key].top, cx + (tree.node[key].left - 0.5) * per, cy)
+                    const position = rotate(cx, cy, deg * tree.node[key].top, cx + (tree.node[key].left - 0.5) * per, cy)
 
                     tree.node[key].left = position[0]
                     tree.node[key].top = position[1]
@@ -135,13 +135,13 @@ class TreeLayout extends Tree implements TreeLayoutType {
     }
 
     private doUpdate() {
-        let newTree = this.use(this.__oralTree, this.__noOpens)
+        const newTree = this.use(this.__oralTree, this.__noOpens)
 
-        let cacheTree = JSON.parse(JSON.stringify(newTree))
+        const cacheTree = JSON.parse(JSON.stringify(newTree))
 
         animation((deep) => {
 
-            for (let key in cacheTree.node) {
+            for (const key in cacheTree.node) {
                 if (newTree.node[key].show || this.__preTree.node[key].show) {
                     cacheTree.node[key].show = true
 

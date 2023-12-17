@@ -12,10 +12,10 @@ import fsColors from '../../shader/fsColors.c'
 import fsImage from '../../shader/fsImage.c'
 import fsCube from '../../shader/fsCube.c'
 
-let shaders = {}
+const shaders = {}
 export default function (type: string, painter: WebGLRenderingContext, mesh: meshType) {
 
-    let uniqueName = type +
+    const uniqueName = type +
         (mesh.material.color ? "1" : "0") +
         (mesh.material.colors ? "1" : "0") +
         (mesh.material.image ? "1" : "0") +
@@ -23,7 +23,7 @@ export default function (type: string, painter: WebGLRenderingContext, mesh: mes
     if (shaders[uniqueName]) return shaders[uniqueName].use()
 
     // 顶点着色器
-    let vertexShader = {
+    const vertexShader = {
         [type + "1000"]: vsColor,
         [type + "0100"]: vsColors,
         [type + "0010"]: vsImage,
@@ -34,7 +34,7 @@ export default function (type: string, painter: WebGLRenderingContext, mesh: mes
     uniform mat4 u_matrix_proporion;`).replace(/u_matrix +\* +a_position/, "u_matrix_proporion * u_matrix_world * u_matrix_mesh * a_position")
 
     // 片段（元）着色器
-    let fragmentShader = {
+    const fragmentShader = {
         [type + "1000"]: fsColor,
         [type + "0100"]: fsColors,
         [type + "0010"]: fsImage,
@@ -42,7 +42,7 @@ export default function (type: string, painter: WebGLRenderingContext, mesh: mes
     }[uniqueName]
 
     // 启用着色器
-    let shader = new ShaderObject(painter).compile(vertexShader, fragmentShader).use()
+    const shader = new ShaderObject(painter).compile(vertexShader, fragmentShader).use()
 
     shaders[uniqueName] = shader
     return shader

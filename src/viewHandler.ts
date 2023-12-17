@@ -1,14 +1,14 @@
 import type { callbackFun } from '../types/viewHandler'
 
-let mousePosition = (el: HTMLElement, event: any) => {
-    let bounding = el.getBoundingClientRect()
+const mousePosition = (el: HTMLElement, event: any) => {
+    const bounding = el.getBoundingClientRect()
     return {
         "x": event.clientX - bounding.left,
         "y": event.clientY - bounding.top
     }
 }
 
-let getKeyString = (event: any) => {
+const getKeyString = (event: any) => {
     return {
         37: "left",
         38: "up",
@@ -19,11 +19,11 @@ let getKeyString = (event: any) => {
 
 export default function (callback: callbackFun) {
 
-    let el = document.getElementsByTagName('body')[0]
+    const el = document.getElementsByTagName('body')[0]
 
     // 键盘控制
     el.addEventListener("keydown", function (event) {
-        let keyCode = getKeyString(event)
+        const keyCode = getKeyString(event)
 
         // 视角向上
         if (keyCode == 'up') {
@@ -69,7 +69,7 @@ export default function (callback: callbackFun) {
 
     // 鼠标控制
     let mouseP = null;
-    let doMove = function (event) {
+    const doMove = function (event) {
 
         // 单纯移动
         if (mouseP == null) {
@@ -84,13 +84,13 @@ export default function (callback: callbackFun) {
         // 按下移动
         else {
 
-            let tempMouseP = mousePosition(el, event)
+            const tempMouseP = mousePosition(el, event)
 
             // 先求解出轨迹向量
-            let normal = [tempMouseP.x - mouseP.x, tempMouseP.y - mouseP.y]
+            const normal = [tempMouseP.x - mouseP.x, tempMouseP.y - mouseP.y]
 
             // 方向向量旋转90deg得到旋转向量
-            let rotateNormal = [
+            const rotateNormal = [
                 normal[1],
                 normal[0],
                 0
@@ -113,7 +113,7 @@ export default function (callback: callbackFun) {
     el.addEventListener("mousedown", (event) => {
         mouseP = mousePosition(el, event)
     })
-    el.addEventListener("mouseup", (event) => {
+    el.addEventListener("mouseup", () => {
         mouseP = null
     })
     el.addEventListener("mousemove", (event) => {
@@ -121,7 +121,7 @@ export default function (callback: callbackFun) {
     })
 
     // 手指控制
-    el.addEventListener("touchend", (event) => {
+    el.addEventListener("touchend", () => {
         mouseP = null;
     })
     el.addEventListener("touchstart", (event) => {
@@ -131,10 +131,10 @@ export default function (callback: callbackFun) {
         doMove(event.touches[0])
     })
 
-    let doScale = function (value: number, event: Event) {
+    const doScale = function (value: number, event: Event) {
         if (value == 0) return
 
-        let baseTimes = 0.899
+        const baseTimes = 0.899
         callback({
             type: "scale",
             value: value < 0 ? baseTimes : 2 - baseTimes,

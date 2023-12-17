@@ -21,7 +21,7 @@ class Geometry implements GeometryType {
     }
 
     config(option: GeometryOptionType) {
-        for (let key in option) {
+        for (const key in option) {
             this.__option[key] = option[key]
         }
         return this
@@ -31,14 +31,14 @@ class Geometry implements GeometryType {
     cylinder(x: number, y: number, z: number, radius: number, height: number): Array<GeometryResultType> {
 
         // 求解出需要切割多少份比较合理
-        let num = splitNum(this.__option.precision, radius)
+        const num = splitNum(this.__option.precision, radius)
         return this.prism(x, y, z, radius, height, num)
     }
 
     // 棱柱体
     prism(x: number, y: number, z: number, radius: number, height: number, num: number): Array<GeometryResultType> {
 
-        let result = [{
+        const result = [{
             points: [],
             length: 0,
             method: "TRIANGLES" as const
@@ -61,10 +61,10 @@ class Geometry implements GeometryType {
     sphere(cx: number, cy: number, cz: number, radius: number): Array<GeometryResultType> {
 
         // 求解出需要切割多少份比较合理
-        let num = splitNum(this.__option.precision, radius)
+        const num = splitNum(this.__option.precision, radius)
 
         // 然后一瓣瓣的绘制
-        let result = [{
+        const result = [{
             points: [],
             length: 0,
             method: "TRIANGLES" as const

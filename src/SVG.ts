@@ -8,9 +8,9 @@ class SVG extends OralSVG implements SVGType {
             throw new Error("VISLite SVG:The mount point requires an HTMLElement type but encountered null.")
         }
 
-        let width = el.clientWidth, height = el.clientHeight
+        const width = el.clientWidth, height = el.clientHeight
 
-        let ViewSVG = document.createElementNS("http://www.w3.org/2000/svg", 'svg')
+        const ViewSVG = document.createElementNS("http://www.w3.org/2000/svg", 'svg')
         el.appendChild(ViewSVG)
 
         ViewSVG.setAttribute("width", width + "")

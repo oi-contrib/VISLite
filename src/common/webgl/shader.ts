@@ -5,10 +5,10 @@
 // 着色器采用的语言是：GLSL ES语言
 
 // 把着色器字符串加载成着色器对象
-let loadShader = (painter: WebGLRenderingContext, type: number, source: string) => {
+const loadShader = (painter: WebGLRenderingContext, type: number, source: string) => {
 
     // 创建着色器对象
-    let shader = painter.createShader(type)
+    const shader = painter.createShader(type)
     if (shader == null) throw new Error('Unable to create shader!')
 
     // 绑定资源
@@ -25,14 +25,14 @@ let loadShader = (painter: WebGLRenderingContext, type: number, source: string) 
 }
 
 //  建立着色器
-let useShader = (painter: WebGLRenderingContext, vshaderSource: string, fshaderSource: string) => {
+const useShader = (painter: WebGLRenderingContext, vshaderSource: string, fshaderSource: string) => {
 
     // 分别加载顶点着色器对象和片段着色器对象
-    let vertexShader = loadShader(painter, painter.VERTEX_SHADER, vshaderSource)
-    let fragmentShader = loadShader(painter, painter.FRAGMENT_SHADER, fshaderSource)
+    const vertexShader = loadShader(painter, painter.VERTEX_SHADER, vshaderSource)
+    const fragmentShader = loadShader(painter, painter.FRAGMENT_SHADER, fshaderSource)
 
     // 创建一个着色器程序
-    let glProgram = painter.createProgram()
+    const glProgram = painter.createProgram()
 
     // 把前面创建的两个着色器对象添加到着色器程序中
     painter.attachShader(glProgram, vertexShader)

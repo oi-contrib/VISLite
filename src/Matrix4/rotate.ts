@@ -4,7 +4,7 @@
  * 旋转角度单位采用弧度制
  */
 export default function (deg: number) {
-    let sin = Math.sin(deg),
+    const sin = Math.sin(deg),
         cos = Math.cos(deg)
     return [
         cos, sin, 0, 0,

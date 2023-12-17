@@ -1,19 +1,19 @@
-let toHex = (value: number) => {
-    let hex = value.toString(16)
+const toHex = (value: number) => {
+    const hex = value.toString(16)
     return hex.length == 1 ? ("0" + hex) : hex
 }
 
 export default function (color: string, format: string) {
 
-    let colorNode = document.getElementsByTagName('head')[0]
+    const colorNode = document.getElementsByTagName('head')[0]
     colorNode.style['color'] = color
 
     // 获取结点的全部样式
-    let allStyle = document.defaultView && document.defaultView.getComputedStyle ?
+    const allStyle = document.defaultView && document.defaultView.getComputedStyle ?
         document.defaultView.getComputedStyle(colorNode, null) :
         (colorNode as any).currentStyle
 
-    let oralFormat = allStyle.getPropertyValue('color').replace(/rgba?\(/, '').replace(")", "").split(',')
+    const oralFormat = allStyle.getPropertyValue('color').replace(/rgba?\(/, '').replace(")", "").split(',')
     for (let index = 0; index < oralFormat.length; index++) {
         oralFormat[index] = +oralFormat[index]
     }

@@ -142,12 +142,16 @@ v0.5.2:
             * createLinearGradient 线性渐变色
             * createRadialGradient 环形渐变色
 v0.6.0:
-    date:
+    date:2023-12-17
     changes:
       - 修复bug
         1、修复ruler值出现浮点“不精确”问题
       - 优化改造
         1、uni-app平台的ui-canvas明确为inline-block盒子
+        2、开发环境添加了eslint
       - 新增功能
         1、Canvas画笔
             * getInfo 获取画布信息
+            * H5环境下创建的时候添加willReadFrequently配置
+        2、Matrix4 变换矩阵
+            * setValue 设置内置矩阵

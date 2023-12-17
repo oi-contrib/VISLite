@@ -23,7 +23,10 @@ let painter = new Canvas(el)
 new Canvas(el, {
 
     // Boolean类型，默认true，表示是否支持区域管理（v0.4.1开始支持）
-    "region": boolean
+    "region": boolean,
+
+    // Boolean类型，默认false，如果多次获取画布颜色（例如：painter.getColor方法）可以开启（v0.6.0开始支持）
+    "willReadFrequently": boolean
 
 })
 </pre>

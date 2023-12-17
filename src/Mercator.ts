@@ -7,12 +7,12 @@ class Mercator implements MapType {
     use: (λ: number, φ: number) => [number, number, number]
     constructor(scale: number = 7, center: number[] = [107, 36]) {
 
-        let perimeter = 100 * scale * Math.PI // 半周长
+        const perimeter = 100 * scale * Math.PI // 半周长
 
-        let help = perimeter / 180
+        const help = perimeter / 180
 
-        let cx = help * center[0]  // 中心横坐标
-        let cy = -1 * help * center[1] // 中心纵坐标
+        const cx = help * center[0]  // 中心横坐标
+        const cy = -1 * help * center[1] // 中心纵坐标
 
         this.use = (λ: number, φ: number) => {
             return [

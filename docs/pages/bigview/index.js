@@ -1,7 +1,7 @@
 (function (window, undefined) {
 
     // 记录例子列表
-    var examples = ["example-1", "example-2", "example-3"];
+    var examples = ["databoard"];
 
     // 当前显示的例子序号
     var current = -1;

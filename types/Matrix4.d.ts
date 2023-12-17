@@ -18,6 +18,11 @@ export default interface Matrix4Type {
     use(x: number, y: number, z?: number, w?: number): [number, number, number, number]
 
     /**
+     * 设置内置矩阵
+     */
+    setValue(initMatrix4?: number[]): this
+
+    /**
      * 沿着向量(a, b, c)方向移动距离dis
      * （其中c可以不传，默认0）
      */

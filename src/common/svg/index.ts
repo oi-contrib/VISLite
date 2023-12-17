@@ -7,7 +7,7 @@ import rotate from "../../rotate"
 import { linearGradient, radialGradient } from "./gradient"
 
 // 属性名向下兼容
-let oldAttrName = {
+const oldAttrName = {
     "font-size": "fontSize",
     "font-family": "fontFamily",
     "arc-start-cap": "arcStartCap",
@@ -57,8 +57,8 @@ class SVG {
         if (typeof params !== "object") {
             return this.__config[oldAttrName[params] || params]
         } else {
-            for (let key in params) {
-                let _key = oldAttrName[key] || key
+            for (const key in params) {
+                const _key = oldAttrName[key] || key
                 this.__config[_key] = params[key]
             }
         }
@@ -136,7 +136,7 @@ class SVG {
         if (typeof params !== "object") {
             return getAttribute(this.__useEl, params)
         } else {
-            for (let key in params) {
+            for (const key in params) {
                 setAttribute(this.__useEl, key, params[key])
             }
             return this
@@ -280,8 +280,8 @@ class SVG {
     }
 
     arc(x: number, y: number, r: number, beginDeg: number, deg: number) {
-        let begPosition = rotate(x, y, (beginDeg / 180) * Math.PI, x + r, y)
-        let endPosition = rotate(
+        const begPosition = rotate(x, y, (beginDeg / 180) * Math.PI, x + r, y)
+        const endPosition = rotate(
             x,
             y,
             ((beginDeg + deg) / 180) * Math.PI,

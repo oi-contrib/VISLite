@@ -27,7 +27,7 @@ class Hermite implements HermiteType {
             // 记录原始尺寸
             this.__a = x1
             this.__b = x2
-            let p3 = this.__u * s1,
+            const p3 = this.__u * s1,
                 p4 = this.__u * s2
             // 缩放到[0,1]定义域
             y1 /= (x2 - x1)
@@ -54,10 +54,10 @@ class Hermite implements HermiteType {
      */
     use(x: number) {
         if (this.__MR) {
-            let sx = (x - this.__a) / (this.__b - this.__a),
+            const sx = (x - this.__a) / (this.__b - this.__a),
                 sx2 = sx * sx,
                 sx3 = sx * sx2
-            let sResult = sx3 * this.__MR[0] + sx2 * this.__MR[1] + sx * this.__MR[2] + this.__MR[3]
+            const sResult = sx3 * this.__MR[0] + sx2 * this.__MR[1] + sx * this.__MR[2] + this.__MR[3]
             return sResult * (this.__b - this.__a)
         } else throw new Error('You shoud first set the position!')
     }

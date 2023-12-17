@@ -7,7 +7,10 @@
         <img src="https://img.shields.io/npm/dm/vislite.svg" alt="downloads">
     </a>
     <a href="https://www.npmjs.com/package/vislite">
-        <img src="https://img.shields.io/npm/v/vislite.svg" alt="Version">
+        <img src="https://img.shields.io/npm/v/vislite.svg" alt="npm">
+    </a>
+    <a href="https://www.jsdelivr.com/package/npm/vislite">
+        <img src="https://data.jsdelivr.com/v1/package/npm/vislite/badge" alt="cdn">
     </a>
     <a href="https://github.com/oi-contrib/VISLite" target='_blank'>
         <img alt="GitHub repo stars" src="https://img.shields.io/github/stars/oi-contrib/VISLite?style=social">
@@ -30,7 +33,7 @@
 
 我们通过提供可视化常用的算法来帮助你绘制复杂图表。比如下面的树图，通过简单的配置就可以把任意格式的数据变成任意绘制的带坐标的数据：
 
-<img src="https://oscimg.oschina.net/oscnet/up-cde6b9299d2b75fddf4dda203eb326837ac.png" width="400" height="300"/>
+<img src="https://oi-contrib.github.io/VISLite/images/docs/what_1.png" width="400" height="300"/>
 
 > 上述例子的运行地址：[从左到右树状图](https://oi-contrib.github.io/VISLite/#/example/canvas/tree-layout-lr)。
 
@@ -40,7 +43,7 @@
 
 我们对画笔进行了加强，使得其更简单好用。比如canvas、webgl，抽象出区域的概念，使得无论你绘制的图形多么的不规则，都可以很轻松的实现交互功能：
 
-<img src="https://oscimg.oschina.net/oscnet/up-187ac2002dfa4805608cdf8b82440186580.png" width="400" height="300"/>
+<img src="https://oi-contrib.github.io/VISLite/images/docs/what_2.png" width="400" height="300"/>
 
 > 上述例子的运行地址：[中国地图](https://oi-contrib.github.io/VISLite/#/example/canvas/china)。
 
@@ -50,11 +53,19 @@
 
 除了Web端外，我们还针对uni-app、微信小程序等端进行了支持，并且不同端API保持一致，大大提高了代码的复用性：
 
-<img src="https://oscimg.oschina.net/oscnet/up-3cd13a65d6384a938c7a0accabc62ad787d.png" width="600" height="300"/>
+<img src="https://oi-contrib.github.io/VISLite/images/docs/what_3.png" width="600" height="300"/>
 
 > 上述例子的运行地址：[金额波浪球](https://oi-contrib.github.io/VISLite/#/example/svg/money-schedule)。
 
 基于实际需要，我们目前对 ```Canvas``` 提供了跨端支持，除 ```Web端``` 外，还支持 ```原生微信小程序``` 和 ```uni-app端``` （编译成H5、微信小程序、支付宝小程序等） ，如果后续有必要，我们会对Canvas支持的端或SVG、WebGL等画笔进行更多端扩展。
+
+### 可视化大屏
+
+当然，按照业务和UI设计，快速开发一个大屏也是相对容易的：
+
+<img src="https://oi-contrib.github.io/VISLite/images/docs/bigview.jpeg" width="500"/>
+
+> 上述例子的运行地址：[数据看板大屏](https://oi-contrib.github.io/VISLite/#/bigview?page=databoard)。
 
 ## 特点
 

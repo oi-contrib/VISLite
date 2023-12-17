@@ -7,7 +7,7 @@ export default function (maxValue: number, minValue: number, num: number, option
 
     // 如果最大值最小值反了
     if (maxValue < minValue) {
-        let temp = minValue
+        const temp = minValue
         minValue = maxValue
         maxValue = temp
     }
@@ -18,12 +18,12 @@ export default function (maxValue: number, minValue: number, num: number, option
     }
 
     // 为了变成 -100 ~ 100 需要放大或者缩小的倍数
-    let times100 =
+    const times100 =
 
         (function (_value) {
 
             // 先确定基调，是放大还是缩小
-            let _times100_base = (_value < 100 && _value > -100) ? 10 : 0.1
+            const _times100_base = (_value < 100 && _value > -100) ? 10 : 0.1
 
             // 记录当前缩放倍数
             let _times100 = -1, _tiemsValue = _value
@@ -59,11 +59,11 @@ export default function (maxValue: number, minValue: number, num: number, option
 
 
     // 求解出 -100 ~ 100 的最佳间距值 后直接转换原来的倍数
-    let distance100_oral = Math.ceil((maxValue - minValue) * times100 / num)
+    const distance100_oral = Math.ceil((maxValue - minValue) * times100 / num)
 
-    let getResult = (changValue: number) => {
+    const getResult = (changValue: number) => {
         // 校对一下
-        let distance100 = {
+        const distance100 = {
             3: 2,
             4: 5,
             6: 5,
@@ -86,12 +86,12 @@ export default function (maxValue: number, minValue: number, num: number, option
             27: 25
         }[distance100_oral + changValue] || (distance100_oral + changValue)
 
-        let distance = distance100 / times100
+        const distance = distance100 / times100
 
         // 最小值，也就是起点
-        let begin = Math.floor(minValue / distance) * distance
+        const begin = Math.floor(minValue / distance) * distance
 
-        let rulerArray = []
+        const rulerArray = []
         // 获取最终的刻度尺数组
         rulerArray.push(begin)
         for (let index = 1; rulerArray[rulerArray.length - 1] < maxValue; index++) {
@@ -103,10 +103,10 @@ export default function (maxValue: number, minValue: number, num: number, option
 
     let rulerArray = getResult(0)
 
-    let balanceMax = () => {
-        let rulerArray_temp = []
+    const balanceMax = () => {
+        const rulerArray_temp = []
 
-        let changeDist = rulerArray[rulerArray.length - 1] - option.max
+        const changeDist = rulerArray[rulerArray.length - 1] - option.max
         for (let index = 0; index < rulerArray.length; index++) {
             if (index + 1 < rulerArray.length && rulerArray[index + 1] - changeDist < minValue) {
                 // 多余的
@@ -118,10 +118,10 @@ export default function (maxValue: number, minValue: number, num: number, option
         return rulerArray_temp
     }
 
-    let balanceMin = () => {
-        let rulerArray_temp = []
+    const balanceMin = () => {
+        const rulerArray_temp = []
 
-        let changeDist = rulerArray[0] - option.min
+        const changeDist = rulerArray[0] - option.min
         for (let index = 0; index < rulerArray.length; index++) {
             rulerArray_temp[index] = rulerArray[index] - changeDist
             if (maxValue <= rulerArray_temp[index]) break
@@ -135,20 +135,20 @@ export default function (maxValue: number, minValue: number, num: number, option
         // 上下界限制
         if ('max' in option && 'min' in option && option.max >= maxValue && option.min <= minValue) {
 
-            let isAnswer = () => {
+            const isAnswer = () => {
 
                 // 先判断原始的是否可行
                 if (rulerArray[0] >= option.min && rulerArray[rulerArray.length - 1] <= option.max) return true
 
                 // 再判断max调整是否可行
-                let rulerArray_max = balanceMax()
+                const rulerArray_max = balanceMax()
                 if (rulerArray_max[0] >= option.min && rulerArray_max[rulerArray_max.length - 1] <= option.max) {
                     rulerArray = rulerArray_max
                     return true
                 }
 
                 // 再判断max调整是否可行
-                let rulerArray_min = balanceMin()
+                const rulerArray_min = balanceMin()
                 if (rulerArray_min[0] >= option.min && rulerArray_min[rulerArray_max.length - 1] <= option.max) {
                     rulerArray = rulerArray_min
                     return true

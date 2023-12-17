@@ -1,5 +1,5 @@
 export default function (begin: number, end: number, step: number, count: number) {
-    let val = []
+    const val = []
     for (let index = 0; index < count; index++) val[index] = begin
 
     // 非常类似进制数，每次调用都+1

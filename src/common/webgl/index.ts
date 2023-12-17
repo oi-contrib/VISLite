@@ -10,7 +10,7 @@ import assemble from '../assemble'
 // 获取区域信息前是否需要刷新区域
 let needUpdate = false
 
-let scale = 10
+const scale = 10
 class WebGL {
 
     readonly name: string = "WebGL"
@@ -18,6 +18,7 @@ class WebGL {
     painter: WebGLRenderingContext
     private __regionPainter: WebGLRenderingContext
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     private __getColor = (x: number, y: number) => "rgba(0,0,0,1)"
 
     private __regionList = {} //区域映射表
@@ -54,7 +55,7 @@ class WebGL {
             })
         }
 
-        let proportion = this.painter.canvas.width / this.painter.canvas.height
+        const proportion = this.painter.canvas.width / this.painter.canvas.height
 
         let xProportion = 1
         let yProportion = 1
@@ -65,7 +66,7 @@ class WebGL {
             yProportion = proportion
         }
 
-        let zProportion = Math.min(xProportion, yProportion)
+        const zProportion = Math.min(xProportion, yProportion)
 
         this.__proporion = [
             xProportion, 0, 0, 0,
@@ -109,11 +110,11 @@ class WebGL {
     private draw(object3D: Object3DType, isUpdateRegion = false) {
         if (!isUpdateRegion) needUpdate = true
 
-        let meshWorld = {
+        const meshWorld = {
             matrix: object3D.matrix.value()
         }
 
-        let globalWorld = {
+        const globalWorld = {
             matrix: this.__scene.matrix.value(),
             proporion: this.__proporion
         }
@@ -154,7 +155,7 @@ class WebGL {
 
         // 对数据进行校对
         for (let index = 0; index < object3D.mesh.length; index++) {
-            let mesh = object3D.mesh[index]
+            const mesh = object3D.mesh[index]
 
             if (mesh.geometry.attributes.normal && Array.isArray(mesh.geometry.attributes.normal.array)) {
                 mesh.geometry.attributes.normal.array = new Float32Array(mesh.geometry.attributes.normal.array)
@@ -202,13 +203,13 @@ class WebGL {
         if (needUpdate) this.review(true)
 
         needUpdate = false
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
 
-            let rgba = this.__getColor(x, y)
+            const rgba = this.__getColor(x, y)
 
             // 查找当前点击的区域
-            for (let key in this.__regionList) {
-                let currentRGBA = this.__regionList[key]
+            for (const key in this.__regionList) {
+                const currentRGBA = this.__regionList[key]
                 if ("rgba(" + currentRGBA[0] * 255 + "," + currentRGBA[1] * 255 + "," + currentRGBA[2] * 255 + "," + currentRGBA[3] * 255 + ")" == rgba) {
                     resolve(key)
                     break

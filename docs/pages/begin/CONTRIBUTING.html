@@ -83,18 +83,21 @@ export let newApi: newApiType
     测试
 </h2>
 <p>
-    除了开发时候的调试外，如果必要，还需要添加如下测试：
+    除了开发时候的调试外，还需要添加如下测试：
 </p>
 <ul>
     <li>
-        基准测试：在 <span class="special">test/benchmark/index.ts</span> 中添加。
+        （可选）基准测试：在 <span class="special">test/benchmark/index.ts</span> 中添加。
     </li>
     <li>
-        单元测试：直接新建文件 <span class="special">test/newApi.spec.ts</span> 即可。
+        （可选）单元测试：直接新建文件 <span class="special">test/newApi.spec.ts</span> 即可。
+    </li>
+    <li>
+        （必选）ESLint：直接运行 <span class="special">npm run lint</span> 并保证没有报错。
     </li>
 </ul>
 <p>
-    上述测试都根据实际情况添加即可，除了调试的测试文件外，都非必需项。
+    除了调试的测试文件和必选项外，上述测试都根据实际情况添加即可。
 </p>
 <h2>
     提交 PR

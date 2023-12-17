@@ -1,1 +1,1 @@
-export let XLINK_ATTRIBUTE = ["href", "title", "show", "type", "role", "actuate"]
+export const XLINK_ATTRIBUTE = ["href", "title", "show", "type", "role", "actuate"]

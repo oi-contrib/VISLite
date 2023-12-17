@@ -2,8 +2,8 @@ import type Matrix4Type from '../../types/Matrix4'
 
 // 两个4x4矩阵相乘
 // 或矩阵和齐次坐标相乘
-let _multiply = function (matrix4: number[], param: number[]) {
-    let newParam: number[] = []
+const _multiply = function (matrix4: number[], param: number[]) {
+    const newParam: number[] = []
     for (let i = 0; i < 4; i++)
         for (let j = 0; j < param.length / 4; j++)
             newParam[j * 4 + i] =
@@ -21,18 +21,26 @@ import _transform from './transform'
 
 // 列主序存储的4x4矩阵
 
+const __initMatrix4 = [
+    1, 0, 0, 0,
+    0, 1, 0, 0,
+    0, 0, 1, 0,
+    0, 0, 0, 1
+]
+
 class Matrix4 implements Matrix4Type {
     readonly name: string = 'Matrix4'
 
     private __matrix4: number[]
 
-    constructor(initMatrix4: number[] = [
-        1, 0, 0, 0,
-        0, 1, 0, 0,
-        0, 0, 1, 0,
-        0, 0, 0, 1
-    ]) {
+    constructor(initMatrix4: number[] = __initMatrix4) {
         this.__matrix4 = initMatrix4
+    }
+
+    // 设置内置矩阵
+    setValue(initMatrix4: number[] = __initMatrix4) {
+        this.__matrix4 = initMatrix4
+        return this
     }
 
     // 移动
@@ -43,7 +51,7 @@ class Matrix4 implements Matrix4Type {
 
     // 旋转
     rotate(deg: number, a1: number, b1: number, c1?: number, a2?: number, b2?: number, c2?: number) {
-        let matrix4s = _transform(a1, b1, c1, a2, b2, c2)
+        const matrix4s = _transform(a1, b1, c1, a2, b2, c2)
         this.__matrix4 = _multiply(_multiply(_multiply(matrix4s[1], _rotate(deg)), matrix4s[0]), this.__matrix4)
         return this
     }

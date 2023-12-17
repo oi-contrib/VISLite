@@ -3,7 +3,7 @@ import type CanvasConfigType from "../../../types/CanvasConfig"
 import arc from "./arc"
 
 // 文字统一设置方法
-export let initText = function (
+export const initText = function (
   painter: CanvasRenderingContext2D,
   config: CanvasConfigType,
   x: number,
@@ -25,7 +25,7 @@ export let initText = function (
 }
 
 // 画弧统一设置方法
-export let initArc = function (
+export const initArc = function (
   painter: CanvasRenderingContext2D,
   config: CanvasConfigType,
   cx: number,
@@ -36,7 +36,7 @@ export let initArc = function (
   deg: number
 ) {
   if (r1 > r2) {
-    let temp = r1
+    const temp = r1
     r1 = r2
     r2 = temp
   }
@@ -132,7 +132,7 @@ export let initArc = function (
 }
 
 // 画圆统一设置方法
-export let initCircle = function (
+export const initCircle = function (
   painter: CanvasRenderingContext2D,
   cx: number,
   cy: number,
@@ -145,7 +145,7 @@ export let initCircle = function (
 };
 
 // 画矩形统一设置方法
-export let initRect = function (
+export const initRect = function (
   painter: CanvasRenderingContext2D,
   x: number,
   y: number,

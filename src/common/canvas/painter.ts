@@ -1,17 +1,8 @@
 import type { arcCapType } from '../../../types/painterConfig'
+import type CanvasOptsType from '../../../types/CanvasOpts'
 
 import { initText, initArc, initCircle, initRect } from './config'
 import texts from './texts'
-
-interface OptsType {
-
-    // https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
-    willReadFrequently?: boolean
-
-    alpha?: boolean
-
-    storage?: string
-}
 
 class Painter {
 
@@ -72,7 +63,7 @@ class Painter {
 
     }
 
-    constructor(canvas: HTMLCanvasElement, opts: OptsType = {}, region?: Painter, isPainter = false) {
+    constructor(canvas: HTMLCanvasElement, opts: CanvasOptsType = {}, region?: Painter, isPainter = false) {
         this.painter = canvas.getContext("2d", opts) as CanvasRenderingContext2D
         this.__region = region
         this.__isPainter = isPainter
@@ -175,7 +166,7 @@ class Painter {
         this.painter.save()
         initText(this.painter, this.__specialConfig, x, y, deg)
 
-        let height = texts(this.painter, contents, width, this.__specialConfig.fontSize * lineHeight, (content, top) => {
+        const height = texts(this.painter, contents, width, this.__specialConfig.fontSize * lineHeight, (content, top) => {
             this.painter.fillText(content, 0, top)
         })
 
@@ -191,7 +182,7 @@ class Painter {
         this.painter.save()
         initText(this.painter, this.__specialConfig, x, y, deg)
 
-        let height = texts(this.painter, contents, width, this.__specialConfig.fontSize * lineHeight, (content, top) => {
+        const height = texts(this.painter, contents, width, this.__specialConfig.fontSize * lineHeight, (content, top) => {
             this.painter.strokeText(content, 0, top)
         })
 
@@ -207,7 +198,7 @@ class Painter {
         this.painter.save()
         initText(this.painter, this.__specialConfig, x, y, deg)
 
-        let height = texts(this.painter, contents, width, this.__specialConfig.fontSize * lineHeight, (content, top) => {
+        const height = texts(this.painter, contents, width, this.__specialConfig.fontSize * lineHeight, (content, top) => {
             this.painter.fillText(content, 0, top)
             this.painter.strokeText(content, 0, top)
         })

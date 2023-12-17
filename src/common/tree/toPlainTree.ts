@@ -5,10 +5,10 @@ import toInnerTree from './toInnerTree'
 // 可以传递任意格式的树原始数据
 // 只要配置对应的解析方法即可
 export default function (initTree: any, config: TreeConfigType, noOpens: {}) {
-    let treeData = toInnerTree(initTree, config)
+    const treeData = toInnerTree(initTree, config)
 
-    let alltreedata = treeData.value // 维护的树
-    let rootid = treeData.rid // 根结点ID
+    const alltreedata = treeData.value // 维护的树
+    const rootid = treeData.rid // 根结点ID
 
     if (treeData.num == 1) {
         alltreedata[rootid].left = 0.5
@@ -22,7 +22,8 @@ export default function (initTree: any, config: TreeConfigType, noOpens: {}) {
         }
     } else {
 
-        let beforeDis = [], size = 0, maxDeep = 0
+        const beforeDis = []
+        let size = 0, maxDeep = 0
 
         if (noOpens[rootid]) {
             alltreedata[rootid].left = 0.5
@@ -62,7 +63,7 @@ export default function (initTree: any, config: TreeConfigType, noOpens: {}) {
                     // 添加的新结点top值第一种求法：本层上边缘+1（比如上边缘是-0.5，那么top最小是top=-0.5+1=0.5）
                     alltreedata[pNode.id].top = beforeDis[deep] + 1
 
-                    let pTop = beforeDis[deep] + 1 + (alltreedata[pNode.pid].children.length - 1) * 0.5
+                    const pTop = beforeDis[deep] + 1 + (alltreedata[pNode.pid].children.length - 1) * 0.5
                     // 计算的原则是：如果第一种可行，选择第一种，否则必须选择第二种
                     // 判断第一种是否可行的方法就是：如果第一种计算后确定的孩子上边缘不对导致孩子和孩子的前兄弟重合就是可行的
                     if (pTop - 1 < beforeDis[deep - 1])
@@ -82,7 +83,7 @@ export default function (initTree: any, config: TreeConfigType, noOpens: {}) {
                 // 无法掌握父辈兄弟的情况
                 // 可能会出现父亲和兄弟重叠问题
                 if (alltreedata[pNode.id].top <= beforeDis[deep]) {
-                    let needUp = beforeDis[deep] + 1 - alltreedata[pNode.id].top
+                    const needUp = beforeDis[deep] + 1 - alltreedata[pNode.id].top
                         (function doUp(_pid: number | string, _deep: number) {
                             alltreedata[_pid].top += needUp;
                             if (beforeDis[_deep] < alltreedata[_pid].top) beforeDis[_deep] = alltreedata[_pid].top
@@ -103,7 +104,7 @@ export default function (initTree: any, config: TreeConfigType, noOpens: {}) {
 
         }
         // 对于不显示的，需要标记一下
-        for (let key in noOpens) {
+        for (const key in noOpens) {
             if (noOpens[key]) {
                 alltreedata[key].isOpen = false
                     ; (function updateHidden(pid, left, top) {

@@ -1,7 +1,7 @@
 // 获取一组循环色彩
 export default function (num: number, alpha: number = 1) {
     // 颜色集合
-    let colorList = [
+    const colorList = [
         'rgba(84,112,198,' + alpha + ")", 'rgba(145,204,117,' + alpha + ")",
         'rgba(250,200,88,' + alpha + ")", 'rgba(238,102,102,' + alpha + ")",
         'rgba(115,192,222,' + alpha + ")", 'rgba(59,162,114,' + alpha + ")",

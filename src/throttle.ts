@@ -17,7 +17,8 @@ export default function (callback: Function, option: throttleOptionType = {}) {
 
     let arg: any
     return function () {
-        let _this = this
+        const _this = this
+        // eslint-disable-next-line prefer-rest-params
         arg = arguments
 
         // 如果前置任务都完成了
@@ -27,7 +28,7 @@ export default function (callback: Function, option: throttleOptionType = {}) {
             }
             hadInterval = true
 
-            let interval = setInterval(() => {
+            const interval = setInterval(() => {
                 if (hadClick) {
                     if (!option.keep) {
                         callback.apply(_this, arg)

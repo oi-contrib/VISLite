@@ -2,7 +2,8 @@ interface OptsType {
     preserveDrawingBuffer?: boolean
 }
 export default function (canvas: HTMLCanvasElement, scale: number, opts: OptsType = {}) {
-    let names = ["webgl", "experimental-webgl", "webkit-3d", "moz-webgl"], painter = null
+    const names = ["webgl", "experimental-webgl", "webkit-3d", "moz-webgl"]
+    let painter = null
     for (let i = 0; i < names.length; i++) {
         try {
             painter = canvas.getContext(names[i], opts)
@@ -11,10 +12,10 @@ export default function (canvas: HTMLCanvasElement, scale: number, opts: OptsTyp
     }
     if (!painter) throw new Error('Non canvas or browser does not support webgl.')
 
-    let width = painter.canvas.width, height = painter.canvas.height
+    const width = painter.canvas.width, height = painter.canvas.height
 
-    let viewWidth = width * scale
-    let viewHeight = height * scale
+    const viewWidth = width * scale
+    const viewHeight = height * scale
 
     painter.viewport((width - viewWidth) * 0.5, (height - viewHeight) * 0.5, viewWidth, viewHeight)
 

@@ -1,6 +1,7 @@
 let observer: ResizeObserver
 
-let attrValueToCallback = {}, uniqueid = 0
+const attrValueToCallback = {}
+let uniqueid = 0
 
 export default function (el: HTMLElement | null, callback: Function) {
 

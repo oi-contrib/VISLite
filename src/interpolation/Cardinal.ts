@@ -38,7 +38,7 @@ class Cardinal implements CardinalType {
             "x": [],
             "h": []
         };
-        var flag: number,
+        let flag: number,
             slope = (points[1][1] - points[0][1]) / (points[1][0] - points[0][0]),
             temp: number
         this.__HS.x[0] = points[0][0]

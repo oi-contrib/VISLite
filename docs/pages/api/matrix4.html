@@ -35,7 +35,12 @@ let matrix4 = new Matrix4(initMatrix4)
     比如采用默认值初始化的矩阵对象，打印结果如下：
 </p>
 <pre tag="javascript">
-    (16) [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
+[
+    1, 0, 0, 0,
+    0, 1, 0, 0,
+    0, 0, 1, 0,
+    0, 0, 0, 1
+]
 </pre>
 <h4>
     multiply
@@ -61,6 +66,15 @@ let matrix4 = new Matrix4(initMatrix4)
 <p>
     矩阵的目的是对坐标进行变换，use方法返回齐次坐标(x, y, z, w)经过matrix4矩阵变换后的坐标值。其中z和w可以不传递，默认0和1，返回的坐标值是一个齐次坐标。
 </p>
+<h4>
+    setValue
+</h4>
+<p>
+    设置内置矩阵，参数initMatrix4可选，默认重置成一个单位矩阵：
+</p>
+<pre tag="javascript">
+    matrix4.setValue(initMatrix4)
+</pre>
 <h3>
     坐标变换
 </h3>

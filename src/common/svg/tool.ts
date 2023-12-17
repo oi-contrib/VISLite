@@ -8,7 +8,7 @@ export function toNode(tagname: string) {
 }
 
 // 设置属性
-let _setAttribute = function (el: SVGElement, key: string, value: string | number) {
+const _setAttribute = function (el: SVGElement, key: string, value: string | number) {
 
     // 需要使用xlink命名空间的xml属性
     if (XLINK_ATTRIBUTE.indexOf(key) > -1) {
@@ -20,7 +20,7 @@ let _setAttribute = function (el: SVGElement, key: string, value: string | numbe
         el.setAttribute(key, value + "")
     }
 }
-export let setAttribute = _setAttribute
+export const setAttribute = _setAttribute
 
 // 获取属性
 export function getAttribute(el: SVGElement, key: string) {
