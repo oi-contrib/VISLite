@@ -155,3 +155,12 @@ v0.6.0:
             * H5环境下创建的时候添加willReadFrequently配置
         2、Matrix4 变换矩阵
             * setValue 设置内置矩阵
+v0.7.0:
+    date:
+    changes:
+      - 修复bug
+        1、修复ui-canvas在HBuilderX中使用“发行”打包成H5后css代码未生效问题
+          （这应该是HBuilderX自身的BUG，但为了快速修复，内部消化）
+      - 优化改造
+        1、一些types定义优化
+            * 针对svg新增：svgElType、svgBoardType

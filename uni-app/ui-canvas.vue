@@ -1,6 +1,6 @@
 <template>
-  <view :class="cover || isH5 ? 'cover-view' : 'normal-view'">
-    <view :class="'view-img view-' + uniqueid" @touchstart="doitstart">
+  <view :class="cover || isH5 ? 'cover-view' : 'normal-view'" :style="{ display: 'inline-block' }">
+    <view v-if="!cover && !isH5" :class="'view-img view-' + uniqueid" @touchstart="doitstart">
       <image
         :style="{ width: width + 'px', height: height + 'px' }"
         :src="viewImg"
@@ -12,13 +12,13 @@
       class="painter"
       :id="'painter-' + uniqueid"
       @touchstart="doitstart"
-      :style="{ width: width + 'px', height: height + 'px' }"
+      :style="[{ width: width + 'px', height: height + 'px'}, cover || isH5 ? {} : {position: 'fixed', left: '50000px'}]"
     ></canvas>
     <canvas
       v-if="region"
       class="region"
       :id="'region-' + uniqueid"
-      :style="{ width: width + 'px', height: height + 'px' }"
+      :style="{ width: width + 'px', height: height + 'px', position: 'fixed', left: '50000px' }"
     ></canvas>
     <!-- #endif -->
     <!-- #ifdef MP-WEIXIN -->
@@ -26,13 +26,13 @@
       class="painter"
       canvas-id="painter"
       @touchstart="doitstart"
-      :style="{ width: width + 'px', height: height + 'px' }"
+      :style="[{ width: width + 'px', height: height + 'px'}, cover || isH5 ? {} : {position: 'fixed', left: '50000px'}]"
     ></canvas>
     <canvas
       v-if="region"
       class="region"
       canvas-id="region"
-      :style="{ width: width + 'px', height: height + 'px' }"
+      :style="{ width: width + 'px', height: height + 'px', position: 'fixed', left: '50000px' }"
     ></canvas>
     <!-- #endif -->
     <!-- #ifndef MP-WEIXIN||MP-ALIPAY -->
@@ -40,18 +40,18 @@
       class="painter"
       :canvas-id="'painter-' + uniqueid"
       @touchstart="doitstart"
-      :style="{ width: width + 'px', height: height + 'px' }"
+      :style="[{ width: width + 'px', height: height + 'px'}, cover || isH5 ? {} : {position: 'fixed', left: '50000px'}]"
     ></canvas>
     <canvas
       v-if="region"
       class="region"
       :canvas-id="'region-' + uniqueid"
-      :style="{ width: width + 'px', height: height + 'px' }"
+      :style="{ width: width + 'px', height: height + 'px', position: 'fixed', left: '50000px' }"
     ></canvas>
     <!-- #endif -->
   </view>
 </template>
-  <script>
+<script>
 import OralCanvas from "../lib/OralCanvas/index.es.js";
 export default {
   data() {
@@ -235,25 +235,3 @@ export default {
   },
 };
 </script>
-
-  <style lang="css" scoped>
-/* 辅助的区域不应该可以看见 */
-.region {
-  position: fixed;
-  left: 50000px;
-}
-
-.cover-view,
-.normal-view {
-  display: inline-block;
-}
-
-.cover-view .view-img {
-  display: none;
-}
-
-.normal-view .painter {
-  position: fixed;
-  left: 50000px;
-}
-</style>

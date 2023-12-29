@@ -33,7 +33,7 @@
 
 我们通过提供可视化常用的算法来帮助你绘制复杂图表。比如下面的树图，通过简单的配置就可以把任意格式的数据变成任意绘制的带坐标的数据：
 
-<img src="https://oi-contrib.github.io/VISLite/images/docs/what_1.png" width="400" height="300"/>
+<img src="https://oi-contrib.github.io/VISLite/images/docs/what_1.png" width="400"/>
 
 > 上述例子的运行地址：[从左到右树状图](https://oi-contrib.github.io/VISLite/#/example/canvas/tree-layout-lr)。
 
@@ -43,7 +43,7 @@
 
 我们对画笔进行了加强，使得其更简单好用。比如canvas、webgl，抽象出区域的概念，使得无论你绘制的图形多么的不规则，都可以很轻松的实现交互功能：
 
-<img src="https://oi-contrib.github.io/VISLite/images/docs/what_2.png" width="400" height="300"/>
+<img src="https://oi-contrib.github.io/VISLite/images/docs/what_2.png" width="400"/>
 
 > 上述例子的运行地址：[中国地图](https://oi-contrib.github.io/VISLite/#/example/canvas/china)。
 
@@ -53,7 +53,7 @@
 
 除了Web端外，我们还针对uni-app、微信小程序等端进行了支持，并且不同端API保持一致，大大提高了代码的复用性：
 
-<img src="https://oi-contrib.github.io/VISLite/images/docs/what_3.png" width="600" height="300"/>
+<img src="https://oi-contrib.github.io/VISLite/images/docs/what_3.png" width="600"/>
 
 > 上述例子的运行地址：[金额波浪球](https://oi-contrib.github.io/VISLite/#/example/svg/money-schedule)。
 
@@ -74,7 +74,7 @@
 - 简单与复杂共存：一方面我们提供了可视化需要的基础功能，你可以按照自己的需要组合使用；另一方面，为了加速开发，我们针对常见的可视化业务场景进行了封装，可以帮助你快速完成，你可以根据实际情况进行选择。
 - 向下兼容：我们向你保证，始终向下兼容```（alpha和beta版本为测试版本，不包括）```，因此，无论何时，最新版本总是最好的选择。
 
-> 版本说明：alpha为开发阶段、beta为发布前测试、无后缀的为正式版本。
+> 版本说明：alpha为开发阶段、beta为发布前测试、rc为候选版本、无后缀的为正式版本。
 
 ## 需求墙
 
