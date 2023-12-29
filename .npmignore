@@ -10,3 +10,5 @@ docs
 build
 tsconfig.json
 module.d.ts
+.eslintrc.js
+.editorconfig

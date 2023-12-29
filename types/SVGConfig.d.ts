@@ -1,5 +1,8 @@
 import { arcCapType, textAlignType, textBaselineType } from './painterConfig'
 
+export type svgElType = SVGElement | "g" | "text" | "path" | "circle" | "rect" | "polygon" | "polyline"
+export type svgBoardType = SVGElement | "text" | "path" | "arc" | "circle" | "rect"
+
 export default interface SVGConfigType {
 
     /**
