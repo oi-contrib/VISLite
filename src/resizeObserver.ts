@@ -20,11 +20,11 @@ export default function (el: HTMLElement | null, callback: Function) {
         (el as any)._resize_observer_ = uniqueid
         attrValueToCallback[uniqueid] = callback
 
-        observer.observe(el)
+        observer.observe(el as HTMLElement)
 
         return function () {
             if (observer) {
-                observer.unobserve(el)
+                observer.unobserve(el as HTMLElement)
                 delete attrValueToCallback[(el as any)._resize_observer_]
             }
         }

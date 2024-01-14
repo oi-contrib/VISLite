@@ -10,7 +10,7 @@ import rotate from '../rotate'
 class TreeLayout extends Tree implements TreeLayoutType {
     readonly name: string = 'TreeLayout'
 
-    private __option: TreeOptionType = {
+    private __option = {
         offsetX: 0,
         offsetY: 0,
         duration: 500,
@@ -25,7 +25,7 @@ class TreeLayout extends Tree implements TreeLayoutType {
 
     private __rback: (tree: TreeResultType) => void
     private __oralTree: any
-    private __preTree: TreeResultType
+    private __preTree: TreeResultType | null
 
     private __noOpens = {}
 
@@ -127,7 +127,7 @@ class TreeLayout extends Tree implements TreeLayoutType {
     }
 
     unbind() {
-        this.__rback = null
+        this.__rback = () => null
         this.__oralTree = null
         this.__preTree = null
         this.__noOpens = {}
@@ -141,12 +141,14 @@ class TreeLayout extends Tree implements TreeLayoutType {
 
         animation((deep) => {
 
-            for (const key in cacheTree.node) {
-                if (newTree.node[key].show || this.__preTree.node[key].show) {
-                    cacheTree.node[key].show = true
+            if (this.__preTree) {
+                for (const key in cacheTree.node) {
+                    if (newTree.node[key].show || this.__preTree.node[key].show) {
+                        cacheTree.node[key].show = true
 
-                    cacheTree.node[key].left = this.__preTree.node[key].left + (newTree.node[key].left - this.__preTree.node[key].left) * deep
-                    cacheTree.node[key].top = this.__preTree.node[key].top + (newTree.node[key].top - this.__preTree.node[key].top) * deep
+                        cacheTree.node[key].left = this.__preTree.node[key].left + (newTree.node[key].left - this.__preTree.node[key].left) * deep
+                        cacheTree.node[key].top = this.__preTree.node[key].top + (newTree.node[key].top - this.__preTree.node[key].top) * deep
+                    }
                 }
             }
             this.__rback(cacheTree)
@@ -159,7 +161,7 @@ class TreeLayout extends Tree implements TreeLayoutType {
     }
 
     closeNode(id: string) {
-        if (!this.__preTree) return
+        if (!this.__preTree) return this
         this.__noOpens[id] = true
 
         this.doUpdate()
@@ -167,7 +169,7 @@ class TreeLayout extends Tree implements TreeLayoutType {
     }
 
     openNode(id: string) {
-        if (!this.__preTree) return
+        if (!this.__preTree) return this
         this.__noOpens[id] = false
 
         this.doUpdate()
@@ -175,7 +177,7 @@ class TreeLayout extends Tree implements TreeLayoutType {
     }
 
     toggleNode(id: string) {
-        if (!this.__preTree) return
+        if (!this.__preTree) return this
         this.__noOpens[id] = !this.__noOpens[id]
 
         this.doUpdate()

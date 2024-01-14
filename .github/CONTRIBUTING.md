@@ -11,22 +11,23 @@
 直接执行 ```npm run dev``` 即可启动开发环境。
 
 * 如果是编辑文档，访问： http://127.0.0.1:20000/docs/index.html 。
-* 如果是调试功能，访问： http://127.0.0.1:20000/test/ 后选择对应的用例即可。
+* 如果是调试功能，访问： http://127.0.0.1:20000/test/example 后选择对应的用例即可。
 
 新增调试页面，只需要在test项目中新建即可，比如：
 
 ```
 - test
-    - newApi
-        - index.html
-        - index.ts
+    - example
+        - newApi
+            - index.html
+            - index.ts
 ```
 
 然后在 ```build/webpack.config.js``` 中添加配置：
 
 ```js
 entry: {
-    newApi: './test/newApi/index.ts'
+    example_newApi: './test/example/newApi/index.ts'
 }
 ```
 
@@ -63,7 +64,7 @@ export let newApi: newApiType
 除了开发时候的调试外，还需要添加如下测试：
 
 * （可选）基准测试：在 ```test/benchmark/index.ts``` 中添加。
-* （可选）单元测试：直接新建文件 ```test/newApi.spec.ts``` 即可。
+* （可选）单元测试：直接新建文件 ```test/unit/newApi.spec.ts``` 即可。
 * （必选）ESLint：直接运行 ```npm run lint``` 并保证没有报错。
 
 除了调试的测试文件和必选项外，上述测试都根据实际情况添加即可。

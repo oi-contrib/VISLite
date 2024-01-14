@@ -260,7 +260,7 @@ export default interface CanvasType {
      * 获取原生画笔
      * @param isRegion 是否是区域
      */
-    getContext(isRegion?: boolean): CanvasRenderingContext2D
+    getContext(isRegion?: boolean): CanvasRenderingContext2D | null
 
     /**
      * 获取画布信息

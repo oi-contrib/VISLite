@@ -3,9 +3,8 @@
     <script type='x-shader/x-vertex' id='vs'>
         attribute vec4 a_position;
         uniform mat4 u_camera;
-        uniform mat4 u_matrix;
         void main(){
-            vec4 temp = u_camera * u_matrix * a_position;
+            vec4 temp = u_camera * a_position;
             temp.z = -1.0 * temp.z;
             float dist = 4.0;
             gl_Position = vec4((dist + 1.0) * temp.x, (dist + 1.0) * temp.y, dist * (dist + temp.z) + 1.0 - dist * dist, temp.w * 2.0 * (dist + temp.z));
@@ -44,17 +43,14 @@
     var O_Geometry = geometry.sphere(0, 0.7, 0, 0.5);
 
     // 化学键（左）
-    var L_left_Geometry = geometry.prism(-0.7, 0, 0, 0.16, 0.6, 20);
+    var L_left_Geometry = geometry.cylinder(-0.7, 0, 0, 0.16, 0, 0.7, 0);
 
     // 化学键（右）
-    var L_right_Geometry = geometry.prism(0.7, 0, 0, 0.16, 0.6, 20);
+    var L_right_Geometry = geometry.cylinder(0.7, 0, 0, 0.16, 0, 0.7, 0);
 
     var globalMatrix4 = new Matrix4();
-    var leftMatrix4_value = new Matrix4().rotate(0.75, -0.7, 0, 0, -0.7, 0, -1).value();
-    var rightMatrix4_value = new Matrix4().rotate(0.75, 0.7, 0, 0, 0.7, 0, 1).value();
 
     var u_camera = painter.getUniformLocation(shader.program, "u_camera");
-    var u_matrix = painter.getUniformLocation(shader.program, "u_matrix");
     var a_position = painter.getAttribLocation(shader.program, "a_position");
     var u_color = painter.getUniformLocation(shader.program, "u_color");
 
@@ -69,9 +65,6 @@
 
         // 首先，每次围绕x轴旋转一点点
         painter.uniformMatrix4fv(u_camera, false, globalMatrix4.rotate(0.05, -1, 0.2, 0, 1, 0.2, 0).value());
-
-        // 对于变换矩阵，只有个别需要，因此先使用单位矩阵E初始化
-        painter.uniformMatrix4fv(u_matrix, false, [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]);
 
         // 设置为绘制氧原子颜色
         painter.uniform4f(u_color, 1, 0.2, 0.2, 1.0);
@@ -92,11 +85,9 @@
         painter.uniform4f(u_color, 0.2, 0.3, 0.1, 0.4);
 
         // 绘制化学键（左）
-        painter.uniformMatrix4fv(u_matrix, false, leftMatrix4_value);
         drawGeometry(L_left_Geometry);
 
         // 绘制化学键（右）
-        painter.uniformMatrix4fv(u_matrix, false, rightMatrix4_value);
         drawGeometry(L_right_Geometry);
 
     }

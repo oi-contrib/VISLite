@@ -8,10 +8,8 @@
 }
 
 .bigview>.displays {
-    width: calc(100vw - 80px);
-    height: calc(100vh - 150px);
-    margin-top: 40px;
-    margin-left: 40px;
+    width: 100vw;
+    height: calc(100vh - 60px);
     cursor: pointer;
 }
 
@@ -23,37 +21,6 @@
     background-color: rgba(225, 226, 227, 0.673);
 }
 
-.bigview>.dots {
-    text-align: center;
-    margin-top: 8px;
-    font-size: 0;
-}
-
-.bigview>.dots>span {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    line-height: 20px;
-    border-radius: 50%;
-    margin: 7px 3px;
-    background-color: #e8e8e8;
-    font-size: 12px;
-}
-
-.bigview>.dots>span[active='yes'] {
-    background-color: rgb(0, 0, 0);
-    color: white;
-}
-
-/* <=700px */
-@media (max-width: 700px) {
-    .bigview>.dots {
-        position: fixed;
-        top: 0;
-        right: 10px;
-        margin-top: 13px;
-    }
-}
 
 /* <=700px 且宽高比小于1 */
 @media (max-width: 700px) and (max-aspect-ratio:1) {
@@ -65,15 +32,5 @@
         right: 0;
         position: fixed;
         top: 100vh;
-    }
-}
-
-/* <=700px 且宽高比大于1 */
-@media (max-width: 700px) and (min-aspect-ratio:1) {
-    .bigview>.displays {
-        width: 100vw;
-        height: calc(100vh - 60px);
-        margin-left: 0;
-        margin-top: 0;
     }
 }

@@ -33,6 +33,8 @@ class Painter {
 
         // 圆弧结束端闭合方式，和上一个类似
         "arcEndCap": <arcCapType>'butt'
+    } as {
+        [key: string]: any
     }
 
     private __initConfig = {

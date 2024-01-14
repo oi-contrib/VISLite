@@ -18,7 +18,7 @@ class Canvas extends OralCanvas implements CanvasType {
 
         const width = el.clientWidth, height = el.clientHeight
 
-        let ViewCanvas: HTMLCanvasElement, RegionCanvas: HTMLCanvasElement
+        let ViewCanvas: HTMLCanvasElement, RegionCanvas: HTMLCanvasElement | null = null
 
         const _el = el as any
 

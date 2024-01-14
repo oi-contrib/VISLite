@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>画笔 / SVG</title>
+    <script src="./polyfill/Promise.js"></script>
+    <script src="../../lib/index.umd.js"></script>
+</head>
+
+<body>
+
+    <div id="root" style="width:500px;height:400px;"></div>
+
+    <script>
+        var el = document.getElementById("root");
+
+        var painter = new VISLite.SVG(el);
+
+        console.log(painter);
+
+        painter
+            .appendBoard("text")
+            .config({
+                fontSize: 50,
+                textAlign: "center"
+            })
+            .fillText("这是文字", 200, 200, 45);
+
+        painter
+            .config({
+                strokeStyle: "red",
+            })
+            .appendBoard("path")
+            .beginPath()
+            .moveTo(0, 200)
+            .lineTo(400, 200)
+            .stroke()
+            .appendBoard("path")
+            .beginPath()
+            .moveTo(200, 0)
+            .lineTo(200, 400)
+            .stroke();
+
+        painter.appendBoard("circle").fullCircle(100, 300, 100).bind('click', function (event, target) {
+            console.log(event, this, target);
+        });
+
+
+        painter
+            .appendBoard("arc")
+            .config({
+                arcStartCap: "-round",
+                arcEndCap: "round"
+            })
+            .fullArc(100, 100, 30, 50, 45, 180);
+
+
+        // 渐变色
+
+        painter
+            .appendBoard("circle")
+            .config({
+                fillStyle: painter
+                    .createRadialGradient(50, 25, 100)
+                    .setColor(0, "white")
+                    .setColor(1, "red")
+                    .value()
+            })
+            .fillCircle(300, 120, 70);
+
+        painter
+            .appendBoard("circle")
+            .config({
+                fillStyle: painter
+                    .createLinearGradient(0, 0, 100, 100)
+                    .setColor(0, "white")
+                    .setColor(1, "green")
+                    .value()
+            })
+            .fillCircle(300, 240, 100);
+    </script>
+
+</body>
+
+</html>

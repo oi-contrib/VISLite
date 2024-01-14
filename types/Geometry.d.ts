@@ -19,6 +19,18 @@ export default interface GeometryType {
     cylinder(x: number, y: number, z: number, radius: number, height: number): Array<GeometryResultType>
 
     /**
+     * 圆柱体
+     * @param x
+     * @param y
+     * @param z
+     * @param radius
+     * @param x2
+     * @param y2
+     * @param z2
+     */
+    cylinder(x: number, y: number, z: number, radius: number, x2: number, y2: number, z2: number): Array<GeometryResultType>
+
+    /**
      * 棱柱体
      * @param x
      * @param y
@@ -28,6 +40,19 @@ export default interface GeometryType {
      * @param num
      */
     prism(x: number, y: number, z: number, radius: number, height: number, num: number): Array<GeometryResultType>
+
+    /**
+     * 棱柱体
+     * @param x
+     * @param y
+     * @param z
+     * @param radius
+     * @param x2
+     * @param y2
+     * @param z2
+     * @param num
+     */
+    prism(x: number, y: number, z: number, radius: number, x2: number, y2: number, z2: number, num: number): Array<GeometryResultType>
 
     /**
      * 球体

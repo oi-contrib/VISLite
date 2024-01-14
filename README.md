@@ -15,6 +15,9 @@
     <a href="https://github.com/oi-contrib/VISLite" target='_blank'>
         <img alt="GitHub repo stars" src="https://img.shields.io/github/stars/oi-contrib/VISLite?style=social">
     </a>
+     <a href="https://gitee.com/oi-contrib/VISLite" target='_blank'>
+        <img alt="Gitee repo stars" src="https://gitee.com/oi-contrib/VISLite/badge/star.svg?theme=dark">
+    </a>
 </p>
 
 # VISLite
@@ -49,6 +52,22 @@
 
 画笔除了像上面那样为了方便交互而补充区域的设计外，还对原来的API进行了一次抽象，使得API更友好简单```（比如WebGL，即使不会3D的人也可以轻松使用，而SVG的使用，你无需去记忆那些晦涩难懂的属性）```，同时，我们还抹平了不同版本浏览器等之间的差异。
 
+### 数据驱动的3D
+
+通过一个简单```立方体JSON```表达立方体意图，从而快速实现3D图表开发：
+
+<img src="https://oi-contrib.github.io/VISLite/images/docs/ring-simple.png" width="400"/>
+
+> 上述例子的运行地址：[环图](https://oi-contrib.github.io/VISLite/#/example/webgl/ring-simple)。
+
+### 立方体运算
+
+借助我们提供的[立方体运算](https://oi-contrib.github.io/VISLite/#/api/geometry)就可以快速获得常见的立方体的```立方体JSON```数据：
+
+<img src="https://oi-contrib.github.io/VISLite/images/docs/H2O.png" width="400"/>
+
+> 上述例子的运行地址：[水分子式H2O](https://oi-contrib.github.io/VISLite/#/example/webgl/H2O)。
+
 ### 支持跨端开发
 
 除了Web端外，我们还针对uni-app、微信小程序等端进行了支持，并且不同端API保持一致，大大提高了代码的复用性：
@@ -63,7 +82,7 @@
 
 当然，按照业务和UI设计，快速开发一个大屏也是相对容易的：
 
-<img src="https://oi-contrib.github.io/VISLite/images/docs/bigview.jpeg" width="500"/>
+<img src="https://oi-contrib.github.io/VISLite/images/docs/bigview.jpeg" width="700"/>
 
 > 上述例子的运行地址：[数据看板大屏](https://oi-contrib.github.io/VISLite/#/bigview?page=databoard)。
 

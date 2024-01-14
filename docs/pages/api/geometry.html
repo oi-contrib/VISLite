@@ -1,5 +1,5 @@
 <header>
-    几何体运算
+    立方体运算
 </header>
 <div class="version">
     0.5.0 新增
@@ -17,7 +17,7 @@ import { Geometry } from 'vislite'
 let geometry = new Geometry(option)
 </pre>
 <p>
-    返回几何体对象，其中option是一个json，可选，其属性如下：
+    返回立方体对象，其中option是一个json，可选，其属性如下：
 </p>
 <table>
     <thead>
@@ -77,7 +77,7 @@ let geometry = new Geometry(option)
     geometry.config(option)
 </pre>
 <h2>
-    几何体
+    立法体
 </h2>
 <p>
     所有的方法返回的
@@ -86,9 +86,12 @@ let geometry = new Geometry(option)
 </p>
 <pre tag="javascript">
 Array&lt;{
-    points: number[]
-    length: number
-    method: "LINES" | "INE_STRIP" | "LINE_LOOP" | "TRIANGLES" | "TRIANGLE_STRIP" | "TRIANGLE_FAN"
+    name: string // 小块名称
+    points: number[] // 点的位置或法向量值
+    length: number // 点个数
+
+    // 当前点应该使用何种方法绘制
+    method: "LINES" | "LINE_STRIP" | "LINE_LOOP" | "TRIANGLES" | "TRIANGLE_STRIP" | "TRIANGLE_FAN"
 }&gt;
 </pre>
 <h3>
@@ -97,11 +100,29 @@ Array&lt;{
 <pre tag="javascript">
 let result = geometry.cylinder(x, y, z, radius, height)
 </pre>
+<p>
+    或者直接设置起终点：
+</p>
+<div class="version">
+    0.7.0 新增
+</div>
+<pre tag="javascript">
+let result = geometry.cylinder(x, y, z, radius, x2, y2, z2)
+</pre>
 <h3>
     棱柱体
 </h3>
 <pre tag="javascript">
 let result = geometry.prism(x, y, z, radius, height, num)
+</pre>
+<p>
+    或者直接设置起终点：
+</p>
+<div class="version">
+    0.7.0 新增
+</div>
+<pre tag="javascript">
+let result = geometry.prism(x, y, z, radius, x2, y2, z2, num)
 </pre>
 <h3>
     球体

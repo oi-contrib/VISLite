@@ -32,7 +32,7 @@ const useShader = (painter: WebGLRenderingContext, vshaderSource: string, fshade
     const fragmentShader = loadShader(painter, painter.FRAGMENT_SHADER, fshaderSource)
 
     // 创建一个着色器程序
-    const glProgram = painter.createProgram()
+    const glProgram = painter.createProgram() as WebGLProgram
 
     // 把前面创建的两个着色器对象添加到着色器程序中
     painter.attachShader(glProgram, vertexShader)
@@ -52,7 +52,7 @@ class ShaderObject {
 
     private __painter: WebGLRenderingContext
 
-    program: WebGLProgram
+    program: WebGLProgram | null = null
 
     constructor(painter: WebGLRenderingContext) {
         this.__painter = painter
@@ -67,7 +67,7 @@ class ShaderObject {
 
     // 编译着色器程序
     compile(vshaderSource: string, fshaderSource: string) {
-        this.program = useShader(this.__painter, vshaderSource, fshaderSource)
+        this.program = useShader(this.__painter, vshaderSource, fshaderSource) as WebGLProgram
         return this
     }
 

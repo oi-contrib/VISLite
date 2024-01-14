@@ -26,7 +26,7 @@
         如果是编辑文档，访问： http://127.0.0.1:20000/docs/index.html 。
     </li>
     <li>
-        如果是调试功能，访问： http://127.0.0.1:20000/test/ 后选择对应的用例即可。
+        如果是调试功能，访问： http://127.0.0.1:20000/test/example 后选择对应的用例即可。
     </li>
 </ul>
 <p>
@@ -34,16 +34,17 @@
 </p>
 <pre>
 - test
-    - newApi
-        - index.html
-        - index.ts
+    - example
+        - newApi
+            - index.html
+            - index.ts
 </pre>
 <p>
     然后在 <span class="special">build/webpack.config.js</span> 中添加配置：
 </p>
 <pre tag="javascript">
 entry: {
-    newApi: './test/newApi/index.ts'
+    example_newApi: './test/example/newApi/index.ts'
 }
 </pre>
 <p>
@@ -90,7 +91,7 @@ export let newApi: newApiType
         （可选）基准测试：在 <span class="special">test/benchmark/index.ts</span> 中添加。
     </li>
     <li>
-        （可选）单元测试：直接新建文件 <span class="special">test/newApi.spec.ts</span> 即可。
+        （可选）单元测试：直接新建文件 <span class="special">test/unit/newApi.spec.ts</span> 即可。
     </li>
     <li>
         （必选）ESLint：直接运行 <span class="special">npm run lint</span> 并保证没有报错。
@@ -110,7 +111,7 @@ export let newApi: newApiType
         commit 内容请说明清楚本次 PR 的主要目的和改动，描述清楚即可。
     </li>
     <li>
-        提交之前确保进行了完善的测试。
+        提交之前尽力确保进行了完整的测试。
     </li>
     <li>
         确保 PR 提交到 dev 分支。

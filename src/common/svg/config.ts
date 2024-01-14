@@ -30,20 +30,24 @@ export const initText = (
     setAttribute(
         el,
         "dy",
-        {
-            top: config["fontSize"] * 0.5,
+        ({
+            top: (config["fontSize"] as number) * 0.5,
             middle: 0,
-            bottom: -config["fontSize"] * 0.5,
-        }[config.textBaseline]
+            bottom: -(config["fontSize"] as number) * 0.5,
+        } as {
+            [key: string]: number
+        })[config.textBaseline as string]
     )
 
     setStyle(el, {
         // 文字对齐方式
-        "text-anchor": {
+        "text-anchor": ({
             left: "start",
             right: "end",
             center: "middle",
-        }[config.textAlign],
+        } as {
+            [key: string]: string
+        })[config.textAlign as string],
         "dominant-baseline": "central",
 
         // 文字大小和字体设置

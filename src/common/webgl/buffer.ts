@@ -51,7 +51,7 @@ class BufferObject {
         this.__painter = painter
         this.__isElement = isElement
 
-        this.__buffer = newBuffer(painter)
+        this.__buffer = newBuffer(painter) as WebGLBuffer
         this.__type = isElement ? painter.ELEMENT_ARRAY_BUFFER : painter.ARRAY_BUFFER
     }
 

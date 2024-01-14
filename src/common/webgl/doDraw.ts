@@ -39,10 +39,10 @@ export default function (type: string, painter: WebGLRenderingContext, mesh: mes
 
         // 写入颜色
         painter.uniform4f(painter.getUniformLocation(shader.program, "u_color")
-            , mesh.material.color.r
-            , mesh.material.color.g
-            , mesh.material.color.b
-            , mesh.material.color.alpha)
+            , mesh.material.color?.r as number
+            , mesh.material.color?.g as number
+            , mesh.material.color?.b as number
+            , mesh.material.color?.alpha as number)
     }
 
     // 多颜色
@@ -50,25 +50,25 @@ export default function (type: string, painter: WebGLRenderingContext, mesh: mes
 
         // 写入颜色序列
         new BufferObject(painter).use()
-            .write(mesh.material.colors.array as Float32Array)
-            .divide(painter.getAttribLocation(shader.program, "a_color"), mesh.material.colors.itemSize, mesh.material.colors.itemSize, 0)
+            .write(mesh.material.colors?.array as Float32Array)
+            .divide(painter.getAttribLocation(shader.program, "a_color"), mesh.material.colors?.itemSize as number, mesh.material.colors?.itemSize as number, 0)
 
     }
 
     // 立方纹理
     else if ("cube" in mesh.material) {
 
-        const size = (mesh.material.cube.right.image.value as any).width
+        const size = (mesh.material.cube?.right?.image.value as any).width
 
         painter.uniform1i(painter.getUniformLocation(shader.program, "u_texture"), 0)
 
         getTexture(type, painter, 'cube').useCube([
-            mesh.material.cube.right.image.value,
-            mesh.material.cube.left.image.value,
-            mesh.material.cube.top.image.value,
-            mesh.material.cube.bottom.image.value,
-            mesh.material.cube.far.image.value,
-            mesh.material.cube.near.image.value
+            mesh.material.cube?.right?.image.value,
+            mesh.material.cube?.left?.image.value,
+            mesh.material.cube?.top?.image.value,
+            mesh.material.cube?.bottom?.image.value,
+            mesh.material.cube?.far?.image.value,
+            mesh.material.cube?.near?.image.value
         ], size, size)
 
     }
@@ -79,10 +79,10 @@ export default function (type: string, painter: WebGLRenderingContext, mesh: mes
         painter.uniform1i(painter.getUniformLocation(shader.program, "u_sampler"), 0)
 
         new BufferObject(painter).use()
-            .write(mesh.geometry.attributes.uv.array as Float32Array)
-            .divide(painter.getAttribLocation(shader.program, "a_textcoord"), mesh.geometry.attributes.uv.itemSize, 2, 0)
+            .write(mesh.geometry.attributes.uv?.array as Float32Array)
+            .divide(painter.getAttribLocation(shader.program, "a_textcoord"), mesh.geometry.attributes.uv?.itemSize as number, 2, 0)
 
-        getTexture(type, painter, '2d').useImage(mesh.material.image.value)
+        getTexture(type, painter, '2d').useImage(mesh.material.image?.value)
 
     }
 

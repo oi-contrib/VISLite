@@ -201,6 +201,7 @@ body>div.menu {
 
 body>div.menu[fullview='yes'] {
     width: 100vw;
+    z-index: 2;
 }
 
 body>div.menu[fullview='no'] {

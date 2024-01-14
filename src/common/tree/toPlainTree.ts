@@ -22,7 +22,7 @@ export default function (initTree: any, config: TreeConfigType, noOpens: {}) {
         }
     } else {
 
-        const beforeDis = []
+        const beforeDis: Array<number> = []
         let size = 0, maxDeep = 0
 
         if (noOpens[rootid]) {

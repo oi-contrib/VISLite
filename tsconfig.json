@@ -1,8 +1,13 @@
 {
   "compilerOptions": {
     "sourceMap": true,
-    "target": "es5",
-    "module": "es6",
-    "moduleResolution": "node"
+    "ignoreDeprecations": "5.0",
+    "target": "ES5",
+    "module": "ES6",
+    "moduleResolution": "node",
+    "strict": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "strictPropertyInitialization": false,
+    "noImplicitThis": false
   }
 }

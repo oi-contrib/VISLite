@@ -25,13 +25,13 @@ class Canvas extends PainterRender {
     // 2023年7月6日 于南京
     private __regionAssemble = assemble(0, 255, 10, 3)
 
-    constructor(ViewCanvas: HTMLCanvasElement, RegionCanvas: HTMLCanvasElement, opts: CanvasOptsType = {}) {
+    constructor(ViewCanvas: HTMLCanvasElement, RegionCanvas: HTMLCanvasElement | null, opts: CanvasOptsType = {}) {
         super(
             ViewCanvas,
             opts,
             RegionCanvas ? new PainterRender(RegionCanvas, {
                 willReadFrequently: true,
-            }) : null, true
+            }) : undefined, true
         )
 
         this.setRegion("")

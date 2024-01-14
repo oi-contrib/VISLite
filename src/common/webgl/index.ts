@@ -21,7 +21,9 @@ class WebGL {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     private __getColor = (x: number, y: number) => "rgba(0,0,0,1)"
 
-    private __regionList = {} //区域映射表
+    private __regionList: {
+        [key: string | number]: Array<number>
+    } = {} //区域映射表
     private __regionAssemble = assemble(0, 1, 0.2, 3)
 
     private __regionName = "" // 当前绘制的内容名称
@@ -43,7 +45,7 @@ class WebGL {
 
     private __unique: number
 
-    constructor(ViewCanvas: HTMLCanvasElement, RegionCanvas: HTMLCanvasElement) {
+    constructor(ViewCanvas: HTMLCanvasElement, RegionCanvas: HTMLCanvasElement | null) {
         this.__unique = new Date().valueOf()
 
         this.painter = getWebGLContext(ViewCanvas, scale)
@@ -111,7 +113,7 @@ class WebGL {
         if (!isUpdateRegion) needUpdate = true
 
         const meshWorld = {
-            matrix: object3D.matrix.value()
+            matrix: object3D.matrix?.value() as Array<number>
         }
 
         const globalWorld = {
@@ -184,7 +186,7 @@ class WebGL {
     }
 
     // 设置当前绘制区域名称
-    setRegion(regionName: string | number) {
+    setRegion(regionName: string | number | undefined) {
         this.__regionName = regionName + ""
 
         if (regionName) {

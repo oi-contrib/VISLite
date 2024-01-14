@@ -69,10 +69,10 @@ class TextureObject {
         this.__type = {
             "2d": painter.TEXTURE_2D,
             "cube": painter.TEXTURE_CUBE_MAP
-        }[type]
+        }[type] as number
 
         // 创建纹理
-        this.__texture = initTexture(painter, this.__type, unit)
+        this.__texture = initTexture(painter, this.__type, unit) as WebGLTexture
 
         // 配置纹理
         painter.texParameteri(this.__type, painter.TEXTURE_MIN_FILTER, painter.NEAREST)

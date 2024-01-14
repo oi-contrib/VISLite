@@ -68,8 +68,10 @@ export default function (callback: callbackFun) {
     })
 
     // 鼠标控制
-    let mouseP = null;
-    const doMove = function (event) {
+    let mouseP: {
+        [key: string]: number
+    } | null = null;
+    const doMove = function (event: any) {
 
         // 单纯移动
         if (mouseP == null) {

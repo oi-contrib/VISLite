@@ -123,7 +123,7 @@ v0.5.0:
       - 优化改造
         1、一些types定义优化（比如 Array<number> 改成更具体的 [number, number] 类型）
       - 新增功能
-        1、Geometry 几何体运算
+        1、Geometry 立方体运算
             * cylinder 圆柱体
             * prism 棱柱体
             * sphere 球体
@@ -156,7 +156,7 @@ v0.6.0:
         2、Matrix4 变换矩阵
             * setValue 设置内置矩阵
 v0.7.0:
-    date:
+    date:2023-01-14
     changes:
       - 修复bug
         1、修复ui-canvas在HBuilderX中使用“发行”打包成H5后css代码未生效问题
@@ -164,3 +164,8 @@ v0.7.0:
       - 优化改造
         1、一些types定义优化
             * 针对svg新增：svgElType、svgBoardType
+        2、Geometry 立方体运算
+            * 针对 “prism 棱柱体” 和 “cylinder 圆柱体” 新增直接设置起终点方式
+            * 给拼接成立方体的每个小片定义一个名称
+        3、开启严格模式并进行相关代码调整
+          （使得更多问题提前暴露出来，提高代码质量）

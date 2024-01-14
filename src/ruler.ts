@@ -106,7 +106,7 @@ export default function (maxValue: number, minValue: number, num: number, option
     const balanceMax = () => {
         const rulerArray_temp = []
 
-        const changeDist = rulerArray[rulerArray.length - 1] - option.max
+        const changeDist = rulerArray[rulerArray.length - 1] - (option?.max as number)
         for (let index = 0; index < rulerArray.length; index++) {
             if (index + 1 < rulerArray.length && rulerArray[index + 1] - changeDist < minValue) {
                 // 多余的
@@ -121,7 +121,7 @@ export default function (maxValue: number, minValue: number, num: number, option
     const balanceMin = () => {
         const rulerArray_temp = []
 
-        const changeDist = rulerArray[0] - option.min
+        const changeDist = rulerArray[0] - (option?.min as number)
         for (let index = 0; index < rulerArray.length; index++) {
             rulerArray_temp[index] = rulerArray[index] - changeDist
             if (maxValue <= rulerArray_temp[index]) break
@@ -133,23 +133,23 @@ export default function (maxValue: number, minValue: number, num: number, option
     if (option) {
 
         // 上下界限制
-        if ('max' in option && 'min' in option && option.max >= maxValue && option.min <= minValue) {
+        if ('max' in option && 'min' in option && (option.max as number) >= maxValue && (option.min as number) <= minValue) {
 
             const isAnswer = () => {
 
                 // 先判断原始的是否可行
-                if (rulerArray[0] >= option.min && rulerArray[rulerArray.length - 1] <= option.max) return true
+                if (rulerArray[0] >= (option.min as number) && rulerArray[rulerArray.length - 1] <= (option.max as number)) return true
 
                 // 再判断max调整是否可行
                 const rulerArray_max = balanceMax()
-                if (rulerArray_max[0] >= option.min && rulerArray_max[rulerArray_max.length - 1] <= option.max) {
+                if (rulerArray_max[0] >= (option.min as number) && rulerArray_max[rulerArray_max.length - 1] <= (option.max as number)) {
                     rulerArray = rulerArray_max
                     return true
                 }
 
                 // 再判断max调整是否可行
                 const rulerArray_min = balanceMin()
-                if (rulerArray_min[0] >= option.min && rulerArray_min[rulerArray_max.length - 1] <= option.max) {
+                if (rulerArray_min[0] >= (option.min as number) && rulerArray_min[rulerArray_max.length - 1] <= (option.max as number)) {
                     rulerArray = rulerArray_min
                     return true
                 }
@@ -170,16 +170,16 @@ export default function (maxValue: number, minValue: number, num: number, option
         }
 
         // 单界限制
-        if ('max' in option && option.max >= maxValue) {
+        if ('max' in option && (option.max as number) >= maxValue) {
 
             // 上越界了
-            if (option.max < rulerArray[rulerArray.length - 1]) {
+            if ((option.max as number) < rulerArray[rulerArray.length - 1]) {
                 rulerArray = balanceMax()
             }
-        } else if ('min' in option && option.min <= minValue) {
+        } else if ('min' in option && (option.min as number) <= minValue) {
 
             // 下越界了
-            if (option.min > rulerArray[0]) {
+            if ((option.min as number) > rulerArray[0]) {
                 rulerArray = balanceMin()
             }
         }

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>辅助 / resizeObserver</title>
+    <script src="./polyfill/Promise.js"></script>
+    <script src="../../lib/index.umd.js"></script>
+    <style>
+        div {
+            outline: 1px solid red;
+            height: 50px;
+            margin: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="div1" onclick="stop1()"></div>
+    <div id="div2" onclick="stop2()"></div>
+    <div id="div3" style="width:300px" onclick="stop3()"></div>
+
+    <script>
+        window.stop1 = VISLite.resizeObserver(document.getElementById('div1'), VISLite.throttle(function () {
+            console.log('div1');
+        }, {
+            time: 300,
+            opportunity: "end",
+            keep: true
+        }));
+
+        window.stop2 = VISLite.resizeObserver(document.getElementById('div2'), function () {
+            console.log('div2');
+        });
+
+        window.stop3 = VISLite.resizeObserver(document.getElementById('div3'), function () {
+            console.log('div3');
+        });
+    </script>
+
+</body>
+
+</html>

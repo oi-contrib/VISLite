@@ -2,11 +2,11 @@ interface OptsType {
     preserveDrawingBuffer?: boolean
 }
 export default function (canvas: HTMLCanvasElement, scale: number, opts: OptsType = {}) {
-    const names = ["webgl", "experimental-webgl", "webkit-3d", "moz-webgl"]
-    let painter = null
+    const names = ["experimental-webgl", "webkit-3d", "moz-webgl"]
+    let painter = canvas.getContext("webgl", opts) as WebGL2RenderingContext
     for (let i = 0; i < names.length; i++) {
         try {
-            painter = canvas.getContext(names[i], opts)
+            painter = canvas.getContext(names[i], opts) as WebGL2RenderingContext
         } catch (e) { }
         if (painter) break
     }

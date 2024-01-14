@@ -14,7 +14,7 @@ export default function (normal: boolean, x: number, y: number, z: number, radiu
 
     const deg = Math.PI * 2 / num, degHalf = Math.PI * 2 / (num * 2)
 
-    let endPosition: [number, number], normalPosition = []
+    let endPosition: [number, number], normalPosition: [number, number, number] | [] = []
     for (let i = 0; i < num; i++) {
 
         endPosition = rotate(x, z, deg, ...beginPosition)

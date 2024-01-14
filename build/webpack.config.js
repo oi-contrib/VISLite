@@ -8,7 +8,9 @@ module.exports = {
         rules: [
             {
                 test: /\.tsx?$/,
-                loader: 'ts-loader'
+                use: [{
+                    loader: 'ts-loader'
+                }]
             }, {
                 test: /\.c$/,
                 loader: './build/shader-loader.js'
@@ -19,27 +21,36 @@ module.exports = {
     entry: {
 
         // 用例测试
-        canvas: './test/canvas/index.ts',
-        svg: './test/svg/index.ts',
-        eoap: './test/eoap/index.ts',
-        animation: './test/animation/index.ts',
-        cardinal: './test/cardinal/index.ts',
-        help: './test/help/index.ts',
-        webgl: './test/webgl/index.ts',
-        "webgl-single": './test/webgl-single/index.ts',
-        mercator: './test/mercator/index.ts',
-        resizeObserver: './test/resizeObserver/index.ts',
-        tree: './test/tree/index.ts',
-        treeLayout: './test/treeLayout/index.ts',
-        'webgl-shader': './test/webgl-shader/index.ts',
-        geometry: './test/geometry/index.ts',
+        example_canvas: './test/example/canvas/index.ts',
+        example_svg: './test/example/svg/index.ts',
+        example_eoap: './test/example/eoap/index.ts',
+        example_animation: './test/example/animation/index.ts',
+        example_cardinal: './test/example/cardinal/index.ts',
+        example_help: './test/example/help/index.ts',
+        example_webgl: './test/example/webgl/index.ts',
+        "example_webgl-single": './test/example/webgl-single/index.ts',
+        example_mercator: './test/example/mercator/index.ts',
+        example_resizeObserver: './test/example/resizeObserver/index.ts',
+        example_tree: './test/example/tree/index.ts',
+        example_treeLayout: './test/example/treeLayout/index.ts',
+        'example_webgl-shader': './test/example/webgl-shader/index.ts',
+        example_geometry: './test/example/geometry/index.ts',
 
         // 基准测试
         benchmark: './test/benchmark/index.ts'
 
     },
     output: {
-        filename: pathData => './test/' + pathData.chunk.name + '/dist.js'
+        filename: pathData => './test/' + pathData.chunk.name.replace(/\_/g, '/') + '/dist.js',
+
+        // https://webpack.js.org/configuration/output/#outputenvironment
+        environment: {
+            arrowFunction: false, // 箭头函数
+            const: false,
+            optionalChaining: false, // obj?.a or obj?.()
+            destructuring: false, // { a, b } = obj
+            forOf: false, // for (const x of array) { ... }
+        },
     },
     devServer: {
         static: './',
