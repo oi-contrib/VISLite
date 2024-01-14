@@ -156,7 +156,7 @@ v0.6.0:
         2、Matrix4 变换矩阵
             * setValue 设置内置矩阵
 v0.7.0:
-    date:2023-01-14
+    date:2024-01-14
     changes:
       - 修复bug
         1、修复ui-canvas在HBuilderX中使用“发行”打包成H5后css代码未生效问题
