@@ -1,5 +1,7 @@
 export default interface ShaderType {
 
+    program: WebGLProgram
+
     /**
      * 使用这个程序
      * （后于编译）

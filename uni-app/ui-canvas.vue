@@ -1,6 +1,13 @@
 <template>
-  <view :class="cover || isH5 ? 'cover-view' : 'normal-view'" :style="{ display: 'inline-block' }">
-    <view v-if="!cover && !isH5" :class="'view-img view-' + uniqueid" @touchstart="doitstart">
+  <view
+    :class="cover || isH5 ? 'cover-view' : 'normal-view'"
+    :style="{ display: 'inline-block' }"
+  >
+    <view
+      v-if="!cover && !isH5"
+      :class="'view-img view-' + uniqueid"
+      @touchstart="doitstart"
+    >
       <image
         :style="{ width: width + 'px', height: height + 'px' }"
         :src="viewImg"
@@ -9,16 +16,26 @@
 
     <!-- #ifdef MP-ALIPAY -->
     <canvas
+      :width="2 * width + 'px'"
+      :height="2 * height + 'px'"
       class="painter"
       :id="'painter-' + uniqueid"
       @touchstart="doitstart"
-      :style="[{ width: width + 'px', height: height + 'px'}, cover || isH5 ? {} : {position: 'fixed', left: '50000px'}]"
+      :style="[
+        { width: width + 'px', height: height + 'px' },
+        cover || isH5 ? {} : { position: 'fixed', left: '50000px' },
+      ]"
     ></canvas>
     <canvas
       v-if="region"
       class="region"
       :id="'region-' + uniqueid"
-      :style="{ width: width + 'px', height: height + 'px', position: 'fixed', left: '50000px' }"
+      :style="{
+        width: width + 'px',
+        height: height + 'px',
+        position: 'fixed',
+        left: '50000px',
+      }"
     ></canvas>
     <!-- #endif -->
     <!-- #ifdef MP-WEIXIN -->
@@ -26,13 +43,21 @@
       class="painter"
       canvas-id="painter"
       @touchstart="doitstart"
-      :style="[{ width: width + 'px', height: height + 'px'}, cover || isH5 ? {} : {position: 'fixed', left: '50000px'}]"
+      :style="[
+        { width: width + 'px', height: height + 'px' },
+        cover || isH5 ? {} : { position: 'fixed', left: '50000px' },
+      ]"
     ></canvas>
     <canvas
       v-if="region"
       class="region"
       canvas-id="region"
-      :style="{ width: width + 'px', height: height + 'px', position: 'fixed', left: '50000px' }"
+      :style="{
+        width: width + 'px',
+        height: height + 'px',
+        position: 'fixed',
+        left: '50000px',
+      }"
     ></canvas>
     <!-- #endif -->
     <!-- #ifndef MP-WEIXIN||MP-ALIPAY -->
@@ -40,13 +65,21 @@
       class="painter"
       :canvas-id="'painter-' + uniqueid"
       @touchstart="doitstart"
-      :style="[{ width: width + 'px', height: height + 'px'}, cover || isH5 ? {} : {position: 'fixed', left: '50000px'}]"
+      :style="[
+        { width: width + 'px', height: height + 'px' },
+        cover || isH5 ? {} : { position: 'fixed', left: '50000px' },
+      ]"
     ></canvas>
     <canvas
       v-if="region"
       class="region"
       :canvas-id="'region-' + uniqueid"
-      :style="{ width: width + 'px', height: height + 'px', position: 'fixed', left: '50000px' }"
+      :style="{
+        width: width + 'px',
+        height: height + 'px',
+        position: 'fixed',
+        left: '50000px',
+      }"
     ></canvas>
     <!-- #endif -->
   </view>
@@ -106,6 +139,16 @@ export default {
       regionid = "region-" + this.uniqueid;
       // #endif
 
+      // #ifdef MP-ALIPAY
+      painter.scale(2, 2);
+      // #endif
+
+      let scaleSize = 1;
+
+      // #ifdef MP-ALIPAY
+      scaleSize = 2;
+      // #endif
+
       let _this = this;
       this.help.instance = new OralCanvas(
         {
@@ -146,7 +189,8 @@ export default {
                 return region;
               },
             }
-          : null
+          : null,
+        scaleSize
       );
       this.help.instance.draw = (reserve = false, callback = () => {}) => {
         painter.draw(reserve, () => {

@@ -24,11 +24,10 @@ assignees: ''
 **实际结果**
 [这里请贴上你的报错截图或文字]
 
-
 **系统信息:**
- - 发行平台: [如 微信小程序、H5平台、5+ App等]
- - 操作系统 [如 iOS 12.1.2、Android 7.0]
- - 设备信息 [如 iPhone8 Plus]
+ - 运行平台: [如 微信小程序、H5平台、5+ App、IE9、chrome（版本 120.0.6099.216（正式版本） (x86_64)）等]
+ - 操作系统: [如 iOS 12.1.2、Android 7.0、macOS monterey 12.3]
+ - 设备信息: [如 iPhone8 Plus、MacBook Air (13-inch, Early 2015)]
 
 **补充信息**
 [可选]

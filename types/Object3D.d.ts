@@ -1,6 +1,6 @@
 import Matrix4Type from './Matrix4'
 
-export type geometryType = "LINES" | "INE_STRIP" | "LINE_LOOP" | "TRIANGLES" | "TRIANGLE_STRIP" | "TRIANGLE_FAN"
+export type geometryType = "LINES" | "LINE_STRIP" | "LINE_LOOP" | "TRIANGLES" | "TRIANGLE_STRIP" | "TRIANGLE_FAN"
 
 export interface meshType {
 

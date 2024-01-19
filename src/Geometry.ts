@@ -46,7 +46,6 @@ class Geometry implements GeometryType {
     // 棱柱体
     prism(x: number, y: number, z: number, radius: number, x2: number, y2: number, z2?: number, num?: number): Array<GeometryResultType> {
 
-
         let height: number, rotateLine: rotateLineType | null = null
 
         if (arguments.length == 6) {

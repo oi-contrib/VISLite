@@ -20,8 +20,6 @@
             fontSize: 9
         }), pid, dist;
 
-
-        var demo = {}
         var treeLayout = new TreeLayout({
             "id": function (treedata) {
                 return treedata.name
@@ -89,8 +87,8 @@
             vis: true
         });
 
-        mycontent.addEventListener('click', event => {
-            painter.getRegion(event.offsetX, event.offsetY).then(regionName => {
+        mycontent.addEventListener('click', function (event) {
+            painter.getRegion(event.offsetX, event.offsetY).then(function (regionName) {
                 if (regionName) {
                     treeLayout.toggleNode(regionName);
                 }

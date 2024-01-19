@@ -52,7 +52,7 @@ class ShaderObject {
 
     private __painter: WebGLRenderingContext
 
-    program: WebGLProgram | null = null
+    program: WebGLProgram
 
     constructor(painter: WebGLRenderingContext) {
         this.__painter = painter

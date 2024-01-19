@@ -65,7 +65,7 @@ class Painter {
 
     }
 
-    constructor(canvas: HTMLCanvasElement, opts: CanvasOptsType = {}, region?: Painter, isPainter = false) {
+    constructor(canvas: HTMLCanvasElement, opts: CanvasOptsType = {}, region?: Painter, isPainter = false, scaleSize = 1) {
         this.painter = canvas.getContext("2d", opts) as CanvasRenderingContext2D
         this.__region = region
         this.__isPainter = isPainter

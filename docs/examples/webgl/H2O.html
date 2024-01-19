@@ -1,24 +1,4 @@
 <div class="view">
-    <!-- 顶点着色器 -->
-    <script type='x-shader/x-vertex' id='vs'>
-        attribute vec4 a_position;
-        uniform mat4 u_camera;
-        void main(){
-            vec4 temp = u_camera * a_position;
-            temp.z = -1.0 * temp.z;
-            float dist = 4.0;
-            gl_Position = vec4((dist + 1.0) * temp.x, (dist + 1.0) * temp.y, dist * (dist + temp.z) + 1.0 - dist * dist, temp.w * 2.0 * (dist + temp.z));
-        }
-    </script>
-
-    <!-- 片段着色器 -->
-    <script type='x-shader/x-fragment' id='fs'>
-        precision mediump float;
-        uniform vec4 u_color;
-        void main(){
-            gl_FragColor = u_color;
-        }
-    </script>
 
     <!-- 绘制图表 -->
     <div id="content" class="content"></div>
@@ -30,7 +10,7 @@
     var geometry = new Geometry();
 
     var painter = getWebGLContext(document.getElementById("content"));
-    var shader = new Shader(painter).compile(document.getElementById("vs").innerText, document.getElementById("fs").innerText).use();
+    var shader = new Shader(painter).compile("color").use();
     var buffer = new Buffer(painter).use();
 
     painter.enable(painter.DEPTH_TEST);
@@ -50,7 +30,7 @@
 
     var globalMatrix4 = new Matrix4();
 
-    var u_camera = painter.getUniformLocation(shader.program, "u_camera");
+    var u_camera = painter.getUniformLocation(shader.program, "u_matrix");
     var a_position = painter.getAttribLocation(shader.program, "a_position");
     var u_color = painter.getUniformLocation(shader.program, "u_color");
 
