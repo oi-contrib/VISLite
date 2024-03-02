@@ -1,8 +1,19 @@
 import rotate from '../../rotate'
 
-// 棱柱垂直部分
-
-export default function (normal: boolean, x: number, y: number, z: number, radius: number, height: number, num: number) {
+/**
+ * 棱柱垂直部分
+ * @param normal 是否需要法向量
+ * @param x 中心
+ * @param y
+ * @param z
+ * @param radius 半径
+ * @param height 高
+ * @param num 份数
+ * @param beginDeg 开始弧度，默认0
+ * @param deg 跨越弧度，默认2pi
+ * @returns 点数组
+ */
+export default function (normal: boolean, x: number, y: number, z: number, radius: number, height: number, num: number, beginDeg: number = 0, deg: number = Math.PI * 2) {
     const points = []
     let beginPosition: [number, number]
 
@@ -12,12 +23,16 @@ export default function (normal: boolean, x: number, y: number, z: number, radiu
         beginPosition = [x + radius, z]
     }
 
-    const deg = Math.PI * 2 / num, degHalf = Math.PI * 2 / (num * 2)
+    if (beginDeg != 0) {
+        beginPosition = rotate(x, z, beginDeg, ...beginPosition)
+    }
+
+    const perDeg = deg / num, degHalf = deg / (num * 2)
 
     let endPosition: [number, number], normalPosition: [number, number, number] | [] = []
     for (let i = 0; i < num; i++) {
 
-        endPosition = rotate(x, z, deg, ...beginPosition)
+        endPosition = rotate(x, z, perDeg, ...beginPosition)
 
         if (normal) {
             const halfPosition = rotate(x, z, degHalf, ...beginPosition)

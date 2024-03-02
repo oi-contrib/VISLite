@@ -306,11 +306,29 @@ painter.config({
 </h3>
 <pre tag="javascript">painter.clearRect(x, y, w, h)</pre>
 <h3>
+    drawImage
+</h3>
+<div class="version">
+    0.8.0 新增
+</div>
+<p>
+    绘制图片到画布：
+</p>
+<pre tag="javascript">painter.drawImage(img, x, y, w, h).then(()=>{
+    // todo
+})</pre>
+<p>
+    其中img表示需要绘制的图片，可以是Image对象或url；(x,y)表示图片绘制到的位置，w和h分别表示绘制位置的宽和高。
+</p>
+<h3>
     toDataURL
 </h3>
 <div class="version">
     0.2.0 新增
 </div>
+<p>
+    获取画布的base64地址：
+</p>
 <pre tag="javascript">painter.toDataURL().then(url=>{
     // todo
 })</pre>

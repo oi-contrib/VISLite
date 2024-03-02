@@ -25,8 +25,17 @@ let painter = new WebGL(el)
 <pre tag="javascript">
 new WebGL(el, {
 
-    // Boolean类型，默认true，表示是否支持区域管理（v0.4.1开始支持）
-    "region": boolean
+    // 布尔类型，默认true，表示是否支持区域管理（v0.4.1开始支持）
+    "region": boolean,
 
+    // 字符串类型，设置画布缩放模式，可选（v0.8.0开始支持）
+    "mode"：string
 })
 </pre>
+<h4>
+    mode
+</h4>
+<p>
+    画布缩放模式表示，如果画布和页面存放位置大小比例不一致的时候，如何出来，具体的可以查看：
+</p>
+<button tag="WebGL-mode" type="explain">WebGL画布缩放模式（mode）</button>

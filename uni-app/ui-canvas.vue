@@ -86,6 +86,7 @@
 </template>
 <script>
 import OralCanvas from "../lib/OralCanvas/index.es.js";
+import drawImage from "./drawImage.js";
 export default {
   data() {
     return {
@@ -98,6 +99,7 @@ export default {
       // #ifndef H5
       isH5: false,
       // #endif
+      hadFetch:false
     };
   },
   props: {
@@ -140,7 +142,7 @@ export default {
       // #endif
 
       // #ifdef MP-ALIPAY
-      painter.scale(2, 2);
+      if(!this.hadFetch) painter.scale(2, 2);
       // #endif
 
       let scaleSize = 1;
@@ -215,6 +217,8 @@ export default {
           }
         });
       };
+
+      this.hadFetch = true;
       return new Promise((resolve, reject) => {
         this.help.instance.toDataURL = () => {
           return new Promise((resolveUrl) => {
@@ -231,6 +235,11 @@ export default {
             );
           });
         };
+
+        this.help.instance.drawImage = drawImage(
+          this.help.instance,
+          this.help.instance.drawImage
+        );
 
         resolve(this.help.instance);
       });

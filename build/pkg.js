@@ -90,6 +90,16 @@ new Promise((resolve, reject) => {
             let sourceFile = "./lib/" + folderPath + "index." + getFormat(folder, rollupConfig.output.format) + ".js"
             let targetFile = "./lib/" + folderPath + "index." + getFormat(folder, rollupConfig.output.format) + ".min.js"
 
+            // 准备types文件
+            if (folder != 'index.ts') {
+
+                let typesCode = `import { ${folder} } from "../../types/index"
+
+export default ${folder}`
+
+                fs.writeFileSync("./lib/" + folderPath + "index." + getFormat(folder, rollupConfig.output.format) + ".d.ts", typesCode)
+                fs.writeFileSync("./lib/" + folderPath + "index." + getFormat(folder, rollupConfig.output.format) + ".min.d.ts", typesCode)
+            }
 
             minify(fs.readFileSync(sourceFile, "utf-8"), {
                 toplevel: true,

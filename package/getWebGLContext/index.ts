@@ -1,6 +1,7 @@
 import getWebGLContext from "../../src/common/webgl/getWebGLContext"
+import type { WebGLmodeType } from "../../types/getWebGLContext"
 
-export default (el: HTMLElement | null, scale: number = 1) => {
+export default (el: HTMLElement | null, scale: number = 1, mode?: WebGLmodeType) => {
     if (!el) {
         throw new Error("VISLite getWebGLContext:The mount point requires an HTMLElement type but encountered null.")
     }
@@ -36,5 +37,5 @@ export default (el: HTMLElement | null, scale: number = 1) => {
     ViewCanvas.style.height = height + "px"
     ViewCanvas.setAttribute('height', height + "")
 
-    return getWebGLContext(ViewCanvas, scale)
+    return getWebGLContext(ViewCanvas, scale, {}, mode)
 }

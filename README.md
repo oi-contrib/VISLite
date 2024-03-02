@@ -15,7 +15,7 @@
     <a href="https://github.com/oi-contrib/VISLite" target='_blank'>
         <img alt="GitHub repo stars" src="https://img.shields.io/github/stars/oi-contrib/VISLite?style=social">
     </a>
-     <a href="https://gitee.com/oi-contrib/VISLite" target='_blank'>
+    <a href="https://gitee.com/oi-contrib/VISLite" target='_blank'>
         <img alt="Gitee repo stars" src="https://gitee.com/oi-contrib/VISLite/badge/star.svg?theme=dark">
     </a>
 </p>
@@ -86,6 +86,14 @@
 
 > 上述例子的运行地址：[数据看板大屏](https://oi-contrib.github.io/VISLite/#/bigview?page=databoard)。
 
+### 3D模型编辑器
+
+为了更好的绘制3D场景，我们提供了一个简易版本的编辑器：
+
+<img src="https://zxl20070701.github.io/toolbox/snipping/model-editor.jpeg" />
+
+> 上述例子的运行地址：[3D模型编辑器](https://zxl20070701.github.io/toolbox/#/model-editor)。
+
 ## 特点
 
 - 灵活的引入方式：包括npm安装后按照```ES Module```或```CommonJS```规范引入或直接使用script标签的```CDN```方式。
@@ -111,6 +119,7 @@
 
 - Canvas、SVG和WebGL画笔功能丰富
 - 为加速开发，提供常用坐标系和布局
+- 为更好的实现3D场景，维护[3D模型编辑器](https://zxl20070701.github.io/toolbox/#/model-editor)，并同步升级相关内容
 - 文档优化（提高可读性、丰富用例、补充教程）
 
 给我们[留言](https://github.com/oi-contrib/VISLite/issues)告诉我们你希望快速扩展的功能，我们会优先你的建议考虑哦～

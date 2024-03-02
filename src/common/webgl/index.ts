@@ -1,5 +1,6 @@
 import type Object3DType from '../../../types/Object3D'
 import type Scene3DType from '../../../types/Scene3D'
+import type { WebGLmodeType } from "../../../types/getWebGLContext"
 
 import getWebGLContext from './getWebGLContext'
 import getColorFactory from './getColorFactory'
@@ -45,16 +46,16 @@ class WebGL {
 
     private __unique: number
 
-    constructor(ViewCanvas: HTMLCanvasElement, RegionCanvas: HTMLCanvasElement | null) {
+    constructor(ViewCanvas: HTMLCanvasElement, RegionCanvas: HTMLCanvasElement | null, mode?: WebGLmodeType) {
         this.__unique = new Date().valueOf()
 
-        this.painter = getWebGLContext(ViewCanvas, scale)
+        this.painter = getWebGLContext(ViewCanvas, scale, {}, mode)
         if (RegionCanvas) {
             this.__regionPainter = getWebGLContext(RegionCanvas, scale, {
 
                 // 如果不设置，涉及到缓冲区的情况可能无法获取颜色
                 // preserveDrawingBuffer: true
-            })
+            }, mode)
         }
 
         const proportion = this.painter.canvas.width / this.painter.canvas.height

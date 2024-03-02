@@ -10,6 +10,8 @@ import prismVertical from './common/geometry/prism-vertical'
 import sphereFragment from './common/geometry/sphere-fragment'
 import mergeOption from './common/mergeOption'
 import rotateLineFactory from "./common/geometry/tool/rotateLine"
+import triangles from "./common/geometry/tool/triangles"
+import rotate from "./rotate"
 
 class Geometry implements GeometryType {
     readonly name: string = 'Geometry'
@@ -28,6 +30,89 @@ class Geometry implements GeometryType {
             this.__option[key] = option[key]
         }
         return this
+    }
+
+    /**
+     * 【1】辅助方法
+     */
+
+    // 计算切割份数
+    splitNum(radius: number, deg?: number) {
+        return splitNum(this.__option.precision as number, radius, deg)
+    }
+
+    // 物体方向转换
+    rotateLine(x1: number, y1: number, z1: number, x2: number, y2: number, z2: number) {
+        const rotateLine = rotateLineFactory(x1, y1, z1, x2, y2, z2)
+        return (x: number, y: number, z: number) => rotateLine(x, y, z, this.__option.normal as boolean)
+    }
+
+    /**
+     * 【2】立方片段
+     */
+
+    // 棱柱水平部分
+    prismHorizontal(x: number, y: number, z: number, radius: number, num: number, d: number, beginDeg?: number, deg?: number) {
+        return prismHorizontal(this.__option.normal as boolean, x, y, z, radius, num, d, beginDeg, deg)
+    }
+
+    // 棱柱垂直部分
+    prismVertical(x: number, y: number, z: number, radius: number, height: number, num: number, beginDeg?: number, deg?: number) {
+        return prismVertical(this.__option.normal as boolean, x, y, z, radius, height, num, beginDeg, deg)
+    }
+
+    // 球体中的一瓣子
+    sphereFragment(cx: number, cy: number, cz: number, radius: number, num: number, index: number) {
+        return sphereFragment(this.__option.normal as boolean, cx, cy, cz, radius, num, index)
+    }
+
+    /**
+     * 【3】立方体
+     */
+
+    // 饼柱体
+    pie(x: number, y: number, z: number, radius: number, height: number, beginDeg: number, deg: number): Array<GeometryResultType> {
+
+        // 求解出需要切割多少份比较合理
+        const num = splitNum(this.__option.precision as number, radius, deg)
+
+        const beginXZ = rotate(x, z, beginDeg, x + radius, z)
+        const endXZ = rotate(x, z, beginDeg + deg, x + radius, z)
+
+        const result = [{
+            name: "bottom",
+            points: prismHorizontal(this.__option.normal as boolean, x, y, z, radius, num as number, height > 0 ? -1 : 1, beginDeg, deg),
+            length: 3 * num,
+            method: "TRIANGLES" as const
+        }, {
+            name: "top",
+            points: prismHorizontal(this.__option.normal as boolean, x, y + height, z, radius, num as number, height > 0 ? 1 : -1, beginDeg, deg),
+            length: 3 * num,
+            method: "TRIANGLES" as const
+        }, {
+            name: "side",
+            points: prismVertical(this.__option.normal as boolean, x, y, z, radius, height, num as number, beginDeg, deg),
+            length: 6 * num,
+            method: "TRIANGLES" as const
+        }, {
+            name: "begin",
+            points: triangles(this.__option.normal as boolean, [
+                x, y, z, x, y + height, z, beginXZ[0], y, beginXZ[1],
+                beginXZ[0], y + height, beginXZ[1], beginXZ[0], y, beginXZ[1], x, y + height, z
+            ]),
+            length: 6,
+            method: "TRIANGLES" as const
+        }, {
+            name: "end",
+            points: triangles(this.__option.normal as boolean, [
+                x, y, z, endXZ[0], y, endXZ[1], x, y + height, z,
+                endXZ[0], y + height, endXZ[1], x, y + height, z, endXZ[0], y, endXZ[1]
+            ]),
+            length: 6,
+            method: "TRIANGLES" as const
+        }]
+
+        return result
     }
 
     // 圆柱体
@@ -52,7 +137,7 @@ class Geometry implements GeometryType {
             height = x2
             num = y2
         } else {
-            height = Math.sqrt((x2 - x) * (x2 - x) + (y2 - y) * (y2 - y) + (z2 as number - z) * (z2 as number - z))
+            height = (y > y2 ? -1 : 1) * Math.sqrt((x2 - x) * (x2 - x) + (y2 - y) * (y2 - y) + (z2 as number - z) * (z2 as number - z))
             rotateLine = rotateLineFactory(x, y, z, x2, y2, z2 as number)
         }
 

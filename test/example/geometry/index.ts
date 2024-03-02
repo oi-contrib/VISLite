@@ -6,7 +6,7 @@ import Matrix4 from "../../../src/Matrix4"
 
 let geometry = new Geometry()
 
-let painter = getWebGLContext(document.getElementById("root"))
+let painter = getWebGLContext(document.getElementById("root"), 1, "aspectFit")
 let shader = new Shader(painter).compile((document.getElementById("vs") as HTMLElement).innerText, (document.getElementById("fs") as HTMLElement).innerText).use()
 let buffer = new Buffer(painter).use()
 
@@ -21,10 +21,14 @@ let O_Geometry = geometry.sphere(0, 0.7, 0, 0.5)
 
 // 化学键（左）
 let L_left_Geometry = geometry.cylinder(-0.7, 0, 0, 0.16, 0, 0.7, 0.7)
-console.log(L_left_Geometry)
+// console.log(L_left_Geometry)
 
 // 化学键（右）
 let L_right_Geometry = geometry.cylinder(0.7, 0, 0, 0.16, 0, 0.7, -0.7)
+
+// 饼柱体
+let pie_Geometry = geometry.pie(0.7, 0.5, 0, 0.6, 0.5, 0, Math.PI * 0.4)
+// console.log(pie_Geometry)
 
 let globalMatrix4 = new Matrix4()
 
@@ -68,6 +72,9 @@ function freshView() {
     // 绘制化学键（右）
     drawGeometry(L_right_Geometry)
 
+    // 饼柱体
+    painter.uniform4f(u_color, 0.2, 0.8, 0.7, 0.4)
+    drawGeometry(pie_Geometry)
 }
 
 (function doit() {

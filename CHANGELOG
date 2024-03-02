@@ -123,7 +123,7 @@ v0.5.0:
       - 优化改造
         1、一些types定义优化（比如 Array<number> 改成更具体的 [number, number] 类型）
       - 新增功能
-        1、Geometry 立方体运算
+        1、Geometry 立方体
             * cylinder 圆柱体
             * prism 棱柱体
             * sphere 球体
@@ -179,3 +179,31 @@ v0.7.1:
         1、提高Canvas绘图清晰度
             * 普通H5端
             * uniapp端（支付宝小程序）
+v0.8.0:
+    date:2024-03-02
+    changes:
+      - 修复bug
+        1、修复“prism 棱柱体” 和 “cylinder 圆柱体”特殊情况下计算错误
+            * 未考虑方向无需调整时分母为零
+            * 未考虑计算的高需要判断正负性
+        2、修复同一个Canvas多次获取画笔会获取错误问题
+      - 优化改造
+        1、针对单独引入的方式添加types支持
+        2、一些types定义优化
+            * 针对ui-canvas补充标签ref类型
+      - 新增功能
+        1、针对3D模型扩展了一个在线编辑器
+          （ https://zxl20070701.github.io/toolbox/#/model-editor ）
+        2、Canvas画笔
+            * drawImage 绘制图片
+        3、WebGL画笔
+            * 画布缩放模式（mode）
+        4、Geometry 辅助方法
+            * splitNum 计算切割份数
+            * rotateLine 物体方向转换
+        5、Geometry 立方片段
+            * prismHorizontal 棱柱水平部分
+            * prismVertical 棱柱垂直部分
+            * sphereFragment 球体中的一瓣子
+        6、Geometry 立方体
+            * pie 饼柱体

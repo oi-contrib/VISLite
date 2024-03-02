@@ -305,4 +305,14 @@ export default interface CanvasType {
      * @param callback 绘制完成后回调
      */
     draw(reserve?: boolean, callback?: Function): void
+
+    /**
+     * 绘制图片
+     * @param img 需要绘制的图片
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     */
+    drawImage(img: CanvasImageSource | string, x: number, y: number, w: number, h: number, isUniapp?: boolean): Promise<any>
 }

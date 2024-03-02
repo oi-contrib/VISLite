@@ -6,6 +6,8 @@ let painter = new Canvas(el, {
     // region: false
 })
 
+painter = new Canvas(el, {})
+
 console.log(painter)
 
 painter
@@ -134,3 +136,11 @@ painter
     .setRegion('看不见的蓝色球').config({
         fillStyle: "blue"
     }).fillCircle(900, 100, 100).onlyRegion(false).setRegion("").fillCircle(700, 100, 100).strokeCircle(900, 100, 100)
+
+painter.config({
+    strokeStyle: "red"
+}).strokeRect(300, 200, 300, 300)
+
+painter.setRegion("图片哦～").drawImage("/docs/images/logo.png", 300, 200, 300, 300).then(() => {
+    console.log("绘制完毕")
+})

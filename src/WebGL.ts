@@ -60,7 +60,7 @@ class WebGL extends OralWebGL implements WebGLType {
             }
         }
 
-        super(ViewCanvas, RegionCanvas)
+        super(ViewCanvas, RegionCanvas, option.mode)
     }
 }
 

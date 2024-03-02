@@ -17,7 +17,7 @@
     获取画笔实例，其中el就是挂载点，比如一个div：
 </p>
 <pre tag="javascript">
-    let painter = getWebGLContext(el, scale)
+    let painter = getWebGLContext(el, scale, mode)
 </pre>
 <p>
     其中参数解释如下：
@@ -29,8 +29,18 @@
     <li>
         scale：画布缩放倍数，可选，默认1
     </li>
+    <li>
+        mode：设置画布缩放模式，可选（v0.8.0开始支持）
+    </li>
 </ol>
 <p>
     返回的画笔painter类型是WebGLRenderingContext，此画笔上具体方法你可以
     <button tag="WebGLRenderingContext" type="explain">点击查看</button>。
 </p>
+<h3>
+    mode
+</h3>
+<p>
+    画布缩放模式表示，如果画布和页面存放位置大小比例不一致的时候，如何出来，具体的可以查看：
+</p>
+<button tag="WebGL-mode" type="explain">WebGL画布缩放模式（mode）</button>

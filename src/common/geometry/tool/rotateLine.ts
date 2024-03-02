@@ -1,5 +1,18 @@
+/**
+ * 物体方向转换
+ * 由（x,y,z）转换成（x2-x,y2-y,z2-z）
+ * @param x
+ * @param y
+ * @param z
+ * @param x2
+ * @param y2
+ * @param z2
+ * @returns 点转换函数
+ */
 export default function (x: number, y: number, z: number, x2: number, y2: number, z2: number) {
     return (x0: number, y0: number, z0: number, isNormal: boolean) => {
+        if (x == x2 && z == z2) return [x0, y0, z0]
+
         let sin: number, cos: number, temp: Array<number>
 
         // 第一步：归零化

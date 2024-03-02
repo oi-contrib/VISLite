@@ -166,6 +166,25 @@ body>div.nav {
     z-index: 2;
 }
 
+body>div.nav>span.model-editor {
+    vertical-align: top;
+    line-height: 14px;
+    font-size: 12px;
+    text-align: center;
+    padding-top: 6px;
+    height: 40px;
+}
+
+body>div.nav>span.model-editor>span {
+    text-align: center;
+    display: inline-block;
+    width: 50px;
+    color: #09487b;
+    text-decoration: underline;
+    font-weight: 800;
+    font-style: italic;
+}
+
 body>div.nav>span.github {
     vertical-align: top;
     background-size: auto 90%;
@@ -230,15 +249,26 @@ body>div.fixed {
     width: 200px;
 }
 
-/* <=1000 */
-@media (max-width: 1000px) {
+/* >=780 */
+@media (min-width: 780px) {
+    body>div.nav>span.model-editor {
+        background-image: url("../images/model-editor.png");
+        background-repeat: no-repeat;
+        background-position: 15px center;
+        background-size: auto 90%;
+        padding-left: 50px;
+    }
+}
+
+/* <=1050 */
+@media (max-width: 1050px) {
     body>header>h1 {
         display: none;
     }
 }
 
-/* <=1000 && >700*/
-@media (max-width: 1000px) and (min-width: 700px) {
+/* <=900 && >780*/
+@media (max-width: 900px) and (min-width: 780px) {
     body>div.content {
         left: 220px;
         width: calc(100vw - 220px);
@@ -249,8 +279,8 @@ body>div.fixed {
     }
 }
 
-/* <=1000px */
-@media (max-width: 1000px) {
+/* <=900px */
+@media (max-width: 900px) {
     body>div.explain-view>div.content {
         left: 10px;
         top: 10px;
@@ -265,8 +295,11 @@ body>div.fixed {
     }
 }
 
-/* <=700px */
-@media (max-width: 700px) {
+/* <=800px */
+@media (max-width: 800px) {
+    body>div.nav>span.model-editor {
+        display: none;
+    }
 
     body>header>.tips {
         display: block;
@@ -372,6 +405,10 @@ body>div.fixed {
 
     body>div.content>.example-view {
         margin: 0;
+    }
+
+    body>div.nav>span.link:hover {
+        background-color: transparent;
     }
 
 }
