@@ -4,7 +4,24 @@
 
     var painter = new getWebGLContext(document.getElementById('mywebgl'));
 
-    var shader = new Shader(painter).compile("color").use();
+    var shader = new Shader(painter).compile(`
+attribute vec4 a_position;
+uniform mat4 u_matrix;
+
+void main()
+{
+    gl_Position = a_position;
+}
+`,`
+precision mediump float;
+
+uniform vec4 u_color;
+
+void main()
+{
+    gl_FragColor = u_color;
+}
+`).use();
 
     // 设置点颜色
     painter.uniform4f(painter.getUniformLocation(shader.program, "u_color"), 1, 0, 0, 1);

@@ -166,25 +166,6 @@ body>div.nav {
     z-index: 2;
 }
 
-body>div.nav>span.model-editor {
-    vertical-align: top;
-    line-height: 14px;
-    font-size: 12px;
-    text-align: center;
-    padding-top: 6px;
-    height: 40px;
-}
-
-body>div.nav>span.model-editor>span {
-    text-align: center;
-    display: inline-block;
-    width: 50px;
-    color: #09487b;
-    text-decoration: underline;
-    font-weight: 800;
-    font-style: italic;
-}
-
 body>div.nav>span.github {
     vertical-align: top;
     background-size: auto 90%;

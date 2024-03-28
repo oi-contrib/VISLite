@@ -6,7 +6,7 @@ const { error, log, warn } = require('devby')
 const package = require("../package.json")
 
 let getFormat = (filename, format) => {
-    if (/^Oral/.test(filename)) {
+    if (/^\_/.test(filename)) {
         return "es"
     } else {
         return format

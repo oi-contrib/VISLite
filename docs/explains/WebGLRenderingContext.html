@@ -102,7 +102,7 @@ painter.uniformMatrix4fv(location, false, value)
     绘制方法
 </h3>
 <p>
-    无论是普通绘制还是索引，其中方法都第一个参数都有如下可选值：
+    无论是普通绘制还是索引，其中方法的第一个参数都有如下可选值：
 </p>
 <table style="margin-top:10px;">
     <thead>
@@ -119,6 +119,17 @@ painter.uniformMatrix4fv(location, false, value)
         </tr>
     </thead>
     <tbody>
+        <tr>
+            <th>
+                painter.POINTS
+            </th>
+            <th>
+                点
+            </th>
+            <th>
+                点的大小通过gl_PointSize进行设置
+            </th>
+        </tr>
         <tr>
             <th>
                 painter.LINES

@@ -1,6 +1,24 @@
 import { initDefs } from './config'
 import { toNode, setAttribute } from "./tool"
 
+let enhanceGradient = function (gradient: SVGElement, gradientId: string) {
+    const enhanceGradient = {
+        "value": function () {
+            return "url(#" + gradientId + ")";
+        },
+        "setColor": function (stop: number, color: string) {
+
+            const stopEl = toNode("stop")
+            gradient.appendChild(stopEl)
+            setAttribute(stopEl, "offset", (stop * 100) + "%")
+            setAttribute(stopEl, "style", "stop-color:" + color + ";")
+
+            return enhanceGradient
+        }
+    }
+    return enhanceGradient
+}
+
 // 线性渐变
 export const linearGradient = function (el: SVGElement, x0: number, y0: number, x1: number, y1: number) {
 
@@ -15,21 +33,7 @@ export const linearGradient = function (el: SVGElement, x0: number, y0: number, 
     setAttribute(linearGradient, "x2", x1 + "%")
     setAttribute(linearGradient, "y2", y1 + "%")
 
-    const enhanceGradient = {
-        "value": function () {
-            return "url(#" + gradientId + ")";
-        },
-        "setColor": function (stop: number, color: string) {
-
-            const stopEl = toNode("stop")
-            linearGradient.appendChild(stopEl)
-            setAttribute(stopEl, "offset", (stop * 100) + "%")
-            setAttribute(stopEl, "style", "stop-color:" + color + ";")
-
-            return enhanceGradient
-        }
-    }
-    return enhanceGradient
+    return enhanceGradient(linearGradient, gradientId)
 }
 
 // 环形渐变
@@ -45,19 +49,5 @@ export const radialGradient = function (el: SVGElement, cx: number, cy: number, 
     setAttribute(radialGradient, "cy", cy + "%")
     setAttribute(radialGradient, "r", r + "%")
 
-    const enhanceGradient = {
-        "value": function () {
-            return "url(#" + gradientId + ")";
-        },
-        "setColor": function (stop: number, color: string) {
-
-            const stopEl = toNode("stop")
-            radialGradient.appendChild(stopEl)
-            setAttribute(stopEl, "offset", (stop * 100) + "%")
-            setAttribute(stopEl, "style", "stop-color:" + color + ";")
-
-            return enhanceGradient
-        }
-    }
-    return enhanceGradient
+    return enhanceGradient(radialGradient, gradientId)
 }

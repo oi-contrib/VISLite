@@ -85,7 +85,7 @@
   </view>
 </template>
 <script>
-import OralCanvas from "../lib/OralCanvas/index.es.js";
+import { _Canvas as RawCanvas } from "../lib/index.umd.min.js";
 import drawImage from "./drawImage.js";
 export default {
   data() {
@@ -110,10 +110,6 @@ export default {
     height: {
       type: Number,
       default: 150,
-    },
-    touchstart: {
-      type: Function,
-      default: () => {},
     },
     cover: {
       type: Boolean,
@@ -152,7 +148,7 @@ export default {
       // #endif
 
       let _this = this;
-      this.help.instance = new OralCanvas(
+      this.help.instance = new RawCanvas(
         {
           getContext() {
             return painter;
@@ -244,12 +240,9 @@ export default {
         resolve(this.help.instance);
       });
     },
-    doit(event, doback) {
+    doit(event) {
       let doRun = (x, y) => {
         this.help.instance.getRegion(x, y).then((regionName) => {
-          // 兼容旧语法
-          if (typeof doback == "function") doback(regionName);
-
           this.$emit("dotouchstart", {
             name: regionName,
             x: x,
@@ -283,7 +276,7 @@ export default {
       }
     },
     doitstart(event) {
-      this.doit(event, this.touchstart);
+      this.doit(event);
     },
   },
 };

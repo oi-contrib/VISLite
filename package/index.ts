@@ -7,13 +7,12 @@ import move from "./move/index"
 import scale from "./scale/index"
 
 import getLoopColors from "./getLoopColors/index"
-import formatColor from "./formatColor/index"
 import animation from "./animation/index"
 import ruler from "./ruler/index"
 
 import SVG from "./SVG/index"
 import Canvas from "./Canvas/index"
-import WebGL from "./WebGL/index"
+import _Canvas from "../src/common/canvas/index"
 
 import getWebGLContext from "./getWebGLContext/index"
 import Shader from "./Shader/index"
@@ -23,13 +22,10 @@ import Buffer from "./Buffer/index"
 import Eoap from "./Eoap/index"
 import Mercator from "./Mercator/index"
 
-import viewHandler from "./viewHandler/index"
 import resizeObserver from "./resizeObserver/index"
 import throttle from "./throttle/index"
 
 import TreeLayout from "./TreeLayout/index"
-
-import Geometry from "./Geometry/index"
 
 export default {
 
@@ -45,14 +41,13 @@ export default {
 
     // 工具
     getLoopColors,
-    formatColor,
     animation,
     ruler,
 
     // 画笔
     SVG,
     Canvas,
-    WebGL,
+    _Canvas,
 
     // WebGL
     getWebGLContext,
@@ -65,13 +60,9 @@ export default {
     Mercator,
 
     // 辅助
-    viewHandler,
     resizeObserver,
     throttle,
 
     // 布局
-    TreeLayout,
-
-    // 几何&模型数据
-    Geometry
+    TreeLayout
 }

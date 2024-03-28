@@ -43,7 +43,21 @@ var painter = getWebGLContext(document.getElementById('mywebgl'));
 <pre tag="javascript">
 import { Shader} from 'vislite';
 
-var shader = new Shader(painter).compile("color").use();
+var shader = new Shader(painter).compile(`
+attribute vec4 a_position;
+uniform mat4 u_matrix;
+
+void main(){
+    gl_Position = a_position;
+}
+`,`
+precision mediump float;
+uniform vec4 u_color;
+
+void main(){
+    gl_FragColor = u_color;
+}
+`).use();
 </pre>
 <p>
     现在，着色器程序也准备好了，是不是真的可以开始绘制了？只能再次说：不可以！我们还需要为这个着色器程序准备好数据。

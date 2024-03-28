@@ -178,7 +178,7 @@ v0.7.1:
       - 优化改造
         1、提高Canvas绘图清晰度
             * 普通H5端
-            * uniapp端（支付宝小程序）
+            * uni-app端（支付宝小程序）
 v0.8.0:
     date:2024-03-02
     changes:
@@ -207,3 +207,18 @@ v0.8.0:
             * sphereFragment 球体中的一瓣子
         6、Geometry 立方体
             * pie 饼柱体
+v1.0.0:
+    date:
+    changes:
+      - 被废弃API或功能
+        （基于更长远的考虑，部分反馈不好的API决定从v1.x开始废弃，后续专注基础技术积累，废弃业务模块，原v0.x的功能将独立一个分支继续维护，敬请理解）
+        1、Geometry 立方体
+        2、WebGL画笔
+        3、取消一些旧的向下兼容语句
+            * 微信小程序组件ui-canvas作为属性传递事件方式
+            * Canvas和SVG画笔配置属性key非驼峰方式
+        4、viewHandler 节点信息捕获
+        5、formatColor 颜色格式化
+      - 优化改造
+        1、针对types文件丰富必要的注释
+        2、微信小程序和uni-app组件ui-canvas使用主包canvas以减低最终包体积

@@ -3,18 +3,30 @@ import Shader from "../../../package/Shader/index"
 import Buffer from "../../../package/Buffer/index"
 import Texture from "../../../package/Texture/index"
 
+import vshaderColor from "./color/vshader.c"
+import fshaderColor from "./color/fshader.c"
+
+import vshaderColors from "./colors/vshader.c"
+import fshaderColors from "./colors/fshader.c"
+
+import vshaderImage from "./image/vshader.c"
+import fshaderImage from "./image/fshader.c"
+
+import vshaderCube from "./cube/vshader.c"
+import fshaderCube from "./cube/fshader.c"
+
 import Matrix4 from "../../../src/Matrix4"
 
 let matrix4 = new Matrix4()
 
 let promises = [], images: Array<HTMLImageElement> = [], srcs = [
-    "../webgl/floor.jpg",
-    "../webgl/skybox/left.jpg",
-    "../webgl/skybox/right.jpg",
-    "../webgl/skybox/near.jpg",
-    "../webgl/skybox/far.jpg",
-    "../webgl/skybox/top.jpg",
-    "../webgl/skybox/bottom.jpg"
+    "./picture/floor.jpg",
+    "./picture/skybox/left.jpg",
+    "./picture/skybox/right.jpg",
+    "./picture/skybox/near.jpg",
+    "./picture/skybox/far.jpg",
+    "./picture/skybox/top.jpg",
+    "./picture/skybox/bottom.jpg"
 ]
 
 for (let src of srcs) {
@@ -40,7 +52,7 @@ Promise.all(promises).then(() => {
      * color
      */
 
-    let shader1 = new Shader(painter).compile("color").use()
+    let shader1 = new Shader(painter).compile(vshaderColor, fshaderColor).use()
 
     // 设置点位置
     new Buffer(painter).use().write(new Float32Array([
@@ -61,7 +73,7 @@ Promise.all(promises).then(() => {
     /**
      * colors
      */
-    let shader2 = new Shader(painter).compile("colors").use()
+    let shader2 = new Shader(painter).compile(vshaderColors, fshaderColors).use()
 
     // 设置点位置和颜色
     new Buffer(painter).use().write(new Float32Array([
@@ -80,7 +92,7 @@ Promise.all(promises).then(() => {
      * image
      */
 
-    let shader3 = new Shader(painter).compile("image").use()
+    let shader3 = new Shader(painter).compile(vshaderImage, fshaderImage).use()
 
     // 设置点位置和UV
     new Buffer(painter).use().write(new Float32Array([
@@ -106,7 +118,7 @@ Promise.all(promises).then(() => {
      * cube
      */
 
-    let shader4 = new Shader(painter).compile("cube").use()
+    let shader4 = new Shader(painter).compile(vshaderCube, fshaderCube).use()
 
     // 设置点位置和法向量
     new Buffer(painter).use().write(new Float32Array([

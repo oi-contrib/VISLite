@@ -52,22 +52,6 @@
 
 画笔除了像上面那样为了方便交互而补充区域的设计外，还对原来的API进行了一次抽象，使得API更友好简单```（比如WebGL，即使不会3D的人也可以轻松使用，而SVG的使用，你无需去记忆那些晦涩难懂的属性）```，同时，我们还抹平了不同版本浏览器等之间的差异。
 
-### 数据驱动的3D
-
-通过一个简单```立方体JSON```表达立方体意图，从而快速实现3D图表开发：
-
-<img src="https://oi-contrib.github.io/VISLite/images/docs/ring-simple.png" width="400"/>
-
-> 上述例子的运行地址：[环图](https://oi-contrib.github.io/VISLite/#/example/webgl/ring-simple)。
-
-### 立方体运算
-
-借助我们提供的[立方体运算](https://oi-contrib.github.io/VISLite/#/api/geometry)就可以快速获得常见的立方体的```立方体JSON```数据：
-
-<img src="https://oi-contrib.github.io/VISLite/images/docs/H2O.png" width="400"/>
-
-> 上述例子的运行地址：[水分子式H2O](https://oi-contrib.github.io/VISLite/#/example/webgl/H2O)。
-
 ### 支持跨端开发
 
 除了Web端外，我们还针对uni-app、微信小程序等端进行了支持，并且不同端API保持一致，大大提高了代码的复用性：
@@ -78,30 +62,14 @@
 
 基于实际需要，我们目前对 ```Canvas``` 提供了跨端支持，除 ```Web端``` 外，还支持 ```原生微信小程序``` 和 ```uni-app端``` （编译成H5、微信小程序、支付宝小程序等） ，如果后续有必要，我们会对Canvas支持的端或SVG、WebGL等画笔进行更多端扩展。
 
-### 可视化大屏
-
-当然，按照业务和UI设计，快速开发一个大屏也是相对容易的：
-
-<img src="https://oi-contrib.github.io/VISLite/images/docs/bigview.jpeg" width="700"/>
-
-> 上述例子的运行地址：[数据看板大屏](https://oi-contrib.github.io/VISLite/#/bigview?page=databoard)。
-
-### 3D模型编辑器
-
-为了更好的绘制3D场景，我们提供了一个简易版本的编辑器：
-
-<img src="https://zxl20070701.github.io/toolbox/snipping/model-editor.jpeg" />
-
-> 上述例子的运行地址：[3D模型编辑器](https://zxl20070701.github.io/toolbox/#/model-editor)。
-
 ## 特点
 
 - 灵活的引入方式：包括npm安装后按照```ES Module```或```CommonJS```规范引入或直接使用script标签的```CDN```方式。
 - 按需引入或全局引入：支持源码TS引入、按需JS引入或者全量引入等多种方式。
 - 简单与复杂共存：一方面我们提供了可视化需要的基础功能，你可以按照自己的需要组合使用；另一方面，为了加速开发，我们针对常见的可视化业务场景进行了封装，可以帮助你快速完成，你可以根据实际情况进行选择。
-- 向下兼容：我们向你保证，始终向下兼容```（alpha和beta版本为测试版本，不包括）```，因此，无论何时，最新版本总是最好的选择。
+- 向下兼容：我们向你保证，始终向下兼容```（alpha和beta版本为测试版本，不包括）```，因此，无论何时，在同一下大版本号下，最新版本总是最好的选择。
 
-> 版本说明：alpha为开发阶段、beta为发布前测试、rc为候选版本、无后缀的为正式版本。
+> 版本说明：alpha为开发阶段、beta为发布前测试、rc为候选版本、next为未来版本、无后缀的为正式版本。
 
 ## 需求墙
 
@@ -117,9 +85,7 @@
 
 我们会在这里列出接下来的工作重心：
 
-- Canvas、SVG和WebGL画笔功能丰富
 - 为加速开发，提供常用坐标系和布局
-- 为更好的实现3D场景，维护[3D模型编辑器](https://zxl20070701.github.io/toolbox/#/model-editor)，并同步升级相关内容
 - 文档优化（提高可读性、丰富用例、补充教程）
 
 给我们[留言](https://github.com/oi-contrib/VISLite/issues)告诉我们你希望快速扩展的功能，我们会优先你的建议考虑哦～

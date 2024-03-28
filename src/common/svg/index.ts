@@ -6,14 +6,6 @@ import { toNode, setAttribute, getAttribute, full, fill, stroke } from "./tool"
 import rotate from "../../rotate"
 import { linearGradient, radialGradient } from "./gradient"
 
-// 属性名向下兼容
-const oldAttrName = {
-    "font-size": "fontSize",
-    "font-family": "fontFamily",
-    "arc-start-cap": "arcStartCap",
-    "arc-end-cap": "arcEndCap",
-}
-
 class SVG {
     readonly name: string = "SVG"
 
@@ -55,11 +47,10 @@ class SVG {
     // 属性设置或获取
     config(params: SVGConfigType) {
         if (typeof params !== "object") {
-            return this.__config[oldAttrName[params] || params]
+            return this.__config[params]
         } else {
             for (const key in params) {
-                const _key = oldAttrName[key] || key
-                this.__config[_key] = params[key]
+                this.__config[key] = params[key]
             }
         }
         return this

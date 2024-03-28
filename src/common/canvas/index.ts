@@ -6,16 +6,6 @@ import assemble from "../assemble"
 import { linearGradient, radialGradient } from "./gradient"
 import { initText } from './config'
 
-// 属性名向下兼容
-const oldAttrName = {
-    "font-size": "fontSize",
-    "font-family": "fontFamily",
-    "font-weight": "fontWeight",
-    "font-style": "fontStyle",
-    "arc-start-cap": "arcStartCap",
-    "arc-end-cap": "arcEndCap",
-}
-
 class Canvas extends PainterRender {
     readonly name: string = "Canvas"
 
@@ -43,8 +33,7 @@ class Canvas extends PainterRender {
 
     config(configs: CanvasConfigType) {
         for (const key in configs) {
-            const _key = oldAttrName[key] || key
-            this.useConfig(_key, configs[key])
+            this.useConfig(key, configs[key])
         }
 
         return this

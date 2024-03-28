@@ -1,6 +1,6 @@
 {
   "name": "vislite",
-  "version": "0.8.0",
+  "version": "1.0.0-next.0",
   "description": "灵活、快速、简单的数据可视化交互式跨端前端库",
   "main": "./lib/index.umd.min.js",
   "typings": "./types/index.d.ts",

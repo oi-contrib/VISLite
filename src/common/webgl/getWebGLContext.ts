@@ -40,7 +40,7 @@ export default function (canvas: HTMLCanvasElement, scale: number, opts: OptsTyp
     painter.depthFunc(painter.LEQUAL)
 
     // 开启深度计算
-    painter.enable(painter.DEPTH_TEST);
+    painter.enable(painter.DEPTH_TEST)
 
     return painter
 }

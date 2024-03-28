@@ -1,4 +1,4 @@
-import OralCanvas from "../../lib/OralCanvas/index.es.js";
+import { _Canvas as RawCanvas } from "../../lib/index.umd.min.js";
 
 let dpr = wx.getSystemInfoSync().pixelRatio;
 
@@ -15,10 +15,6 @@ Component({
         region: {
             type: Boolean,
             default: true
-        },
-        touchstart: {
-            type: Function,
-            default: () => { }
         }
     },
     data: {
@@ -58,7 +54,7 @@ Component({
 
                 getCanvasContext("painter", painter => {
                     getCanvasContext("region", region => {
-                        this.data.help.instance = new OralCanvas({
+                        this.data.help.instance = new RawCanvas({
                             getContext() {
                                 return painter;
                             }
@@ -84,14 +80,11 @@ Component({
 
             });
         },
-        doit(event, doback) {
+        doit(event) {
             let x = event.touches[0].x;
             let y = event.touches[0].y;
 
             this.data.help.instance.getRegion(x, y).then((regionName) => {
-                // 兼容旧语法
-                if (doback) doback(regionName);
-
                 this.triggerEvent('dotouchstart', {
                     name: regionName,
                     x: x,
@@ -100,7 +93,7 @@ Component({
             });
         },
         doitstart(event) {
-            this.doit(event, this.data.touchstart);
+            this.doit(event);
         }
     }
 

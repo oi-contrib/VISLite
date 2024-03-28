@@ -94,34 +94,8 @@ window.JSLitmus.test('assemble 0-255', function () {
 import ShaderObject from '../../src/common/webgl/shader'
 import getWebGLContext from '../../src/common/webgl/getWebGLContext'
 
-let vertexShader = `
-attribute vec4 a_position;
-
-uniform mat4 u_matrix_world;
-uniform mat4 u_matrix_mesh;
-uniform mat4 u_matrix_proporion;
-
-attribute vec2 a_textcoord;
-varying vec2 v_textcoord;
-
-void main(){
-    gl_Position = u_matrix_world * u_matrix_proporion * u_matrix_mesh * a_position;
-
-    v_textcoord = a_textcoord;
-}
-`
-
-let fragmentShader = `
-precision mediump float;
-
-uniform samplerCube u_texture;
-
-uniform sampler2D u_sampler;varying vec2 v_textcoord;
-
-void main(){
-    gl_FragColor = texture2D(u_sampler,v_textcoord);
-}
-`;
+import vertexShader from "./vshader.c"
+import fragmentShader from "./fshader.c"
 
 let gl = getWebGLContext(document.getElementById('mywebgl') as HTMLCanvasElement, 4)
 
