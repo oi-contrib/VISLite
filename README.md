@@ -86,14 +86,6 @@
 
 > 上述例子的运行地址：[数据看板大屏](https://oi-contrib.github.io/VISLite/#/bigview?page=databoard)。
 
-### 3D模型编辑器
-
-为了更好的绘制3D场景，我们提供了一个简易版本的编辑器：
-
-<img src="https://zxl20070701.github.io/toolbox/snipping/model-editor.jpeg" />
-
-> 上述例子的运行地址：[3D模型编辑器](https://zxl20070701.github.io/toolbox/#/model-editor)。
-
 ## 特点
 
 - 灵活的引入方式：包括npm安装后按照```ES Module```或```CommonJS```规范引入或直接使用script标签的```CDN```方式。
