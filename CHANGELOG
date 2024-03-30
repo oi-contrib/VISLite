@@ -192,18 +192,16 @@ v0.8.0:
         2、一些types定义优化
             * 针对ui-canvas补充标签ref类型
       - 新增功能
-        1、针对3D模型扩展了一个在线编辑器
-          （ https://zxl20070701.github.io/toolbox/#/model-editor ）
-        2、Canvas画笔
+        1、Canvas画笔
             * drawImage 绘制图片
-        3、WebGL画笔
+        2、WebGL画笔
             * 画布缩放模式（mode）
-        4、Geometry 辅助方法
+        3、Geometry 辅助方法
             * splitNum 计算切割份数
             * rotateLine 物体方向转换
-        5、Geometry 立方片段
+        4、Geometry 立方片段
             * prismHorizontal 棱柱水平部分
             * prismVertical 棱柱垂直部分
             * sphereFragment 球体中的一瓣子
-        6、Geometry 立方体
+        5、Geometry 立方体
             * pie 饼柱体
