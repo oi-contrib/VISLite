@@ -205,3 +205,16 @@ v0.8.0:
             * sphereFragment 球体中的一瓣子
         5、Geometry 立方体
             * pie 饼柱体
+v0.8.1:
+    date:2024-04-10
+    changes:
+      - 修复bug
+        1、微信小程序ui-canvas
+            * 不支持绘制图片问题
+            * toDataURL不兼容新版本
+        2、Canvas画笔
+            * 修复drawImage后续内容被覆盖问题
+            * 修复drawImage未正确绘制全图
+      - 优化改造
+        1、Canvas画笔
+            * draw方法兼容非uniapp环境

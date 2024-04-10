@@ -1,4 +1,5 @@
 import OralCanvas from "../../lib/OralCanvas/index.es.js";
+import drawImage from "./drawImage.js";
 
 let dpr = wx.getSystemInfoSync().pixelRatio;
 
@@ -49,14 +50,14 @@ Component({
                                     ctx.scale(dpr, dpr);
                                 }
 
-                                doback(ctx);
+                                doback(ctx, idName != 'region' ? canvas : null);
                             });
                     } else {
                         doback(null);
                     }
                 };
 
-                getCanvasContext("painter", painter => {
+                getCanvasContext("painter", (painter, panvas) => {
                     getCanvasContext("region", region => {
                         this.data.help.instance = new OralCanvas({
                             getContext() {
@@ -70,14 +71,28 @@ Component({
 
                         this.data.help.instance.toDataURL = () => {
                             return new Promise((resolveUrl) => {
-                                wx.canvasToTempFilePath({
-                                    canvasId: "painter",
-                                    success: function (e) {
-                                        resolveUrl(e.tempFilePath);
-                                    },
-                                }, this);
-                            })
+                                if (panvas.toDataURL) {
+                                    resolveUrl(panvas.toDataURL());
+                                } else {
+                                    wx.canvasToTempFilePath({
+                                        canvasId: "painter",
+                                        success: function (e) {
+                                            resolveUrl(e.tempFilePath);
+                                        },
+                                        fail: function (e) {
+                                            console.log(e)
+                                        }
+                                    }, this);
+                                }
+                            });
                         };
+
+                        this.data.help.instance.drawImage = drawImage(
+                            this.data.help.instance,
+                            this.data.help.instance.drawImage,
+                            panvas
+                        );
+
                         resolve(this.data.help.instance);
                     });
                 });

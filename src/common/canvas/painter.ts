@@ -416,27 +416,34 @@ class Painter {
     }
 
     // 渲染绘制（uniapp独有）
-    draw() { }
+    draw() {
+
+        // 兼容非uniapp环境，防止误用
+        // 2024年4月3日 于南京
+        return Promise.resolve()
+    }
 
     // 绘制图片
-    drawImage(img: CanvasImageSource | string, x: number, y: number, w: number, h: number, isUniapp: boolean = false) {
+    drawImage(img: CanvasImageSource | string, x: number, y: number, w: number, h: number, isImage: boolean = false) {
         return new Promise((resolve) => {
             if (this.__region) {
                 this.__region.fillRect(x, y, w, h)
-                resolve({})
             }
 
-            if (this.__isPainter && this.__onlyRegion) return this
+            if (this.__isPainter && this.__onlyRegion) {
+                resolve({})
+                return
+            }
 
-            if (typeof img == 'string' && !isUniapp) {
+            if (typeof img == 'string' && !isImage) {
                 const imgInstance = new Image()
                 imgInstance.onload = () => {
-                    this.painter.drawImage(imgInstance, x, y, w, h)
+                    this.painter.drawImage(imgInstance, 0, 0, imgInstance.width, imgInstance.height, x, y, w, h)
                     resolve({})
                 }
                 imgInstance.src = img
             } else {
-                this.painter.drawImage(img as CanvasImageSource, x, y, w, h)
+                this.painter.drawImage(img as CanvasImageSource, 0, 0, w, h, x, y, w, h)
                 resolve({})
             }
 
