@@ -215,6 +215,30 @@ body>div.menu-mask {
     z-index: 1;
 }
 
+body>div.menu .open-link {
+    padding-bottom: 5px;
+    display: block;
+}
+
+body>div.menu .open-link:hover>span {
+    text-decoration: underline;
+}
+
+body>div.menu .open-link>span.title {
+    margin-bottom: 2px;
+    font-weight: 800;
+    font-style: italic;
+    color: #3c3939;
+}
+
+body>div.menu .open-link>span.info {
+    font-size: 12px;
+    margin: 0;
+    color: #9a999b;
+    border-top: 1px solid gray;
+    padding-top: 5px;
+}
+
 body>div.content {
     left: 220px;
     width: calc(100vw - 420px);
@@ -446,6 +470,22 @@ body>div.fixed {
 
 .menu li[is-open='no']>ul {
     display: none;
+}
+
+.menu .more {
+    font-size: 12px;
+    text-align: center;
+    display: block;
+    margin: 30px auto;
+    color: white;
+    background-color: #2196F3;
+    width: 180px;
+    border-radius: 5px;
+    line-height: 30px;
+}
+
+.menu .more:hover {
+    text-decoration: underline;
 }
 
 
@@ -700,74 +740,6 @@ body>div.fixed {
 
 .content .toRight {
     float: right;
-}
-
-pre {
-    position: relative;
-    outline: 1px solid #d3d3d4;
-    overflow: auto;
-}
-
-pre:hover {
-    outline-color: black;
-}
-
-pre>.copy-icon {
-    position: absolute;
-    right: 5px;
-    top: 5px;
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-    background-image: url('../images/copy.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 100% auto;
-    background-color: transparent;
-    outline: none;
-    border: none;
-}
-
-.copy-icon[copied] {
-    outline: 1px solid #343848;
-    border-radius: 0 4px 4px 0;
-}
-
-.copy-icon[copied='no'] {
-    outline: 1px solid #ff0000;
-}
-
-.copy-btn[copied]:before,
-.copy-icon[copied]:before {
-    position: absolute;
-    left: -64px;
-    top: 0;
-    display: block;
-    border-radius: 4px 0 0 4px;
-    width: 64px;
-    text-align: center;
-    font-size: 12px;
-    font-weight: 500;
-    color: #ffffff;
-    background-color: #343848;
-    white-space: nowrap;
-    content: attr(data-before);
-}
-
-.copy-btn[copied='no']:before,
-.copy-icon[copied='no']:before {
-    background-color: #ff0000;
-}
-
-.copy-btn[copied]:before {
-    height: 26px;
-    line-height: 26px;
-}
-
-.copy-icon[copied]:before {
-    height: 32px;
-    line-height: 32px;
-    top: -1px;
 }
 
 /* 导航 */

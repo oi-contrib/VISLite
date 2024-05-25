@@ -237,9 +237,14 @@ export default interface CanvasType {
     clearRect(x: number, y: number, w: number, h: number): this
 
     /**
-     * 是否绘制的内容只需要进行区域记录
+     * 是否操作只影响区域
      */
     onlyRegion(flag: boolean): this
+
+    /**
+     * 是否操作只影响视图
+     */
+    onlyView(flag: boolean): this
 
     /**
      * 设置区域

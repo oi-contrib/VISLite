@@ -6,10 +6,10 @@ const { error, log, warn } = require('devby')
 const package = require("../package.json")
 
 let getFormat = (filename, format) => {
-    if (/^\_/.test(filename)) {
-        return "es"
-    } else {
+    if (filename == "index.ts") {
         return format
+    } else {
+        return "es"
     }
 }
 
@@ -17,15 +17,9 @@ fs.writeFileSync("./docs/js/system.js", `window.VISLite_system = {
     "version": "${package.version}"
 };`)
 
-let banner = `/*!
-* VISLite JavaScript Library v${package.version}
+let banner = (bundleName) => `/*!
+* ${bundleName}VISLite JavaScript Library v${package.version}
 * ${package.repository.url}
-*
-* Copyright ${package.author.name}
-* Released under the ${package.license} license
-* ${package.author.url}
-*
-* Publish Date:  ${new Date()}
 */`
 
 error(`
@@ -39,11 +33,10 @@ new Promise((resolve, reject) => {
             resolve()
             return
         }
-
         let folder = sourceFiles[index]
 
-        let folderPath = folder == 'index.ts' ? "" : (folder + "/")
-        let folderName = folder == 'index.ts' ? "" : ("_" + folder)
+        let isMainBundle = folder == 'index.ts'
+        let folderPath = isMainBundle ? "" : (folder + "/")
 
         let sourceFile = "./package/" + folderPath + "index.ts"
         let targetFile = "./lib/" + folderPath + "index." + getFormat(folder, rollupConfig.output.format) + ".js"
@@ -53,9 +46,9 @@ new Promise((resolve, reject) => {
             plugins: rollupConfig.plugins
         }).then(bundle => {
             bundle.write({
-                name: "VISLite" + folderName,
+                name: "VISLite",
                 format: getFormat(folder, rollupConfig.output.format),
-                banner,
+                banner: banner(isMainBundle ? "" : (folder + " of ")),
                 file: targetFile
             }).then(() => {
                 log(`✔ [${index}] ${sourceFile} → ${targetFile}`)

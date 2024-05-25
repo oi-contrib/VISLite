@@ -1,12 +1,14 @@
 {
   "name": "vislite",
-  "version": "1.0.0-next.0",
+  "version": "1.0.0",
   "description": "灵活、快速、简单的数据可视化交互式跨端前端库",
   "main": "./lib/index.umd.min.js",
   "typings": "./types/index.d.ts",
   "unpkg": "./lib/index.umd.min.js",
+  "jsdelivr":"./lib/index.umd.min.js",
   "sideEffects": false,
   "scripts": {
+    "init": "npm install && devby --copy ./node_modules/pageby/dist/pageby.min.js ./docs/js/min/pageby.min.js",
     "dev": "webpack serve --config ./build/webpack.config.js",
     "build": "devby --delete ./lib && node ./build/pkg.js",
     "test": "karma start ./build/karma.config.js",
@@ -58,6 +60,7 @@
     "karma-chrome-launcher": "^3.1.0",
     "karma-jasmine": "^4.0.1",
     "karma-webpack": "^5.0.0",
+    "pageby": "^0.1.0",
     "rollup": "^3.20.6",
     "terser": "^5.17.1",
     "ts-loader": "^9.2.8",

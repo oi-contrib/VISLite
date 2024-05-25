@@ -18,7 +18,6 @@
 </p>
 <pre tag="javascript">
 import { getWebGLContext } from 'vislite';
-
 var painter = getWebGLContext(document.getElementById('mywebgl'));
 </pre>
 <p>
@@ -35,29 +34,46 @@ var painter = getWebGLContext(document.getElementById('mywebgl'));
     定义着色器程序
 </h2>
 <p>
-    按理来说，我们接下来需要定义好着色器程序并编译好，不过我们现在并不打算这样做，因为那样现在要说明的东西就太多了，其次，既然说了是程序代码了，为什么不内置一些常用的情况？
+    描述点的位置（或大小）的称为顶点着色器，描述点的色彩的称为片段着色器。下面先来看看这里的具体代码：
 </p>
-<p>
-    是的，我们内置了一部分，比如我们这里选择可以设置点的位置和单一颜色的程序：
-</p>
-<pre tag="javascript">
-import { Shader} from 'vislite';
-
-var shader = new Shader(painter).compile(`
+<h3>
+    顶点着色器
+</h3>
+<pre tag="html">
+<script type='x-shader/x-vertex' id='vs'>
 attribute vec4 a_position;
-uniform mat4 u_matrix;
 
 void main(){
     gl_Position = a_position;
 }
-`,`
+</script>
+</pre>
+<h3>
+    片段着色器
+</h3>
+<pre tag="html">
+<script type='x-shader/x-fragment' id='fs'>
 precision mediump float;
 uniform vec4 u_color;
 
 void main(){
     gl_FragColor = u_color;
 }
-`).use();
+</script>
+</pre>
+<h3>
+    编译并生效
+</h3>
+<p>
+    本质上来说，这里其实就是两段字符串（也就是源码），直接编译成着色器程序并生效即可：
+</p>
+<pre tag="javascript">
+import { Shader} from 'vislite';
+
+var shader = new Shader(painter).compile(
+    document.getElementById("vs").innerText,
+    document.getElementById("fs").innerText
+).use();
 </pre>
 <p>
     现在，着色器程序也准备好了，是不是真的可以开始绘制了？只能再次说：不可以！我们还需要为这个着色器程序准备好数据。
@@ -66,16 +82,9 @@ void main(){
     设置数据
 </h2>
 <p>
-    设置数据的第一步是：确定需要设置哪些数据。查看
-    <a href="#/api/webgl/shader" target="_blank">
-        着色器
-    </a>
-    一节后发现，需要的数据如下：
+    设置数据的第一步是：确定需要设置哪些数据。根据上面的着色器代码可以发现，需要的数据如下：
 </p>
 <ul>
-    <li>
-        u_matrix：<span class="special">uniform mat4</span>类型，用于设置物体变换矩阵；
-    </li>
     <li>
         u_color：<span class="special">uniform vec4</span>类型，用于设置物体颜色；
     </li>
@@ -86,24 +95,21 @@ void main(){
 <p>
     知道应该设置哪些数据后，那就需要知道如何设置了。
 </p>
-<p>
-    事实上，对于多个数据，比如这里的点（超过一个点就可以认为是多个数据），就需要借助过会要说明的缓冲区来设置，先别急，我们这里先来看看单一数据
-    <span class="important">u_color</span>和 <span class="important">u_matrix</span>如何设置。
-</p>
 <h4>
-    设置单一数据
+    设置单个数据
 </h4>
 <p>
-    画笔painter上就提供了相关方法， 你可以<button tag="WebGLRenderingContext" type="explain">点击查看</button>，我们这里就先拿
-    <span class="important">u_color</span>
-    举例子：
+    被uniform修饰的变量，只需要设置单一的数据，比如这里的 <span class="important">u_color</span>变量。
+</p>
+<p>
+    画笔painter上就提供了相关方法， 你可以<button tag="WebGLRenderingContext" type="explain">点击查看</button>，这里直接看具体代码：
 </p>
 <pre tag="javascript">
 var location = painter.getUniformLocation(shader.program, "u_color");
 painter.uniform4f(location, 1, 0, 0, 1);
 </pre>
 <p>
-    因为u_color的类型是<span class="special">uniform</span>，所以使用
+    类型是<span class="special">uniform</span>，所以使用
     <span class="special">getUniformLocation()</span>
     方法获取位置。
 </p>
@@ -112,23 +118,20 @@ painter.uniform4f(location, 1, 0, 0, 1);
     <span class="special">uniform4f()</span>
     方法在获取的位置上设置数据，也就是完成了对u_color的数据设置。
 </p>
-<div class="warn">
-    温馨提示：变量
-    <span class="important">u_matrix</span>
-    是类似的，只不过数据类型是mat4，所以在设置的时候改成
-    <span class="special">uniformMatrix4fv()</span>而获取位置的时候不变。
-</div>
 <h4>
-    使用缓冲区设置多个数据
+    设置多个数据
 </h4>
 <p>
-    说了需要使用缓冲区来传递了（因为数据太多，一个个传递太慢），所以第一步当然是创建缓冲区对象了：
+    被attribute修饰的变量，需要设置多个数据，也就是需要使用缓冲区。
+</p>
+<p>
+    使用缓冲区的第一步当然是创建缓冲区对象了：
 </p>
 <pre tag="javascript">
 var buffer = new Buffer(painter).use().write(new Float32Array([
-        -1, 1, 1,
-        1, 1, -1,
-        -1, -1, 0
+    -0.5, 0.5, 0,
+    0.5, 0.5, 0,
+    -0.5, -0.5, 0
 ]));
 </pre>
 <p>
@@ -164,7 +167,7 @@ buffer.divide(location, 3, 3, 0);
     好了，到此为止 ，真的可以直接绘制了。我们传递了三个点，并且设置点的颜色是红色，因此，我们打算绘制一个三角形：
 </p>
 <pre tag="javascript">
-    painter.drawArrays(painter.TRIANGLE_STRIP, 0, 3);
+    painter.drawArrays(painter.TRIANGLES, 0, 3);
 </pre>
 <p>
     下面是完整的例子代码：

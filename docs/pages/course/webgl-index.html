@@ -1,0 +1,65 @@
+<header>
+    使用索引坐标
+</header>
+<h2>
+    非索引写法
+</h2>
+<p>
+    比如我们现在想绘制2个三角形，怎么办？肯定是设置6个点，然后前3个点和后3个点分别连成一个三角形，就像这样：
+</p>
+<example tag="course/webgl-index_1" height="340px"></example>
+<p>
+    具体的代码解释和上一节类似，这里就不赘述了。
+</p>
+<p>
+    聪明的你肯定可以发现，第2个点和第4个点一样，第3个点和第5个点一样，其实这里还好，只重复了2个点，如果使用三角形拼接立方体，其实立方体就8个点，如果按照上面的写法，就需要设置36个点，太浪费了，怎么办？
+</p>
+<h2>
+    使用索引
+</h2>
+<h3>
+    基础点
+</h3>
+<p>
+    首先，和非索引写法类似的设置所有未重复的点：
+</p>
+<pre tag="javascript">
+var buffer = new Buffer(painter).use().write(new Float32Array([
+    -0.4, 0.4, 0,
+    0.5, 0.5, 0,
+    -0.5, -0.5, 0,
+    0.4, -0.4, 0,
+]));
+</pre>
+<p>
+    没有重复的点一共4个，第4和第5个点和前面的重复了，删除掉。
+</p>
+<h3>
+    定义点
+</h3>
+<p>
+    不同于普通的点坐标，借助索引缓冲区可以基于普通点来“丰富出”更多的点，先看这里的代码：
+</p>
+<pre tag="javascript">
+new Buffer(painter, true).use()
+    .write(new Uint8Array([
+        0, 1, 2,
+        1, 2, 3
+    ]));
+</pre>
+<p>
+    前面的3个数据表示一个点，这里不同，这里一个数据表示一个点，比如第一个点值是0，就表示前面设置的普通点中的第一个点作为这里的第一个点，以此类推。
+</p>
+<h2>
+    绘制
+</h2>
+<p>
+    因为点来自索引缓冲区，所以画笔需要使用索引方法：
+</p>
+<pre tag="javascript">
+    painter.drawElements(painter.TRIANGLES, 6, painter.UNSIGNED_BYTE, 0);
+</pre>
+<p>
+    下面是完整的例子代码：
+</p>
+<example tag="course/webgl-index_2" height="340px"></example>

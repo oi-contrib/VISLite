@@ -27,12 +27,28 @@ new Canvas(el, {
 
     // Boolean类型，默认false，如果多次获取画布颜色（例如：painter.getColor方法）可以开启（v0.6.0开始支持）
     "willReadFrequently": boolean
-
 })
+</pre>
+<h3>
+    画布大小
+</h3>
+<div class="version">
+    1.0.0 新增
+</div>
+<p>
+    默认情况下，画布大小都是自动嗅探的，而对于不显示的画布，可以进行设置：
+</p>
+<pre tag="javascript">
+new Canvas(el, {}, width, height)
 </pre>
 <h2>
     uni-app
 </h2>
+<div class="warn">
+    目前只对 “浏览器”、“微信小程序”、“支付宝小程序” 端进行了验证。
+    <hr />
+    若在编译成其余端时出现问题，可以告诉我们进行兼容改造！
+</div>
 <p>
     我们提供的是一个uni-app组件，引入以后需要进行注册：
 </p>

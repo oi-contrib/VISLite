@@ -401,7 +401,22 @@ painter.getRegion(x, y).then((regionName) => {
 painter.onlyRegion(flag)
 </pre>
 <p>
-    如果flag为true，那么或许所有的操作都不会同步到画布中，只会被区域记录，重新设置成false即可退出区域模式。
+    如果flag为true，那么后续所有的操作都不会同步到画布中，只会被区域记录，重新设置成false即可退出区域模式。
+</p>
+<h3>
+    绘制模式
+</h3>
+<div class="version">
+    1.0.0 新增
+</div>
+<p>
+    是否只进行绘制而不影响区域相关操作：
+</p>
+<pre tag="javascript">
+painter.onlyView(flag)
+</pre>
+<p>
+    如果flag为true，那么后续所有的操作都不会同步到区域中，只会被呈现到画布中，重新设置成false即可退出绘制模式。
 </p>
 <h2>
     原生画笔

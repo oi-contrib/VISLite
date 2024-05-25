@@ -20,6 +20,8 @@
     </a>
 </p>
 
+<img src="https://nodei.co/npm/vislite.png?downloads=true&amp;downloadRank=true&amp;stars=true" alt="NPM">
+
 # VISLite
 
 ```VISLite```是一个使用```TypeScript```开发的可视化库。官网地址：[https://oi-contrib.github.io/VISLite](https://oi-contrib.github.io/VISLite)
@@ -67,7 +69,7 @@
 - 灵活的引入方式：包括npm安装后按照```ES Module```或```CommonJS```规范引入或直接使用script标签的```CDN```方式。
 - 按需引入或全局引入：支持源码TS引入、按需JS引入或者全量引入等多种方式。
 - 简单与复杂共存：一方面我们提供了可视化需要的基础功能，你可以按照自己的需要组合使用；另一方面，为了加速开发，我们针对常见的可视化业务场景进行了封装，可以帮助你快速完成，你可以根据实际情况进行选择。
-- 向下兼容：我们向你保证，始终向下兼容```（alpha和beta版本为测试版本，不包括）```，因此，无论何时，在同一下大版本号下，最新版本总是最好的选择。
+- 向下兼容：我们向你保证，同一个大版本下始终向下兼容```（alpha和beta版本为测试版本，不包括）```，因此，无论何时，在同一个大版本号下，最新版本总是最好的选择。
 
 > 版本说明：alpha为开发阶段、beta为发布前测试、rc为候选版本、next为未来版本、无后缀的为正式版本。
 
@@ -102,6 +104,28 @@
 如果有意向加入我们，你可以通过提 [issue](https://github.com/oi-contrib/VISLite/issues) 和我们取到联系，请简单说明一下情况，我们会尽快回复。
 
 你可以查看[VISLite 贡献指南](./.github/CONTRIBUTING.md)文件了解更多细节，查看[AUTHORS.txt](./AUTHORS.txt)了解所有的贡献者。
+
+## 相关项目
+
+此外，我们还基于此项目维护了一个用例项目[dataGUI](https://github.com/oi-contrib/dataGUI)，比如：
+
+### 水分子式 H2O
+
+![https://oi-contrib.github.io/dataGUI/#/h2o](https://oi-contrib.github.io/dataGUI/snipping/h2o.jpeg)
+
+### 手式解锁
+
+![https://oi-contrib.github.io/dataGUI/#/manual-unlocking](https://oi-contrib.github.io/dataGUI/snipping/manual-unlocking.jpeg)
+
+### 3D环图
+
+![https://oi-contrib.github.io/dataGUI/#/ring3d](https://oi-contrib.github.io/dataGUI/snipping/ring3d.jpeg)
+
+### 可视化大屏
+
+![https://oi-contrib.github.io/dataGUI/#/bigview](https://oi-contrib.github.io/dataGUI/snipping/bigview.jpeg)
+
+> 更多内容，你可以直接访问： [https://oi-contrib.github.io/dataGUI](https://oi-contrib.github.io/dataGUI)
 
 ## 版权
 

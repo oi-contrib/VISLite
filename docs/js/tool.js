@@ -137,41 +137,6 @@ function fetchData(url) {
     });
 }
 
-// 复制到剪切板
-function execCopy(source, el) {
-    var textareaEl = document.createElement('textarea');
-    textareaEl.innerHTML = source;
-
-    document.body.appendChild(textareaEl);
-    textareaEl.select();
-
-    // copy提醒
-    function prompt(isOk) {
-        el.setAttribute("copied", isOk ? "yes" : "no")
-        el.setAttribute('data-before', isOk ? "复制成功" : "复制失败");
-        setTimeout(function () {
-            el.removeAttribute("copied");
-            el.removeAttribute('data-before');
-            el.blur();
-        }, 700);
-    }
-
-    try {
-        var result = window.document.execCommand("copy", false, null);
-
-        if (result) {
-            prompt(true);
-        } else {
-            prompt(false);
-        }
-    } catch (e) {
-        prompt(false);
-        console.error(e);
-    }
-
-    document.body.removeChild(textareaEl);
-}
-
 function compilerImport(source, isOnline) {
     var execResult = /import *\{([^}]+)\} *from *(["'])vislite\2;?/.exec(source);
     if (!execResult) {
@@ -181,11 +146,11 @@ function compilerImport(source, isOnline) {
     // 根据开发环境和生产环境区别lib地址
     var libSrc = isOnline ? "https://cdn.jsdelivr.net/npm/vislite@" + window.VISLite_system.version + "/lib/" : "../lib/";
 
-    var items = execResult[1].trim().split(","), item, index, importCode = "";
+    var items = execResult[1].trim().split(","), item, index, importCode = "import '" + libSrc + "index.umd.min.js';";
     for (index = 0; index < items.length; index++) {
         item = items[index].trim();
 
-        importCode += "import '" + libSrc + item + "/index.umd.min.js';var " + item + " = window.VISLite_" + item + ";\n"
+        importCode += "var " + item + " = window.VISLite." + item + ";\n"
     }
 
     return source.replace(execResult[0], importCode);

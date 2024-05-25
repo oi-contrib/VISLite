@@ -19,7 +19,7 @@
         var width = mycontent.clientWidth;
         var height = mycontent.clientHeight;
 
-        var mercator = new Mercator(7.5), cx = width * 0.5, cy = height * 0.5;
+        var mercator = new Mercator(Math.min(width,height)*0.015), cx = width * 0.5, cy = height * 0.5;
 
         var painter = new Canvas(mycontent);
         var t, p, i, j, k;

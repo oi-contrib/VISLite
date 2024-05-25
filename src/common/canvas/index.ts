@@ -45,6 +45,11 @@ class Canvas extends PainterRender {
         return this
     }
 
+    onlyView(flag: boolean) {
+        this.__onlyView = flag
+        return this
+    }
+
     // 设置当前绘制区域名称
     setRegion(regionName: string | number) {
         if (this.__region) {

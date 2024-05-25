@@ -9,14 +9,11 @@
     <link rel="shortcut icon" href="./images/logo.png">
     <meta name="keywords"
         content="zxl20070701 1904314465@qq.com vislite svg webgl typescript canvas vue uniapp miniprogram image2d image3d">
-    <link rel="stylesheet" href="./styles/normalize.css">
+    <script src="./js/min/pageby.min.js"></script>
     <link rel="stylesheet" href="./styles/common.css">
-    <link rel="stylesheet" href="./pages/bigview/index.css">
     <script src="./js/system.js"></script>
     <script src="./js/tool.js"></script>
     <script src="./js/menu.js"></script>
-    <script src="./js/shader.js"></script>
-    <script src="./pages/bigview/index.js"></script>
     <script>
         // 控制是否需要缓存
         var host = window.location.host;
@@ -46,9 +43,21 @@
     <!-- 导航 -->
     <div class="nav" id="nav">
         <span onclick="changeNav('begin')" id="nav-begin" title="写在前面和一些说明、介绍等">开始</span>
-        <span onclick="changeNav('course')" id="nav-course" title="教会你本项目如何使用以及一些经验之谈">教程</span>
+        <span onclick="changeNav('course')" id="nav-course" title="教会你本项目如何使用以及一些经验之谈">
+            教程
+            <span
+                style="position: absolute;background-color: red;color: white;font-size: 12px;padding: 0 4px;border-radius: 16px 0;transform: scale(.7);margin-top: -9px;margin-left: -10px;height: 24px;line-height: 24px;">
+                丰富中
+            </span>
+        </span>
         <span onclick="changeNav('api')" id="nav-api" title="接口文档">文档</span>
-        <span onclick="changeNav('example')" id="nav-example" title="基于本项目开发的一些例子">用例</span>
+        <span onclick="changeNav('example')" id="nav-example" title="基于本项目开发的一些例子">
+            用例
+            <span
+                style="position: absolute;background-color: red;color: white;font-size: 12px;padding: 0 4px;border-radius: 16px 0;transform: scale(.7);margin-top: -9px;margin-left: -10px;height: 24px;line-height: 24px;">
+                丰富中
+            </span>
+        </span>
         <span onclick="changeNav('question')" id="nav-question" title="使用本项目的时候需要注意的点，以及遇到问题如何解决">答疑</span>
         <span class="github link" onclick="openBlankPage('https://github.com/oi-contrib/VISLite')"
             title="项目仓库地址，包含源码、文档、例子、测试等">GitHub</span>

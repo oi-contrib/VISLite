@@ -85,7 +85,7 @@
   </view>
 </template>
 <script>
-import { _Canvas as RawCanvas } from "../lib/index.umd.min.js";
+import { RawCanvas } from "../lib/index.umd.min.js";
 import drawImage from "./drawImage.js";
 export default {
   data() {

@@ -192,33 +192,48 @@ v0.8.0:
         2、一些types定义优化
             * 针对ui-canvas补充标签ref类型
       - 新增功能
-        1、针对3D模型扩展了一个在线编辑器
-          （ https://zxl20070701.github.io/toolbox/#/model-editor ）
-        2、Canvas画笔
+        1、Canvas画笔
             * drawImage 绘制图片
-        3、WebGL画笔
+        2、WebGL画笔
             * 画布缩放模式（mode）
-        4、Geometry 辅助方法
+        3、Geometry 辅助方法
             * splitNum 计算切割份数
             * rotateLine 物体方向转换
-        5、Geometry 立方片段
+        4、Geometry 立方片段
             * prismHorizontal 棱柱水平部分
             * prismVertical 棱柱垂直部分
             * sphereFragment 球体中的一瓣子
-        6、Geometry 立方体
+        5、Geometry 立方体
             * pie 饼柱体
 v1.0.0:
-    date:
+    date:2024-05-25
     changes:
       - 被废弃API或功能
-        （基于更长远的考虑，部分反馈不好的API决定从v1.x开始废弃，后续专注基础技术积累，废弃业务模块，原v0.x的功能将独立一个分支继续维护，敬请理解）
+        （
+            > 基于更长远的考虑，部分反馈不好的API决定从v1.x开始废弃，后续专注基础技术积累，废弃业务模块，敬请理解
+            > 原v0.x的功能将独立一个分支继续维护：https://github.com/oi-contrib/VISLite/blob/v0.x/CHANGELOG
+        ）
         1、Geometry 立方体
         2、WebGL画笔
         3、取消一些旧的向下兼容语句
             * 微信小程序组件ui-canvas作为属性传递事件方式
             * Canvas和SVG画笔配置属性key非驼峰方式
-        4、viewHandler 节点信息捕获
-        5、formatColor 颜色格式化
+        4、节点信息捕获 viewHandler
+        5、颜色格式化 formatColor
+        6、节点缩放监听 resizeObserver
+      - 修复bug
+        1、微信小程序ui-canvas
+            * 不支持绘制图片问题
+            * toDataURL不兼容新版本
+        2、Canvas画笔
+            * 修复drawImage后续内容被覆盖问题
       - 优化改造
         1、针对types文件丰富必要的注释
         2、微信小程序和uni-app组件ui-canvas使用主包canvas以减低最终包体积
+        3、Canvas画笔
+            * draw方法兼容非uniapp环境
+            * 修复drawImage未正确绘制全图
+      - 新增功能
+        1、Canvas画笔
+            * H5环境下创建画笔对象的时候添加传递画布尺寸功能
+            * onlyView 绘制模式

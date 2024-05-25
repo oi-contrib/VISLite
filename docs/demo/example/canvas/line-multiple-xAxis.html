@@ -4,7 +4,7 @@
     <div id="content" class="content"></div>
 </div>
 <script type="module">
-    import { Canvas, resizeObserver, throttle, ruler, Cardinal, animation } from "vislite";
+    import { Canvas, throttle, ruler, Cardinal, animation } from "vislite";
 
     var data = [{
         year: "2015",
@@ -258,11 +258,12 @@
 
     }
 
-    resizeObserver(document.getElementsByTagName('body')[0], throttle(function() {
+    window.addEventListener("resize", throttle(function () {
         doResize()
     }, {
         keep: true
     }));
+    doResize();
 
     mycontent.addEventListener('mousemove', doHover);
 

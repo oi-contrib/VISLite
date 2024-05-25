@@ -6,7 +6,7 @@ import mergeOption from './common/mergeOption'
 
 class Canvas extends OralCanvas implements CanvasType {
     private __canvas: HTMLCanvasElement
-    constructor(el: HTMLElement | null, option: CanvasOptionType = {}) {
+    constructor(el: HTMLElement | null, option: CanvasOptionType = {}, width: number = 0, height: number = 0) {
         if (!el) {
             throw new Error("VISLite Canvas:The mount point requires an HTMLElement type but encountered null.")
         }
@@ -16,7 +16,8 @@ class Canvas extends OralCanvas implements CanvasType {
             willReadFrequently: false
         })
 
-        const width = el.clientWidth, height = el.clientHeight
+        width = width || el.clientWidth
+        height = height || el.clientHeight
 
         let ViewCanvas: HTMLCanvasElement, RegionCanvas: HTMLCanvasElement | null = null
 

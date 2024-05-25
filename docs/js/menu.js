@@ -1,7 +1,7 @@
 var currenNavName = "";
 
 // 需要无菜单显示的模块
-var FullViews = ['bigview'];
+var FullViews = [];
 
 // 需要无导航显示的模块
 var NoFixedViews = ['example'];
@@ -127,7 +127,7 @@ function changeNav(_navName, isInit) {
                                     }
 
                                     docEl.innerHTML = res + getFooterTemplate("docs/pages/" + window.__router[0] + "/" + window.__router[1] + ".html");
-                                    window.doShader(docEl);
+                                    pageby.shader(docEl);
 
                                     docEl.scrollTop = 0;
 
@@ -148,7 +148,7 @@ function changeNav(_navName, isInit) {
                                                             document.getElementById('explain-root').style.display = "block";
                                                             explainEl.innerHTML = data;
 
-                                                            window.doShader(explainEl);
+                                                            pageby.shader(explainEl);
 
                                                             explainEl.scrollTop = 0;
                                                         });
@@ -172,7 +172,7 @@ function changeNav(_navName, isInit) {
 
                                             exampleEls[index].replaceWith(exampleEl);
 
-                                            fetchData("./examples/" + examplePath + ".html").then(function (data) {
+                                            fetchData("./demo/" + examplePath + ".html").then(function (data) {
 
                                                 // 运行区域
                                                 var exampleViewEl = document.createElement("iframe");

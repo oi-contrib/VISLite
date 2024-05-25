@@ -23,16 +23,6 @@
             - index.ts
 ```
 
-然后在 ```build/webpack.config.js``` 中添加配置：
-
-```js
-entry: {
-    example_newApi: './test/example/newApi/index.ts'
-}
-```
-
-然后记得重新启动后就可以正常访问了。
-
 ### 新增功能
 
 主体代码写在 ```src``` 目录中，按照功能分类，对外暴露则在 ```package``` 目录中，结构如下：

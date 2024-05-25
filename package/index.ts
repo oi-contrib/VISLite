@@ -12,7 +12,7 @@ import ruler from "./ruler/index"
 
 import SVG from "./SVG/index"
 import Canvas from "./Canvas/index"
-import _Canvas from "../src/common/canvas/index"
+import RawCanvas from "../src/common/canvas/index"
 
 import getWebGLContext from "./getWebGLContext/index"
 import Shader from "./Shader/index"
@@ -22,7 +22,6 @@ import Buffer from "./Buffer/index"
 import Eoap from "./Eoap/index"
 import Mercator from "./Mercator/index"
 
-import resizeObserver from "./resizeObserver/index"
 import throttle from "./throttle/index"
 
 import TreeLayout from "./TreeLayout/index"
@@ -47,7 +46,7 @@ export default {
     // 画笔
     SVG,
     Canvas,
-    _Canvas,
+    RawCanvas,
 
     // WebGL
     getWebGLContext,
@@ -60,7 +59,6 @@ export default {
     Mercator,
 
     // 辅助
-    resizeObserver,
     throttle,
 
     // 布局

@@ -23,7 +23,6 @@ import TextureType from './Texture'
 import MapType from './Map'
 
 import throttleType from './throttle'
-import resizeObserverType from './resizeObserver'
 
 import TreeLayoutType from './TreeLayout'
 import TreeConfigType from './TreeConfig'
@@ -46,7 +45,7 @@ interface NewSVGType extends SVGType {
     new(el: HTMLElement | null): this
 }
 interface NewCanvasType extends CanvasType {
-    new(el: HTMLElement | null, option?: CanvasOptionType): this
+    new(el: HTMLElement | null, option?: CanvasOptionType, width?: number, height?: number): this
 }
 
 // WebGL
@@ -106,7 +105,6 @@ export default class VISLite {
 
     // 辅助
     static throttle: throttleType
-    static resizeObserver: resizeObserverType
 
     // 布局
     static TreeLayout: NewTreeLayoutType
@@ -143,7 +141,6 @@ export let Mercator: NewMercatorType
 
 // 辅助
 export let throttle: throttleType
-export let resizeObserver: resizeObserverType
 
 // 布局
 export let TreeLayout: NewTreeLayoutType

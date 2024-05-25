@@ -1,0 +1,42 @@
+<div id="mywebgl" style="width:300px;height:300px;outline: 1px solid red;"></div>
+
+<!-- 顶点着色器 -->
+<script type='x-shader/x-vertex' id='vs'>
+    attribute vec4 a_position;
+
+    void main(){
+        gl_Position = a_position;
+    }
+</script>
+
+ <!-- 片段着色器 -->
+<script type='x-shader/x-fragment' id='fs'>
+    precision mediump float;
+    uniform vec4 u_color;
+
+    void main(){
+        gl_FragColor = u_color;
+    }
+</script>
+<script type="module">
+    import { getWebGLContext, Shader, Buffer } from 'vislite';
+
+    var painter = new getWebGLContext(document.getElementById('mywebgl'));
+    var shader = new Shader(painter).compile(document.getElementById("vs").innerText, document.getElementById("fs").innerText).use();
+
+    // 设置点颜色
+    painter.uniform4f(painter.getUniformLocation(shader.program, "u_color"), 1, 0, 0, 1);
+
+    // 设置点位置
+    new Buffer(painter).use().write(new Float32Array([
+        -0.4, 0.4, 0,
+        0.5, 0.5, 0,
+        -0.5, -0.5, 0,
+        0.5, 0.5, 0,
+        -0.5, -0.5, 0,
+        0.4, -0.4, 0,
+    ])).divide(painter.getAttribLocation(shader.program, "a_position"), 3, 3, 0);
+
+    // 绘制
+    painter.drawArrays(painter.TRIANGLES, 0, 6);
+</script>
