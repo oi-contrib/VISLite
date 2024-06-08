@@ -111,19 +111,27 @@
 
 ### 水分子式 H2O
 
-![https://oi-contrib.github.io/dataGUI/#/h2o](https://oi-contrib.github.io/dataGUI/snipping/h2o.jpeg)
+<a href="https://oi-contrib.github.io/dataGUI/#/h2o" target="_blank">
+    <img src="https://oi-contrib.github.io/dataGUI/snipping/h2o.png">
+</a>
 
 ### 手式解锁
 
-![https://oi-contrib.github.io/dataGUI/#/manual-unlocking](https://oi-contrib.github.io/dataGUI/snipping/manual-unlocking.jpeg)
+<a href="https://oi-contrib.github.io/dataGUI/#/manual-unlocking" target="_blank">
+    <img src="https://oi-contrib.github.io/dataGUI/snipping/manual-unlocking.jpeg">
+</a>
 
 ### 3D环图
 
-![https://oi-contrib.github.io/dataGUI/#/ring3d](https://oi-contrib.github.io/dataGUI/snipping/ring3d.jpeg)
+<a href="https://oi-contrib.github.io/dataGUI/#/ring3d" target="_blank">
+    <img src="https://oi-contrib.github.io/dataGUI/snipping/ring3d.jpeg">
+</a>
 
 ### 可视化大屏
 
-![https://oi-contrib.github.io/dataGUI/#/bigview](https://oi-contrib.github.io/dataGUI/snipping/bigview.jpeg)
+<a href="https://oi-contrib.github.io/dataGUI/#/bigview" target="_blank">
+    <img src="https://oi-contrib.github.io/dataGUI/snipping/bigview.jpeg">
+</a>
 
 > 更多内容，你可以直接访问： [https://oi-contrib.github.io/dataGUI](https://oi-contrib.github.io/dataGUI)
 

@@ -1,4 +1,4 @@
-import { RawCanvas } from "../../lib/index.umd.min.js";
+import RawCanvas from "../../lib/RawCanvas/index.es.min.js";
 import drawImage from "./drawImage.js";
 
 let dpr = wx.getSystemInfoSync().pixelRatio;
