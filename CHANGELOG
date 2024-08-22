@@ -218,3 +218,15 @@ v0.8.1:
       - 优化改造
         1、Canvas画笔
             * draw方法兼容非uniapp环境
+v0.8.2:
+    date:2024-08-22
+    changes:
+      - 优化改造
+        1、添加jsdelivr默认文件配置
+      - 修复bug
+        1、修复uni-app平台的ui-canvas组件在ts环境中引入报错问题
+        2、SVG 画笔
+            * 修复lineWidth不生效问题
+        3、修复微信小程序版本的ui-canvas的region默认值设置错误问题
+        4、Canvas画笔
+            * 修复drawImage在非H5端源图片尺寸错误问题

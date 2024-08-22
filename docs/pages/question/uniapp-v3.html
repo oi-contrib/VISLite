@@ -1,0 +1,49 @@
+<header>
+    uni-app / Vue3.js版本
+</header>
+<h2>
+    文件未声明
+</h2>
+<p>
+    比如你使用如下语句引入ui-canvas组件：
+</p>
+<pre tag="javascript">
+    import uiCanvas from "vislite/uni-app/ui-canvas.vue";
+</pre>
+<p>
+    你可能会看见如下错误提示：
+</p>
+<p class="important">
+    Could not find a declaration file for module 'vislite/uni-app/ui-canvas.vue'.
+</p>
+<p>
+    怎么办？你可以在项目中找到
+    <span class="special">
+        tsconfig.json
+    </span>
+    文件，然后在里面添加这样的配置：
+</p>
+<pre tag="javascript">
+{
+    "compilerOptions": {
+        "types": [ "vislite/types" ]
+    }
+}
+</pre>
+<p>
+    如此就不会报错了。当然，你也可以直接使用
+    <span class="special">
+        easycom
+    </span>
+    的方式进行配置，这将不会有任何错误：
+</p>
+<pre tag="javascript">
+{
+    "easycom": {
+        "autoscan": true,
+        "custom": {
+            "ui-canvas": "vislite/uni-app/ui-canvas.vue"
+        }
+    }
+}
+</pre>

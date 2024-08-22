@@ -114,7 +114,7 @@ class Painter {
 
         // 其它情况直接生效即可
         else if (key in this.__initConfig) {
-            this.painter[key] = value
+            (this.painter as any)[key] = value
         }
 
         // 如果属性未被定义
@@ -438,12 +438,12 @@ class Painter {
             if (typeof img == 'string' && !isImage) {
                 const imgInstance = new Image()
                 imgInstance.onload = () => {
-                    this.painter.drawImage(imgInstance, 0, 0, imgInstance.width, imgInstance.height, x, y, w, h)
+                    this.painter.drawImage(imgInstance, x, y, w, h)
                     resolve({})
                 }
                 imgInstance.src = img
             } else {
-                this.painter.drawImage(img as CanvasImageSource, 0, 0, w, h, x, y, w, h)
+                this.painter.drawImage(img as CanvasImageSource, x, y, w, h)
                 resolve({})
             }
 

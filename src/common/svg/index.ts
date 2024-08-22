@@ -264,17 +264,17 @@ class SVG {
         return this
     }
     fill() {
-        initPath(this.__useEl, this.__path)
+        initPath(this.__useEl, this.__path, this.__config)
         fill(this.__useEl, this.__config)
         return this
     }
     stroke() {
-        initPath(this.__useEl, this.__path)
+        initPath(this.__useEl, this.__path, this.__config)
         stroke(this.__useEl, this.__config)
         return this
     }
     full() {
-        initPath(this.__useEl, this.__path);
+        initPath(this.__useEl, this.__path, this.__config)
         full(this.__useEl, this.__config)
         return this
     }

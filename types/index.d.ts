@@ -1,3 +1,5 @@
+/// <reference path="./uni-canvas.d.ts" />
+
 import CardinalType from './Cardinal'
 import HermiteType from './Hermite'
 

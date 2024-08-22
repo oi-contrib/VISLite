@@ -76,9 +76,11 @@ export const initCircle = (el: SVGElement, cx: number, cy: number, r: number) =>
 }
 
 // 路径统一设置方法
-export const initPath = (el: SVGElement, path: string) => {
+export const initPath = (el: SVGElement, path: string, config: SVGConfigType) => {
     if (el.nodeName.toLowerCase() !== "path") throw new Error("Need a <path> !")
     setAttribute(el, "d", path)
+    setAttribute(el, "stroke-dasharray", (config.lineDash as Array<number>).join(','))
+    setAttribute(el, "stroke-width", config.lineWidth + "")
 }
 
 // 画矩形统一设置方法

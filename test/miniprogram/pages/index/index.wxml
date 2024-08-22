@@ -1,0 +1,1 @@
+<button type="primary" class="btn" bindtap="goto" data-page="canvas">Canvas画笔</button>

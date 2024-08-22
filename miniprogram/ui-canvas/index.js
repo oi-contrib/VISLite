@@ -3,23 +3,25 @@ import drawImage from "./drawImage.js";
 
 let dpr = wx.getSystemInfoSync().pixelRatio;
 
+// https://developers.weixin.qq.com/miniprogram/dev/reference/api/Component.html
+
 Component({
     properties: {
         width: {
             type: Number,
-            default: 300
+            value: 300
         },
         height: {
             type: Number,
-            default: 150
+            value: 150
         },
         region: {
             type: Boolean,
-            default: true
+            value: true
         },
         touchstart: {
             type: Function,
-            default: () => { }
+            value: () => { }
         }
     },
     data: {

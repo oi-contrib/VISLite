@@ -1,0 +1,7 @@
+{
+  "name": "miniprogram",
+  "version": "0.0.0",
+  "dependencies": {
+    "vislite": "^0.8.2-beta.0"
+  }
+}
