@@ -12,11 +12,20 @@
     <a href="https://www.jsdelivr.com/package/npm/vislite">
         <img src="https://data.jsdelivr.com/v1/package/npm/vislite/badge" alt="cdn">
     </a>
+    <a href="https://github.com/oi-contrib/VISLite/issues">
+        <img src="https://img.shields.io/github/issues/oi-contrib/VISLite" alt="issue">
+    </a>
     <a href="https://github.com/oi-contrib/VISLite" target='_blank'>
-        <img alt="GitHub repo stars" src="https://img.shields.io/github/stars/oi-contrib/VISLite?style=social">
+        <img alt="GitHub repo stars" src="https://img.shields.io/github/stars/oi-contrib/VISLite">
+    </a>
+    <a href="https://github.com/oi-contrib/VISLite">
+        <img src="https://img.shields.io/github/forks/oi-contrib/VISLite" alt="forks">
     </a>
     <a href="https://gitee.com/oi-contrib/VISLite" target='_blank'>
-        <img alt="Gitee repo stars" src="https://gitee.com/oi-contrib/VISLite/badge/star.svg?theme=dark">
+        <img alt="Gitee repo stars" src="https://gitee.com/oi-contrib/VISLite/badge/star.svg">
+    </a>
+    <a href="https://gitee.com/oi-contrib/VISLite">
+        <img src="https://gitee.com/oi-contrib/VISLite/badge/fork.svg" alt="forks">
     </a>
 </p>
 
@@ -46,7 +55,7 @@
 
 ### 画笔加强
 
-我们对画笔进行了加强，使得其更简单好用。比如canvas、webgl，抽象出区域的概念，使得无论你绘制的图形多么的不规则，都可以很轻松的实现交互功能：
+我们对画笔进行了加强，使得其更简单好用。比如canvas，抽象出区域的概念，使得无论你绘制的图形多么的不规则，都可以很轻松的实现交互功能：
 
 <img src="https://oi-contrib.github.io/VISLite/images/docs/what_2.png" width="400"/>
 
@@ -62,7 +71,7 @@
 
 > 上述例子的运行地址：[金额波浪球](https://oi-contrib.github.io/VISLite/#/example/svg/money-schedule)。
 
-基于实际需要，我们目前对 ```Canvas``` 提供了跨端支持，除 ```Web端``` 外，还支持 ```原生微信小程序``` 和 ```uni-app端``` （编译成H5、微信小程序、支付宝小程序等） ，如果后续有必要，我们会对Canvas支持的端或SVG、WebGL等画笔进行更多端扩展。
+基于实际需要，我们目前对 ```Canvas``` 提供了跨端支持，除 ```Web端``` 外，还支持 ```原生微信小程序``` 、 ```原生支付宝小程序``` 和 ```uni-app端``` （编译成H5、微信小程序、支付宝小程序等） ，如果后续有必要，我们会对Canvas支持的端或SVG、WebGL等画笔进行更多端扩展。
 
 ## 特点
 
@@ -106,6 +115,30 @@
 你可以查看[VISLite 贡献指南](./.github/CONTRIBUTING.md)文件了解更多细节，查看[AUTHORS.txt](./AUTHORS.txt)了解所有的贡献者。
 
 ## 相关项目
+
+| Project | Status | Download |Description |
+|---------|--------|-------|------|
+| [@vislite/canvas] | [![vislite-canvas-status]][vislite-canvas-package] |[![vislite-canvas-download-status]][vislite-canvas-download] | 基于VISLite的Canvas画笔开发的绘制方法 |
+| [@vislite/chart] | [![vislite-chart-status]][vislite-chart-package] |[![vislite-chart-download-status]][vislite-chart-download] | 基于VISLite开发的可视化图表库（基础布局版本可跨端，类似ECharts） |
+| [H5Charts] | [![h5charts-status]][h5charts-package] |[![h5charts-download-status]][h5charts-download] | 一个基于 JavaScript 的开源可视化图表库 |
+
+[@vislite/canvas]: https://github.com/oi-contrib/vislite-plugin-canvas
+[vislite-canvas-package]:  https://npmjs.com/package/@vislite/canvas
+[vislite-canvas-status]: https://img.shields.io/npm/v/@vislite/canvas.svg
+[vislite-canvas-download-status]: https://img.shields.io/npm/dm/@vislite/canvas.svg
+[vislite-canvas-download]: https://zxl20070701.github.io/toolbox/#/npm-download?packages=@vislite/canvas&interval=7
+
+[@vislite/chart]: https://github.com/oi-contrib/vislite-plugin-chart
+[vislite-chart-package]:  https://npmjs.com/package/@vislite/chart
+[vislite-chart-status]: https://img.shields.io/npm/v/@vislite/chart.svg
+[vislite-chart-download-status]: https://img.shields.io/npm/dm/@vislite/chart.svg
+[vislite-chart-download]: https://zxl20070701.github.io/toolbox/#/npm-download?packages=@vislite/chart&interval=7
+
+[H5Charts]: https://github.com/oi-contrib/H5Charts
+[h5charts-package]:  https://npmjs.com/package/h5charts
+[h5charts-status]: https://img.shields.io/npm/v/h5charts.svg
+[h5charts-download-status]: https://img.shields.io/npm/dm/h5charts.svg
+[h5charts-download]: https://zxl20070701.github.io/toolbox/#/npm-download?packages=h5charts&interval=7
 
 此外，我们还基于此项目维护了一个用例项目[dataGUI](https://github.com/oi-contrib/dataGUI)，比如：
 

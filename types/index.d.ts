@@ -1,3 +1,5 @@
+/// <reference path="./uni-canvas.d.ts" />
+
 import CardinalType from './Cardinal'
 import HermiteType from './Hermite'
 
@@ -23,9 +25,12 @@ import TextureType from './Texture'
 import MapType from './Map'
 
 import throttleType from './throttle'
+import assembleType from './assemble'
 
 import TreeLayoutType from './TreeLayout'
 import TreeConfigType from './TreeConfig'
+
+import { initOptionType, mergeOptionType } from './option'
 
 // 插值
 interface NewCardinalType extends CardinalType {
@@ -105,9 +110,14 @@ export default class VISLite {
 
     // 辅助
     static throttle: throttleType
+    static assemble: assembleType
 
     // 布局
     static TreeLayout: NewTreeLayoutType
+
+    // 配置项
+    static initOption: initOptionType
+    static mergeOption: mergeOptionType
 }
 
 // 插值
@@ -141,6 +151,11 @@ export let Mercator: NewMercatorType
 
 // 辅助
 export let throttle: throttleType
+export let assemble: assembleType
 
 // 布局
 export let TreeLayout: NewTreeLayoutType
+
+// 配置项
+export let initOption: initOptionType
+export let mergeOption: mergeOptionType

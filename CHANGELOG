@@ -242,3 +242,33 @@ v1.1.0:
     changes:
       - 新增功能
         1、添加对uni-app（Vue3版本）的支持
+v1.2.0:
+    date:2024-09-01
+    changes:
+      - 修复bug
+        1、修复uni-app平台的ui-canvas组件在ts环境中引入报错问题
+        2、修复微信小程序版本的ui-canvas的region默认值设置错误问题
+        3、SVG 画笔
+            * 修复lineWidth不生效问题
+        4、Canvas画笔
+            * 修复drawImage在非H5端源图片尺寸错误问题
+      - 优化改造
+        1、getLoopColors 可修改基础色
+      - 新增功能
+        1、Canvas画笔
+            * H5环境下添加bind绑定事件方法
+            * createConicGradient 角度渐变色
+            * 配置config添加可配置项
+              > lineCap 线的端点类型
+              > lineJoin 线的拐角连接方式
+            * 支付宝小程序版本的ui-canvas
+            * 重置 reset
+        2、SVG 画笔
+            * 配置config添加可配置项
+              > lineCap 线的端点类型
+              > lineJoin 线的拐角连接方式
+            * 重置 reset
+        3、assemble 步进生成器
+        4、option 配置项
+            * initOption 初始化
+            * mergeOption 合并

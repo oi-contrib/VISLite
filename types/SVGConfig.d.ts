@@ -1,4 +1,4 @@
-import { arcCapType, textAlignType, textBaselineType } from './painterConfig'
+import { arcCapType, textAlignType, textBaselineType, lineCapType, lineJoinType } from './painterConfig'
 
 export type svgElType = SVGElement | "g" | "text" | "path" | "circle" | "rect" | "polygon" | "polyline"
 export type svgBoardType = SVGElement | "text" | "path" | "arc" | "circle" | "rect"
@@ -21,6 +21,23 @@ export default interface SVGConfigType {
     lineWidth?: number
 
     /**
+     * 线的端点类型，默认"butt"平直边缘（还有"round"半圆和"square"矩形）
+     */
+    lineCap?: lineCapType
+
+    /**
+     * 线的拐角连接方式，默认"miter"连接处边缘延长相接（还有"bevel"对角线斜角和"round"圆）
+     */
+    lineJoin?: lineJoinType
+
+    /**
+     * 设置线条虚线，默认为[]表示使用实线绘制
+     *
+     * 值应该是一个数组，格式：[实线长，虚线长，实线长 ...]，数组长度任意，会自动循环
+     */
+    lineDash?: Array<number>
+
+    /**
      * 文字水平对齐方式，默认"left"左对齐（还有"center"居中和"right"右对齐）
      */
     textAlign?: textAlignType
@@ -29,13 +46,6 @@ export default interface SVGConfigType {
      * 文字垂直对齐方式，默认"middle"垂直居中（还有"top"上对齐和"bottom"下对齐）
      */
     textBaseline?: textBaselineType
-
-    /**
-     * 设置线条虚线，默认为[]表示使用实线绘制
-     *
-     * 值应该是一个数组，格式：[实线长，虚线长，实线长 ...]，数组长度任意，会自动循环
-     */
-    lineDash?: Array<number>
 
     /**
      * 文字大小，默认16

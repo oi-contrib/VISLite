@@ -21,6 +21,18 @@ body {
     cursor: move;
 }
 
+@media (min-width: 900px) {
+    .cat {
+        right: 220px;
+    }
+}
+
+@media (max-width: 500px) {
+    .cat {
+        display: none;
+    }
+}
+
 .top-tips {
     position: absolute;
     right: 20px;

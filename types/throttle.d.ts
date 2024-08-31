@@ -1,8 +1,6 @@
-import throttleOptionType from './throttleOption'
+import { throttleType } from "@oipage/core.js/src/throttle"
 
 /**
  * 节流函数
  */
-export default interface throttle {
-    (callback: Function, option?: throttleOptionType): Function
-}
+export default throttleType

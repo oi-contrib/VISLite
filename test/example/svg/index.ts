@@ -82,3 +82,12 @@ painter
             .value(),
     })
     .fillCircle(300, 240, 100)
+
+painter.appendBoard("path").beginPath().config({
+    lineWidth: 20,
+    lineCap: "round",
+    lineJoin: "round",
+    lineDash: [40, 100, 40]
+})
+// .reset()
+.moveTo(900, 600).lineTo(800, 500).lineTo(400, 650).stroke()

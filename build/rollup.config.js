@@ -1,5 +1,7 @@
 const typescript = require('@rollup/plugin-typescript')
 const tsconfig = require('../tsconfig.json')
+const pluginNodeResolve = require("@rollup/plugin-node-resolve")
+const pluginCommonjs = require("@rollup/plugin-commonjs")
 
 tsconfig.compilerOptions.sourceMap = false
 tsconfig.compilerOptions.removeComments = true
@@ -10,6 +12,8 @@ module.exports = {
     },
     plugins: [
         typescript(tsconfig),
+        pluginNodeResolve(),
+        pluginCommonjs(),
         (function () {
             return {
                 transform(source, path) {

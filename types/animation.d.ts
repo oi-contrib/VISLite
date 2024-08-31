@@ -1,10 +1,6 @@
-interface animationFun {
-    (deep: number): void
-}
+import { animationType } from "@oipage/core.js/src/animation"
 
 /**
  * 轮询动画，返回一个函数，调用该函数，可以提前结束动画
  */
-export default interface animationType {
-    (doback: animationFun, duration?: number, callback?: animationFun): Function
-}
+export default animationType

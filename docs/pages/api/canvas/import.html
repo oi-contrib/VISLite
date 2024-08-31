@@ -20,13 +20,27 @@ let painter = new Canvas(el)
     创建画笔的时候，你还可以传递一个参数来进行更精细的控制：
 </p>
 <pre tag="javascript">
-new Canvas(el, {
+let painter = new Canvas(el, {
 
     // Boolean类型，默认true，表示是否支持区域管理（v0.4.1开始支持）
     "region": boolean,
 
     // Boolean类型，默认false，如果多次获取画布颜色（例如：painter.getColor方法）可以开启（v0.6.0开始支持）
     "willReadFrequently": boolean
+})
+</pre>
+<h3>
+    交互
+</h3>
+<div class="version">
+    1.2.0 新增
+</div>
+<p>
+    使用bind方法绑定事件即可：
+</p>
+<pre tag="javascript">
+painter.bind(eventName, function(regionName, x, y){
+    // todo
 })
 </pre>
 <h3>
@@ -39,15 +53,15 @@ new Canvas(el, {
     默认情况下，画布大小都是自动嗅探的，而对于不显示的画布，可以进行设置：
 </p>
 <pre tag="javascript">
-new Canvas(el, {}, width, height)
+let painter = new Canvas(el, {}, width, height)
 </pre>
 <h2>
     uni-app
 </h2>
 <div class="warn">
-    目前只对 “浏览器”、“微信小程序”、“支付宝小程序” 端进行了验证。
+    目前只支持 “浏览器”、“微信小程序”、“支付宝小程序” 等端。
     <hr />
-    若在编译成其余端时出现问题，可以告诉我们进行兼容改造！
+    若需要支持更多端，可以留言告诉我们进行兼容扩展改造！
 </div>
 <p>
     我们提供的是一个uni-app组件，引入以后需要进行注册：
@@ -322,4 +336,124 @@ Page({
 </pre>
 <p>
     在你每次点击画笔的时候就会触发doit方法，此方法的形参有一个属性detail，记录着你点击的区域信息。
+</p>
+<h2>
+    支付宝小程序
+</h2>
+<div class="version">
+    1.2.0 新增
+</div>
+<p>
+    注册组件：
+</p>
+<pre tag="javascript">
+// page.json
+{
+    "usingComponents": {
+        "ui-canvas": "vislite/minialipay/ui-canvas/index"
+    }
+}
+</pre>
+<p>
+    注册完毕就可以在页面中使用了：
+</p>
+<pre tag="html">
+    <ui-canvas id='mycanvas' width='400' height='300'></ui-canvas>
+</pre>
+<p>
+    然后获取画笔：
+</p>
+<pre tag="javascript">
+this.$selectComponent("#mycanvas").fetch().then(painter=>{
+    // todo
+});
+</pre>
+<p>
+    此时，你就可以用这只画笔绘制你想要的内容了。
+</p>
+<h3>
+    属性说明
+</h3>
+<table>
+    <thead>
+        <tr>
+            <td>
+                属性名
+            </td>
+            <td>
+                类型
+            </td>
+            <td>
+                默认值
+            </td>
+            <td>
+                说明
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                width
+            </td>
+            <td>
+                Number
+            </td>
+            <td>
+                300
+            </td>
+            <td>
+                画布的宽
+            </td>
+        </tr>
+        <tr>
+            <td>
+                height
+            </td>
+            <td>
+                Number
+            </td>
+            <td>
+                150
+            </td>
+            <td>
+                画布的高
+            </td>
+        </tr>
+        <tr>
+            <td>
+                region
+            </td>
+            <td>
+                Boolean
+            </td>
+            <td>
+                true
+            </td>
+            <td>
+                是否支持区域管理
+            </td>
+        </tr>
+    </tbody>
+</table>
+<h3>
+    交互
+</h3>
+<pre tag="html">
+    &lt;ui-canvas onDoTouchstart="doit"&gt;&lt;/ui-canvas&gt;
+</pre>
+<p>
+    其中doit是定义的方法：
+</p>
+<pre tag="javascript">
+Page({
+    doit(detail) {
+
+        // {"name":string,"x":number,"y":number}
+        console.log(detail)
+    }
+})
+</pre>
+<p>
+    在你每次点击画笔的时候就会触发doit方法，此方法的形参detail，记录着你点击的区域信息。
 </p>

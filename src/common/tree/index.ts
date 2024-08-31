@@ -2,7 +2,7 @@ import type TreeConfigType from '../../../types/TreeConfig'
 import type { TreeResultType } from '../../../types/Tree'
 
 import toPlainTree from './toPlainTree'
-import mergeOption from '../mergeOption'
+import { initOption } from '../option'
 
 class Tree {
     readonly name: string = 'Tree'
@@ -10,7 +10,7 @@ class Tree {
     private __config: TreeConfigType
 
     constructor(config: TreeConfigType = {}) {
-        this.__config = mergeOption(config, {
+        this.__config = initOption(config, {
             root: (initTree: any) => initTree,
             children: (parentTree: any) => parentTree.children,
             id: (treedata: any) => treedata.name

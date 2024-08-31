@@ -1,8 +1,8 @@
-import type { arcCapType } from '../../../types/painterConfig'
 import type CanvasOptsType from '../../../types/CanvasOpts'
 
 import { initText, initArc, initCircle, initRect } from './config'
 import texts from './texts'
+import defaultFactory from "./default"
 
 class Painter {
 
@@ -16,56 +16,11 @@ class Painter {
 
     // 用于记录配置
     // 因为部分配置的设置比较特殊，只先记录意图
-    __specialConfig = {
-
-        // 文字大小
-        "fontSize": 16,
-
-        // 字体
-        "fontFamily": "sans-serif",
-
-        // 字重
-        "fontWeight": 400,
-
-        // 字类型
-        "fontStyle": "normal",
-
-        // 圆弧开始端闭合方式（"butt"直线闭合、"round"圆帽闭合）
-        "arcStartCap": <arcCapType>'butt',
-
-        // 圆弧结束端闭合方式，和上一个类似
-        "arcEndCap": <arcCapType>'butt'
-    } as {
+    __specialConfig = defaultFactory("special") as {
         [key: string]: any
     }
 
-    private __initConfig = {
-
-        // 填充色或图案
-        "fillStyle": 'black',
-
-        // 轮廓色或图案
-        "strokeStyle": 'black',
-
-        // 线条宽度(单位px，下同)
-        "lineWidth": 1,
-
-        // 文字水平对齐方式（"left"左对齐、"center"居中和"right"右对齐）
-        "textAlign": 'left',
-
-        // 文字垂直对齐方式（"middle"垂直居中、"top"上对齐和"bottom"下对齐）
-        "textBaseline": 'middle',
-
-        // 设置线条虚线，应该是一个数组[number,...]
-        "lineDash": [],
-
-        // 阴影的模糊系数，默认0，也就是无阴影
-        "shadowBlur": 0,
-
-        // 阴影的颜色
-        "shadowColor": "black"
-
-    }
+    private __initConfig = defaultFactory("init")
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     constructor(canvas: HTMLCanvasElement, opts: CanvasOptsType = {}, region?: Painter, isPainter = false, scaleSize = 1) {
@@ -116,7 +71,7 @@ class Painter {
 
         // 其它情况直接生效即可
         else if (key in this.__initConfig) {
-            this.painter[key] = value
+            (this.painter as any)[key] = value
         }
 
         // 如果属性未被定义
@@ -440,16 +395,36 @@ class Painter {
             if (typeof img == 'string' && !isImage) {
                 const imgInstance = new Image()
                 imgInstance.onload = () => {
-                    this.painter.drawImage(imgInstance, 0, 0, imgInstance.width, imgInstance.height, x, y, w, h)
+                    this.painter.drawImage(imgInstance, x, y, w, h)
                     resolve({})
                 }
                 imgInstance.src = img
             } else {
-                this.painter.drawImage(img as CanvasImageSource, 0, 0, w, h, x, y, w, h)
+                this.painter.drawImage(img as CanvasImageSource, x, y, w, h)
                 resolve({})
             }
 
         })
+    }
+
+    // 扩展绘制方法
+    install(methods: {
+        [key: string]: Function
+    }): any {
+        for (let key in methods) {
+
+            if (key in this) {
+                throw new Error("VISLite Canvas:Method already exists and cannot be overwritten.")
+            } else {
+                (this as any)[key] = (...args: any) => {
+                    let value = methods[key].apply(this, args)
+                    if (value != void 0) return value
+                    return this
+                }
+            }
+
+        }
+        return this
     }
 }
 

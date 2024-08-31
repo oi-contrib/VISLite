@@ -1,4 +1,4 @@
-import animation from '../../../src/animation'
+import animation from '../../../package/animation/index'
 
 console.log(animation)
 

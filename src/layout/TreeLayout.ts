@@ -3,8 +3,8 @@ import type { TreeResultType } from '../../types/Tree'
 import type TreeOptionType from '../../types/TreeOption'
 
 import Tree from '../common/tree/index'
-import mergeOption from '../common/mergeOption'
-import animation from '../animation'
+import { initOption } from '../common/option'
+import { animation } from "@oipage/core.js/src/animation/index"
 import rotate from '../rotate'
 
 class TreeLayout extends Tree implements TreeLayoutType {
@@ -30,7 +30,7 @@ class TreeLayout extends Tree implements TreeLayoutType {
     private __noOpens = {}
 
     setOption(option: TreeOptionType) {
-        mergeOption(option, this.__option)
+        initOption(option, this.__option)
         return this
     }
 

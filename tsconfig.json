@@ -9,5 +9,9 @@
     "suppressImplicitAnyIndexErrors": true,
     "strictPropertyInitialization": false,
     "noImplicitThis": false
-  }
+  },
+  "exclude": [
+    "test/uniapp2",
+    "test/uniapp3"
+  ]
 }

@@ -1,0 +1,32 @@
+<header>
+    配置项
+</header>
+<h2>
+    initOption
+</h2>
+<div class="version">
+    1.2.0 新增
+</div>
+<p>
+    初始化配置：
+</p>
+<pre tag="javascript">
+import { initOption } from "vislite"
+
+let option = initOption(setOption, defaultOption)
+</pre>
+<h2>
+    mergeOption
+</h2>
+<div class="version">
+    1.2.0 新增
+</div>
+<p>
+    合并配置：
+</p>
+<pre tag="javascript">
+import { mergeOption } from "vislite"
+
+// 会把新配置合并到旧配置中
+mergeOption(oldOption, newOption)
+</pre>

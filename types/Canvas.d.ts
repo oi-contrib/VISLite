@@ -8,6 +8,11 @@ export default interface CanvasType {
     config(configs: CanvasConfigType): this
 
     /**
+     * 重置
+     */
+    reset(): this
+
+    /**
      * 绘制一个实心文字
      * @param text 需要绘制的文字
      * @param x 绘制位置的x坐标
@@ -298,6 +303,15 @@ export default interface CanvasType {
     createRadialGradient(cx: number, cy: number, r: number): GradientType<CanvasGradient>
 
     /**
+     * 创建角度渐变
+     * @param cx 中心
+     * @param cy
+     * @param beginDeg 开始弧度
+     * @param deg 跨越弧度，可选，默认2PI
+     */
+    createConicGradient(cx: number, cy: number, beginDeg: number, deg?: number): GradientType<CanvasGradient>
+
+    /**
      * 获取指定位置颜色
      * @param x
      * @param y
@@ -320,4 +334,11 @@ export default interface CanvasType {
      * @param h
      */
     drawImage(img: CanvasImageSource | string, x: number, y: number, w: number, h: number, isUniapp?: boolean): Promise<any>
+
+    /**
+     * 绑定事件（仅H5可用）
+     * @param eventName 事件名称
+     * @param callback 回调函数
+     */
+    bind(eventName: string, callback: (regionName: string, x: number, y: number) => void): this
 }

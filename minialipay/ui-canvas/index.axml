@@ -1,0 +1,4 @@
+<view>
+    <canvas type="2d" id="{{'painter-'+uniqueid}}" style="{{'width:'+(width+'px')+';'+('height:'+(height+'px')+';')}}" width="{{2*width+'px'}}" height="{{2*height+'px'}}" onTouchStart="doitstart"></canvas>
+    <canvas a:if="{{region}}" type="2d" id="{{'region-'+uniqueid}}" style="{{'width:'+(width+'px')+';'+('height:'+(height+'px')+';')}}" id="{{'region-'+uniqueid}}" class="region"></canvas>
+</view>

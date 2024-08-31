@@ -1,0 +1,1 @@
+<button type="primary" class="btn" onTap="goto" data-page="canvas">Canvas画笔</button>

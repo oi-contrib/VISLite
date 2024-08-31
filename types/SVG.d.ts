@@ -9,6 +9,11 @@ export default interface SVGType {
     config(configs: SVGConfigType): this
 
     /**
+    * 重置
+    */
+    reset(): this
+
+    /**
      * 标记应用节点
      */
     useEl(el: SVGElement): this

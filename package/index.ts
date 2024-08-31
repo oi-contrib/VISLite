@@ -26,6 +26,11 @@ import throttle from "./throttle/index"
 
 import TreeLayout from "./TreeLayout/index"
 
+import initOption from "./initOption/index"
+import mergeOption from "./mergeOption/index"
+
+import assemble from "./assemble/index"
+
 export default {
 
     // 插值
@@ -60,7 +65,12 @@ export default {
 
     // 辅助
     throttle,
+    assemble,
 
     // 布局
-    TreeLayout
+    TreeLayout,
+
+    // 配置项
+    initOption,
+    mergeOption
 }

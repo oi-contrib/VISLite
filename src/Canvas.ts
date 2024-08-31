@@ -2,16 +2,17 @@ import type CanvasType from '../types/Canvas'
 import type CanvasOptionType from '../types/CanvasOption'
 
 import OralCanvas from './common/canvas/index'
-import mergeOption from './common/mergeOption'
+import { initOption } from './common/option'
 
 class Canvas extends OralCanvas implements CanvasType {
     private __canvas: HTMLCanvasElement
+    private __el: HTMLElement
     constructor(el: HTMLElement | null, option: CanvasOptionType = {}, width: number = 0, height: number = 0) {
         if (!el) {
             throw new Error("VISLite Canvas:The mount point requires an HTMLElement type but encountered null.")
         }
 
-        option = mergeOption(option, {
+        option = initOption(option, {
             region: true,
             willReadFrequently: false
         })
@@ -61,6 +62,7 @@ class Canvas extends OralCanvas implements CanvasType {
         }, 2)
 
         this.__canvas = ViewCanvas
+        this.__el = el
         this.painter.scale(2, 2)
     }
 
@@ -68,6 +70,15 @@ class Canvas extends OralCanvas implements CanvasType {
         return new Promise(resolve => {
             resolve(this.__canvas.toDataURL())
         })
+    }
+
+    bind(eventName: string, callback: (regionName: string, x: number, y: number) => void) {
+        this.__el.addEventListener(eventName, (event: any) => {
+            this.getRegion(event.offsetX, event.offsetY).then(regionName => {
+                callback(regionName, event.offsetX, event.offsetY)
+            })
+        })
+        return this
     }
 }
 

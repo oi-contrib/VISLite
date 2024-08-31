@@ -1,36 +1,16 @@
 import type { default as SVGConfigType, svgElType, svgBoardType } from "../../../types/SVGConfig"
-import type { arcCapType, textAlignType, textBaselineType } from "../../../types/painterConfig"
 
 import { initText, initCircle, initPath, initRect, initArc } from "./config"
 import { toNode, setAttribute, getAttribute, full, fill, stroke } from "./tool"
 import rotate from "../../rotate"
 import { linearGradient, radialGradient } from "./gradient"
+import defaultFactory from "./default"
 
 class SVG {
     readonly name: string = "SVG"
 
     // 用于记录配置
-    private __config = {
-        // 基本设置
-        fillStyle: "#000",
-        strokeStyle: "#000",
-        lineWidth: 1,
-
-        // 文字对齐方式
-        textAlign: <textAlignType>"left",
-        textBaseline: <textBaselineType>"middle",
-
-        // 文字设置
-        "fontSize": 16,
-        "fontFamily": "sans-serif",
-
-        // arc二端闭合方式['butt':直线闭合,'round':圆帽闭合]
-        "arcStartCap": <arcCapType>"butt",
-        "arcEndCap": <arcCapType>"butt",
-
-        // 虚线设置
-        lineDash: [],
-    }
+    private __config = defaultFactory()
 
     // 作用的节点
     private __useEl: SVGElement
@@ -50,9 +30,14 @@ class SVG {
             return this.__config[params]
         } else {
             for (const key in params) {
-                this.__config[key] = params[key]
+                (this.__config as any)[key] = (params as any)[key]
             }
         }
+        return this
+    }
+
+    reset() {
+        this.config(defaultFactory())
         return this
     }
 
@@ -255,17 +240,17 @@ class SVG {
         return this
     }
     fill() {
-        initPath(this.__useEl, this.__path)
+        initPath(this.__useEl, this.__path, this.__config)
         fill(this.__useEl, this.__config)
         return this
     }
     stroke() {
-        initPath(this.__useEl, this.__path)
+        initPath(this.__useEl, this.__path, this.__config)
         stroke(this.__useEl, this.__config)
         return this
     }
     full() {
-        initPath(this.__useEl, this.__path);
+        initPath(this.__useEl, this.__path, this.__config);
         full(this.__useEl, this.__config)
         return this
     }

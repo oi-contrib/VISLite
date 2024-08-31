@@ -19,3 +19,22 @@ import { getLoopColors } from "vislite"
 <pre tag="javascript">
 let colors = getLoopColors(num, alpha=1)
 </pre>
+<h3>
+    基础色
+</h3>
+<p>
+    默认循环色基础颜色为（透明度可以修改）：
+</p>
+<pre tag="javascript">
+    ['#5470c6', '#91cc75', '#fac858', '#ee6666', '#73c0de', '#3ba272', '#fc8452', '#9a60b4', '#ea7ccc']
+</pre>
+<p>
+    你可以通过下面的方法进行修改：
+</p>
+<pre tag="javascript">
+let colors = getLoopColors(num, alpha, function(alpha){
+
+    // 返回一组的颜色值数组（透明度不可修改）
+    return []
+})
+</pre>

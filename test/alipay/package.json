@@ -1,0 +1,7 @@
+{
+  "name": "alipay",
+  "version": "0.0.0",
+  "dependencies": {
+    "vislite": "^1.2.0-alpha.7"
+  }
+}

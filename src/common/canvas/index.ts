@@ -3,8 +3,9 @@ import type CanvasOptsType from '../../../types/CanvasOpts'
 
 import PainterRender from "./painter"
 import assemble from "../assemble"
-import { linearGradient, radialGradient } from "./gradient"
+import { linearGradient, radialGradient, conicGradient } from "./gradient"
 import { initText } from './config'
+import defaultFactory from "./default"
 
 class Canvas extends PainterRender {
     readonly name: string = "Canvas"
@@ -33,9 +34,14 @@ class Canvas extends PainterRender {
 
     config(configs: CanvasConfigType) {
         for (const key in configs) {
-            this.useConfig(key, configs[key])
+            this.useConfig(key, (configs as any)[key])
         }
 
+        return this
+    }
+
+    reset() {
+        this.config(defaultFactory() as CanvasConfigType)
         return this
     }
 
@@ -54,14 +60,14 @@ class Canvas extends PainterRender {
     setRegion(regionName: string | number) {
         if (this.__region) {
             if (regionName) {
-                if (this.__regionList[regionName] == void 0) {
-                    const tempColor = this.__regionAssemble()
-                    this.__regionList[regionName] =
+                if ((this.__regionList as any)[regionName] == void 0) {
+                    const tempColor = this.__regionAssemble();
+                    (this.__regionList as any)[regionName] =
                         "rgb(" + tempColor[0] + "," + tempColor[1] + "," + tempColor[2] + ")"
                 }
 
-                this.__region.useConfig("fillStyle", this.__regionList[regionName]) &&
-                    this.__region.useConfig("strokeStyle", this.__regionList[regionName])
+                this.__region.useConfig("fillStyle", (this.__regionList as any)[regionName]) &&
+                    this.__region.useConfig("strokeStyle", (this.__regionList as any)[regionName])
             } else {
                 this.__region.useConfig("fillStyle", "#000000") &&
                     this.__region.useConfig("strokeStyle", "#000000")
@@ -93,7 +99,7 @@ class Canvas extends PainterRender {
                             "," +
                             currentRGBA[2] +
                             ")" ==
-                            this.__regionList[key]
+                            (this.__regionList as any)[key]
                         ) {
                             resolve(key)
                             break
@@ -153,6 +159,11 @@ class Canvas extends PainterRender {
     // 环形渐变
     createRadialGradient(cx: number, cy: number, r: number) {
         return radialGradient(this.painter, cx, cy, r)
+    }
+
+    // 角度渐变
+    createConicGradient(cx: number, cy: number, beginDeg: number, deg?: number) {
+        return conicGradient(this.painter, cx, cy, beginDeg, deg)
     }
 
     // 获取指定位置颜色

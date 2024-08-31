@@ -31,7 +31,6 @@ export function getAttribute(el: SVGElement, key: string) {
 export function full(el: SVGElement, config: SVGConfigType) {
     _setAttribute(el, "stroke", config.strokeStyle as string)
     _setAttribute(el, "fill", config.fillStyle as string)
-    _setAttribute(el, "stroke-dasharray", (config.lineDash as Array<number>).join(','))
 }
 
 export function fill(el: SVGElement, config: SVGConfigType) {
@@ -41,5 +40,4 @@ export function fill(el: SVGElement, config: SVGConfigType) {
 export function stroke(el: SVGElement, config: SVGConfigType) {
     _setAttribute(el, "stroke", config.strokeStyle as string)
     _setAttribute(el, "fill", "none")
-    _setAttribute(el, "stroke-dasharray", (config.lineDash as Array<number>).join(','))
 }

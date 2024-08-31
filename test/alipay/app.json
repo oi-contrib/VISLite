@@ -1,0 +1,15 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/canvas/index"
+  ],
+  "window": {
+    "defaultTitle": "VISLite 测试"
+  },
+  "behavior": {
+    "requestReferrerStrategy": "page",
+    "requestReferrerStyle": "full",
+    "requestDefaultEnableCookie": true,
+    "connectSocketDefaultMultiple": true
+  }
+}

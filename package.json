@@ -1,11 +1,11 @@
 {
   "name": "vislite",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "灵活、快速、简单的数据可视化交互式跨端前端库",
   "main": "./lib/index.umd.min.js",
   "typings": "./types/index.d.ts",
   "unpkg": "./lib/index.umd.min.js",
-  "jsdelivr":"./lib/index.umd.min.js",
+  "jsdelivr": "./lib/index.umd.min.js",
   "sideEffects": false,
   "scripts": {
     "init": "npm install && devby --copy ./node_modules/pageby/dist/pageby.min.js ./docs/js/min/pageby.min.js",
@@ -50,6 +50,8 @@
   },
   "homepage": "https://oi-contrib.github.io/VISLite",
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-typescript": "^11.1.0",
     "@types/jasmine": "^4.3.1",
     "@typescript-eslint/eslint-plugin": "^6.14.0",
@@ -69,5 +71,8 @@
     "webpack": "^5.70.0",
     "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^4.7.4"
+  },
+  "dependencies": {
+    "@oipage/core.js": "^0.1.0"
   }
 }
