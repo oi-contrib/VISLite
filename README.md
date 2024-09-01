@@ -119,7 +119,7 @@
 | Project | Status | Download |Description |
 |---------|--------|-------|------|
 | [@vislite/canvas] | [![vislite-canvas-status]][vislite-canvas-package] |[![vislite-canvas-download-status]][vislite-canvas-download] | 基于VISLite的Canvas画笔开发的绘制方法 |
-| [@vislite/chart] | [![vislite-chart-status]][vislite-chart-package] |[![vislite-chart-download-status]][vislite-chart-download] | 基于VISLite开发的可视化图表库（基础布局版本可跨端，类似ECharts） |
+| [@vislite/chart] | [![vislite-chart-status]][vislite-chart-package] |[![vislite-chart-download-status]][vislite-chart-download] | 基于VISLite开发的可视化图表库（基础布局版本可跨端，类似无头ECharts） |
 | [H5Charts] | [![h5charts-status]][h5charts-package] |[![h5charts-download-status]][h5charts-download] | 一个基于 JavaScript 的开源可视化图表库 |
 
 [@vislite/canvas]: https://github.com/oi-contrib/vislite-plugin-canvas
