@@ -4,7 +4,7 @@ import type TreeOptionType from '../../types/TreeOption'
 
 import Tree from '../common/tree/index'
 import { initOption } from '../common/option'
-import { animation } from "@oipage/core.js/src/animation/index"
+import { animation } from "oipage/corejs/animation/index"
 import rotate from '../rotate'
 
 class TreeLayout extends Tree implements TreeLayoutType {
@@ -80,13 +80,16 @@ class TreeLayout extends Tree implements TreeLayoutType {
                 const balanceW = this.__option.x - this.__option.width * 0.5
                 const flag = this.__option.direction == 'TB' ? 1 : -1
 
+
+
                 for (const key in tree.node) {
+                    tree.node[key].deg = this.__option.direction == 'TB' ? Math.PI * 0.5 : Math.PI * -0.5
+
                     if (tree.deep == 1) {
                         tree.node[key].left = this.__option.x
                         tree.node[key].top = this.__option.y + this.__option.height * 0.5 * flag
                     } else {
                         const left = tree.node[key].left
-
                         tree.node[key].left = tree.node[key].top * perW + balanceW
                         tree.node[key].top = this.__option.y + (left - 0.5) * perD * flag
                     }
@@ -106,6 +109,7 @@ class TreeLayout extends Tree implements TreeLayoutType {
                 } else {
                     const position = rotate(cx, cy, deg * tree.node[key].top, cx + (tree.node[key].left - 0.5) * per, cy)
 
+                    tree.node[key].deg = deg * tree.node[key].top
                     tree.node[key].left = position[0]
                     tree.node[key].top = position[1]
                 }
@@ -134,7 +138,7 @@ class TreeLayout extends Tree implements TreeLayoutType {
         return this
     }
 
-    private doUpdate() {
+    doUpdate() {
         const newTree = this.use(this.__oralTree, this.__noOpens)
 
         const cacheTree = JSON.parse(JSON.stringify(newTree))
@@ -158,6 +162,8 @@ class TreeLayout extends Tree implements TreeLayoutType {
             this.__preTree = newTree
             this.__rback(this.__preTree)
         })
+
+        return this
     }
 
     closeNode(id: string) {

@@ -36,17 +36,22 @@ export interface TreeResultType {
             /**
              * 当前结点的纵坐标
              */
-            top: number,
+            top: number
 
             /**
              * 当前结点的打开还是关闭
              */
-            isOpen: boolean,
+            isOpen: boolean
 
             /**
              * 当前结点本身是否显示
              */
             show: boolean
+
+            /**
+             * 文字建议旋转弧度
+             */
+            deg: number
         }
     }
 

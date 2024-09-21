@@ -1,4 +1,4 @@
-let enhanceGradient = function (gradient: CanvasGradient, calcStop?: Function) {
+const enhanceGradient = function (gradient: CanvasGradient, calcStop?: Function) {
     const enhanceGradient = {
         "value": function () {
             return gradient

@@ -83,11 +83,25 @@ painter
     })
     .fillCircle(300, 240, 100)
 
+// painter
+//     .appendBoard("circle")
+//     .config({
+        // fillStyle: painter
+        //     .createConicGradient(200, 200, 3.14, 5)
+        //     .setColor(0, "red")
+        //     .setColor(0.25, "pink")
+        //     .setColor(0.5, "blue")
+        //     .setColor(0.75, "yellow")
+        //     .setColor(1, "green")
+        //     .value(),
+    // })
+    // .fillCircle(200, 200, 100)
+
 painter.appendBoard("path").beginPath().config({
     lineWidth: 20,
     lineCap: "round",
     lineJoin: "round",
     lineDash: [40, 100, 40]
 })
-// .reset()
-.moveTo(900, 600).lineTo(800, 500).lineTo(400, 650).stroke()
+    // .reset()
+    .moveTo(900, 600).lineTo(800, 500).lineTo(400, 650).stroke()

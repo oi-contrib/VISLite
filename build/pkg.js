@@ -2,7 +2,7 @@ const fs = require("fs")
 const { rollup } = require('rollup')
 const { minify } = require("terser")
 const rollupConfig = require('./rollup.config.js')
-const { error, log, warn } = require('devby')
+const { error, log, warn } = require('oipage')
 const package = require("../package.json")
 
 let getFormat = (filename, format) => {

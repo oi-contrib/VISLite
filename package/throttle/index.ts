@@ -1,3 +1,3 @@
-import { throttle } from "@oipage/core.js/src/throttle/index"
+import { throttle } from "oipage/corejs/throttle/index"
 
 export default throttle

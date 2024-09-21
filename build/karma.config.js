@@ -1,5 +1,5 @@
 
-// 下列配置项解释： 
+// 下列配置项解释：
 // https://zxl20070701.github.io/notebook/#/program/course/test/karma/config
 
 module.exports = function (config) {
@@ -7,7 +7,7 @@ module.exports = function (config) {
         basePath: '',
         frameworks: ['jasmine'],
         files: [
-            '../test/**/*.spec.ts'
+            '../test/unit/**/*.spec.ts'
         ],
         exclude: [
             '../test/data/**/*',

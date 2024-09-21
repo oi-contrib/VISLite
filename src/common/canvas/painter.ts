@@ -411,13 +411,13 @@ class Painter {
     install(methods: {
         [key: string]: Function
     }): any {
-        for (let key in methods) {
+        for (const key in methods) {
 
             if (key in this) {
                 throw new Error("VISLite Canvas:Method already exists and cannot be overwritten.")
             } else {
                 (this as any)[key] = (...args: any) => {
-                    let value = methods[key].apply(this, args)
+                    const value = methods[key].apply(this, args)
                     if (value != void 0) return value
                     return this
                 }

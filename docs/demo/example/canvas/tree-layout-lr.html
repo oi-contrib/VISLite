@@ -40,9 +40,9 @@
             });
             for (var key in tree.node) {
                 if (tree.node[key].show && key != tree.root) {
-                    pid = tree.node[key].pid
+                    pid = tree.node[key].pid;
 
-                    dist = (tree.node[key].left - tree.node[pid].left) * 0.5
+                    dist = (tree.node[key].left - tree.node[pid].left) * 0.5;
 
                     painter
                         .beginPath()
@@ -51,7 +51,7 @@
                             tree.node[key].left - dist, tree.node[key].top,
                             tree.node[pid].left + dist, tree.node[pid].top,
                             tree.node[pid].left, tree.node[pid].top
-                        ).stroke()
+                        ).stroke();
                 }
             }
 

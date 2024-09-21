@@ -33,7 +33,9 @@ onMounted(() => {
             })
             .fillCircle(100, 100, 100);
 
-        painter.draw();
+        painter.drawImage("https://qiniu-web-assets.dcloud.net.cn/unidoc/zh/mp-xhs-qrcode.png", 150, 150, 100, 100).then(() => {
+            painter.draw();
+        });
     });
 
 });

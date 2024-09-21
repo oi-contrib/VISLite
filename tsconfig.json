@@ -12,6 +12,9 @@
   },
   "exclude": [
     "test/uniapp2",
-    "test/uniapp3"
+    "test/uniapp3",
+    "test/alipay",
+    "test/miniprogram",
+    "test/script"
   ]
 }

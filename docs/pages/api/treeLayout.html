@@ -124,7 +124,7 @@ let treeLayout = new TreeLayout(config)
     x
 </h4>
 <p>
-    树图x坐标，非type不是plain时有效，表示树图根一侧的中间位置（圆树的话就是圆心位置），下同。
+    树图x坐标，type不是plain时有效，表示树图根一侧的中间位置（圆树的话就是圆心位置），下同。
 </p>
 <h4>
     y
@@ -232,4 +232,16 @@ treeLayout.bind(initTree, function(tree){
 </p>
 <pre tag="javascript">
     treeLayout.toggleNode(id)
+</pre>
+<h3>
+    doUpdate
+</h3>
+<div class="version">
+    1.2.1 新增
+</div>
+<p>
+    主动触发绘制更新：
+</p>
+<pre tag="javascript">
+    treeLayout.doUpdate()
 </pre>

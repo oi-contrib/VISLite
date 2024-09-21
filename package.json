@@ -1,6 +1,6 @@
 {
   "name": "vislite",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "灵活、快速、简单的数据可视化交互式跨端前端库",
   "main": "./lib/index.umd.min.js",
   "typings": "./types/index.d.ts",
@@ -8,9 +8,9 @@
   "jsdelivr": "./lib/index.umd.min.js",
   "sideEffects": false,
   "scripts": {
-    "init": "npm install && devby --copy ./node_modules/pageby/dist/pageby.min.js ./docs/js/min/pageby.min.js",
+    "init": "npm install && oipage-cli --copy ./node_modules/pageby/dist/pageby.min.js ./docs/js/min/pageby.min.js",
     "dev": "webpack serve --config ./build/webpack.config.js",
-    "build": "devby --delete ./lib && node ./build/pkg.js",
+    "build": "oipage-cli --delete ./lib && node ./build/pkg.js",
     "test": "karma start ./build/karma.config.js",
     "lint": "eslint src/**/*.ts --fix"
   },
@@ -56,7 +56,6 @@
     "@types/jasmine": "^4.3.1",
     "@typescript-eslint/eslint-plugin": "^6.14.0",
     "@typescript-eslint/parser": "^6.14.0",
-    "devby": "^0.4.6",
     "eslint": "^8.56.0",
     "karma": "^6.3.10",
     "karma-chrome-launcher": "^3.1.0",
@@ -73,6 +72,6 @@
     "webpack-dev-server": "^4.7.4"
   },
   "dependencies": {
-    "@oipage/core.js": "^0.1.0"
+    "oipage": "^0.1.0"
   }
 }

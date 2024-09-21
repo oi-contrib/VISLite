@@ -52,6 +52,9 @@ interface NewSVGType extends SVGType {
 interface NewCanvasType extends CanvasType {
     new(el: HTMLElement | null, option?: CanvasOptionType, width?: number, height?: number): this
 }
+interface NewRawCanvasType extends CanvasType {
+    new(canvas: any, region?: any, scaleSize?: number): this
+}
 
 // WebGL
 interface NewShaderType extends ShaderType {
@@ -97,6 +100,7 @@ export default class VISLite {
     // 画笔
     static SVG: NewSVGType
     static Canvas: NewCanvasType
+    static RawCanvas: NewRawCanvasType
 
     // WebGL
     static getWebGLContext: getWebGLContextType
@@ -138,6 +142,7 @@ export let ruler: rulerType
 // 画笔
 export let SVG: NewSVGType
 export let Canvas: NewCanvasType
+export let RawCanvas: NewRawCanvasType
 
 // WebGL
 export let getWebGLContext: getWebGLContextType

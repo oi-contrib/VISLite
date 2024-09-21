@@ -52,4 +52,9 @@ export default interface TreeLayoutType extends TreeType {
      */
     toggleNode(id: string): this
 
+    /**
+     * 主动触发绘制更新
+     */
+    doUpdate(): this
+
 }

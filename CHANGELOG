@@ -272,3 +272,12 @@ v1.2.0:
         4、option 配置项
             * initOption 初始化
             * mergeOption 合并
+v1.2.1:
+    date:2024-09-21
+    changes:
+      - 修复bug
+        1、修复未定义RawCanvas类型问题
+      - 新增功能
+        1、树布局 treeLayout
+            * 新增doUpdate方法
+            * 新增deg文字建议旋转弧度

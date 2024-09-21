@@ -1,4 +1,4 @@
-import { throttleType } from "@oipage/core.js/src/throttle"
+import { throttleType } from "oipage/corejs/throttle"
 
 /**
  * 节流函数

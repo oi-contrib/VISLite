@@ -242,6 +242,9 @@ painter.config({
 <p>
     基于路径可以绘制几乎大部分图形，非常类似画笔在纸上划动。
 </p>
+<h4>
+    基础
+</h4>
 <p>
     开始一段独立的路径：
 </p>
@@ -263,6 +266,21 @@ painter.config({
 </p>
 <pre tag="javascript">painter.arc(cx, cy, r, beginDeg, deg)</pre>
 <p>
+    把当前路径包裹的区域填充颜色：
+</p>
+<pre tag="javascript">painter.fill()</pre>
+<p>
+    把当前路径上色（轮廓线）：
+</p>
+<pre tag="javascript">painter.stroke()</pre>
+<p>
+    把当前路径画上轮廓线并填充颜色到当前路径所包裹的区域：
+</p>
+<pre tag="javascript">painter.full()</pre>
+<h4>
+    贝塞尔曲线
+</h4>
+<p>
     二次贝塞尔曲线到：
 </p>
 <pre tag="javascript">painter.quadraticCurveTo(cpx, cpy, x, y)</pre>
@@ -276,15 +294,3 @@ painter.config({
 <div class="warn">
     有两个控制点p(cp1x, cp1y)和p(cp2x, cp2y),画笔当前的位置和p(x, y)分别是起点和终点。
 </div>
-<p>
-    把当前路径包裹的区域填充颜色：
-</p>
-<pre tag="javascript">painter.fill()</pre>
-<p>
-    把当前路径上色（轮廓线）：
-</p>
-<pre tag="javascript">painter.stroke()</pre>
-<p>
-    把当前路径画上轮廓线并填充颜色到当前路径所包裹的区域：
-</p>
-<pre tag="javascript">painter.full()</pre>

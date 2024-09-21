@@ -2,7 +2,7 @@ import type { arcCapType } from '../../../types/painterConfig'
 
 export default function (type?: string) {
 
-    let special = {
+    const special = {
         // 文字大小
         "fontSize": 16,
 
@@ -22,7 +22,7 @@ export default function (type?: string) {
         "arcEndCap": <arcCapType>'butt'
     }
 
-    let init = {
+    const init = {
         // 填充色或图案
         "fillStyle": 'black',
 

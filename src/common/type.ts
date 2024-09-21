@@ -1,4 +1,4 @@
-let toString = Object.prototype.toString
+const toString = Object.prototype.toString
 
 // 获取一个值的类型字符串[object type]
 export function getType(value: any) {

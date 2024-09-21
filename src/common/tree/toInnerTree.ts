@@ -27,6 +27,7 @@ export default (initTree: any, config: TreeConfigType) => {
         "id": id,
         "isOpen": true,
         "show": true,
+        "deg": 0,
         "children": []
     }
 
@@ -45,6 +46,7 @@ export default (initTree: any, config: TreeConfigType) => {
                     "id": id,
                     "isOpen": true,
                     "show": true,
+                    "deg": 0,
                     "children": []
                 }
                 createTree(children[flag], id)

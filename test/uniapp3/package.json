@@ -18,7 +18,7 @@
     "@dcloudio/uni-mp-alipay": "3.0.0-3090920231225001",
     "@dcloudio/uni-mp-toutiao": "3.0.0-3090920231225001",
     "@dcloudio/uni-mp-weixin": "3.0.0-3090920231225001",
-    "vislite": "^1.2.0-alpha.7",
+    "vislite": "^1.2.0",
     "vue": "^3.2.45",
     "vue-tsc": "^1.0.24"
   },
