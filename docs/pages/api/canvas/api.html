@@ -18,10 +18,10 @@ painter.config({
     // 线条宽度(单位px，下同)
     "lineWidth": 1,
 
-    // 线的端点类型，（"butt"平直边缘、"round"半圆和"square"矩形）
+    // 线的端点类型，（"butt"平直边缘、"round"半圆和"square"矩形）（1.2.0 新增）
     "lineCap": "butt",
 
-    // 线的拐角连接方式，（"miter"连接处边缘延长相接、"bevel"对角线斜角和"round"圆）
+    // 线的拐角连接方式，（"miter"连接处边缘延长相接、"bevel"对角线斜角和"round"圆）（1.2.0 新增）
     "lineJoin": "miter",
 
     // 设置线条虚线，应该是一个数组[number,...]
@@ -51,25 +51,16 @@ painter.config({
     // 字类型
     "fontStyle": "normal",
 
-    // 圆弧开始端闭合方式（"butt"直线闭合、"round"圆帽闭合和"-round"反圆帽闭合）
+    // 圆弧开始端闭合方式（"butt"直线闭合、"round"圆帽闭合和"-round"反圆帽闭合）（-round 0.3.0 新增）
     "arcStartCap": 'butt',
 
     // 圆弧结束端闭合方式，和上一个类似
-    "arcEndCap": 'butt'
+    "arcEndCap": 'butt',
+
+    // 矩形圆角半径（1.3.0 新增）
+    "rectRadius": Array&lt;number&gt;
 })
 </pre>
-<div class="version">
-    丰富日志
-    <hr />
-    <ul>
-        <li>
-            arcStartCap和arcEndCap的-round 0.3.0 新增
-        </li>
-        <li>
-            lineCap和lineJoin 1.2.0 新增
-        </li>
-    </ul>
-</div>
 <h3>
     渐变色
 </h3>
@@ -333,9 +324,16 @@ painter.config({
 </p>
 <pre tag="javascript">painter.clip()</pre>
 <h3>
-    擦除画面
+    橡皮擦
 </h3>
+<h4>
+    矩形橡皮擦
+</h4>
 <pre tag="javascript">painter.clearRect(x, y, w, h)</pre>
+<h4>
+    圆形橡皮擦
+</h4>
+<pre tag="javascript">painter.clearCircle(cx, cy, r)</pre>
 <h3>
     drawImage
 </h3>

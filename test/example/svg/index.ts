@@ -1,8 +1,8 @@
-let el = document.getElementById("root")
+const el = document.getElementById("root")
 
 import SVG from "../../../src/SVG"
 
-let painter = new SVG(el)
+const painter = new SVG(el)
 
 console.log(painter)
 
@@ -41,7 +41,7 @@ class Demo {
             .config({
                 fillStyle: "blue",
             })
-            .appendBoard("rect")
+            .appendBoard("path")
             .fillRect(300, 100, 50, 200).bind('click', (event, target) => {
                 console.log(event, this, target)
             })
@@ -86,16 +86,16 @@ painter
 // painter
 //     .appendBoard("circle")
 //     .config({
-        // fillStyle: painter
-        //     .createConicGradient(200, 200, 3.14, 5)
-        //     .setColor(0, "red")
-        //     .setColor(0.25, "pink")
-        //     .setColor(0.5, "blue")
-        //     .setColor(0.75, "yellow")
-        //     .setColor(1, "green")
-        //     .value(),
-    // })
-    // .fillCircle(200, 200, 100)
+// fillStyle: painter
+//     .createConicGradient(200, 200, 3.14, 5)
+//     .setColor(0, "red")
+//     .setColor(0.25, "pink")
+//     .setColor(0.5, "blue")
+//     .setColor(0.75, "yellow")
+//     .setColor(1, "green")
+//     .value(),
+// })
+// .fillCircle(200, 200, 100)
 
 painter.appendBoard("path").beginPath().config({
     lineWidth: 20,
@@ -105,3 +105,12 @@ painter.appendBoard("path").beginPath().config({
 })
     // .reset()
     .moveTo(900, 600).lineTo(800, 500).lineTo(400, 650).stroke()
+
+painter.appendBoard("path").config({
+    rectRadius: [10, 20, 30, 50],
+    fillStyle: "pink"
+}).fullRect(50, 400, 300, 200)
+
+painter
+    .appendBoard("circle")
+    .fullCircle(400, 300, 70)

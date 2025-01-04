@@ -1,4 +1,4 @@
-let el = document.getElementById("root")
+const el = document.getElementById("root")
 
 import Canvas from "../../../src/Canvas"
 
@@ -66,7 +66,7 @@ painter.bind("click", (reginName: string) => {
 })
 
 // 多行文字
-let textH = painter
+const textH = painter
     .strokeRect(50, 250, 100, 100)
     .config({
         textAlign: "left",
@@ -88,10 +88,10 @@ painter.fillCircle(50, 250 + textH, 2)
 
 painter.setRegion("原生画笔")
 
-let ctx = painter.getContext()
+const ctx = painter.getContext()
 ctx?.fillRect(0, 0, 100, 50)
 
-let ctxRegion = painter.getContext(true)
+const ctxRegion = painter.getContext(true)
 ctxRegion?.fillRect(0, 0, 100, 50)
 
 // 渐变色
@@ -167,7 +167,15 @@ painter.setRegion("图片哦～").drawImage("/docs/images/logo.png", 300, 200, 3
 painter.setRegion("line设置").beginPath().config({
     lineWidth: 20,
     lineCap: "round",
-    lineJoin: "round"
+    lineJoin: "round",
+    lineDash: [10, 20]
 })
-// .reset()
-.moveTo(900, 600).lineTo(800, 500).lineTo(400, 650).stroke();
+    // .reset()
+    .moveTo(900, 600).lineTo(800, 500).lineTo(400, 650).stroke();
+
+painter.setRegion("圆角矩形").config({
+    rectRadius: [10, 20, 30, 50],
+    fillStyle: "pink"
+}).fullRect(50, 400, 300, 200);
+
+painter.clearCircle(200, 200, 30);

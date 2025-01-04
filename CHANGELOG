@@ -281,3 +281,20 @@ v1.2.1:
         1、树布局 treeLayout
             * 新增doUpdate方法
             * 新增deg文字建议旋转弧度
+v1.3.0:
+    date:2025-01-04
+    changes:
+      - 修复bug
+        1、SVG 画笔
+            * 修复图形stroke模式的lineWidth、lineDash、lineCap、lineJoin不生效问题
+        2、从types中移除被废弃的画笔属性
+      - 新增功能
+        1、Canvas画笔
+            * 配置config添加可配置项
+              > rectRadius 矩形圆角半径
+            * clearCircle 圆形橡皮擦
+        2、SVG画笔
+            * 配置config添加可配置项
+              > rectRadius 矩形圆角半径
+        3、坐标系
+            * 地理坐标系 mapCoordinate

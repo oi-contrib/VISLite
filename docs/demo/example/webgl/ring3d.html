@@ -1,0 +1,174 @@
+<div class="view">
+
+    <div class="title">
+        Referer of a Website
+    </div>
+    <div class="label">
+        Fake Data
+    </div>
+
+    <!-- 绘制图表 -->
+    <div id="content" class="content"></div>
+
+</div>
+<script type="module">
+    import { getWebGLContext, Shader, Buffer, rotate, Matrix4 } from "vislite";
+
+    var colors3d = [[0.33, 0.44, 0.78, 1], [0.57, 0.8, 0.46, 1], [0.98, 0.78, 0.35, 1], [0.93, 0.4, 0.4, 1], [0.45, 0.75, 0.87, 1]];
+    var colors3d_gray = [[0.33, 0.44, 0.78, 0.9], [0.57, 0.8, 0.46, 0.9], [0.98, 0.78, 0.35, 0.9], [0.93, 0.4, 0.4, 0.9], [0.45, 0.75, 0.87, 0.9]];
+
+    var data = [
+        {
+            "value": 1048,
+            "name": "Search Engine"
+        },
+        {
+            "value": 735,
+            "name": "Direct"
+        },
+        {
+            "value": 580,
+            "name": "Email"
+        },
+        {
+            "value": 484,
+            "name": "Union Ads"
+        },
+        {
+            "value": 300,
+            "name": "Video Ads"
+        }
+    ];
+
+    Promise.all([
+
+        // 顶点着色器
+        fetch('./demo/example/webgl/vshader.c').then(function (res) { if (res.status === 200) { return res.text(); } }),
+
+        // 片段（元）着色器
+        fetch('./demo/example/webgl/fshader.c').then(function (res) { if (res.status === 200) { return res.text(); } })
+
+    ]).then(function (res) {
+
+        var el = document.getElementById("content");
+        var painter = getWebGLContext(el, 1, "aspectFill");
+
+        // 开启深度计算
+        painter.enable(painter.DEPTH_TEST);
+
+        // 编译着色器程序
+        var shader = new Shader(painter).compile(res[0], res[1]).use();
+
+        // 获取世界矩阵、点位置、点颜色变量把柄
+        var u_camera = painter.getUniformLocation(shader.program, "u_matrix");
+        var a_position = painter.getAttribLocation(shader.program, "a_position");
+        var u_color = painter.getUniformLocation(shader.program, "u_color");
+
+        // 创建缓冲区
+        var buffer = new Buffer(painter).use();
+
+        // 设置世界矩阵
+        var matrix4 = new Matrix4().scale(0.7, 0.7, 0.7).rotate(-1, 1, 0, 0);
+        painter.uniformMatrix4fv(u_camera, false, matrix4.value());
+
+        // 求解值总数
+        var allValue = 0;
+        for (var i = 0; i < data.length; i++) {
+            allValue += data[i].value;
+        }
+
+        var beginDeg = Math.PI * -0.5;
+        for (var i = 0; i < data.length; i++) {
+            var deg = data[i].value / allValue * Math.PI * 2;
+
+            var stripTriangles_top = [];
+            var stripTriangles_bottom = [];
+            var stripTriangles_near = [];
+            var stripTriangles_far = [];
+
+            // 计算切割份数
+            var splitNum = Math.ceil(deg * el.clientHeight * 0.1);
+
+            var innerRadius = 0.8, outerRadius = 1.7;
+            var deepLen = 0.1;
+
+            var perDeg = deg / splitNum;
+            for (var j = 0; j <= splitNum; j++) {
+
+                var positionOuter = rotate(0, 0, beginDeg + perDeg * j, outerRadius, 0);
+                var positionInner = rotate(0, 0, beginDeg + perDeg * j, innerRadius, 0);
+
+                stripTriangles_top.push(
+                    positionOuter[0], positionOuter[1], deepLen,
+                    positionInner[0], positionInner[1], deepLen
+                );
+
+                stripTriangles_bottom.push(
+                    positionOuter[0], positionOuter[1], -deepLen,
+                    positionInner[0], positionInner[1], -deepLen
+                );
+
+                stripTriangles_near.push(
+                    positionInner[0], positionInner[1], deepLen,
+                    positionInner[0], positionInner[1], -deepLen
+                );
+
+                stripTriangles_far.push(
+                    positionOuter[0], positionOuter[1], deepLen,
+                    positionOuter[0], positionOuter[1], -deepLen
+                );
+
+            }
+
+            // 设置明亮颜色
+            painter.uniform4f(u_color, ...colors3d[i]);
+
+            // 绘制上
+            buffer.write(new Float32Array(stripTriangles_top)).divide(a_position, 3, 3, 0);
+            painter.drawArrays(painter.TRIANGLE_STRIP, 0, stripTriangles_top.length / 3);
+
+            // 绘制下
+            buffer.write(new Float32Array(stripTriangles_bottom)).divide(a_position, 3, 3, 0);
+            painter.drawArrays(painter.TRIANGLE_STRIP, 0, stripTriangles_bottom.length / 3);
+
+            // 设置暗淡颜色
+            painter.uniform4f(u_color, ...colors3d_gray[i]);
+
+            // 绘制上
+            buffer.write(new Float32Array(stripTriangles_near)).divide(a_position, 3, 3, 0);
+            painter.drawArrays(painter.TRIANGLE_STRIP, 0, stripTriangles_near.length / 3);
+
+            // 绘制下
+            buffer.write(new Float32Array(stripTriangles_far)).divide(a_position, 3, 3, 0);
+            painter.drawArrays(painter.TRIANGLE_STRIP, 0, stripTriangles_far.length / 3);
+
+            beginDeg += deg;
+        }
+
+    });
+
+</script>
+<style>
+    body {
+        margin: 0;
+        min-width: 700px;
+        text-align: center;
+    }
+
+    .title {
+        font-size: 20px;
+        line-height: 50px;
+        font-weight: 600;
+    }
+
+    .label {
+        font-size: 12px;
+        font-weight: 200;
+    }
+
+    .content {
+        width: 700px;
+        height: 435px;
+        margin: auto;
+    }
+</style>

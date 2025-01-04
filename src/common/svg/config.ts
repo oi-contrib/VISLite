@@ -76,24 +76,28 @@ export const initCircle = (el: SVGElement, cx: number, cy: number, r: number) =>
 }
 
 // 路径统一设置方法
-export const initPath = (el: SVGElement, path: string, config: SVGConfigType) => {
+export const initPath = (el: SVGElement, path: string) => {
     if (el.nodeName.toLowerCase() !== "path") throw new Error("Need a <path> !")
     setAttribute(el, "d", path)
-    setAttribute(el, "stroke-dasharray", (config.lineDash as Array<number>).join(','))
-    setAttribute(el, "stroke-width", config.lineWidth + "")
-    setAttribute(el, "stroke-linecap", config.lineCap + "")
-    setAttribute(el, "stroke-linejoin", config.lineJoin + "")
 }
 
 // 画矩形统一设置方法
 export const initRect = (
     el: SVGElement,
+    config: SVGConfigType,
     x: number,
     y: number,
     width: number,
     height: number
 ) => {
-    if (el.nodeName.toLowerCase() !== "rect") throw new Error("Need a <rect> !")
+    if (el.nodeName.toLowerCase() !== "path") throw new Error("Need a <path> !")
+
+    const rectRadius: Array<number> = [];
+    if (Array.isArray(config.rectRadius) && config.rectRadius.length > 0) {
+        for (let index = 0; index < 4; index++) {
+            rectRadius.push(...config.rectRadius)
+        }
+    }
 
     // 由于高和宽不可以是负数，校对一下
     if (height < 0) {
@@ -105,10 +109,25 @@ export const initRect = (
         x -= width
     }
 
-    setAttribute(el, "x", x)
-    setAttribute(el, "y", y)
-    setAttribute(el, "width", width)
-    setAttribute(el, "height", height)
+    let d = ""
+    if (rectRadius.length >= 4) {
+        d = "M" + (x + rectRadius[0]) + " " + y
+        d += "L" + (x + width - rectRadius[1]) + " " + y
+        d += "A" + rectRadius[1] + " " + rectRadius[1] + " 0 0 1 " + (x + width) + " " + (y + rectRadius[1])
+        d += "L" + (x + width) + " " + (y + height - rectRadius[2])
+        d += "A" + rectRadius[2] + " " + rectRadius[2] + " 0 0 1 " + (x + width - rectRadius[2]) + " " + (y + height)
+        d += "L" + (x + rectRadius[3]) + " " + (y + height)
+        d += "A" + rectRadius[3] + " " + rectRadius[3] + " 0 0 1 " + x + " " + (y + height - rectRadius[3])
+        d += "L" + x + " " + (y + rectRadius[0])
+        d += "A" + rectRadius[0] + " " + rectRadius[0] + " 0 0 1 " + (x + rectRadius[0]) + " " + y
+    } else {
+        d = "M" + x + " " + y
+        d += "L" + (x + width) + " " + y
+        d += "L" + (x + width) + " " + (y + height)
+        d += "L" + x + " " + (y + height)
+        d += "Z"
+    }
+    setAttribute(el, "d", d)
 }
 
 // 画弧统一设置方法

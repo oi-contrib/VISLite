@@ -242,6 +242,14 @@ export default interface CanvasType {
     clearRect(x: number, y: number, w: number, h: number): this
 
     /**
+     * 擦除画笔上的一个圆形区域
+     * @param cx 区域中心X坐标
+     * @param cy 区域中心Y坐标
+     * @param r 区域半径
+     */
+    clearCircle(cx: number, cy: number, r: number): this
+
+    /**
      * 是否操作只影响区域
      */
     onlyRegion(flag: boolean): this

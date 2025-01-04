@@ -202,17 +202,17 @@ class SVG {
 
     // 矩形
     fillRect(x: number, y: number, width: number, height: number) {
-        initRect(this.__useEl, x, y, width, height)
+        initRect(this.__useEl, this.__config, x, y, width, height)
         fill(this.__useEl, this.__config)
         return this
     }
     strokeRect(x: number, y: number, width: number, height: number) {
-        initRect(this.__useEl, x, y, width, height)
+        initRect(this.__useEl, this.__config, x, y, width, height)
         stroke(this.__useEl, this.__config)
         return this
     }
     fullRect(x: number, y: number, width: number, height: number) {
-        initRect(this.__useEl, x, y, width, height)
+        initRect(this.__useEl, this.__config, x, y, width, height)
         full(this.__useEl, this.__config)
         return this
     }
@@ -240,17 +240,17 @@ class SVG {
         return this
     }
     fill() {
-        initPath(this.__useEl, this.__path, this.__config)
+        initPath(this.__useEl, this.__path)
         fill(this.__useEl, this.__config)
         return this
     }
     stroke() {
-        initPath(this.__useEl, this.__path, this.__config)
+        initPath(this.__useEl, this.__path)
         stroke(this.__useEl, this.__config)
         return this
     }
     full() {
-        initPath(this.__useEl, this.__path, this.__config);
+        initPath(this.__useEl, this.__path)
         full(this.__useEl, this.__config)
         return this
     }

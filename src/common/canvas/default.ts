@@ -19,7 +19,10 @@ export default function (type?: string) {
         "arcStartCap": <arcCapType>'butt',
 
         // 圆弧结束端闭合方式，和上一个类似
-        "arcEndCap": <arcCapType>'butt'
+        "arcEndCap": <arcCapType>'butt',
+
+        // 矩形圆角半径
+        "rectRadius": []
     }
 
     const init = {

@@ -43,6 +43,117 @@
 
 > 本项目已在[开源中国](https://www.oschina.net/p/vislite)中开源，欢迎关注和留言。
 
+## 如何使用？
+
+首先，需要进行安装：
+
+```js
+npm install --save vislite
+```
+
+然后，准备好画布：
+
+```html
+<div id="root" style="width:500px;height:300px;"></div>
+```
+
+现在，就可以获取画笔绘制自己需要的内容了。比如获取canvas画笔，绘制一个红色的圆：
+
+```js
+import { Canvas } from 'vislite';
+
+var painter = new Canvas(document.getElementById('root'));
+
+painter.config({
+    fillStyle: "red"
+}).fillCircle(200, 150, 100);
+```
+
+更复杂的图表，我们也提供了丰富的辅助API。比如使用树布局，可以非常快速的绘制一个树图：
+
+<img src="https://oi-contrib.github.io/VISLite/images/docs/tree.png" width="500"/>
+
+具体代码如下：
+
+```js
+import { Canvas, TreeLayout } from 'vislite';
+
+var painter = new Canvas(document.getElementById('root'));
+var treeLayout = new TreeLayout();
+
+treeLayout.setOption({
+    type: "rect",
+    direction: "TB",
+    x: 250,
+    y: 20,
+    width: 500,
+    height: 260
+});
+
+var data = {
+    "name": "前端",
+    "children": [{
+        "name": "基础",
+        "children": [{
+            "name": "HTML"
+        }, {
+            "name": "CSS"
+        }, {
+            "name": "JavaScript"
+        }, {
+            "name": "DOM"
+        }]
+    }, {
+        "name": "框架"
+    }, {
+        "name": "小技术"
+    }]
+};
+
+var tree = treeLayout.use(data);
+
+// 绘制连线
+painter.config({
+    strokeStyle: 'red'
+});
+for (var key in tree.node) {
+    var pid = tree.node[key].pid;
+
+    // 如果父结点存在，和父结点连起来
+    if (pid) {
+        var dist = (tree.node[key].top - tree.node[pid].top) * 0.5;
+
+        painter
+            .beginPath()
+            .moveTo(tree.node[key].left, tree.node[key].top)
+            .bezierCurveTo(
+                tree.node[key].left, tree.node[key].top - dist,
+                tree.node[pid].left, tree.node[pid].top + dist,
+                tree.node[pid].left, tree.node[pid].top
+            ).stroke();
+    }
+}
+
+// 绘制节点和文字
+painter.config({
+    strokeStyle: 'red',
+    fontSize: 12
+});
+for (var key in tree.node) {
+    painter.config({
+        fillStyle: "white"
+    }).fullCircle(tree.node[key].left, tree.node[key].top, 10);
+
+    painter.config({
+        fillStyle: "black"
+    }).fillText(key, tree.node[key].left + 15, tree.node[key].top);
+}
+```
+
+关于树布局更具体的使用细节，你可以访问：[ 《教程 / 树布局》 ](https://oi-contrib.github.io/VISLite/#/course/tree-layout)一节。
+
+## 部分功能
+
 ### 常用的算法
 
 我们通过提供可视化常用的算法来帮助你绘制复杂图表。比如下面的树图，通过简单的配置就可以把任意格式的数据变成任意绘制的带坐标的数据：
@@ -65,7 +176,7 @@
 
 ### 支持跨端开发
 
-除了Web端外，我们还针对uni-app、微信小程序等端进行了支持，并且不同端API保持一致，大大提高了代码的复用性：
+除了Web端外，我们还针对uni-app、微信小程序、支付宝小程序等端进行了支持，并且不同端API保持一致，大大提高了代码的复用性：
 
 <img src="https://oi-contrib.github.io/VISLite/images/docs/what_3.png" width="600"/>
 
@@ -114,31 +225,7 @@
 
 你可以查看[VISLite 贡献指南](./.github/CONTRIBUTING.md)文件了解更多细节，查看[AUTHORS.txt](./AUTHORS.txt)了解所有的贡献者。
 
-## 相关项目
-
-| Project           | Status                                             | Download                                                     | Description                                                          |
-| ----------------- | -------------------------------------------------- | ------------------------------------------------------------ | -------------------------------------------------------------------- |
-| [@vislite/canvas] | [![vislite-canvas-status]][vislite-canvas-package] | [![vislite-canvas-download-status]][vislite-canvas-download] | 基于VISLite的Canvas画笔开发的绘制方法                                |
-| [@vislite/chart]  | [![vislite-chart-status]][vislite-chart-package]   | [![vislite-chart-download-status]][vislite-chart-download]   | 基于VISLite开发的可视化图表库（基础布局版本可跨端，类似无头ECharts） |
-| [H5Charts]        | [![h5charts-status]][h5charts-package]             | [![h5charts-download-status]][h5charts-download]             | 一个基于 JavaScript 的开源可视化图表库                               |
-
-[@vislite/canvas]: https://github.com/oi-contrib/H5Charts/blob/master/modules/vislite-plugin-canvas/README.md
-[vislite-canvas-package]: https://npmjs.com/package/@vislite/canvas
-[vislite-canvas-status]: https://img.shields.io/npm/v/@vislite/canvas.svg
-[vislite-canvas-download-status]: https://img.shields.io/npm/dm/@vislite/canvas.svg
-[vislite-canvas-download]: https://zxl20070701.github.io/toolbox/#/npm-download?packages=@vislite/canvas&interval=7
-[@vislite/chart]: https://github.com/oi-contrib/H5Charts/blob/master/modules/vislite-plugin-chart/README.md
-[vislite-chart-package]: https://npmjs.com/package/@vislite/chart
-[vislite-chart-status]: https://img.shields.io/npm/v/@vislite/chart.svg
-[vislite-chart-download-status]: https://img.shields.io/npm/dm/@vislite/chart.svg
-[vislite-chart-download]: https://zxl20070701.github.io/toolbox/#/npm-download?packages=@vislite/chart&interval=7
-[H5Charts]: https://github.com/oi-contrib/H5Charts
-[h5charts-package]: https://npmjs.com/package/h5charts
-[h5charts-status]: https://img.shields.io/npm/v/h5charts.svg
-[h5charts-download-status]: https://img.shields.io/npm/dm/h5charts.svg
-[h5charts-download]: https://zxl20070701.github.io/toolbox/#/npm-download?packages=h5charts&interval=7
-
-此外，我们还基于此项目维护了一个用例项目[dataGUI](https://oi-contrib.github.io/h5box/dataGUI/index.html)，比如：
+## 例子项目
 
 ### 水分子式 H2O
 

@@ -1,0 +1,73 @@
+<header>
+    地理坐标系
+</header>
+<div class="version">
+    1.3.0 新增
+</div>
+<h2>
+    引入
+</h2>
+<pre tag="javascript">
+import { MapCoordinate } from "vislite"
+</pre>
+<h2>
+    语法
+</h2>
+<p>
+    通过传递一个配置项即可创建坐标系对象：
+</p>
+<pre tag="javascript">
+    let mapCoordinate = new MapCoordinate(config)
+</pre>
+<p>
+    其中config表示坐标系求解的需要的一些基本信息，具体如下：
+</p>
+<pre tag="javascript">
+{
+    api?: "Eoap" | "Mercator" // 投影算法，默认Mercator
+    width?: number // 地图宽，默认400
+    height?: number // 地图高，默认300
+    left?: number // 地图左上角横坐标，默认0
+    top?: number // 地图左上角枞坐标，默认0
+}
+</pre>
+<h2>
+    方法
+</h2>
+<h3>
+    setConfig
+</h3>
+<p>
+    可以在坐标系对象创建后，对配置进行修改：
+</p>
+<pre tag="javascript">
+    mapCoordinate.setConfig(config)
+</pre>
+<h3>
+    setGeos
+</h3>
+<p>
+    设置地理数据，比如你需要绘制中国地图：
+</p>
+<pre tag="javascript">
+    mapCoordinate.setGeos(chinaGeoJSON)
+</pre>
+<p>
+    此外，如果希望在一个画布绘制多个地图，比如同时绘制江苏和河南的，就可以：
+</p>
+<pre tag="javascript">
+// 事实上，参数长度可以任意多个
+mapCoordinate.setGeos(sdGeoJSON,hnGeoJSON)
+</pre>
+<p>
+    这样，坐标系在计算的时候，就会把上面两个省的数据都考虑进去。
+</p>
+<h3>
+    use
+</h3>
+<p>
+    传递一个点的经纬度即可返回该点的绘图坐标：
+</p>
+<pre tag="javascript">
+let position = mapCoordinate.use(longitude, latitude)
+</pre>

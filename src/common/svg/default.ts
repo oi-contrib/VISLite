@@ -22,6 +22,9 @@ export default function () {
         lineDash: [],
         lineWidth: 1,
         lineCap: <lineCapType>"butt",
-        lineJoin: <lineJoinType>"miter"
+        lineJoin: <lineJoinType>"miter",
+
+        // 矩形圆角半径
+        "rectRadius": []
     }
 }

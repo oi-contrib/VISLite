@@ -287,6 +287,19 @@ class Painter {
         this.painter.clearRect(x, y, w, h)
         return this
     }
+    clearCircle(cx: number, cy: number, r: number) {
+        if (this.__region && !this.__onlyView) this.__region.clearCircle(cx, cy, r)
+
+        if (this.__isPainter && this.__onlyRegion) return this
+
+        this.painter.beginPath()
+        this.painter.globalCompositeOperation = "destination-out"
+        this.painter.arc(cx, cy, r, 0, Math.PI * 2)
+        this.painter.fill()
+        this.painter.globalCompositeOperation = "source-over"
+        this.painter.closePath()
+        return this
+    }
 
     // 弧
     fillArc(cx: number, cy: number, r1: number, r2: number, beginDeg: number, deg: number) {
@@ -350,7 +363,7 @@ class Painter {
 
         if (this.__isPainter && this.__onlyRegion) return this
 
-        initRect(this.painter, x, y, width, height).fill()
+        initRect(this.painter, this.__specialConfig, x, y, width, height).fill()
         return this
     }
     strokeRect(x: number, y: number, width: number, height: number) {
@@ -358,7 +371,7 @@ class Painter {
 
         if (this.__isPainter && this.__onlyRegion) return this
 
-        initRect(this.painter, x, y, width, height).stroke()
+        initRect(this.painter, this.__specialConfig, x, y, width, height).stroke()
         return this
     }
     fullRect(x: number, y: number, width: number, height: number) {
@@ -366,7 +379,7 @@ class Painter {
 
         if (this.__isPainter && this.__onlyRegion) return this
 
-        initRect(this.painter, x, y, width, height)
+        initRect(this.painter, this.__specialConfig, x, y, width, height)
         this.painter.fill()
         this.painter.stroke()
         return this

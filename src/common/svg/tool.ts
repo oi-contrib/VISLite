@@ -2,6 +2,13 @@ import type SVGConfigType from '../../../types/SVGConfig'
 
 import { XLINK_ATTRIBUTE } from "./dictionary"
 
+const setLineAttr = (el: SVGElement, config: SVGConfigType) => {
+    setAttribute(el, "stroke-dasharray", (config.lineDash as Array<number>).join(','))
+    setAttribute(el, "stroke-width", config.lineWidth + "")
+    setAttribute(el, "stroke-linecap", config.lineCap + "")
+    setAttribute(el, "stroke-linejoin", config.lineJoin + "")
+}
+
 // 新建节点
 export function toNode(tagname: string) {
     return document.createElementNS('http://www.w3.org/2000/svg', tagname)
@@ -29,6 +36,7 @@ export function getAttribute(el: SVGElement, key: string) {
 }
 
 export function full(el: SVGElement, config: SVGConfigType) {
+    setLineAttr(el, config)
     _setAttribute(el, "stroke", config.strokeStyle as string)
     _setAttribute(el, "fill", config.fillStyle as string)
 }
@@ -38,6 +46,7 @@ export function fill(el: SVGElement, config: SVGConfigType) {
 }
 
 export function stroke(el: SVGElement, config: SVGConfigType) {
+    setLineAttr(el, config)
     _setAttribute(el, "stroke", config.strokeStyle as string)
     _setAttribute(el, "fill", "none")
 }

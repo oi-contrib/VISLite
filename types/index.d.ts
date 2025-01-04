@@ -27,8 +27,11 @@ import MapType from './Map'
 import throttleType from './throttle'
 import assembleType from './assemble'
 
-import TreeLayoutType from './TreeLayout'
+import MapConfigType from './MapConfig'
+import MapCoordinateType from './MapCoordinate'
+
 import TreeConfigType from './TreeConfig'
+import TreeLayoutType from './TreeLayout'
 
 import { initOptionType, mergeOptionType } from './option'
 
@@ -75,6 +78,11 @@ interface NewMercatorType extends MapType {
     new(scale?: number, center?: number[]): this
 }
 
+// 坐标系
+interface NewMapCoordinateType extends MapCoordinateType {
+    new(config?: MapConfigType): this
+}
+
 // 布局
 interface NewTreeLayoutType extends TreeLayoutType {
     new(config?: TreeConfigType): this
@@ -115,6 +123,9 @@ export default class VISLite {
     // 辅助
     static throttle: throttleType
     static assemble: assembleType
+
+    // 坐标系
+    static MapCoordinate: NewMapCoordinateType
 
     // 布局
     static TreeLayout: NewTreeLayoutType
@@ -157,6 +168,9 @@ export let Mercator: NewMercatorType
 // 辅助
 export let throttle: throttleType
 export let assemble: assembleType
+
+// 坐标系
+export let MapCoordinate: NewMapCoordinateType
 
 // 布局
 export let TreeLayout: NewTreeLayoutType
