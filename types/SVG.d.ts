@@ -241,4 +241,8 @@ export default interface SVGType {
      */
     createRadialGradient(cx: number, cy: number, r: number): GradientType<string>
 
+    /**
+     * 把画布变成url
+     */
+    toDataURL(): Promise<string>
 }

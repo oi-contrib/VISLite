@@ -4,7 +4,7 @@ import type TreeOptionType from '../../types/TreeOption'
 
 import Tree from '../common/tree/index'
 import { initOption } from '../common/option'
-import { animation } from "oipage/corejs/animation/index"
+import { animation } from "oipage/web/animation/index"
 import rotate from '../rotate'
 
 class TreeLayout extends Tree implements TreeLayoutType {
@@ -168,6 +168,7 @@ class TreeLayout extends Tree implements TreeLayoutType {
 
     closeNode(id: string) {
         if (!this.__preTree) return this
+        // @ts-ignore
         this.__noOpens[id] = true
 
         this.doUpdate()
@@ -176,6 +177,7 @@ class TreeLayout extends Tree implements TreeLayoutType {
 
     openNode(id: string) {
         if (!this.__preTree) return this
+        // @ts-ignore
         this.__noOpens[id] = false
 
         this.doUpdate()
@@ -184,6 +186,7 @@ class TreeLayout extends Tree implements TreeLayoutType {
 
     toggleNode(id: string) {
         if (!this.__preTree) return this
+        // @ts-ignore
         this.__noOpens[id] = !this.__noOpens[id]
 
         this.doUpdate()

@@ -33,6 +33,12 @@ import MapCoordinateType from './MapCoordinate'
 import TreeConfigType from './TreeConfig'
 import TreeLayoutType from './TreeLayout'
 
+import PieConfigType from './PieConfig'
+import PieLayoutType from './PieLayout'
+
+import BarConfigType from './BarConfig'
+import BarLayoutType from './BarLayout'
+
 import { initOptionType, mergeOptionType } from './option'
 
 // 插值
@@ -87,6 +93,12 @@ interface NewMapCoordinateType extends MapCoordinateType {
 interface NewTreeLayoutType extends TreeLayoutType {
     new(config?: TreeConfigType): this
 }
+interface NewPieLayoutType extends PieLayoutType {
+    new(config?: PieConfigType): this
+}
+interface NewBarLayoutType extends BarLayoutType {
+    new(config?: BarConfigType): this
+}
 
 export default class VISLite {
 
@@ -129,6 +141,8 @@ export default class VISLite {
 
     // 布局
     static TreeLayout: NewTreeLayoutType
+    static PieLayout: NewPieLayoutType
+    static BarLayout: NewBarLayoutType
 
     // 配置项
     static initOption: initOptionType
@@ -174,6 +188,8 @@ export let MapCoordinate: NewMapCoordinateType
 
 // 布局
 export let TreeLayout: NewTreeLayoutType
+export let PieLayout: NewPieLayoutType
+export let BarLayout: NewBarLayoutType
 
 // 配置项
 export let initOption: initOptionType

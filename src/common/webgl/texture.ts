@@ -8,6 +8,7 @@ const initTexture = (painter: WebGLRenderingContext, type: number, unit: number)
     const texture = painter.createTexture()
 
     // 开启纹理单元，unit表示开启的编号
+    // @ts-ignore
     painter.activeTexture(painter['TEXTURE' + unit])
 
     // 绑定纹理对象到目标上

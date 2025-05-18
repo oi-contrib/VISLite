@@ -1,0 +1,50 @@
+<header>
+    BarLayout 数据格式
+</header>
+<h2>
+    类型定义
+</h2>
+<pre tag="javascript">
+{
+    // 坐标系
+   coordinate: {
+       x: number // 坐标系左下角横坐标
+       y: number // 坐标系左下角纵坐标
+       width: number // 坐标系的宽
+       height: number // 坐标系的高
+       xAxis: categoryAxios | valueAxios // x坐标轴
+       yAxis: categoryAxios | valueAxios // y坐标轴
+   }
+
+   // 直方矩形
+   node: Array&lt;{
+       name?: string // 分类名称（如果是一维的，就不存在此项）
+       bar: Array&lt;{ // 当前分类的一个个直方矩形
+           value: number // 矩形原始的值
+           x: number // 矩形左下角横坐标
+           y: number // 矩形左下角纵坐标
+           width: number // 矩形宽
+           height: number // 矩形高
+       }&gt;
+   }&gt;
+
+}
+</pre>
+<h3>
+    categoryAxios
+</h3>
+<pre tag="javascript">
+{
+    type: "category"
+    data: Array&lt;string&gt;
+}
+</pre>
+<h3>
+    valueAxios
+</h3>
+<pre tag="javascript">
+{
+    type: "value"
+    data: Array&lt;number&gt;
+}
+</pre>

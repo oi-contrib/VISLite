@@ -19,7 +19,7 @@ class SVG {
     private __path: string = ""
     private __currentPosition: number[] = []
 
-    private __svg: SVGElement
+    protected __svg: SVGElement
     constructor(svg: SVGElement) {
         this.__svg = svg
     }

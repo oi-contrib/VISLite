@@ -23,7 +23,7 @@ const enhanceGradient = function (gradient: SVGElement, gradientId: string) {
 export const linearGradient = function (el: SVGElement, x0: number, y0: number, x1: number, y1: number) {
 
     const defs = initDefs(el)
-    const gradientId = "vislite-lg-" + new Date().valueOf() + "-" + Math.random()
+    const gradientId = "visliteLg" + new Date().valueOf() + "" + (Math.random() * 1000000).toFixed(0)
 
     const linearGradient = toNode("linearGradient")
     defs.appendChild(linearGradient)
@@ -40,7 +40,7 @@ export const linearGradient = function (el: SVGElement, x0: number, y0: number, 
 export const radialGradient = function (el: SVGElement, cx: number, cy: number, r: number) {
 
     const defs = initDefs(el)
-    const gradientId = "vislite-rg-" + new Date().valueOf() + "-" + Math.random()
+    const gradientId = "visliteRg" + new Date().valueOf() + "" + (Math.random() * 1000000).toFixed(0)
 
     const radialGradient = toNode("radialGradient")
     defs.appendChild(radialGradient)
