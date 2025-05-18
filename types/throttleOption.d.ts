@@ -1,1 +1,1 @@
-export * from "oipage/corejs/throttle"
+export * from "oipage/web/throttle/index"

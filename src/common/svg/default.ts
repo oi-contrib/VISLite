@@ -3,8 +3,8 @@ import type { arcCapType, textAlignType, textBaselineType, lineCapType, lineJoin
 export default function () {
     return {
         // 颜色
-        fillStyle: "#000",
-        strokeStyle: "#000",
+        fillStyle: "rgb(0,0,0)",
+        strokeStyle: "rgb(0,0,0)",
 
         // 文字对齐方式
         textAlign: <textAlignType>"left",

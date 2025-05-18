@@ -27,6 +27,8 @@ import throttle from "./throttle/index"
 import MapCoordinate from "./MapCoordinate/index"
 
 import TreeLayout from "./TreeLayout/index"
+import PieLayout from "./PieLayout/index"
+import BarLayout from "./BarLayout/index"
 
 import initOption from "./initOption/index"
 import mergeOption from "./mergeOption/index"
@@ -74,6 +76,8 @@ export default {
 
     // 布局
     TreeLayout,
+    PieLayout,
+    BarLayout,
 
     // 配置项
     initOption,

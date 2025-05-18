@@ -1,0 +1,42 @@
+<header>
+    PieLayout 数据格式
+</header>
+<h2>
+    类型定义
+</h2>
+<pre tag="javascript">
+{
+
+    // 条目个数
+    count: number
+
+    // 一个个条目
+    node:Array&lt;{
+        value: number // 值
+        name: string // 名称
+        beginDeg: number // 开始弧度
+        deg: number // 结束弧度
+        radius: [number, number] // 半径
+        isHover: boolean // 是否悬浮
+
+        // 提示
+        label: {
+            line: [[number, number],[number, number],[number, number]]
+            position: [number, number]
+            align: "left" | "right"
+        }
+    }&gt;
+
+    // 圆心横坐标
+    cx: number
+
+    // 圆心纵坐标
+    cy: number
+
+    // 半径
+    radius: [number, number]
+
+    // 当前悬浮位置
+    hoverIndex: number
+}
+</pre>

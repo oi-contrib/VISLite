@@ -208,11 +208,9 @@ v0.8.0:
 v1.0.0:
     date:2024-05-25
     changes:
+      - 基于更长远的考虑，部分反馈不好的API决定从v1.x开始废弃，后续专注基础技术积累，废弃业务模块，敬请理解
+        （原v0.x的功能将独立一个分支继续维护：https://github.com/oi-contrib/VISLite/blob/v0.x/CHANGELOG）
       - 被废弃API或功能
-        （
-            > 基于更长远的考虑，部分反馈不好的API决定从v1.x开始废弃，后续专注基础技术积累，废弃业务模块，敬请理解
-            > 原v0.x的功能将独立一个分支继续维护：https://github.com/oi-contrib/VISLite/blob/v0.x/CHANGELOG
-        ）
         1、Geometry 立方体
         2、WebGL画笔
         3、取消一些旧的向下兼容语句
@@ -298,3 +296,12 @@ v1.3.0:
               > rectRadius 矩形圆角半径
         3、坐标系
             * 地理坐标系 mapCoordinate
+v1.4.0:
+    date:2025-05-18
+    changes:
+      - 新增功能
+        1、SVG画笔
+            * toDataURL 获取画布的base64地址
+        2、布局
+            * 饼布局 pieLayout
+            * 直方布局 barLayout

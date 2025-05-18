@@ -17,8 +17,10 @@ fetch("/docs/data/china.json", {
 
     let mapCoordinate = new MapCoordinate({
         api: "Eoap",
-        width: el?.clientWidth,
-        height: el?.clientHeight
+        left: 100,
+        top: 50,
+        width: (el?.clientWidth || 0) - 100,
+        height: (el?.clientHeight || 0) - 50
     }).setGeos(res)
 
     let painter = new Canvas(el).config({

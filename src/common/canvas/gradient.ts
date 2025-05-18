@@ -28,5 +28,5 @@ export const conicGradient = function (painter: CanvasRenderingContext2D, cx: nu
     const gradient = painter.createConicGradient(startDeg, cx, cy)
     return enhanceGradient(gradient, deg ? (stop: number) => {
         return deg / (Math.PI * 2) * stop
-    } : undefined)
+    } : void 0)
 }

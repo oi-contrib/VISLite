@@ -59,6 +59,24 @@ painter
     .fullArc(100, 100, 30, 50, 45, 180)
 
 
+painter.appendBoard("path").beginPath().config({
+    lineWidth: 20,
+    lineCap: "round",
+    lineJoin: "round",
+    lineDash: [40, 100, 40]
+})
+    // .reset()
+    .moveTo(900, 600).lineTo(800, 500).lineTo(400, 650).stroke()
+
+painter.appendBoard("path").config({
+    rectRadius: [10, 20, 30, 50],
+    fillStyle: "pink"
+}).fullRect(50, 400, 300, 200)
+
+painter
+    .appendBoard("circle")
+    .fullCircle(400, 300, 70)
+
 // 渐变色
 
 painter
@@ -66,8 +84,8 @@ painter
     .config({
         fillStyle: painter
             .createRadialGradient(50, 25, 100)
-            .setColor(0, "white")
-            .setColor(1, "red")
+            .setColor(0, "rgb(255,255,255)")
+            .setColor(1, "rgb(255,0,0)")
             .value(),
     })
     .fillCircle(300, 120, 70)
@@ -77,8 +95,8 @@ painter
     .config({
         fillStyle: painter
             .createLinearGradient(0, 0, 100, 100)
-            .setColor(0, "white")
-            .setColor(1, "green")
+            .setColor(0, "rgb(255,255,255)")
+            .setColor(1, "rgb(0,255,0)")
             .value(),
     })
     .fillCircle(300, 240, 100)
@@ -97,20 +115,6 @@ painter
 // })
 // .fillCircle(200, 200, 100)
 
-painter.appendBoard("path").beginPath().config({
-    lineWidth: 20,
-    lineCap: "round",
-    lineJoin: "round",
-    lineDash: [40, 100, 40]
-})
-    // .reset()
-    .moveTo(900, 600).lineTo(800, 500).lineTo(400, 650).stroke()
-
-painter.appendBoard("path").config({
-    rectRadius: [10, 20, 30, 50],
-    fillStyle: "pink"
-}).fullRect(50, 400, 300, 200)
-
-painter
-    .appendBoard("circle")
-    .fullCircle(400, 300, 70)
+// painter.toDataURL().then(function (base64) {
+//     console.log(base64);
+// })

@@ -1,0 +1,159 @@
+<header>
+    直方布局
+</header>
+<div class="version">
+    1.4.0 新增
+</div>
+<h2>
+    引入
+</h2>
+<pre tag="javascript">
+import { BarLayout } from "vislite"
+</pre>
+<h2>
+    语法
+</h2>
+<p>
+    通过传递一个配置项即可创建布局对象：
+</p>
+<pre tag="javascript">
+let barLayout = new BarLayout(config)
+</pre>
+<p>
+    其中config表示布局求解的原始数据格式，如果你数据的格式类似下面：
+</p>
+<h3>
+    一维
+</h3>
+<pre tag="javascript">
+{
+    category: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    data: [120, 200, 150, 80, 70, 110, 130]
+}
+</pre>
+<h3>
+    二维
+</h3>
+<pre tag="javascript">
+{
+    category: ['一月', '二月', '三月'],
+    value: [{
+        name: "City Alpha",
+        data: [165, 170, 30]
+    }, {
+        name: "City Beta",
+        data: [150, 105, 110]
+    }, {
+        name: "City Gamma",
+        data: [220, 82, 63]
+    }]
+}
+</pre>
+<p>
+    则config可以不传递，直接使用默认值，否则就需要自己配置不满足默认格式的部分，具体config是一个json，可选属性如下：
+</p>
+<div class="warn">
+    温馨提示：暂不支持，后续如果必要会进行扩展。
+</div>
+<h2>
+    方法
+</h2>
+<h3>
+    setOption
+</h3>
+<p>
+    设置布局的行为：
+</p>
+<pre tag="javascript">
+    barLayout.setOption(option)
+</pre>
+<p>
+    其中option应该是一个json，用以规范直方图的行为，可选属性如下：
+</p>
+<h4>
+    x
+</h4>
+<p>
+    直方图左下角横坐标，number类型，默认50。
+</p>
+<h4>
+    y
+</h4>
+<p>
+    直方图左下角纵坐标，number类型，默认350。
+</p>
+<h4>
+    width
+</h4>
+<p>
+    直方图宽，number类型，默认400。
+</p>
+<h4>
+    height
+</h4>
+<p>
+    直方图高，number类型，默认300。
+</p>
+<h4>
+    category
+</h4>
+<p>
+    直方图分类刻度尺，字符串类型，可选值为：
+</p>
+<ul>
+    <li>
+        xAxis：默认值，表示x轴作为分类轴；
+    </li>
+    <li>
+        yAxis：表示y轴作为分类轴。
+    </li>
+</ul>
+<h4>
+    duration
+</h4>
+<p>
+    切换时长，number类型，默认200（即0.2s）。
+</p>
+<h3>
+    use
+</h3>
+<p>
+    单纯的直方图坐标计算：
+</p>
+<pre tag="javascript">
+    let bar = barLayout.use(initBar)
+</pre>
+<h3>
+    bind
+</h3>
+<p>
+    绑定新的数据和渲染方法：
+</p>
+<pre tag="javascript">
+barLayout.bind(initBar, function(bar){
+    // 绘制出直方图
+})
+</pre>
+<div class="warn">
+    温馨提示：上述形参bar的格式你可以点击
+    <button tag="bar-format" type="explain">BarLayout 数据格式</button>
+    进行查阅。
+</div>
+<h3>
+    unbind
+</h3>
+<p>
+    解除绑定：
+</p>
+<pre tag="javascript">
+    barLayout.unbind()
+</pre>
+<h3>
+    doUpdate
+</h3>
+<p>
+    主动触发绘制更新：
+</p>
+<pre tag="javascript">
+    barLayout.doUpdate()
+</pre>

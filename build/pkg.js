@@ -2,7 +2,6 @@ const fs = require("fs")
 const { rollup } = require('rollup')
 const { minify } = require("terser")
 const rollupConfig = require('./rollup.config.js')
-const { error, log, warn } = require('oipage')
 const package = require("../package.json")
 
 let getFormat = (filename, format) => {
@@ -22,9 +21,9 @@ let banner = (bundleName) => `/*!
 * ${package.repository.url}
 */`
 
-error(`
+console.log(`\x1b[31m
 > Rollup 打包
-`)
+\x1b[0m`)
 
 let sourceFiles = fs.readdirSync("./package")
 new Promise((resolve, reject) => {
@@ -51,7 +50,7 @@ new Promise((resolve, reject) => {
                 banner: banner(isMainBundle ? "" : (folder + " of ")),
                 file: targetFile
             }).then(() => {
-                log(`✔ [${index}] ${sourceFile} → ${targetFile}`)
+                console.log(`✔ [${index}] ${sourceFile} → ${targetFile}`)
                 doRollup(index + 1)
             }).catch((e) => {
                 console.log(e)
@@ -64,9 +63,9 @@ new Promise((resolve, reject) => {
     })(0)
 }).then((msg) => {
 
-    error(`
+    console.log(`\x1b[31m
 > Terser 压缩混淆
-`)
+\x1b[0m`)
 
     new Promise((resolve, reject) => {
 
@@ -99,11 +98,11 @@ export default ${folder}`
             }).then((data) => {
                 fs.writeFileSync(targetFile, data.code)
 
-                log(`✔ [${index}] ${sourceFile} → ${targetFile}`)
+                console.log(`✔ [${index}] ${sourceFile} → ${targetFile}`)
                 doTerser(index + 1)
             }).catch((e) => {
                 console.log(e)
-                error(`✘ [${index}] ${sourceFile} → ${targetFile} [3]`)
+                error(`\x1b[31m✘ [${index}] ${sourceFile} → ${targetFile} [3]\x1b[0m`)
                 reject()
             })
 
@@ -111,14 +110,14 @@ export default ${folder}`
 
     }).then(() => {
 
-        warn(`
+        console.log(`
 ✔ 完毕
 `)
 
     }).catch((e) => {
-        error(`
+        console.log(`\x1b[31m
 ✘ 失败
-`)
+\x1b[0m`)
         console.log(e)
     })
 
