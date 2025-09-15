@@ -223,7 +223,18 @@ export default {
               {
                 canvasId: painterid,
                 success: function (e) {
-                  resolveUrl(e.tempFilePath);
+                    // #ifdef MP-WEIXIN
+                    wx.getFileSystemManager().readFile({
+                        filePath: e.tempFilePath,
+                        encoding: 'base64',
+                        success: function (res) {
+                            resolveUrl('data:image/png;base64,' + res.data);
+                        }
+                    });
+                    // #endif
+                    // #ifndef MP-WEIXIN
+                    resolveUrl(e.tempFilePath);
+                    // #endif
                 },
               },
               // #ifndef MP-ALIPAY

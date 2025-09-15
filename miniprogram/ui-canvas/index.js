@@ -75,7 +75,15 @@ Component({
                                     wx.canvasToTempFilePath({
                                         canvasId: "painter",
                                         success: function (e) {
-                                            resolveUrl(e.tempFilePath);
+                                             wx.getFileSystemManager().readFile({
+                                                filePath: e.tempFilePath,
+                                                encoding: 'base64',
+                                                success: function (res) {
+                                                    resolveUrl('data:image/png;base64,' + res.data);
+                                                }
+                                            });
+                                            // resolveUrl(e.tempFilePath);
+
                                         },
                                         fail: function (e) {
                                             console.log(e)

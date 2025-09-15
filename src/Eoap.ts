@@ -56,7 +56,7 @@ class Eoap implements MapType {
         p = rotateX((90 - this.__center[1]) / 180 * Math.PI, p[0], p[1], p[2])
 
         return [
-            -p[0], // 加-号是因为浏览器坐标和地图不一样
+            -p[0], // 加负号是因为浏览器坐标和地图不一样
             p[1],
             p[2]
         ]
