@@ -13,6 +13,11 @@ class Canvas extends OralCanvas implements CanvasType {
         }
 
         option = initOption(option, {
+
+            // 对外暴露自定义缩放倍率（为满足特殊场景，以简化使用）
+            // 2025年7月25日 于秦皇岛
+            scale: 2,
+
             region: true,
             willReadFrequently: false
         })
@@ -50,20 +55,20 @@ class Canvas extends OralCanvas implements CanvasType {
             const canvas = canvasArray[index]
             if (canvas) {
                 canvas.style.width = width + "px"
-                canvas.setAttribute('width', (index * width + width) + "")
+                canvas.setAttribute('width', ((index === 1 ? option.scale as number : 1) * width) + "")
 
                 canvas.style.height = height + "px"
-                canvas.setAttribute('height', (index * height + height) + "")
+                canvas.setAttribute('height', ((index === 1 ? option.scale as number : 1) * height) + "")
             }
         }
 
         super(ViewCanvas, RegionCanvas, {
             willReadFrequently: option.willReadFrequently,
-        }, 2)
+        }, option.scale)
 
         this.__canvas = ViewCanvas
         this.__el = el
-        this.painter.scale(2, 2)
+        this.painter.scale(option.scale as number, option.scale as number)
     }
 
     toDataURL(): Promise<string> {

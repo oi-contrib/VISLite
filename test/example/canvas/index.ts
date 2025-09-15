@@ -4,9 +4,12 @@ import Canvas from "../../../src/Canvas"
 
 let painter = new Canvas(el, {
     // region: false
+    scale: 1
 })
 
-painter = new Canvas(el, {})
+painter = new Canvas(el, {
+    scale: 2
+})
 
 console.log(painter)
 
