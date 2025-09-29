@@ -349,4 +349,17 @@ export default interface CanvasType {
      * @param callback 回调函数
      */
     bind(eventName: string, callback: (regionName: string, x: number, y: number) => void): this
+
+     /**
+     * 将画布的坐标原点向左右方向移动dx，向上下方向移动dy
+     * @param dx
+     * @param dy
+     */
+    translate(dx: number, dy: number): this
+
+    /**
+     * 将画布顺时针旋转deg弧度
+     * @param deg
+     */
+    rotate(deg: number): this
 }
