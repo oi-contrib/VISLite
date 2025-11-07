@@ -375,6 +375,24 @@ painter.config({
 <pre tag="javascript">painter.toDataURL().then(url=>{
     // todo
 })</pre>
+<h4>
+    格式和质量
+</h4>
+<div class="version">
+    1.6.0 新增，且只支持Web端
+</div>
+<pre tag="javascript">painter.toDataURL(type="image/png", encoderOptions=0.92).then(url=>{
+    // todo
+})</pre>
+<ol>
+    <li>
+        type：字符串类型，可选，表示要导出的图片格式，默认为 "image/png"（还可以设置为 "image/jpeg"、"image/webp" 等格式）。
+    </li>
+    <li>
+        encoderOptions：数值类型，可选，用于指定图像的质量，默认0.92，如果设置了该参数，则只对 "image/jpeg" 和 "image/webp" 格式有效，取值范围是 0 到 1 之间，其中 1
+        表示最高质量，0 表示最低质量。对于 PNG 格式，此参数无效。
+    </li>
+</ol>
 <h3>
     getColor
 </h3>

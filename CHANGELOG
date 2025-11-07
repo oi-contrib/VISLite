@@ -318,6 +318,8 @@ v1.5.0:
 v1.6.0:
     date:
     changes:
+      - 优化改造
+        1、H5版本Canvas画笔的toDataURL新增图片格式和图片质量设置
       - 新增功能
         1、Canvas画笔
             * 转换画手：translate、rotate

@@ -71,9 +71,9 @@ class Canvas extends OralCanvas implements CanvasType {
         this.painter.scale(option.scale as number, option.scale as number)
     }
 
-    toDataURL(): Promise<string> {
+    toDataURL(type: string = "image/png", encoderOptions: number = 0.92): Promise<string> {
         return new Promise(resolve => {
-            resolve(this.__canvas.toDataURL())
+            resolve(this.__canvas.toDataURL(type, encoderOptions))
         })
     }
 
