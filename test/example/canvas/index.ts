@@ -182,3 +182,18 @@ painter.setRegion("圆角矩形").config({
 }).fullRect(50, 400, 300, 200);
 
 painter.clearCircle(200, 200, 30);
+
+painter
+    .config({
+        rectRadius: [0, 25, 25, 25],
+        fillStyle: "red"
+    })
+    .translate(500, 350)
+    .rotate(Math.PI * 0.25)
+    .fillRect(0, 0, 50, 50);
+
+painter.install({
+    demo1() {
+        console.log(this)
+    }
+}).demo1();

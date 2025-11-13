@@ -271,8 +271,10 @@ export default interface CanvasType {
 
     /**
      * 把画布变成url
+     * @param type 【仅H5端有效】字符串类型，可选，表示要导出的图片格式，默认为 "image/png"（还可以设置为 "image/jpeg"、"image/webp" 等格式）
+     * @param encoderOptions 【仅H5端有效】数值类型，可选，用于指定图像的质量，默认0.92，如果设置了该参数，则只对 "image/jpeg" 和 "image/webp" 格式有效，取值范围是 0 到 1 之间，其中 1 表示最高质量，0 表示最低质量。对于 PNG 格式，此参数无效。
      */
-    toDataURL(): Promise<string>
+    toDataURL(type?: string, encoderOptions?: number): Promise<string>
 
     /**
      * 获取原生画笔
@@ -350,7 +352,7 @@ export default interface CanvasType {
      */
     bind(eventName: string, callback: (regionName: string, x: number, y: number) => void): this
 
-     /**
+    /**
      * 将画布的坐标原点向左右方向移动dx，向上下方向移动dy
      * @param dx
      * @param dy
@@ -362,4 +364,12 @@ export default interface CanvasType {
      * @param deg
      */
     rotate(deg: number): this
+
+    /**
+     * 扩展绘制方法
+     * @param methods
+     */
+    install(methods: {
+        [key: string]: Function
+    }): this
 }

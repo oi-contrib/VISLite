@@ -316,10 +316,13 @@ v1.5.0:
         1、Canvas画笔
             * 添加scale配置，可以控制画布缩放倍率
 v1.6.0:
-    date:
+    date:2025-11-13
     changes:
+      - 修复bug
+        1、修复若干eslint检查报错
       - 优化改造
         1、H5版本Canvas画笔的toDataURL新增图片格式和图片质量设置
       - 新增功能
         1、Canvas画笔
             * 转换画手：translate、rotate
+            * 扩展绘制方法：install

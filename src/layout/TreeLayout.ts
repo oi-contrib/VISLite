@@ -168,6 +168,7 @@ class TreeLayout extends Tree implements TreeLayoutType {
 
     closeNode(id: string) {
         if (!this.__preTree) return this
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         this.__noOpens[id] = true
 
@@ -177,6 +178,7 @@ class TreeLayout extends Tree implements TreeLayoutType {
 
     openNode(id: string) {
         if (!this.__preTree) return this
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         this.__noOpens[id] = false
 
@@ -186,6 +188,7 @@ class TreeLayout extends Tree implements TreeLayoutType {
 
     toggleNode(id: string) {
         if (!this.__preTree) return this
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         this.__noOpens[id] = !this.__noOpens[id]
 

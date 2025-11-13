@@ -14,7 +14,9 @@ class PieLayout implements PieLayoutType {
 
     constructor(config: PieConfigType = {}) {
         this.__config = initOption(config, {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             name: (pieData: any, initPie: Array<any>) => pieData.name,
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             value: (pieData: any, initPie: Array<any>) => pieData.value
         })
     }
@@ -38,7 +40,7 @@ class PieLayout implements PieLayoutType {
     private __hoverIndex = -1 // 表示当前悬浮的序号
 
     use(initPie: Array<any>, hoverIndex: number = -1) {
-        let pie: PieResultType = {
+        const pie: PieResultType = {
             count: initPie.length,
             cx: this.__option.cx,
             cy: this.__option.cy,
@@ -47,7 +49,8 @@ class PieLayout implements PieLayoutType {
             node: []
         }
 
-        let totalValue = 0, names = [], values = []
+        let totalValue = 0
+        const names = [], values = []
         for (let i = 0; i < initPie.length; i++) {
             names[i] = (this.__config.name as nameType)(initPie[i], initPie)
             values[i] = (this.__config.value as valueType)(initPie[i], initPie)
@@ -58,15 +61,15 @@ class PieLayout implements PieLayoutType {
         let beginDeg = Math.PI * -0.5, currenDeg
         for (let i = 0; i < initPie.length; i++) {
             currenDeg = values[i] / totalValue * Math.PI * 2
-            let radius = [this.__option.radius[0], this.__option.radius[1] * (1 + (hoverIndex === i ? 0.05 : 0))]
+            const radius = [this.__option.radius[0], this.__option.radius[1] * (1 + (hoverIndex === i ? 0.05 : 0))]
 
-            let pdeg = beginDeg + currenDeg * 0.5, pradius = Math.max(this.__option.radius[0], this.__option.radius[1])
-            let p0 = rotate(pie.cx, pie.cy, pdeg, pie.cx + pradius, pie.cy)
-            let p1 = rotate(pie.cx, pie.cy, pdeg, pie.cx + pradius + 15, pie.cy)
+            const pdeg = beginDeg + currenDeg * 0.5, pradius = Math.max(this.__option.radius[0], this.__option.radius[1])
+            const p0 = rotate(pie.cx, pie.cy, pdeg, pie.cx + pradius, pie.cy)
+            const p1 = rotate(pie.cx, pie.cy, pdeg, pie.cx + pradius + 15, pie.cy)
 
-            let pflag = p0[0] > pie.cx ? 1 : -1
-            let p2 = [p1[0] + pflag * 20, p1[1]]
-            let p3 = [p1[0] + pflag * 25, p1[1]]
+            const pflag = p0[0] > pie.cx ? 1 : -1
+            const p2 = [p1[0] + pflag * 20, p1[1]]
+            const p3 = [p1[0] + pflag * 25, p1[1]]
 
             pie.node[i] = {
                 value: values[i],

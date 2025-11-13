@@ -37,7 +37,7 @@ class BarLayout implements BarLayoutType {
     private __preBar: BarResultType | null
 
     use(initBar: any) {
-        let bar: BarResultType = {
+        const bar: BarResultType = {
             coordinate: {
                 x: this.__option.x,
                 y: this.__option.y,
@@ -59,7 +59,7 @@ class BarLayout implements BarLayoutType {
 
         // 求解一维最值
         if (initBar.data) {
-            for (let val of initBar.data) {
+            for (const val of initBar.data) {
                 if (maxValue === void 0 || val > maxValue) maxValue = val
                 if (minValue === void 0 || val < minValue) minValue = val
             }
@@ -67,8 +67,8 @@ class BarLayout implements BarLayoutType {
 
         // 求解二维最值
         else if (initBar.value) {
-            for (let item of initBar.value) {
-                for (let val of item.data) {
+            for (const item of initBar.value) {
+                for (const val of item.data) {
                     if (maxValue === void 0 || val > maxValue) maxValue = val
                     if (minValue === void 0 || val < minValue) minValue = val
                 }
@@ -77,7 +77,7 @@ class BarLayout implements BarLayoutType {
             throw new Error('No data leads to parsing errors')
         }
 
-        let rulerArray = ruler(maxValue || 0, minValue || 0, 5)
+        const rulerArray = ruler(maxValue || 0, minValue || 0, 5)
 
         let categoryLen // 分类轴长度
         let valueLen // 数值轴长度
@@ -99,12 +99,12 @@ class BarLayout implements BarLayoutType {
         }
 
         // 求解分类轴刻度
-        let category: any = []
+        const category: any = []
 
         // 一维
-        let categorySingle1Width = categoryLen / initBar.category.length
-        let categorySingle2Width = categorySingle1Width * 0.9
-        let categoryStart = categorySingle1Width * 0.05
+        const categorySingle1Width = categoryLen / initBar.category.length
+        const categorySingle2Width = categorySingle1Width * 0.9
+        const categoryStart = categorySingle1Width * 0.05
         if (initBar.data) {
             for (let i = 0; i < initBar.data.length; i++) {
                 category.push([
@@ -116,9 +116,9 @@ class BarLayout implements BarLayoutType {
 
         // 二维
         else {
-            let categorySingle3Width = categorySingle2Width / initBar.value.length
-            let categorySingle4Width = categorySingle3Width * 0.9
-            let categoryStartBlance = categorySingle3Width * 0.05
+            const categorySingle3Width = categorySingle2Width / initBar.value.length
+            const categorySingle4Width = categorySingle3Width * 0.9
+            const categoryStartBlance = categorySingle3Width * 0.05
             for (let i = 0; i < initBar.value[0].data.length; i++) {
                 category[i] = []
                 for (let j = 0; j < initBar.value.length; j++) {
@@ -131,15 +131,15 @@ class BarLayout implements BarLayoutType {
         }
 
         // 根据值获取长度
-        let singleValueLen = valueLen / (rulerArray[rulerArray.length - 1] - rulerArray[0])
-        let getLenByValue = (value: number) => {
+        const singleValueLen = valueLen / (rulerArray[rulerArray.length - 1] - rulerArray[0])
+        const getLenByValue = (value: number) => {
             return singleValueLen * (value - rulerArray[0])
         }
 
         // 计算小矩形
         if (this.__option.category === "xAxis") { // 分类在x轴，从左到右
             if (initBar.data) {
-                let nodeBar = []
+                const nodeBar = []
                 for (let i = 0; i < initBar.data.length; i++) {
                     nodeBar.push({
                         x: this.__option.x + category[i][0],
@@ -154,7 +154,7 @@ class BarLayout implements BarLayoutType {
                 })
             } else {
                 for (let j = 0; j < initBar.value.length; j++) {
-                    let nodeBar = []
+                    const nodeBar = []
                     for (let i = 0; i < initBar.value[j].data.length; i++) {
                         nodeBar.push({
                             x: this.__option.x + category[i][j][0],
@@ -172,7 +172,7 @@ class BarLayout implements BarLayoutType {
             }
         } else { // 分类在y轴，从上到下
             if (initBar.data) {
-                let nodeBar = []
+                const nodeBar = []
                 for (let i = 0; i < initBar.data.length; i++) {
                     nodeBar.push({
                         x: this.__option.x,
@@ -187,7 +187,7 @@ class BarLayout implements BarLayoutType {
                 })
             } else {
                 for (let j = 0; j < initBar.value.length; j++) {
-                    let nodeBar = []
+                    const nodeBar = []
                     for (let i = 0; i < initBar.value[j].data.length; i++) {
                         nodeBar.push({
                             x: this.__option.x,
@@ -230,13 +230,14 @@ class BarLayout implements BarLayoutType {
 
         const cacheBar = JSON.parse(JSON.stringify(newBar))
 
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         animation((deep) => {
 
             if (this.__preBar) {
                 // todo
+            } else {
+                this.__rback(cacheBar)
             }
-
-            this.__rback(cacheBar)
 
         }, this.__option.duration, () => {
             this.__preBar = newBar
