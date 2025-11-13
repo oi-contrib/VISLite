@@ -41,6 +41,7 @@ barLayout.setOption({
     category: "yAxis"
 }).bind(oralData, function (bar) {
     console.log(bar)
+    painter.clearRect(0, 0, 700, 700);
 
     let colors = getLoopColors(bar.node.length)
     for (let i = 0; i < bar.node.length; i++) {
@@ -56,3 +57,12 @@ barLayout.setOption({
 })
 
 // console.log(painter, BarLayout)
+
+// setTimeout(() => {
+//     barLayout.setOption({
+//         x: 50,
+//         width: 500,
+//         height: 500,
+//         category: "xAxis"
+//     }).doUpdate()
+// }, 1000)

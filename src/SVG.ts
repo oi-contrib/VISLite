@@ -28,21 +28,21 @@ class SVG extends OralSVG implements SVGType {
         return new Promise(resolve => {
             const width = this.__el.clientWidth, height = this.__el.clientHeight
 
-            let img = document.createElement('img');
+            const img = document.createElement('img');
 
             img.setAttribute('width', width + "");
             img.setAttribute('height', height + "");
-            let base64_svg = "data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' width='" + width + "' height='" + height + "'>" + this.__svg.innerHTML.replace(/"/g, "'") + "</svg>";
+            const base64_svg = "data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' width='" + width + "' height='" + height + "'>" + this.__svg.innerHTML.replace(/"/g, "'") + "</svg>";
             img.setAttribute('src', base64_svg);
 
             setTimeout(function () {
 
                 // 准备画布
-                let canvas = document.createElement('canvas');
+                const canvas = document.createElement('canvas');
                 canvas.setAttribute('width', width + "");
                 canvas.setAttribute('height', height + "");
 
-                let painter = canvas.getContext('2d');
+                const painter = canvas.getContext('2d');
 
                 // 绘制截图
                 if (painter) painter.drawImage(img, 0, 0, width, height);

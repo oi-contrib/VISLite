@@ -146,11 +146,18 @@ function compilerImport(source, isOnline) {
     // 根据开发环境和生产环境区别lib地址
     var libSrc = isOnline ? "https://cdn.jsdelivr.net/npm/vislite@" + window.VISLite_system.version + "/lib/" : "../lib/";
 
-    var items = execResult[1].trim().split(","), item, index, importCode = "import '" + libSrc + "index.umd.min.js';";
+    // var items = execResult[1].trim().split(","), item, index, importCode = "import '" + libSrc + "index.umd.min.js';";
+    // for (index = 0; index < items.length; index++) {
+    //     item = items[index].trim();
+
+    //     importCode += "var " + item + " = window.VISLite." + item + ";\n"
+    // }
+
+    var items = execResult[1].trim().split(","), item, index, importCode = "";
     for (index = 0; index < items.length; index++) {
         item = items[index].trim();
 
-        importCode += "var " + item + " = window.VISLite." + item + ";\n"
+        importCode += "import "+item+" from '" + libSrc + item + "/index.es.js';\n"
     }
 
     return source.replace(execResult[0], importCode);

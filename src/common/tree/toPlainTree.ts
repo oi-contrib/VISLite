@@ -4,7 +4,7 @@ import toInnerTree from './toInnerTree'
 
 // 可以传递任意格式的树原始数据
 // 只要配置对应的解析方法即可
-export default function (initTree: any, config: TreeConfigType, noOpens: {}) {
+export default function (initTree: any, config: TreeConfigType, noOpens: any = {}) {
     const treeData = toInnerTree(initTree, config)
 
     const alltreedata = treeData.value // 维护的树
@@ -25,7 +25,7 @@ export default function (initTree: any, config: TreeConfigType, noOpens: {}) {
         const beforeDis: Array<number> = []
         let size = 0, maxDeep = 0
 
-        // @ts-ignore
+        //  @typescript-eslint/ban-ts-comment
         if (noOpens[rootid]) {
             alltreedata[rootid].left = 0.5
             alltreedata[rootid].top = 0.5
@@ -38,7 +38,7 @@ export default function (initTree: any, config: TreeConfigType, noOpens: {}) {
                 if (deep > maxDeep) maxDeep = deep
 
                 let flag: number = 0
-                // @ts-ignore
+                //  @typescript-eslint/ban-ts-comment
                 if (!noOpens[pNode.id]) {
 
                     for (flag = 0; flag < pNode.children.length; flag++)
@@ -107,7 +107,7 @@ export default function (initTree: any, config: TreeConfigType, noOpens: {}) {
         }
         // 对于不显示的，需要标记一下
         for (const key in noOpens) {
-            // @ts-ignore
+            // @typescript-eslint/ban-ts-comment
             if (noOpens[key]) {
                 alltreedata[key].isOpen = false
                     ; (function updateHidden(pid, left, top) {

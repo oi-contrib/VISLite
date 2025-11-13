@@ -420,6 +420,16 @@ class Painter {
         })
     }
 
+    // 转换画布
+    translate(dx: number, dy: number) {
+        this.painter.translate(dx, dy)
+        return this
+    }
+    rotate(deg: number) {
+        this.painter.rotate(deg)
+        return this
+    }
+
     // 扩展绘制方法
     install(methods: {
         [key: string]: Function
