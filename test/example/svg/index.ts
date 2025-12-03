@@ -41,7 +41,7 @@ class Demo {
             .config({
                 fillStyle: "blue",
             })
-            .appendBoard("path")
+            .appendBoard("rect")
             .fillRect(300, 100, 50, 200).bind('click', (event, target) => {
                 console.log(event, this, target)
             })
@@ -68,7 +68,7 @@ painter.appendBoard("path").beginPath().config({
     // .reset()
     .moveTo(900, 600).lineTo(800, 500).lineTo(400, 650).stroke()
 
-painter.appendBoard("path").config({
+painter.appendBoard("rect").config({
     rectRadius: [10, 20, 30, 50],
     fillStyle: "pink"
 }).fullRect(50, 400, 300, 200)
