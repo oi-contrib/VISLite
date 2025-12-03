@@ -85,7 +85,7 @@ class SVG {
                     path: "path",
                     arc: "path",
                     circle: "circle",
-                    rect: "rect",
+                    rect: "path",
                 }[el] || ""
 
         if (_el == "") throw new Error("Unsupported drawing method:" + el)
