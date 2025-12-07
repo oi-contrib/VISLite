@@ -68,7 +68,7 @@ painter.appendBoard("path").beginPath().config({
     // .reset()
     .moveTo(900, 600).lineTo(800, 500).lineTo(400, 650).stroke()
 
-painter.appendBoard("rect").config({
+painter.appendBoard("path").config({
     rectRadius: [10, 20, 30, 50],
     fillStyle: "pink"
 }).fullRect(50, 400, 300, 200)
@@ -118,3 +118,26 @@ painter
 // painter.toDataURL().then(function (base64) {
 //     console.log(base64);
 // })
+
+painter
+    .appendBoard("arc")
+    .save()
+    .translate(100, 0)
+    .rotate(30)
+    .beginPath()
+    .moveTo(200, 100)
+    .arc(250, 100, 100, 0, 340)
+    .config({
+        fillStyle: "green",
+    })
+    .fill()
+
+painter.restore()
+
+painter
+    .appendBoard("rect")
+    .config({
+        fillStyle: "blue",
+        rectRadius: [0, 0, 0, 0],
+    })
+    .fillRect(300, 100, 50, 200)

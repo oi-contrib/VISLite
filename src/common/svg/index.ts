@@ -19,6 +19,10 @@ class SVG {
     private __path: string = ""
     private __currentPosition: number[] = []
 
+    // 变换（和canvas2D的类似，内部维护了用于记录）
+    private __transform_history: Array<string> = []
+    private __transform_current = ""
+
     protected __svg: SVGElement
     constructor(svg: SVGElement) {
         this.__svg = svg
@@ -128,18 +132,27 @@ class SVG {
     // deg表示文字旋转角度，是角度值，不是弧度
     fillText(text: string, x: number, y: number, deg: number = 0) {
         initText(this.__useEl, this.__config, x, y, deg)
+        this.attr({
+            transform: this.__transform_current
+        })
         this.__useEl.textContent = text
         fill(this.__useEl, this.__config)
         return this
     }
     strokeText(text: string, x: number, y: number, deg: number = 0) {
         initText(this.__useEl, this.__config, x, y, deg)
+        this.attr({
+            transform: this.__transform_current
+        })
         this.__useEl.textContent = text
         stroke(this.__useEl, this.__config)
         return this
     }
     fullText(text: string, x: number, y: number, deg: number = 0) {
         initText(this.__useEl, this.__config, x, y, deg)
+        this.attr({
+            transform: this.__transform_current
+        })
         this.__useEl.textContent = text
         full(this.__useEl, this.__config)
         return this
@@ -155,6 +168,9 @@ class SVG {
         deg: number
     ) {
         initArc(this.__useEl, this.__config, cx, cy, r1, r2, beginDeg, deg)
+        this.attr({
+            transform: this.__transform_current
+        })
         fill(this.__useEl, this.__config)
         return this
     }
@@ -167,6 +183,9 @@ class SVG {
         deg: number
     ) {
         initArc(this.__useEl, this.__config, cx, cy, r1, r2, beginDeg, deg)
+        this.attr({
+            transform: this.__transform_current
+        })
         stroke(this.__useEl, this.__config)
         return this
     }
@@ -179,6 +198,9 @@ class SVG {
         deg: number
     ) {
         initArc(this.__useEl, this.__config, cx, cy, r1, r2, beginDeg, deg)
+        this.attr({
+            transform: this.__transform_current
+        })
         full(this.__useEl, this.__config)
         return this
     }
@@ -186,16 +208,25 @@ class SVG {
     // 圆形
     fillCircle(cx: number, cy: number, r: number) {
         initCircle(this.__useEl, cx, cy, r)
+        this.attr({
+            transform: this.__transform_current
+        })
         fill(this.__useEl, this.__config)
         return this
     }
     strokeCircle(cx: number, cy: number, r: number) {
         initCircle(this.__useEl, cx, cy, r)
+        this.attr({
+            transform: this.__transform_current
+        })
         stroke(this.__useEl, this.__config)
         return this
     }
     fullCircle(cx: number, cy: number, r: number) {
         initCircle(this.__useEl, cx, cy, r)
+        this.attr({
+            transform: this.__transform_current
+        })
         full(this.__useEl, this.__config)
         return this
     }
@@ -203,16 +234,25 @@ class SVG {
     // 矩形
     fillRect(x: number, y: number, width: number, height: number) {
         initRect(this.__useEl, this.__config, x, y, width, height)
+        this.attr({
+            transform: this.__transform_current
+        })
         fill(this.__useEl, this.__config)
         return this
     }
     strokeRect(x: number, y: number, width: number, height: number) {
         initRect(this.__useEl, this.__config, x, y, width, height)
+        this.attr({
+            transform: this.__transform_current
+        })
         stroke(this.__useEl, this.__config)
         return this
     }
     fullRect(x: number, y: number, width: number, height: number) {
         initRect(this.__useEl, this.__config, x, y, width, height)
+        this.attr({
+            transform: this.__transform_current
+        })
         full(this.__useEl, this.__config)
         return this
     }
@@ -241,17 +281,35 @@ class SVG {
     }
     fill() {
         initPath(this.__useEl, this.__path)
+        this.attr({
+            transform: this.__transform_current
+        })
         fill(this.__useEl, this.__config)
         return this
     }
     stroke() {
         initPath(this.__useEl, this.__path)
+        this.attr({
+            transform: this.__transform_current
+        })
         stroke(this.__useEl, this.__config)
         return this
     }
     full() {
         initPath(this.__useEl, this.__path)
+        this.attr({
+            transform: this.__transform_current
+        })
         full(this.__useEl, this.__config)
+        return this
+    }
+
+    save() {
+        this.__transform_history.push(this.__transform_current);
+        return this
+    }
+    restore() {
+        if (this.__transform_history.length > 0) this.__transform_current = this.__transform_history.pop() as string;
         return this
     }
 
@@ -317,7 +375,6 @@ class SVG {
         return this
     }
 
-
     // 线性渐变
     createLinearGradient(x0: number, y0: number, x1: number, y1: number) {
         return linearGradient(this.__svg, x0, y0, x1, y1)
@@ -326,6 +383,36 @@ class SVG {
     // 环形渐变
     createRadialGradient(cx: number, cy: number, r: number) {
         return radialGradient(this.__svg, cx, cy, r)
+    }
+
+    // 转换画布
+    translate(dx: number, dy: number) {
+        this.__transform_current += ' translate(' + dx + ',' + dy + ')'
+        return this
+    }
+    rotate(deg: number) {
+        this.__transform_current += ' rotate(' + deg + ')'
+        return this
+    }
+
+    // 扩展绘制方法
+    install(methods: {
+        [key: string]: Function
+    }): any {
+        for (const key in methods) {
+
+            if (key in this) {
+                throw new Error("VISLite SVG:Method already exists and cannot be overwritten.")
+            } else {
+                (this as any)[key] = (...args: any) => {
+                    const value = methods[key].apply(this, args)
+                    if (value != void 0) return value
+                    return this
+                }
+            }
+
+        }
+        return this
     }
 }
 

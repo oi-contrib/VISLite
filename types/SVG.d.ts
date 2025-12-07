@@ -200,6 +200,16 @@ export default interface SVGType {
     bezierCurveTo(cp1x: number, cp1y: number, cp2x: number, cp2y: number, x: number, y: number): this
 
     /**
+     * 保存当前的绘图状态
+     */
+    save(): this
+
+    /**
+     * 恢复之前保存的绘图状态
+     */
+    restore(): this
+
+    /**
      * 把当前路径包裹的区域填充颜色
      */
     fill(): this
@@ -245,4 +255,25 @@ export default interface SVGType {
      * 把画布变成url
      */
     toDataURL(): Promise<string>
+
+    /**
+     * 将画布的坐标原点向左右方向移动dx，向上下方向移动dy
+     * @param dx
+     * @param dy
+     */
+    translate(dx: number, dy: number): this
+
+    /**
+     * 将画布顺时针旋转deg弧度
+     * @param deg
+     */
+    rotate(deg: number): this
+
+    /**
+     * 扩展绘制方法
+     * @param methods
+     */
+    install(methods: {
+        [key: string]: Function
+    }): this
 }

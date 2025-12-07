@@ -286,6 +286,34 @@ painter.config({
     有两个控制点p(cp1x, cp1y)和p(cp2x, cp2y),画笔当前的位置和p(x, y)分别是起点和终点。
 </div>
 <h3>
+    记录
+</h3>
+<div class="version">
+    1.7.0 新增
+</div>
+<p>
+    暂存当前状态：
+</p>
+<pre tag="javascript">painter.save()</pre>
+<p>
+    恢复上次暂存状态：
+</p>
+<pre tag="javascript">painter.restore()</pre>
+<h3>
+    转换画手
+</h3>
+<div class="version">
+    1.7.0 新增
+</div>
+<p>
+    将画手的笔原点向左右方向移动dx，向上下方向移动dy：
+</p>
+<pre tag="javascript">painter.translate(dx, dy)</pre>
+<p>
+    将画手姿势顺时针旋转deg角度：
+</p>
+<pre tag="javascript">painter.rotate(deg)</pre>
+<h3>
     toDataURL
 </h3>
 <div class="version">
@@ -297,3 +325,20 @@ painter.config({
 <pre tag="javascript">painter.toDataURL().then(url=>{
     // todo
 })</pre>
+<h2>
+    更多
+</h2>
+<h3>
+    install
+</h3>
+<p>
+    扩展绘制方法：
+</p>
+<div class="version">
+    1.7.0 新增
+</div>
+<pre tag="javascript">
+painter.install(methods: {
+    [key: string]: Function
+});
+</pre>
