@@ -1,6 +1,6 @@
 {
   "name": "vislite",
-  "version": "1.6.1",
+  "version": "1.7.0",
   "description": "灵活、快速、简单的数据可视化交互式跨端前端库",
   "main": "./lib/index.umd.min.js",
   "typings": "./types/index.d.ts",
@@ -70,6 +70,6 @@
     "webpack-dev-server": "^4.7.4"
   },
   "dependencies": {
-    "oipage": "^1.3.1"
+    "oipage": "^1.5.0"
   }
 }
