@@ -227,6 +227,12 @@ for (var key in tree.node) {
 
 ## 例子项目
 
+主要是基于本项目及相关项目（比如 [ @vislite/canvas](https://github.com/oi-contrib/vislite-plugin-canvas) 、 [ @vislite/chart](https://github.com/oi-contrib/vislite-plugin-chart)）开发的一些用例：
+
+<img src="https://oi-contrib.github.io/VISLite/images/docs/examples/review1.png" style="width:700px;border:2px solid black;margin-bottom:20px;"/>
+<img src="https://oi-contrib.github.io/VISLite/images/docs/examples/review2.png" style="width:700px;border:2px solid black;margin-bottom:20px;"/>
+<img src="https://oi-contrib.github.io/VISLite/images/docs/examples/review3.png" style="width:300px;border:2px solid black;margin-bottom:20px;"/>
+
 更多内容，你可以直接访问： [https://rapid-start.github.io/VISLite-examples/index.html](https://rapid-start.github.io/VISLite-examples/index.html)
 
 ## 版权
