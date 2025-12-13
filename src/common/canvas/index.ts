@@ -6,6 +6,7 @@ import assemble from "../assemble"
 import { linearGradient, radialGradient, conicGradient } from "./gradient"
 import { initText } from './config'
 import defaultFactory from "./default"
+import { initOption } from "../option"
 
 class Canvas extends PainterRender {
     readonly name: string = "Canvas"
@@ -40,8 +41,8 @@ class Canvas extends PainterRender {
         return this
     }
 
-    reset() {
-        this.config(defaultFactory() as CanvasConfigType)
+    reset(config: CanvasConfigType = {}) {
+        this.config(initOption(config, defaultFactory() as CanvasConfigType))
         return this
     }
 

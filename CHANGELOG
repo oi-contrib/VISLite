@@ -341,3 +341,11 @@ v1.7.0:
             * 记录：save、restore
             * 转换画手：translate、rotate
             * 扩展绘制方法：install
+v1.8.0:
+    date:
+    changes:
+      - 新增功能
+        1、Canvas画笔
+            * 重置 reset 支持传递覆盖值
+        2、SVG画笔
+            * 重置 reset 支持传递覆盖值

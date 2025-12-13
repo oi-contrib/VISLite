@@ -11,7 +11,7 @@ export default interface SVGType {
     /**
     * 重置
     */
-    reset(): this
+    reset(config?: SVGConfigType): this
 
     /**
      * 标记应用节点

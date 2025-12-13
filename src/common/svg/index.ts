@@ -5,6 +5,7 @@ import { toNode, setAttribute, getAttribute, full, fill, stroke } from "./tool"
 import rotate from "../../rotate"
 import { linearGradient, radialGradient } from "./gradient"
 import defaultFactory from "./default"
+import { initOption } from "../option"
 
 class SVG {
     readonly name: string = "SVG"
@@ -40,8 +41,8 @@ class SVG {
         return this
     }
 
-    reset() {
-        this.config(defaultFactory())
+    reset(config: SVGConfigType = {}) {
+        this.config(initOption(config, defaultFactory()))
         return this
     }
 

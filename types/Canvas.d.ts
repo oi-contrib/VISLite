@@ -10,7 +10,7 @@ export default interface CanvasType {
     /**
      * 重置
      */
-    reset(): this
+    reset(config?: CanvasConfigType): this
 
     /**
      * 绘制一个实心文字

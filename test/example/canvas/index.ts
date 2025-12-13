@@ -173,7 +173,9 @@ painter.setRegion("line设置").beginPath().config({
     lineJoin: "round",
     lineDash: [10, 20]
 })
-    // .reset()
+    // .reset({
+    //     lineWidth:5
+    // })
     .moveTo(900, 600).lineTo(800, 500).lineTo(400, 650).stroke();
 
 painter.setRegion("圆角矩形").config({

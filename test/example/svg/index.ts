@@ -65,7 +65,9 @@ painter.appendBoard("path").beginPath().config({
     lineJoin: "round",
     lineDash: [40, 100, 40]
 })
-    // .reset()
+    // .reset({
+    //     lineWidth:5
+    // })
     .moveTo(900, 600).lineTo(800, 500).lineTo(400, 650).stroke()
 
 painter.appendBoard("path").config({
