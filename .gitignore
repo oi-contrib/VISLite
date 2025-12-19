@@ -5,3 +5,5 @@ node_modules
 lib
 dist
 miniprogram_npm
+types/module.d.ts
+*.tgz

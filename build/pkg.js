@@ -1,4 +1,5 @@
 const fs = require("fs")
+const path = require("path")
 const { rollup } = require('rollup')
 const { minify } = require("terser")
 const rollupConfig = require('./rollup.config.js')
@@ -10,6 +11,17 @@ let getFormat = (filename, format) => {
     } else {
         return "es"
     }
+}
+
+fs.writeFileSync(path.join("./types/module.d.ts"), `// VISLite 模块定义 （程序自动生成，请勿修改）
+`);
+function createModule(bundlename, filename) {
+    fs.appendFileSync(path.join("./types/module.d.ts"), `
+declare module "vislite/lib/${bundlename}/${filename}.js"{
+    import ${bundlename} from "vislite/lib/${bundlename}/${filename}"
+    export default ${bundlename}
+}
+`);
 }
 
 fs.writeFileSync("./docs/js/system.js", `window.VISLite_system = {
@@ -91,6 +103,9 @@ export default ${folder}`
 
                 fs.writeFileSync("./lib/" + folderPath + "index." + getFormat(folder, rollupConfig.output.format) + ".d.ts", typesCode)
                 fs.writeFileSync("./lib/" + folderPath + "index." + getFormat(folder, rollupConfig.output.format) + ".min.d.ts", typesCode)
+
+                createModule(folder, "index.es")
+                createModule(folder, "index.es.min")
             }
 
             minify(fs.readFileSync(sourceFile, "utf-8"), {

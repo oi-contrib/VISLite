@@ -10,5 +10,7 @@ docs
 build
 tsconfig.json
 module.d.ts
+!types/module.d.ts
 .eslintrc.js
 .editorconfig
+*.tgz
