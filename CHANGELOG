@@ -334,20 +334,22 @@ v1.6.1:
       - 优化改造
         1、升级被废弃的 oipage@1.3.0 依赖包
 v1.7.0:
-    date:
-    changes:2025-12-11
+    date:2025-12-11
+    changes:
       - 新增功能
         1、SVG画笔
             * 记录：save、restore
             * 转换画手：translate、rotate
             * 扩展绘制方法：install
 v1.8.0:
-    date:
+    date:2026-01-06
     changes:
+      - 优化改造
+        1、types定义模块，方便使用时代码提示
+        2、优化new对象后返回值类型
+        3、使用requestAnimationFrame改造animation
       - 新增功能
         1、Canvas画笔
             * 重置 reset 支持传递覆盖值
         2、SVG画笔
             * 重置 reset 支持传递覆盖值
-      - 优化改造
-        1、types定义模块，方便使用时代码提示

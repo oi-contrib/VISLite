@@ -44,61 +44,61 @@ import { initOptionType, mergeOptionType } from './option'
 
 // 插值
 interface NewCardinalType extends CardinalType {
-    new(t?: number): this
+    new(t?: number): CardinalType
 }
 interface NewHermiteType extends HermiteType {
-    new(u?: number): this
+    new(u?: number): HermiteType
 }
 
 // 变换
 interface NewMatrix4Type extends Matrix4Type {
-    new(initMatrix4?: number[]): this
+    new(initMatrix4?: number[]): Matrix4Type
 }
 
 // 画笔
 interface NewSVGType extends SVGType {
-    new(el: HTMLElement | null): this
+    new(el: HTMLElement | null): SVGType
 }
 interface NewCanvasType extends CanvasType {
-    new(el: HTMLElement | null, option?: CanvasOptionType, width?: number, height?: number): this
+    new(el: HTMLElement | null, option?: CanvasOptionType, width?: number, height?: number): CanvasType
 }
 interface NewRawCanvasType extends CanvasType {
-    new(canvas: any, region?: any, scaleSize?: number): this
+    new(canvas: any, region?: any, scaleSize?: number): CanvasType
 }
 
 // WebGL
 interface NewShaderType extends ShaderType {
-    new(painter: WebGLRenderingContext): this
+    new(painter: WebGLRenderingContext): ShaderType
 }
 interface NewBufferType extends BufferType {
-    new(painter: WebGLRenderingContext, isElement?: boolean): this
+    new(painter: WebGLRenderingContext, isElement?: boolean): BufferType
 }
 interface NewTextureType extends TextureType {
-    new(painter: WebGLRenderingContext, type: string, unit?: number): this
+    new(painter: WebGLRenderingContext, type: string, unit?: number): TextureType
 }
 
 // 投影
 interface NewEoapType extends MapType {
-    new(scale?: number, center?: number[]): this
+    new(scale?: number, center?: number[]): MapType
 }
 interface NewMercatorType extends MapType {
-    new(scale?: number, center?: number[]): this
+    new(scale?: number, center?: number[]): MapType
 }
 
 // 坐标系
 interface NewMapCoordinateType extends MapCoordinateType {
-    new(config?: MapConfigType): this
+    new(config?: MapConfigType): MapCoordinateType
 }
 
 // 布局
 interface NewTreeLayoutType extends TreeLayoutType {
-    new(config?: TreeConfigType): this
+    new(config?: TreeConfigType): TreeLayoutType
 }
 interface NewPieLayoutType extends PieLayoutType {
-    new(config?: PieConfigType): this
+    new(config?: PieConfigType): PieLayoutType
 }
 interface NewBarLayoutType extends BarLayoutType {
-    new(config?: BarConfigType): this
+    new(config?: BarConfigType): BarLayoutType
 }
 
 export default class VISLite {

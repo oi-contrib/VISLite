@@ -1,3 +1,3 @@
 window.VISLite_system = {
-    "version": "1.7.0"
+    "version": "1.8.0"
 };
