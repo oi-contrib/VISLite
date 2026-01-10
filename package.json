@@ -70,6 +70,6 @@
     "webpack-dev-server": "^4.7.4"
   },
   "dependencies": {
-    "oipage": "^1.7.0-alpha.3"
+    "oipage": "^1.7.0"
   }
 }

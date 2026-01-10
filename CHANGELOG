@@ -353,3 +353,9 @@ v1.8.0:
             * 重置 reset 支持传递覆盖值
         2、SVG画笔
             * 重置 reset 支持传递覆盖值
+v1.9.0:
+    date:
+    changes:
+      - 修复bug
+        1、Canvas画笔
+            * 配置项shadowColor未正确设置缺省值

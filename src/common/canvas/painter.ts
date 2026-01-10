@@ -31,6 +31,7 @@ class Painter {
         // 默认配置canvas2D对象已经存在的属性
         this.painter.textBaseline = 'middle'
         this.painter.textAlign = 'left'
+        this.painter.shadowColor = 'black'
     }
 
     useConfig(key: string, value: any) {
