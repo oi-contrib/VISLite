@@ -359,3 +359,5 @@ v1.9.0:
       - 修复bug
         1、Canvas画笔
             * 配置项shadowColor未正确设置缺省值
+      - 优化改造
+        1、animation兼容对支付宝小程序等支持
