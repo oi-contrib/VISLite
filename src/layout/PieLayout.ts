@@ -61,7 +61,8 @@ class PieLayout implements PieLayoutType {
         let beginDeg = Math.PI * -0.5, currenDeg
         for (let i = 0; i < initPie.length; i++) {
             currenDeg = values[i] / totalValue * Math.PI * 2
-            const radius = [this.__option.radius[0], this.__option.radius[1] * (1 + (hoverIndex === i ? 0.05 : 0))]
+
+            const radius = [this.__option.radius[0] * (1 + (this.__option.radius[0] > 0 && hoverIndex === i ? -0.1 : 0)), this.__option.radius[1] * (1 + (hoverIndex === i ? 0.05 : 0))]
 
             const pdeg = beginDeg + currenDeg * 0.5, pradius = Math.max(this.__option.radius[0], this.__option.radius[1])
             const p0 = rotate(pie.cx, pie.cy, pdeg, pie.cx + pradius, pie.cy)
@@ -127,6 +128,7 @@ class PieLayout implements PieLayoutType {
 
             if (this.__prePie) {
                 for (let i = 0; i < cachePie.count; i++) {
+                    cachePie.node[i].radius[0] = this.__prePie.node[i].radius[0] + (newPie.node[i].radius[0] - this.__prePie.node[i].radius[0]) * deep
                     cachePie.node[i].radius[1] = this.__prePie.node[i].radius[1] + (newPie.node[i].radius[1] - this.__prePie.node[i].radius[1]) * deep
                 }
             }

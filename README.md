@@ -233,7 +233,7 @@ for (var key in tree.node) {
 <img src="https://oi-contrib.github.io/VISLite/images/docs/examples/review2.png" style="width:700px;border:2px solid black;margin-bottom:20px;"/>
 <img src="https://oi-contrib.github.io/VISLite/images/docs/examples/review3.png" style="width:300px;border:2px solid black;margin-bottom:20px;"/>
 
-更多内容，你可以直接访问： [https://rapid-start.github.io/VISLite-examples/index.html](https://rapid-start.github.io/VISLite-examples/index.html)
+更多内容，你可以直接访问： [VISLite 例子项目](https://rapid-start.github.io/VISLite-examples/index.html)
 
 ## 版权
 

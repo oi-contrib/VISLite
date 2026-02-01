@@ -283,7 +283,7 @@ v1.3.0:
     date:2025-01-04
     changes:
       - 修复bug
-        1、SVG 画笔
+        1、SVG画笔
             * 修复图形stroke模式的lineWidth、lineDash、lineCap、lineJoin不生效问题
         2、从types中移除被废弃的画笔属性
       - 新增功能
@@ -354,10 +354,12 @@ v1.8.0:
         2、SVG画笔
             * 重置 reset 支持传递覆盖值
 v1.9.0:
-    date:
+    date:2026-02-01
     changes:
       - 修复bug
         1、Canvas画笔
             * 配置项shadowColor未正确设置缺省值
       - 优化改造
         1、animation兼容对支付宝小程序等支持
+        2、饼布局 pieLayout
+            * 优化动画效果

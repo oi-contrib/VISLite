@@ -22,7 +22,10 @@ const oralData = [
 ]
 
 pieLayout.setOption({
-    radius: [0, 150]
+    cx: 350,
+    cy: 350,
+    radius: [70, 150],
+    // radius: [0,150],
 }).bind(oralData, function (pie) {
     console.log(pie)
 
@@ -32,22 +35,26 @@ pieLayout.setOption({
 
     for (let i = 0; i < pie.count; i++) {
 
+        console.log(pie.node[i].isHover, i)
+
         painter.setRegion(i + 1).config({
-            fillStyle: colors[i]
+            fillStyle: colors[i],
+            shadowBlur: pie.node[i].isHover ? 10 : 0
         }).fillArc(pie.cx, pie.cy, pie.node[i].radius[0], pie.node[i].radius[1], pie.node[i].beginDeg, pie.node[i].deg)
 
         let label = pie.node[i].label
 
         painter.config({
             strokeStyle: colors[i],
-            lineWidth: 1.5
+            lineWidth: 1.5,
+            shadowBlur: 0
         }).beginPath().moveTo(label.line[0][0], label.line[0][1]).lineTo(label.line[1][0], label.line[1][1]).lineTo(label.line[2][0], label.line[2][1]).stroke()
 
         painter.config({
             fillStyle: "#929292",
             textAlign: label.align,
             fontSize: 12,
-            fontWeight: 400
+            fontWeight: 400,
         }).fillText(pie.node[i].name, label.position[0], label.position[1])
 
     }
