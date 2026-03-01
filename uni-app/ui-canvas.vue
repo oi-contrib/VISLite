@@ -131,9 +131,9 @@ export default {
       regionid = "region";
       // #endif
       // #ifndef MP-WEIXIN
-      painter = uni.createCanvasContext("painter-" + this.uniqueid, this);
+      painter = uni.createCanvasContext("painter-" + this.uniqueid);
       if (this.region)
-        region = uni.createCanvasContext("region-" + this.uniqueid, this);
+        region = uni.createCanvasContext("region-" + this.uniqueid);
       painterid = "painter-" + this.uniqueid;
       regionid = "region-" + this.uniqueid;
       // #endif
