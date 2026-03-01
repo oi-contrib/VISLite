@@ -14,24 +14,24 @@ let getFormat = (filename, format) => {
 }
 
 fs.writeFileSync(path.join("./types/module.d.ts"), `// VISLite 模块定义 （程序自动生成，请勿修改）
-`);
+`)
 function createModule(bundlename, filename) {
     fs.appendFileSync(path.join("./types/module.d.ts"), `
 declare module "vislite/lib/${bundlename}/${filename}.js"{
     import ${bundlename} from "vislite/lib/${bundlename}/${filename}"
     export default ${bundlename}
 }
-`);
+`)
 }
 
 fs.writeFileSync("./docs/js/system.js", `window.VISLite_system = {
     "version": "${package.version}"
 };`)
 
-let banner = (bundleName) => `/*!
+let banner = (bundleName) => bundleName === "" ? `/*!
 * ${bundleName}VISLite JavaScript Library v${package.version}
 * ${package.repository.url}
-*/`
+*/`: ""
 
 console.log(`\x1b[31m
 > Rollup 打包
