@@ -11,13 +11,27 @@ class SVG extends OralSVG implements SVGType {
 
         const width = el.clientWidth, height = el.clientHeight
 
-        const ViewSVG = document.createElementNS("http://www.w3.org/2000/svg", 'svg')
-        el.appendChild(ViewSVG)
+        let ViewSVG: SVGElement
 
-        ViewSVG.setAttribute("width", width + "")
-        ViewSVG.setAttribute("height", height + "")
+        const _el = el as any
 
-        ViewSVG.setAttribute("viewBox", "0 0 " + width + " " + height)
+        // 如果已经初始化过了
+        if (_el._vislite_svg_) {
+            ViewSVG = _el._vislite_svg_[0]
+        } else {
+
+            ViewSVG = document.createElementNS("http://www.w3.org/2000/svg", 'svg')
+            el.appendChild(ViewSVG)
+
+            ViewSVG.setAttribute("width", width + "")
+            ViewSVG.setAttribute("height", height + "")
+
+            ViewSVG.setAttribute("viewBox", "0 0 " + width + " " + height)
+
+            _el._vislite_svg_ = [ViewSVG]
+
+            el.setAttribute('vislite', 'SVG')
+        }
 
         super(ViewSVG)
 
