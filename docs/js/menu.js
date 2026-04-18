@@ -227,7 +227,33 @@ function changeNav(_navName, isInit) {
                                                 exampleCopyEl.style.top = exampleRunHeight;
 
                                                 exampleCopyEl.addEventListener("click", function () {
-                                                    execCopy(exampleCodeEl.value, exampleCopyEl);
+                                                    var textareaEl = document.createElement('textarea');
+                                                    textareaEl.innerHTML = exampleCodeEl.value;
+
+                                                    document.body.appendChild(textareaEl);
+                                                    textareaEl.select();
+
+                                                    let prompt = function (isOk) {
+                                                        exampleCopyEl.innerText = isOk ? "复制成功" : "复制失败";
+                                                        setTimeout(function () {
+                                                            exampleCopyEl.innerText = "复制";
+                                                        }, 700);
+                                                    }
+
+                                                    try {
+                                                        var result = window.document.execCommand("copy", false, null);
+
+                                                        if (result) {
+                                                            prompt(true);
+                                                        } else {
+                                                            prompt(false);
+                                                        }
+                                                    } catch (e) {
+                                                        prompt(false);
+                                                        console.error(e);
+                                                    }
+
+                                                    document.body.removeChild(textareaEl);
                                                 });
 
                                                 // 运行按钮
