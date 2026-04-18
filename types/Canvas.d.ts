@@ -1,3 +1,7 @@
+/**
+ * Canvas绘图类型定义
+ * 提供Canvas 2D绘图的各种方法和功能
+ */
 import CanvasConfigType from "./CanvasConfig"
 import GradientType from "./Gradient"
 

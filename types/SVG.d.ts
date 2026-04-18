@@ -1,3 +1,7 @@
+/**
+ * SVG绘图类型定义
+ * 提供SVG绘图的各种方法和功能
+ */
 import SVGConfigType from './SVGConfig'
 import GradientType from "./Gradient"
 
