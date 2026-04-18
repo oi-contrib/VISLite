@@ -11,12 +11,12 @@ body {
     --success-color: #10b981;
     --warning-color: #f59e0b;
     --error-color: #ef4444;
-    
+
     /* 版本支持 */
     --version-color: var(--primary-color);
     /* 警告 */
     --warn-color: var(--error-color);
-    
+
     /* 中性色 */
     --gray-50: #f8fafc;
     --gray-100: #f1f5f9;
@@ -346,7 +346,7 @@ body>div.fixed {
     body>header>h1 {
         display: none;
     }
-    
+
     body>header>h2 {
         width: 45px;
     }
@@ -963,22 +963,19 @@ body>div.fixed {
     height: 32px;
     width: 32px;
     font-size: 0;
-    background-size: 60% auto;
+    background-size: 80% auto;
     background-position: center center;
     background-repeat: no-repeat;
-    background-color: white;
-    border: 1px solid var(--gray-300);
-    border-radius: 50%;
+    border: none;
     outline: none;
     cursor: pointer;
     z-index: 101;
     transition: all 0.2s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: transparent;
 }
 
 .explain-view>button:hover {
-    transform: scale(1.1);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+    background-size: 90% auto;
 }
 
 /* 例子界面 */
