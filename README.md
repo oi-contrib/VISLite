@@ -33,31 +33,35 @@
 
 # VISLite
 
-`VISLite`是一个使用`TypeScript`开发的可视化库。官网地址：[https://oi-contrib.github.io/VISLite](https://oi-contrib.github.io/VISLite)
+🚀 一款轻量、优雅的跨端数据可视化解决方案
 
-主要提供了跨端的画布和计算，开发人员只需要按照文档的描述就可以非常简单的完成包括Web、uni-app、微信小程序、支付宝小程序等平台的可视化开发，除了初始化时可能存在一些差异外，主要的业务代码部分在不同端完全一致。
+`VISLite` 是一个使用 `TypeScript` 构建的高性能可视化库。官网地址：[https://oi-contrib.github.io/VISLite](https://oi-contrib.github.io/VISLite)
+
+它提供了统一的跨端画布绘制与计算能力，让开发者只需关注业务逻辑，即可轻松实现 Web、uni-app、微信小程序、支付宝小程序等多平台的可视化应用。除初始化配置存在细微平台差异外，核心业务代码完全通用。
 
 ## 简介
 
-这是一个轻量级的数据可视化资源库，目标是：帮助你更快速、简单、高效的开发出任意的可视化业务产品。
+🎯 轻量级数据可视化开发库 —— 助你更快速、简洁、高效地构建可视化产品。
 
 > 本项目已在[开源中国](https://www.oschina.net/p/vislite)中开源，欢迎关注和留言。
 
-## 如何使用？
+## 快速开始
 
-首先，需要进行安装：
+### 📦 安装
 
-```js
+```bash
 npm install --save vislite
 ```
 
-然后，准备好画布：
+### 🖼️ 准备画布
 
 ```html
 <div id="root" style="width:500px;height:300px;"></div>
 ```
 
-现在，就可以获取画笔绘制自己需要的内容了。比如获取canvas画笔，绘制一个红色的圆：
+### 🎨 开始绘制
+
+获取画笔即可绘制你需要的任意内容。例如，获取 Canvas 画笔绘制一个红色圆：
 
 ```js
 import { Canvas } from 'vislite';
@@ -69,11 +73,9 @@ painter.config({
 }).fillCircle(200, 150, 100);
 ```
 
-更复杂的图表，我们也提供了丰富的辅助API。比如使用树布局，可以非常快速的绘制一个树图：
+更复杂的图表？我们提供了丰富的辅助 API。以树布局为例，只需简单几步即可绘制树图：
 
 <img src="https://oi-contrib.github.io/VISLite/images/docs/tree.png" width="500"/>
-
-具体代码如下：
 
 ```js
 import { Canvas, TreeLayout } from 'vislite';
@@ -119,7 +121,6 @@ painter.config({
 for (var key in tree.node) {
     var pid = tree.node[key].pid;
 
-    // 如果父结点存在，和父结点连起来
     if (pid) {
         var dist = (tree.node[key].top - tree.node[pid].top) * 0.5;
 
@@ -150,90 +151,90 @@ for (var key in tree.node) {
 }
 ```
 
-关于树布局更具体的使用细节，你可以访问：[ 《教程 / 树布局》 ](https://oi-contrib.github.io/VISLite/#/course/tree-layout)一节。
+树布局的详细用法，请参阅：[《教程 / 树布局》](https://oi-contrib.github.io/VISLite/#/course/tree-layout)
 
-## 部分功能
+## 核心功能
 
-### 常用的算法
+### 🧮 可视化算法库
 
-我们通过提供可视化常用的算法来帮助你绘制复杂图表。比如下面的树图，通过简单的配置就可以把任意格式的数据变成任意绘制的带坐标的数据：
+我们封装了可视化开发中常用的算法，助你轻松绘制复杂图表。通过简单的配置，即可将任意格式的数据转换为带坐标的绘制数据：
 
 <img src="https://oi-contrib.github.io/VISLite/images/docs/what_1.png" width="400"/>
 
-> 上述例子的运行地址：[从左到右树状图](https://oi-contrib.github.io/VISLite/#/example/canvas/tree-layout-lr)。
+> 示例运行地址：[从左到右树状图](https://oi-contrib.github.io/VISLite/#/example/canvas/tree-layout-lr)
 
-除了[树布局](https://oi-contrib.github.io/VISLite/#/api/treeLayout)外，我们还提供了：[刻度尺算法](https://oi-contrib.github.io/VISLite/#/api/ruler)来帮助你计算刻度应该如何确定、[等角斜方位投影](https://oi-contrib.github.io/VISLite/#/api/eoap)和[墨卡托投影](https://oi-contrib.github.io/VISLite/#/api/mercator)来绘制地图、[插值函数](https://oi-contrib.github.io/VISLite/#/api/cardinal)来完成折线变光滑的曲线、[变换矩阵](https://oi-contrib.github.io/VISLite/#/api/matrix4)提供各种坐标变换等。
+除[树布局](https://oi-contrib.github.io/VISLite/#/api/treeLayout)外，还提供：[刻度尺算法](https://oi-contrib.github.io/VISLite/#/api/ruler)、[等角斜方位投影](https://oi-contrib.github.io/VISLite/#/api/eoap)、[墨卡托投影](https://oi-contrib.github.io/VISLite/#/api/mercator)、[插值函数](https://oi-contrib.github.io/VISLite/#/api/cardinal)、[变换矩阵](https://oi-contrib.github.io/VISLite/#/api/matrix4)等。
 
-### 画笔加强
+### 🖌️ 增强型画笔
 
-我们对画笔进行了加强，使得其更简单好用。比如canvas，抽象出区域的概念，使得无论你绘制的图形多么的不规则，都可以很轻松的实现交互功能：
+画笔经过精心设计，使用更简单、功能更强大。以 Canvas 为例，抽象出「区域」概念，无论图形多么不规则，都能轻松实现交互：
 
 <img src="https://oi-contrib.github.io/VISLite/images/docs/what_2.png" width="400"/>
 
-> 上述例子的运行地址：[中国地图](https://oi-contrib.github.io/VISLite/#/example/canvas/china)。
+> 示例运行地址：[中国地图](https://oi-contrib.github.io/VISLite/#/example/canvas/china)
 
-画笔除了像上面那样为了方便交互而补充区域的设计外，还对原来的API进行了一次抽象，使得API更友好简单`（比如WebGL，即使不会3D的人也可以轻松使用，而SVG的使用，你无需去记忆那些晦涩难懂的属性）`，同时，我们还抹平了不同版本浏览器等之间的差异。
+画笔不仅为交互而设计区域，还对原生 API 进行了优雅封装，接口更友好直观（如 WebGL 让3D开发零门槛，SVG 无需记忆晦涩属性）。同时自动抹平浏览器兼容性差异。
 
-### 支持跨端开发
+### 📱 跨端支持
 
-除了Web端外，我们还针对uni-app、微信小程序、支付宝小程序等端进行了支持，并且不同端API保持一致，大大提高了代码的复用性：
+除 Web 端外，还支持 uni-app、微信小程序、支付宝小程序等多端，API 统一，极大提升代码复用率：
 
 <img src="https://oi-contrib.github.io/VISLite/images/docs/what_3.png" width="600"/>
 
-> 上述例子的运行地址：[金额波浪球](https://oi-contrib.github.io/VISLite/#/example/svg/money-schedule)。
+> 示例运行地址：[金额波浪球](https://oi-contrib.github.io/VISLite/#/example/svg/money-schedule)
 
-基于实际需要，我们目前对 `Canvas` 提供了跨端支持，除 `Web端` 外，还支持 `原生微信小程序` 、 `原生支付宝小程序` 和 `uni-app端` （编译成H5、微信小程序、支付宝小程序等） ，如果后续有必要，我们会对Canvas支持的端或SVG、WebGL等画笔进行更多端扩展。
+目前 `Canvas` 已支持：Web、原生微信小程序、原生支付宝小程序、uni-app（编译为 H5、微信小程序、支付宝小程序等）。后续将持续扩展更多端和画笔类型。
 
-## 特点
+## 核心优势
 
--   灵活的引入方式：包括npm安装后按照`ES Module`或`CommonJS`规范引入或直接使用script标签的`CDN`方式。
--   按需引入或全局引入：支持源码TS引入、按需JS引入或者全量引入等多种方式。
--   简单与复杂共存：一方面我们提供了可视化需要的基础功能，你可以按照自己的需要组合使用；另一方面，为了加速开发，我们针对常见的可视化业务场景进行了封装，可以帮助你快速完成，你可以根据实际情况进行选择。
--   向下兼容：我们向你保证，同一个大版本下始终向下兼容`（alpha和beta版本为测试版本，不包括）`，因此，无论何时，在同一个大版本号下，最新版本总是最好的选择。
+-   **灵活的引入方式**：支持 npm 安装后的 ES Module / CommonJS 引入，以及 script 标签 CDN 方式
+-   **按需加载**：源码 TS 引入、按需 JS 引入或全量引入，多种模式按需选择
+-   **简洁与强大并存**：提供可视化基础组件可自由组合，同时也支持常见场景的封装方案
+-   **稳定可靠**：同一大版本完全向下兼容（alpha、beta 版本除外），始终保持最新版本为最优选择
 
-> 版本说明：alpha为开发阶段、beta为发布前测试、rc为候选版本、next为未来版本、无后缀的为正式版本。
+> 版本规范：alpha（开发版）→ beta（测试版）→ rc（候选版）→ next（预发布版）→ 正式版
 
-## 需求墙
+## 需求反馈
 
-我们的目标是不断完善丰富可视化功能，非常希望获得你宝贵的建议和批评，无论任何想法，都可以给我们[留言](https://github.com/oi-contrib/VISLite/issues)告诉我们。
+我们致力于不断完善可视化功能，期待你的宝贵建议！欢迎通过 [留言](https://github.com/oi-contrib/VISLite/issues) 与我们交流。
 
-你所提的任何建议我们都会在最长一周内进行反馈说明。
+所有建议将在一周内得到回复。
 
 ## 更新日志
 
-详见[正式版更新日志](./CHANGELOG)，我们会在每次发布完正式版本后更新其内容。
+详见[正式版更新日志](./CHANGELOG)，每次正式版本发布后更新。
 
-## 下一步
+## Roadmap
 
-我们会在这里列出接下来的工作重心：
+近期工作重点：
 
--   为加速开发，提供常用坐标系和布局
--   文档优化（提高可读性、丰富用例、补充教程）
+-   提供常用坐标系和布局组件，加速开发
+-   持续优化文档（提升可读性、丰富示例、完善教程）
 
-给我们[留言](https://github.com/oi-contrib/VISLite/issues)告诉我们你希望快速扩展的功能，我们会优先你的建议考虑哦～
+有想要的功能？[告诉我们](https://github.com/oi-contrib/VISLite/issues)，我们会优先考虑！
 
-## 参与贡献
+## 贡献指南
 
-你可以选择下列一项或多项进行参与：
+欢迎通过以下方式参与项目：
 
--   代码维护：由于新功能或一些BUG的出现，对代码进行维护和升级。
--   文档编辑：主要是接口文档和教程需要编辑，这很重要。
--   用例开发和测试：在项目的test文件夹下有一些测试，而在docs文档中存在一些例子需要补充。
--   参与讨论：主要是讨论未来如何发展，改造的方向等。
+-   **代码维护**：处理新功能开发与 Bug 修复
+-   **文档完善**：接口文档和教程的编写与优化
+-   **测试用例**：补充 test 目录下的测试用例和 docs 目录下的示例
+-   **方向讨论**：参与项目未来发展的讨论
 
-如果有意向加入我们，你可以通过提 [issue](https://github.com/oi-contrib/VISLite/issues) 和我们取到联系，请简单说明一下情况，我们会尽快回复。
+有意加入？请通过 [issue](https://github.com/oi-contrib/VISLite/issues) 联系我们，请简要说明情况，我们会尽快回复。
 
-你可以查看[VISLite 贡献指南](./.github/CONTRIBUTING.md)文件了解更多细节，查看[AUTHORS.txt](./AUTHORS.txt)了解所有的贡献者。
+详见 [VISLite 贡献指南](./.github/CONTRIBUTING.md) 和 [AUTHORS.txt](./AUTHORS.txt)
 
-## 例子项目
+## 示例项目
 
-主要是基于本项目及相关项目（比如 [ @vislite/canvas](https://github.com/oi-contrib/vislite-plugin-canvas) 、 [ @vislite/chart](https://github.com/oi-contrib/vislite-plugin-chart)）开发的一些用例：
+基于 VISLite 及相关插件（如 [@vislite/canvas](https://github.com/oi-contrib/vislite-plugin-canvas)、[@vislite/chart](https://github.com/oi-contrib/vislite-plugin-chart)）开发的示例：
 
 <img src="https://oi-contrib.github.io/VISLite/images/docs/examples/review1.png" style="width:700px;border:2px solid black;margin-bottom:20px;"/>
 <img src="https://oi-contrib.github.io/VISLite/images/docs/examples/review2.png" style="width:700px;border:2px solid black;margin-bottom:20px;"/>
 <img src="https://oi-contrib.github.io/VISLite/images/docs/examples/review3.png" style="width:300px;border:2px solid black;margin-bottom:20px;"/>
 
-更多内容，你可以直接访问： [VISLite 例子项目](https://rapid-start.github.io/VISLite-examples/index.html)
+更多示例请访问：[VISLite 示例项目](https://rapid-start.github.io/VISLite-examples/index.html)
 
 ## 版权
 
