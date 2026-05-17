@@ -1,3 +1,5 @@
+中文版本 ｜ [English Version](./README-en.md)
+
 -   💘 开源不易，去 <i>[Github给个Star](https://github.com/oi-contrib/VISLite) </i>吧！
 
 <img src='https://oi-contrib.github.io/VISLite/images/logo.png' height='300px'/>
