@@ -242,4 +242,4 @@ For more examples, please visit: [VISLite Example Projects](https://rapid-start.
 
 MIT License
 
-Copyright (c) [zxl20070701](https://zxl20070701.github.io/notebook/home.html)
+Copyright (c) [zxl20070701](https://zxl20070701.github.io/notebook/home.html) Step By Step
