@@ -1,4 +1,4 @@
-中文版本 ｜ [English Version](./README-en.md)
+[English](./README-en.md) · **中文** · [📖 在线文档](https://oi-contrib.github.io/VISLite)
 
 -   💘 开源不易，去 <i>[Github给个Star](https://github.com/oi-contrib/VISLite) </i>吧！
 

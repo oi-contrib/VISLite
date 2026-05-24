@@ -3,6 +3,39 @@ var currenNavName = "";
 // 需要无菜单显示的模块
 var FullViews = [];
 
+// 英文显示状态
+var englishVisible = false;
+
+// 切换英文显示/隐藏
+function toggleEnglish() {
+    englishVisible = !englishVisible;
+
+    var langToggleEl = document.getElementById('lang-toggle');
+    var bodyEl = document.body;
+
+    if (englishVisible) {
+        bodyEl.classList.add('show-en');
+        langToggleEl.title = '显示中文';
+    } else {
+        bodyEl.classList.remove('show-en');
+        langToggleEl.title = '显示英文';
+    }
+
+    // 保存到localStorage以便下次访问保持状态
+    localStorage.setItem('vislite_english', englishVisible);
+}
+
+// 初始化英文状态
+function initEnglishStatus() {
+    var saved = localStorage.getItem('vislite_english');
+    if (saved === 'true') {
+        englishVisible = true;
+        document.body.classList.add('show-en');
+        document.getElementById('lang-toggle').innerHTML = '显示中文';
+        document.getElementById('lang-toggle').title = '隐藏英文';
+    }
+}
+
 // 需要无导航显示的模块
 var NoFixedViews = ['example'];
 
@@ -286,7 +319,7 @@ function changeNav(_navName, isInit) {
                                         docEl.setAttribute('fullview', 'yes');
                                     } else {
                                         fixedEl.style.display = ""
-                                        fixedEl.innerHTML = "<h1>导航</h1>";
+                                        fixedEl.innerHTML = "<h1><span class='zh-menu'>导航</span><span class='en-menu'>Navigation</span></h1>";
 
                                         docEl.setAttribute('fullview', 'no');
 

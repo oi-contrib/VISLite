@@ -1,29 +1,36 @@
 <header>
-    直方布局
+    <span class="zh-content">直方布局</span>
+    <span class="en-content">Bar Layout</span>
 </header>
 <div class="version">
-    1.4.0 新增
+    <span class="zh-content">1.4.0 新增</span>
+    <span class="en-content">Added in 1.4.0</span>
 </div>
 <h2>
-    引入
+    <span class="zh-content">引入</span>
+    <span class="en-content">Import</span>
 </h2>
 <pre tag="javascript">
 import { BarLayout } from "vislite"
 </pre>
 <h2>
-    语法
+    <span class="zh-content">语法</span>
+    <span class="en-content">Syntax</span>
 </h2>
 <p>
-    通过传递一个配置项即可创建布局对象：
+    <span class="zh-content">通过传递一个配置项即可创建布局对象：</span>
+    <span class="en-content">Create a layout object by passing a configuration:</span>
 </p>
 <pre tag="javascript">
 let barLayout = new BarLayout(config)
 </pre>
 <p>
-    其中config表示布局求解的原始数据格式，如果你数据的格式类似下面：
+    <span class="zh-content">其中config表示布局求解的原始数据格式，如果你数据的格式类似下面：</span>
+    <span class="en-content">Where config defines the raw data format. If your data is formatted like:</span>
 </p>
 <h3>
-    一维
+    <span class="zh-content">一维</span>
+    <span class="en-content">One-dimensional</span>
 </h3>
 <pre tag="javascript">
 {
@@ -32,7 +39,8 @@ let barLayout = new BarLayout(config)
 }
 </pre>
 <h3>
-    二维
+    <span class="zh-content">二维</span>
+    <span class="en-content">Two-dimensional</span>
 </h3>
 <pre tag="javascript">
 {
@@ -50,84 +58,108 @@ let barLayout = new BarLayout(config)
 }
 </pre>
 <p>
-    则config可以不传递，直接使用默认值，否则就需要自己配置不满足默认格式的部分，具体config是一个json，可选属性如下：
+    <span class="zh-content">则config可以不传递，直接使用默认值，否则就需要自己配置不满足默认格式的部分，具体config是一个json，可选属性如下：</span>
+    <span class="en-content">config can be omitted to use defaults. Otherwise, configure the non-standard parts. config is a JSON with optional properties:</span>
 </p>
 <div class="warn">
-    温馨提示：暂不支持，后续如果必要会进行扩展。
+    <span class="zh-content">温馨提示：暂不支持，后续如果必要会进行扩展。</span>
+    <span class="en-content">Note: Not supported yet. Will be extended if necessary.</span>
 </div>
 <h2>
-    方法
+    <span class="zh-content">方法</span>
+    <span class="en-content">Methods</span>
 </h2>
 <h3>
-    setOption
+    <span class="zh-content">setOption</span>
+    <span class="en-content">setOption</span>
 </h3>
 <p>
-    设置布局的行为：
+    <span class="zh-content">设置布局的行为：</span>
+    <span class="en-content">Set layout behavior:</span>
 </p>
 <pre tag="javascript">
     barLayout.setOption(option)
 </pre>
 <p>
-    其中option应该是一个json，用以规范直方图的行为，可选属性如下：
+    <span class="zh-content">其中option应该是一个json，用以规范直方图的行为，可选属性如下：</span>
+    <span class="en-content">Where option is a JSON to define bar chart behavior with optional properties:</span>
 </p>
 <h4>
-    x
+    <span class="zh-content">x</span>
+    <span class="en-content">x</span>
 </h4>
 <p>
-    直方图左下角横坐标，number类型，默认50。
+    <span class="zh-content">直方图左下角横坐标，number类型，默认50。</span>
+    <span class="en-content">Bar chart bottom-left x-coordinate, number, default 50.</span>
 </p>
 <h4>
-    y
+    <span class="zh-content">y</span>
+    <span class="en-content">y</span>
 </h4>
 <p>
-    直方图左下角纵坐标，number类型，默认350。
+    <span class="zh-content">直方图左下角纵坐标，number类型，默认350。</span>
+    <span class="en-content">Bar chart bottom-left y-coordinate, number, default 350.</span>
 </p>
 <h4>
-    width
+    <span class="zh-content">width</span>
+    <span class="en-content">width</span>
 </h4>
 <p>
-    直方图宽，number类型，默认400。
+    <span class="zh-content">直方图宽，number类型，默认400。</span>
+    <span class="en-content">Bar chart width, number, default 400.</span>
 </p>
 <h4>
-    height
+    <span class="zh-content">height</span>
+    <span class="en-content">height</span>
 </h4>
 <p>
-    直方图高，number类型，默认300。
+    <span class="zh-content">直方图高，number类型，默认300。</span>
+    <span class="en-content">Bar chart height, number, default 300.</span>
 </p>
 <h4>
-    category
+    <span class="zh-content">category</span>
+    <span class="en-content">category</span>
 </h4>
 <p>
-    直方图分类刻度尺，字符串类型，可选值为：
+    <span class="zh-content">直方图分类刻度尺，字符串类型，可选值为：</span>
+    <span class="en-content">Bar chart category axis, string, options:</span>
 </p>
 <ul>
     <li>
-        xAxis：默认值，表示x轴作为分类轴；
+        <span class="zh-content">xAxis：默认值，表示x轴作为分类轴；</span>
+        <span class="en-content">xAxis: default, x-axis as category axis;</span>
     </li>
     <li>
-        yAxis：表示y轴作为分类轴。
+        <span class="zh-content">yAxis：表示y轴作为分类轴。</span>
+        <span class="en-content">yAxis: y-axis as category axis.</span>
     </li>
 </ul>
 <h4>
-    duration
+    <span class="zh-content">duration</span>
+    <span class="en-content">duration</span>
 </h4>
 <p>
-    切换时长，number类型，默认200（即0.2s）。
+    <span class="zh-content">切换时长，number类型，默认200（即0.2s）。</span>
+    <span class="en-content">Transition duration, number, default 200 (0.2s).</span>
 </p>
 <h3>
-    use
+    <span class="zh-content">use</span>
+    <span class="en-content">use</span>
 </h3>
 <p>
-    单纯的直方图坐标计算：
+    <span class="zh-content">单纯的直方图坐标计算：</span>
+    <span class="en-content">Pure bar chart coordinate calculation:</span>
 </p>
 <pre tag="javascript">
     let bar = barLayout.use(initBar)
 </pre>
 <h3>
-    bind
+    <span class="zh-content">bind</span>
+    <span class="en-content">bind</span>
 </h3>
 <p>
-    绑定新的数据和渲染方法：
+    <span class="zh-content">绑定新的数据和渲染方法：</span>
+    <span class="en-content">Bind new data and rendering method:</span>
 </p>
 <pre tag="javascript">
 barLayout.bind(initBar, function(bar){
@@ -135,24 +167,30 @@ barLayout.bind(initBar, function(bar){
 })
 </pre>
 <div class="warn">
-    温馨提示：上述形参bar的格式你可以点击
+    <span class="zh-content">温馨提示：上述形参bar的格式你可以点击</span>
+    <span class="en-content">Note: Click</span>
     <button tag="bar-format" type="explain">BarLayout 数据格式</button>
-    进行查阅。
+    <span class="zh-content">进行查阅。</span>
+    <span class="en-content">to view the bar data format.</span>
 </div>
 <h3>
-    unbind
+    <span class="zh-content">unbind</span>
+    <span class="en-content">unbind</span>
 </h3>
 <p>
-    解除绑定：
+    <span class="zh-content">解除绑定：</span>
+    <span class="en-content">Unbind:</span>
 </p>
 <pre tag="javascript">
     barLayout.unbind()
 </pre>
 <h3>
-    doUpdate
+    <span class="zh-content">doUpdate</span>
+    <span class="en-content">doUpdate</span>
 </h3>
 <p>
-    主动触发绘制更新：
+    <span class="zh-content">主动触发绘制更新：</span>
+    <span class="en-content">Trigger drawing update manually:</span>
 </p>
 <pre tag="javascript">
     barLayout.doUpdate()

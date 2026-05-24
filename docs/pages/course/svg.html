@@ -1,29 +1,41 @@
 <header>
-    SVG
+    <span class="zh-content">SVG</span>
+    <span class="en-content">SVG</span>
 </header>
 <p>
-    鉴于SVG的底层几乎全是DOM操作，虽然可以通过技术手段在多端模拟出来，不过目前看意义不大，因此，当前此画笔只支持Web端。
+    <span class="zh-content">鉴于SVG的底层几乎全是DOM操作，虽然可以通过技术手段在多端模拟出来，不过目前看意义不大，因此，当前此画笔只支持Web端。</span>
+    <span class="en-content">Since SVG is almost entirely DOM operations under the hood, although it can be simulated
+        across multiple platforms through technical means, it currently doesn't make much sense. Therefore, this painter
+        currently only supports the Web platform.</span>
 </p>
 <p>
-    当然，如果后期发现多端是有意义的话，我们会进行兼容升级。
+    <span class="zh-content">当然，如果后期发现多端是有意义的话，我们会进行兼容升级。</span>
+    <span class="en-content">Of course, if multi-platform support becomes meaningful in the future, we will upgrade for
+        compatibility.</span>
 </p>
 <h2>
-    基本使用
+    <span class="zh-content">基本使用</span>
+    <span class="en-content">Basic Usage</span>
 </h2>
 <h3>
-    准备画布
+    <span class="zh-content">准备画布</span>
+    <span class="en-content">Prepare Canvas</span>
 </h3>
 <p>
-    使用之前，我们首先需要准备一个设置了大小的节点，具体是用的div还是span或者别的都可以：
+    <span class="zh-content">使用之前，我们首先需要准备一个设置了大小的节点，具体是用的div还是span或者别的都可以：</span>
+    <span class="en-content">Before using, we need to prepare a node with size set. It can be a div, span or other
+        elements:</span>
 </p>
 <pre tag="html">
-<div id="mysvg" style="width:300px;height:300px;"></div>
+&lt;div id="mysvg" style="width:300px;height:300px;"&gt;&lt;/div&gt;
 </pre>
 <h3>
-    获取画笔
+    <span class="zh-content">获取画笔</span>
+    <span class="en-content">Get Painter</span>
 </h3>
 <p>
-    准备好节点以后，就可以获取画笔了：
+    <span class="zh-content">准备好节点以后，就可以获取画笔了：</span>
+    <span class="en-content">After preparing the node, we can get the painter:</span>
 </p>
 <pre tag="javascript">
 import { SVG } from 'vislite';
@@ -31,25 +43,31 @@ import { SVG } from 'vislite';
 var painter = new SVG(document.getElementById('mysvg'));
 </pre>
 <h3>
-    绘制
+    <span class="zh-content">绘制</span>
+    <span class="en-content">Drawing</span>
 </h3>
 <p>
-    现在，画笔也有了，我们就可以直接用这支画笔绘制我们想要的内容了。
+    <span class="zh-content">现在，画笔也有了，我们就可以直接用这支画笔绘制我们想要的内容了。</span>
+    <span class="en-content">Now that we have the painter, we can directly draw what we want.</span>
 </p>
 <p>
-    比如我们想在 <span class="special">(50, 20)处</span>
-    写段文字，然后在
-    <span class="special">(150, 150)处</span>
-    绘制一个
-    <span class="special">半径100</span>
-    的小球：
+    <span class="zh-content">
+        比如我们想在 <span class="special">(50, 20)处</span> 写段文字，然后在 <span class="special">(150, 150)处</span> 绘制一个 <span
+            class="special">半径100</span> 的小球：
+    </span>
+    <span class="en-content">
+        For example, we want to write some text at <span class="special">(50, 20)</span> and then draw a small ball with
+        a <span class="special">radius of 100</span> at <span class="special">(150, 150)</span>:
+    </span>
 </p>
 <pre tag="javascript">
 painter.appendBoard('text').fillText("我爱你，中国～", 50, 20);
 painter.appendBoard('circle').fillCircle(150, 150, 100);
 </pre>
 <p>
-    当然，画笔的属性也是可以修改的，比如你可以设置小球的颜色：
+    <span class="zh-content">当然，画笔的属性也是可以修改的，比如你可以设置小球的颜色：</span>
+    <span class="en-content">Of course, you can modify the painter's properties, such as setting the circle
+        color:</span>
 </p>
 <pre tag="javascript">
 painter.config({
@@ -57,66 +75,100 @@ painter.config({
 });
 </pre>
 <div class="warn">
-    温馨提示：具体的可以绘制的基础图形和可以设置的画笔属性，请
-    <a href="#/api/svg/api" target="_blank">点击此处</a>
-    进行查阅。
+    <span class="zh-content">温馨提示：具体的可以绘制的基础图形和可以设置的画笔属性，请</span>
+    <span class="en-content">Note: For specific basic shapes and painter properties, please</span>
+    <a href="#/api/svg/api" target="_blank">
+        <span class="zh-content">点击此处</span>
+        <span class="en-content">click here</span>
+    </a>
+    <span class="zh-content">进行查阅。</span>
+    <span class="en-content">to check.</span>
 </div>
 <p>
-    下面是完整的例子代码：
+    <span class="zh-content">下面是完整的例子代码：</span>
+    <span class="en-content">Here is the complete example code:</span>
 </p>
 <example tag="course/svg_1" height="340px"></example>
 <p>
-    怎么了，是不是和Canvas画笔用起来差不多，很简单吧？
+    <span class="zh-content">怎么了，是不是和Canvas画笔用起来差不多，很简单吧？</span>
+    <span class="en-content">Is it similar to using the Canvas painter? Very simple, right?</span>
 </p>
 <div class="warn">
-    温馨提示：和canvas相比，svg在不同浏览器之间的表现实在是差强人意，我们在磨平这些差异上进行了一些探索，初见成效；所以，不推荐你直接使用浏览器的原始DOM操作来修改画布svg中的节点，虽然我们为你暴露了这个api，以备不时之需。
+    <span
+        class="zh-content">温馨提示：和canvas相比，svg在不同浏览器之间的表现实在是差强人意，我们在磨平这些差异上进行了一些探索，初见成效；所以，不推荐你直接使用浏览器的原始DOM操作来修改画布svg中的节点，虽然我们为你暴露了这个api，以备不时之需。</span>
+    <span class="en-content">Note: Compared to canvas, SVG performance varies across browsers. We've made some
+        explorations to smooth these differences with initial success; so we don't recommend directly using the
+        browser's native DOM operations to modify nodes in the SVG canvas, although we've exposed this API for emergency
+        use.</span>
 </div>
 <p>
-    不过，聪明的你一定发现，比如绘制文字，在绘制内容之前，多了
+    <span class="zh-content">不过，聪明的你一定发现，比如绘制文字，在绘制内容之前，多了</span>
+    <span class="en-content">However, you must have noticed that when drawing text, there's an extra</span>
     <span class="special">painter.appendBoard('text')</span>
-    语句，这是什么东西，用来干什么的？别急，我们接下来将展开解释。
+    <span class="zh-content">语句，这是什么东西，用来干什么的？别急，我们接下来将展开解释。</span>
+    <span class="en-content">statement before drawing. What is this and what does it do? Don't worry, we will explain it
+        next.</span>
 </p>
 <h2>
-    灵活的画笔
+    <span class="zh-content">灵活的画笔</span>
+    <span class="en-content">Flexible Painter</span>
 </h2>
 <p>
-    接上一小节结尾的问题，我们接着讲。
+    <span class="zh-content">接上一小节结尾的问题，我们接着讲。</span>
+    <span class="en-content">Continuing from the question at the end of the previous section.</span>
 </p>
 <h3>
-    原理
+    <span class="zh-content">原理</span>
+    <span class="en-content">Principle</span>
 </h3>
 <p>
-    我们来看看上述代码运行后的svg具体长什么样子：
+    <span class="zh-content">我们来看看上述代码运行后的svg具体长什么样子：</span>
+    <span class="en-content">Let's see what the SVG looks like after running the above code:</span>
 </p>
 <img src="./images/docs/svg_1.png">
 <p>
-    以上述绘制文字为例，本质上来说，就是在svg中添加一个text标签，然后设置好这个标签的内容和属性。
+    <span class="zh-content">以上述绘制文字为例，本质上来说，就是在svg中添加一个text标签，然后设置好这个标签的内容和属性。</span>
+    <span class="en-content">Taking the text drawing above as an example, essentially, it adds a text tag to the SVG and
+        sets its content and attributes.</span>
 </p>
 <p>
-    那既然如此，为什么不直接把：
+    <span class="zh-content">那既然如此，为什么不直接把：</span>
+    <span class="en-content">Then why not directly simplify:</span>
 </p>
 <pre tag="javascript">
     painter.appendBoard('text').fillText("我爱你，中国～", 50, 20);
 </pre>
 <p>
-    合并成：
+    <span class="zh-content">合并成：</span>
+    <span class="en-content">into:</span>
 </p>
 <pre tag="javascript">
     painter.fillText("我爱你，中国～", 50, 20);
 </pre>
 <p>
-    这样使用起来更简单，不是吗？反正
+    <span class="zh-content">这样使用起来更简单，不是吗？反正</span>
+    <span class="en-content">This would be simpler to use, right? After all,</span>
     <span class="special">painter.fillText()</span>
-    方法内部肯定知道需要添加一个text标签。
+    <span class="zh-content">方法内部肯定知道需要添加一个text标签。</span>
+    <span class="en-content">must know internally that it needs to add a text tag.</span>
 </p>
 <p>
-    哈哈哈，理想很丰满，现实～好像不合理。为什么？因为svg可以操作DOM，比如修改文字的时候，并不需要清空svg画布重绘，而只需要修改对应的text节点即可，而这，正是svg相比canvas优势所在，大概。
+    <span
+        class="zh-content">哈哈哈，理想很丰满，现实～好像不合理。为什么？因为svg可以操作DOM，比如修改文字的时候，并不需要清空svg画布重绘，而只需要修改对应的text节点即可，而这，正是svg相比canvas优势所在，大概。</span>
+    <span class="en-content">Haha, ideal is full, but reality seems unreasonable. Why? Because SVG can manipulate DOM.
+        For example, when modifying text, you don't need to clear and redraw the entire SVG canvas; you only need to
+        modify the corresponding text node. This is roughly the advantage of SVG over canvas.</span>
 </p>
 <div class="warn">
-    说是优势，其实也是缺点，毕竟DOM操作很消耗性能；当然，具体用svg还是canvas好，需要结合业务场景来判断。
+    <span class="zh-content">说是优势，其实也是缺点，毕竟DOM操作很消耗性能；当然，具体用svg还是canvas好，需要结合业务场景来判断。</span>
+    <span class="en-content">It's an advantage, but also a disadvantage, after all DOM operations consume performance;
+        of course, whether to use SVG or canvas depends on the business scenario.</span>
 </div>
 <p>
-    所以，
+    <span class="zh-content">所以，</span>
+    <span class="en-content">Therefore, the</span>
     <span class="special">painter.appendBoard()</span>
-    方法其实就是一个DOM操作，而为了更好的使用svg，我们提供了一组特殊的DOM操作方法。
+    <span class="zh-content">方法其实就是一个DOM操作，而为了更好的使用svg，我们提供了一组特殊的DOM操作方法。</span>
+    <span class="en-content">method is actually a DOM operation. To better use SVG, we provide a set of special DOM
+        operation methods.</span>
 </p>

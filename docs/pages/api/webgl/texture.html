@@ -1,46 +1,60 @@
 <header>
-    纹理
+    <span class="zh-content">纹理</span>
+    <span class="en-content">Texture</span>
 </header>
 <div class="version">
-    0.3.0 新增
+    <span class="zh-content">0.3.0 新增</span>
+    <span class="en-content">Added in 0.3.0</span>
 </div>
 <h2>
-    引入
+    <span class="zh-content">引入</span>
+    <span class="en-content">Import</span>
 </h2>
 <pre tag="javascript">
     import { Texture } from 'vislite'
 </pre>
 <h2>
-    语法
+    <span class="zh-content">语法</span>
+    <span class="en-content">Syntax</span>
 </h2>
 <p>
-    获取纹理实例：
+    <span class="zh-content">获取纹理实例：</span>
+    <span class="en-content">Get texture instance:</span>
 </p>
 <pre tag="javascript">
     let texture = new Texture(painter, type, unit)
 </pre>
 <p>
-    其中参数解释如下：
+    <span class="zh-content">其中参数解释如下：</span>
+    <span class="en-content">Parameters explained as follows:</span>
 </p>
 <ol>
     <li>
-        painter：WebGLRenderingContext类型
+        painter：WebGLRenderingContext
+        <span class="zh-content">类型</span>
+        <span class="en-content">type</span>
     </li>
     <li>
-        type：string类型，可以是"2d"或"cube"，分别表示是二维纹理还是立方纹理
+        type：string
+        <span class="zh-content">类型，可以是"2d"或"cube"，分别表示是二维纹理还是立方纹理</span>
+        <span class="en-content">type, can be "2d" or "cube", representing 2D texture or cube texture respectively</span>
     </li>
     <li>
-        unit：number类型，表示纹理单元，默认0
+        unit：number
+        <span class="zh-content">类型，表示纹理单元，默认0</span>
+        <span class="en-content">type, represents texture unit, default 0</span>
     </li>
 </ol>
 <h2>
-    方法
+    <span class="zh-content">方法</span>
+    <span class="en-content">Methods</span>
 </h2>
 <h3>
     useImage
 </h3>
 <p>
-    链接图片资源(单一)，表示纹理图片，TexImageSource类型：
+    <span class="zh-content">链接图片资源(单一)，表示纹理图片，TexImageSource类型：</span>
+    <span class="en-content">Link single image resource, representing texture image, TexImageSource type:</span>
 </p>
 <pre tag="javascript">
     texture.useImage(image)
@@ -49,22 +63,30 @@
     useCube
 </h3>
 <p>
-    链接图片资源（多张）：
+    <span class="zh-content">链接图片资源（多张）：</span>
+    <span class="en-content">Link multiple image resources:</span>
 </p>
 <pre tag="javascript">
     texture.useCube(images, width, height)
 </pre>
 <p>
-    其中参数解释如下：
+    <span class="zh-content">其中参数解释如下：</span>
+    <span class="en-content">Parameters explained as follows:</span>
 </p>
 <ol>
     <li>
-        images：纹理图片集，是一个数组，里面的元素是TexImageSource类型
+        images：
+        <span class="zh-content">纹理图片集，是一个数组，里面的元素是TexImageSource类型</span>
+        <span class="en-content">Texture image set, an array where elements are of type TexImageSource</span>
     </li>
     <li>
-        width：图片宽
+        width：
+        <span class="zh-content">图片宽</span>
+        <span class="en-content">Image width</span>
     </li>
     <li>
-        height：图片高
+        height：
+        <span class="zh-content">图片高</span>
+        <span class="en-content">Image height</span>
     </li>
 </ol>

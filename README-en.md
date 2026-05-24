@@ -1,4 +1,4 @@
-[中文版本](./README.md) ｜ English Version
+**English** · [中文](./README.md) · [📖 Online Docs](https://oi-contrib.github.io/VISLite)
 
 -   💘 Open source is not easy, please <i>[Give a Star on Github](https://github.com/oi-contrib/VISLite) </i>!
 
@@ -242,4 +242,8 @@ For more examples, please visit: [VISLite Example Projects](https://rapid-start.
 
 MIT License
 
+<<<<<<< HEAD
 Copyright (c) [zxl20070701](https://zxl20070701.github.io/notebook/home.html) Step By Step
+=======
+Copyright (c) [zxl20070701](https://zxl20070701.github.io/notebook/home.html) Step By Step
+>>>>>>> dev

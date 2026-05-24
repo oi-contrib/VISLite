@@ -1,38 +1,47 @@
 <header>
-    Cardinal
+    <span class="zh-content">Cardinal</span>
+    <span class="en-content">Cardinal</span>
 </header>
 <h2>
-    引入
+    <span class="zh-content">引入</span>
+    <span class="en-content">Import</span>
 </h2>
 <pre tag="javascript">
 import { Cardinal } from "vislite"
 </pre>
 <h2>
-    语法
+    <span class="zh-content">语法</span>
+    <span class="en-content">Syntax</span>
 </h2>
 <pre tag="javascript">
 let cardinal = new Cardinal(t = 0)
 </pre>
 <p>
-    参数t用于调整曲线走势，默认数值t=0，分水岭t=-1，|t-(-1)|的值越大，曲线走势调整的越严重。
+    <span class="zh-content">参数t用于调整曲线走势，默认数值t=0，分水岭t=-1，|t-(-1)|的值越大，曲线走势调整的越严重。</span>
+    <span class="en-content">Parameter t is used to adjust the curve shape. Default is t=0, watershed is t=-1. The larger |t-(-1)| is, the more severe the curve adjustment.</span>
 </p>
 <h3>
-    setP
+    <span class="zh-content">setP</span>
+    <span class="en-content">setP</span>
 </h3>
 <p>
-    设置点的位置：
+    <span class="zh-content">设置点的位置：</span>
+    <span class="en-content">Set point positions:</span>
 </p>
 <pre tag="javascript">
 cardinal.setP(points) 
 </pre>
 <p>
-    参数格式：[[x1, y1], [x2, y2], ... ]，至少两个点。
+    <span class="zh-content">参数格式：[[x1, y1], [x2, y2], ... ]，至少两个点。</span>
+    <span class="en-content">Parameter format: [[x1, y1], [x2, y2], ... ], at least two points.</span>
 </p>
 <h3>
-    use
+    <span class="zh-content">use</span>
+    <span class="en-content">use</span>
 </h3>
 <p>
-    根据x值返回y值：
+    <span class="zh-content">根据x值返回y值：</span>
+    <span class="en-content">Return y value based on x:</span>
 </p>
 <pre tag="javascript">
 cardinal.use(x)

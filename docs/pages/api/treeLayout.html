@@ -1,26 +1,32 @@
 <header>
-    树布局
+    <span class="zh-content">树布局</span>
+    <span class="en-content">Tree Layout</span>
 </header>
 <div class="version">
-    0.4.1 新增
+    <span class="zh-content">0.4.1 新增</span>
+    <span class="en-content">Added in 0.4.1</span>
 </div>
 <h2>
-    引入
+    <span class="zh-content">引入</span>
+    <span class="en-content">Import</span>
 </h2>
 <pre tag="javascript">
 import { TreeLayout } from "vislite"
 </pre>
 <h2>
-    语法
+    <span class="zh-content">语法</span>
+    <span class="en-content">Syntax</span>
 </h2>
 <p>
-    通过传递一个配置项即可创建布局对象：
+    <span class="zh-content">通过传递一个配置项即可创建布局对象：</span>
+    <span class="en-content">Create a layout object by passing a configuration:</span>
 </p>
 <pre tag="javascript">
 let treeLayout = new TreeLayout(config)
 </pre>
 <p>
-    其中config表示布局求解的原始数据格式，如果你数据的格式类似下面：
+    <span class="zh-content">其中config表示布局求解的原始数据格式，如果你数据的格式类似下面：</span>
+    <span class="en-content">Where config represents the original data format for layout calculation. If your data format is similar to the following:</span>
 </p>
 <pre tag="javascript">
 {
@@ -32,35 +38,33 @@ let treeLayout = new TreeLayout(config)
 }
 </pre>
 <p>
-    则config可以不传递，直接使用默认值，否则就需要自己配置不满足默认格式的部分，具体config是一个json，可选属性如下：
+    <span class="zh-content">则config可以不传递，直接使用默认值，否则就需要自己配置不满足默认格式的部分，具体config是一个json，可选属性如下：</span>
+    <span class="en-content">Then config can be omitted and defaults will be used. Otherwise, you need to configure the parts that don't match the default format. config is a JSON object with the following optional properties:</span>
 </p>
-<h3>
-    root
-</h3>
+<h3>root</h3>
 <p>
-    获取根结点的方法，以默认格式为例（下同）：
+    <span class="zh-content">获取根结点的方法，以默认格式为例（下同）：</span>
+    <span class="en-content">Method to get the root node. Taking the default format as an example (same below):</span>
 </p>
 <pre tag="javascript">
 "root": function(initTree){
     return initTree
 }
 </pre>
-<h3>
-    children
-</h3>
+<h3>children</h3>
 <p>
-    获取子结点的方法：
+    <span class="zh-content">获取子结点的方法：</span>
+    <span class="en-content">Method to get child nodes:</span>
 </p>
 <pre tag="javascript">
 "children": function(parentTree, initTree){
     return parentTree.children
 }
 </pre>
-<h3>
-    id
-</h3>
+<h3>id</h3>
 <p>
-    获取结点ID方法：
+    <span class="zh-content">获取结点ID方法：</span>
+    <span class="en-content">Method to get node ID:</span>
 </p>
 <pre tag="javascript">
 "id": function(treedata){
@@ -68,179 +72,178 @@ let treeLayout = new TreeLayout(config)
 }
 </pre>
 <h2>
-    方法
+    <span class="zh-content">方法</span>
+    <span class="en-content">Methods</span>
 </h2>
-<h3>
-    setOption
-</h3>
+<h3>setOption</h3>
 <p>
-    设置布局的行为：
+    <span class="zh-content">设置布局的行为：</span>
+    <span class="en-content">Set layout behavior:</span>
 </p>
 <pre tag="javascript">
     treeLayout.setOption(option)
 </pre>
 <p>
-    其中option应该是一个json，用以规范树图的行为，可选属性如下：
+    <span class="zh-content">其中option应该是一个json，用以规范树图的行为，可选属性如下：</span>
+    <span class="en-content">Where option should be a JSON object to specify tree diagram behavior. Optional properties are as follows:</span>
 </p>
-<h4>
-    offsetX
-</h4>
+<h4>offsetX</h4>
 <p>
-    水平方向隐藏结点偏差值，number类型，默认0。
+    <span class="zh-content">水平方向隐藏结点偏差值，number类型，默认0。</span>
+    <span class="en-content">Horizontal offset for hidden nodes, number type, default 0.</span>
 </p>
-<h4>
-    offsetY
-</h4>
+<h4>offsetY</h4>
 <p>
-    垂直方向隐藏结点偏差值，number类型，默认0。
+    <span class="zh-content">垂直方向隐藏结点偏差值，number类型，默认0。</span>
+    <span class="en-content">Vertical offset for hidden nodes, number type, default 0.</span>
 </p>
-<h4>
-    type
-</h4>
+<h4>type</h4>
 <p>
-    树图类型，string类型，默认plain，还可以设置成rect矩形树图、circle圆树。
+    <span class="zh-content">树图类型，string类型，默认plain，还可以设置成rect矩形树图、circle圆树。</span>
+    <span class="en-content">Tree diagram type, string type, default 'plain'. Can also be 'rect' for rectangular tree or 'circle' for circular tree.</span>
 </p>
-<h4>
-    direction
-</h4>
+<h4>direction</h4>
 <p>
-    设置成矩形树图（rect）时有效，表示树图方向，字符串类型，可选值为：
+    <span class="zh-content">设置成矩形树图（rect）时有效，表示树图方向，字符串类型，可选值为：</span>
+    <span class="en-content">Valid when type is 'rect', indicates tree direction, string type. Options are:</span>
 </p>
 <ul>
     <li>
-        LR：默认值，表示从左往右的树；
+        <span class="zh-content">LR：默认值，表示从左往右的树；</span>
+        <span class="en-content">LR: Default, tree from left to right;</span>
     </li>
     <li>
-        RL：表示从右往左的树；
+        <span class="zh-content">RL：表示从右往左的树；</span>
+        <span class="en-content">RL: Tree from right to left;</span>
     </li>
     <li>
-        TB：表示从上往下的树；
+        <span class="zh-content">TB：表示从上往下的树；</span>
+        <span class="en-content">TB: Tree from top to bottom;</span>
     </li>
     <li>
-        BT：表示从下往上的树。
+        <span class="zh-content">BT：表示从下往上的树。</span>
+        <span class="en-content">BT: Tree from bottom to top.</span>
     </li>
 </ul>
-<h4>
-    x
-</h4>
+<h4>x</h4>
 <p>
-    树图x坐标，type不是plain时有效，表示树图根一侧的中间位置（圆树的话就是圆心位置），下同。
+    <span class="zh-content">树图x坐标，type不是plain时有效，表示树图根一侧的中间位置（圆树的话就是圆心位置），下同。</span>
+    <span class="en-content">Tree x coordinate, valid when type is not 'plain'. Represents the center position of the root side (or center of circle for circular tree). Same below.</span>
 </p>
-<h4>
-    y
-</h4>
+<h4>y</h4>
 <p>
-    树图y坐标。
+    <span class="zh-content">树图y坐标。</span>
+    <span class="en-content">Tree y coordinate.</span>
 </p>
-<h4>
-    width
-</h4>
+<h4>width</h4>
 <p>
-    设置成矩形树图（rect）时有效，表示矩形宽。
+    <span class="zh-content">设置成矩形树图（rect）时有效，表示矩形宽。</span>
+    <span class="en-content">Valid when type is 'rect', represents rectangle width.</span>
 </p>
-<h4>
-    height
-</h4>
+<h4>height</h4>
 <p>
-    设置成矩形树图（rect）时有效，表示矩形高。
+    <span class="zh-content">设置成矩形树图（rect）时有效，表示矩形高。</span>
+    <span class="en-content">Valid when type is 'rect', represents rectangle height.</span>
 </p>
-<h4>
-    radius
-</h4>
+<h4>radius</h4>
 <p>
-    设置成圆树图（circle）时有效，表示圆树的半径。
+    <span class="zh-content">设置成圆树图（circle）时有效，表示圆树的半径。</span>
+    <span class="en-content">Valid when type is 'circle', represents circle radius.</span>
 </p>
-<h4>
-    duration
-</h4>
+<h4>duration</h4>
 <p>
-    切换时长，number类型，默认500（即0.5s）。
+    <span class="zh-content">切换时长，number类型，默认500（即0.5s）。</span>
+    <span class="en-content">Transition duration, number type, default 500 (0.5s).</span>
 </p>
-<h3>
-    use
-</h3>
+<h3>use</h3>
 <p>
-    单纯的树图坐标计算：
+    <span class="zh-content">单纯的树图坐标计算：</span>
+    <span class="en-content">Simple tree coordinate calculation:</span>
 </p>
 <pre tag="javascript">
     let tree = treeLayout.use(initTree, noOpens = {})
 </pre>
 <div class="version">
-    参数 <span class="special">noOpens</span> 0.5.0 新增
+    <span class="zh-content">参数 <span class="special">noOpens</span> 0.5.0 新增</span>
+    <span class="en-content">Parameter <span class="special">noOpens</span> added in 0.5.0</span>
 </div>
 <p>
-    其中noOpens表示一个结点是打开还是闭合，比如我们有结点id分别为：“node1”和“node2”，第一个打开第二个关闭，那么就可以传递：
+    <span class="zh-content">其中noOpens表示一个结点是打开还是闭合，比如我们有结点id分别为："node1"和"node2"，第一个打开第二个关闭，那么就可以传递：</span>
+    <span class="en-content">Where noOpens indicates whether a node is open or closed. For example, if we have nodes with IDs "node1" and "node2", where the first is open and the second is closed:</span>
 </p>
 <pre tag="javascript">
 // 由于默认值是false，因此node1其实不传递也可以
+// Since default is false, node1 can be omitted
 treeLayout.use(initTree, {
     node1: false,
     node2: true
 })
 </pre>
-<h3>
-    bind
-</h3>
+<h3>bind</h3>
 <p>
-    绑定新的数据和渲染方法：
+    <span class="zh-content">绑定新的数据和渲染方法：</span>
+    <span class="en-content">Bind new data and rendering method:</span>
 </p>
 <pre tag="javascript">
 treeLayout.bind(initTree, function(tree){
     // 绘制出树图
+    // Draw the tree
 }, noOpens = {})
 </pre>
 <div class="version">
-    参数 <span class="special">noOpens</span> 0.5.0 新增
+    <span class="zh-content">参数 <span class="special">noOpens</span> 0.5.0 新增</span>
+    <span class="en-content">Parameter <span class="special">noOpens</span> added in 0.5.0</span>
 </div>
 <div class="warn">
-    温馨提示：上述形参tree的格式你可以点击
-    <button tag="tree-format" type="explain">TreeLayout 数据格式</button>
-    进行查阅。
+    <span class="zh-content">温馨提示：上述形参tree的格式你可以点击</span>
+    <span class="en-content">Note: You can click</span>
+    <button tag="tree-format" type="explain">
+        <span class="zh-content">TreeLayout 数据格式</span>
+        <span class="en-content">TreeLayout Data Format</span>
+    </button>
+    <span class="zh-content">进行查阅。</span>
+    <span class="en-content">to view the data format.</span>
 </div>
-<h3>
-    unbind
-</h3>
+<h3>unbind</h3>
 <p>
-    解除绑定：
+    <span class="zh-content">解除绑定：</span>
+    <span class="en-content">Unbind:</span>
 </p>
 <pre tag="javascript">
     treeLayout.unbind()
 </pre>
-<h3>
-    closeNode
-</h3>
+<h3>closeNode</h3>
 <p>
-    闭合指定节点：
+    <span class="zh-content">闭合指定节点：</span>
+    <span class="en-content">Close specified node:</span>
 </p>
 <pre tag="javascript">
     treeLayout.closeNode(id)
 </pre>
-<h3>
-    openNode
-</h3>
+<h3>openNode</h3>
 <p>
-    展开指定节点：
+    <span class="zh-content">展开指定节点：</span>
+    <span class="en-content">Open specified node:</span>
 </p>
 <pre tag="javascript">
     treeLayout.openNode(id)
 </pre>
-<h3>
-    toggleNode
-</h3>
+<h3>toggleNode</h3>
 <p>
-    闭合或展开指定节点：
+    <span class="zh-content">闭合或展开指定节点：</span>
+    <span class="en-content">Toggle specified node:</span>
 </p>
 <pre tag="javascript">
     treeLayout.toggleNode(id)
 </pre>
-<h3>
-    doUpdate
-</h3>
+<h3>doUpdate</h3>
 <div class="version">
-    1.2.1 新增
+    <span class="zh-content">1.2.1 新增</span>
+    <span class="en-content">Added in 1.2.1</span>
 </div>
 <p>
-    主动触发绘制更新：
+    <span class="zh-content">主动触发绘制更新：</span>
+    <span class="en-content">Trigger draw update manually:</span>
 </p>
 <pre tag="javascript">
     treeLayout.doUpdate()

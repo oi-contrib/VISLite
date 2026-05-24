@@ -1,26 +1,32 @@
 <header>
-    饼布局
+    <span class="zh-content">饼布局</span>
+    <span class="en-content">Pie Layout</span>
 </header>
 <div class="version">
-    1.4.0 新增
+    <span class="zh-content">1.4.0 新增</span>
+    <span class="en-content">Added in 1.4.0</span>
 </div>
 <h2>
-    引入
+    <span class="zh-content">引入</span>
+    <span class="en-content">Import</span>
 </h2>
 <pre tag="javascript">
 import { PieLayout } from "vislite"
 </pre>
 <h2>
-    语法
+    <span class="zh-content">语法</span>
+    <span class="en-content">Syntax</span>
 </h2>
 <p>
-    通过传递一个配置项即可创建布局对象：
+    <span class="zh-content">通过传递一个配置项即可创建布局对象：</span>
+    <span class="en-content">Create a layout object by passing a configuration:</span>
 </p>
 <pre tag="javascript">
 let pieLayout = new PieLayout(config)
 </pre>
 <p>
-    其中config表示布局求解的原始数据格式，如果你数据的格式类似下面：
+    <span class="zh-content">其中config表示布局求解的原始数据格式，如果你数据的格式类似下面：</span>
+    <span class="en-content">Where config defines the raw data format. If your data is formatted like:</span>
 </p>
 <pre tag="javascript">
 [
@@ -29,16 +35,20 @@ let pieLayout = new PieLayout(config)
 ]
 </pre>
 <p>
-    则config可以不传递，直接使用默认值，否则就需要自己配置不满足默认格式的部分，具体config是一个json，可选属性如下：
+    <span class="zh-content">则config可以不传递，直接使用默认值，否则就需要自己配置不满足默认格式的部分，具体config是一个json，可选属性如下：</span>
+    <span class="en-content">config can be omitted to use defaults. Otherwise, configure the non-standard parts. config is a JSON with optional properties:</span>
 </p>
 <div class="warn">
-    温馨提示：数据必须是一个数组。
+    <span class="zh-content">温馨提示：数据必须是一个数组。</span>
+    <span class="en-content">Note: Data must be an array.</span>
 </div>
 <h3>
-    name
+    <span class="zh-content">name</span>
+    <span class="en-content">name</span>
 </h3>
 <p>
-    获取条目名称的方法，以默认格式为例（下同）：
+    <span class="zh-content">获取条目名称的方法，以默认格式为例（下同）：</span>
+    <span class="en-content">Method to get item name, using default format as example:</span>
 </p>
 <pre tag="javascript">
 "name": function(pieData, initPie){
@@ -46,10 +56,12 @@ let pieLayout = new PieLayout(config)
 }
 </pre>
 <h3>
-    value
+    <span class="zh-content">value</span>
+    <span class="en-content">value</span>
 </h3>
 <p>
-    获取条目值的方法：
+    <span class="zh-content">获取条目值的方法：</span>
+    <span class="en-content">Method to get item value:</span>
 </p>
 <pre tag="javascript">
 "value": function(pieData, initPie){
@@ -57,58 +69,74 @@ let pieLayout = new PieLayout(config)
 }
 </pre>
 <h2>
-    方法
+    <span class="zh-content">方法</span>
+    <span class="en-content">Methods</span>
 </h2>
 <h3>
-    setOption
+    <span class="zh-content">setOption</span>
+    <span class="en-content">setOption</span>
 </h3>
 <p>
-    设置布局的行为：
+    <span class="zh-content">设置布局的行为：</span>
+    <span class="en-content">Set layout behavior:</span>
 </p>
 <pre tag="javascript">
     pieLayout.setOption(option)
 </pre>
 <p>
-    其中option应该是一个json，用以规范饼图的行为，可选属性如下：
+    <span class="zh-content">其中option应该是一个json，用以规范饼图的行为，可选属性如下：</span>
+    <span class="en-content">Where option is a JSON to define pie chart behavior with optional properties:</span>
 </p>
 <h4>
-    cx
+    <span class="zh-content">cx</span>
+    <span class="en-content">cx</span>
 </h4>
 <p>
-    饼图圆心横坐标，number类型，默认200。
+    <span class="zh-content">饼图圆心横坐标，number类型，默认200。</span>
+    <span class="en-content">Pie center x-coordinate, number, default 200.</span>
 </p>
 <h4>
-    cy
+    <span class="zh-content">cy</span>
+    <span class="en-content">cy</span>
 </h4>
 <p>
-    饼图圆心纵坐标，number类型，默认200。
+    <span class="zh-content">饼图圆心纵坐标，number类型，默认200。</span>
+    <span class="en-content">Pie center y-coordinate, number, default 200.</span>
 </p>
 <h4>
-    radius
+    <span class="zh-content">radius</span>
+    <span class="en-content">radius</span>
 </h4>
 <p>
-    饼图内外半，number数组类型，默认[50, 100]。
+    <span class="zh-content">饼图内外半，number数组类型，默认[50, 100]。</span>
+    <span class="en-content">Inner and outer radii, number array, default [50, 100].</span>
 </p>
 <h4>
-    duration
+    <span class="zh-content">duration</span>
+    <span class="en-content">duration</span>
 </h4>
 <p>
-    切换时长，number类型，默认200（即0.2s）。
+    <span class="zh-content">切换时长，number类型，默认200（即0.2s）。</span>
+    <span class="en-content">Transition duration, number, default 200 (0.2s).</span>
 </p>
 <h3>
-    use
+    <span class="zh-content">use</span>
+    <span class="en-content">use</span>
 </h3>
 <p>
-    单纯的饼图坐标计算：
+    <span class="zh-content">单纯的饼图坐标计算：</span>
+    <span class="en-content">Pure pie chart coordinate calculation:</span>
 </p>
 <pre tag="javascript">
     let pie = pieLayout.use(initPie, hoverIndex = -1)
 </pre>
 <h3>
-    bind
+    <span class="zh-content">bind</span>
+    <span class="en-content">bind</span>
 </h3>
 <p>
-    绑定新的数据和渲染方法：
+    <span class="zh-content">绑定新的数据和渲染方法：</span>
+    <span class="en-content">Bind new data and rendering method:</span>
 </p>
 <pre tag="javascript">
 pieLayout.bind(initPie, function(pie){
@@ -116,33 +144,41 @@ pieLayout.bind(initPie, function(pie){
 })
 </pre>
 <div class="warn">
-    温馨提示：上述形参pie的格式你可以点击
+    <span class="zh-content">温馨提示：上述形参pie的格式你可以点击</span>
+    <span class="en-content">Note: Click</span>
     <button tag="pie-format" type="explain">PieLayout 数据格式</button>
-    进行查阅。
+    <span class="zh-content">进行查阅。</span>
+    <span class="en-content">to view the pie data format.</span>
 </div>
 <h3>
-    unbind
+    <span class="zh-content">unbind</span>
+    <span class="en-content">unbind</span>
 </h3>
 <p>
-    解除绑定：
+    <span class="zh-content">解除绑定：</span>
+    <span class="en-content">Unbind:</span>
 </p>
 <pre tag="javascript">
     pieLayout.unbind()
 </pre>
 <h3>
-    setHover
+    <span class="zh-content">setHover</span>
+    <span class="en-content">setHover</span>
 </h3>
 <p>
-    设置当前悬浮序号（-1表示取消悬浮）：
+    <span class="zh-content">设置当前悬浮序号（-1表示取消悬浮）：</span>
+    <span class="en-content">Set current hover index (-1 to cancel):</span>
 </p>
 <pre tag="javascript">
     pieLayout.setHover(hoverIndex)
 </pre>
 <h3>
-    doUpdate
+    <span class="zh-content">doUpdate</span>
+    <span class="en-content">doUpdate</span>
 </h3>
 <p>
-    主动触发绘制更新：
+    <span class="zh-content">主动触发绘制更新：</span>
+    <span class="en-content">Trigger drawing update manually:</span>
 </p>
 <pre tag="javascript">
     pieLayout.doUpdate()

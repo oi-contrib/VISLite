@@ -1,29 +1,36 @@
 <header>
-    刻度尺
+    <span class="zh-content">刻度尺</span>
+    <span class="en-content">Ruler</span>
 </header>
 <h2>
-    引入
+    <span class="zh-content">引入</span>
+    <span class="en-content">Import</span>
 </h2>
 <pre tag="javascript">
 import { ruler } from "vislite"
 </pre>
 <h2>
-    语法
+    <span class="zh-content">语法</span>
+    <span class="en-content">Syntax</span>
 </h2>
 <pre tag="javascript">
 let rulerArray = ruler(maxValue, minValue, num)
 </pre>
 <p>
-    返回一个数组，表示刻度尺上应该显示的刻度。
+    <span class="zh-content">返回一个数组，表示刻度尺上应该显示的刻度。</span>
+    <span class="en-content">Returns an array representing the ticks to display on the ruler.</span>
 </p>
 <h3>
-    约束
+    <span class="zh-content">约束</span>
+    <span class="en-content">Constraints</span>
 </h3>
 <div class="version">
-    0.4.1 新增
+    <span class="zh-content">0.4.1 新增</span>
+    <span class="en-content">Added in 0.4.1</span>
 </div>
 <p>
-    此外，还可以约束上下界：
+    <span class="zh-content">此外，还可以约束上下界：</span>
+    <span class="en-content">In addition, you can constrain the upper and lower bounds:</span>
 </p>
 <pre tag="javascript">
 let rulerArray = ruler(maxValue, minValue, num, {
@@ -32,5 +39,6 @@ let rulerArray = ruler(maxValue, minValue, num, {
 })
 </pre>
 <p>
-    你可以只传递max或min来约束上界或下界，也可以同时传递来约束上下界。
+    <span class="zh-content">你可以只传递max或min来约束上界或下界，也可以同时传递来约束上下界。</span>
+    <span class="en-content">You can pass only max or min to constrain the upper or lower bound, or both to constrain both bounds.</span>
 </p>
