@@ -1,55 +1,69 @@
 <header>
-    缓冲区
+    <span class="zh-content">缓冲区</span>
+    <span class="en-content">Buffer</span>
 </header>
 <div class="version">
-    0.3.0 新增
+    <span class="zh-content">0.3.0 新增</span>
+    <span class="en-content">Added in 0.3.0</span>
 </div>
 <h2>
-    引入
+    <span class="zh-content">引入</span>
+    <span class="en-content">Import</span>
 </h2>
 <pre tag="javascript">
     import { Buffer } from 'vislite'
 </pre>
 <h2>
-    语法
+    <span class="zh-content">语法</span>
+    <span class="en-content">Syntax</span>
 </h2>
 <p>
-    获取缓冲区实例：
+    <span class="zh-content">获取缓冲区实例：</span>
+    <span class="en-content">Get buffer instance:</span>
 </p>
 <pre tag="javascript">
     let buffer = new Buffer(painter, isElement)
 </pre>
 <p>
-    其中参数解释如下：
+    <span class="zh-content">其中参数解释如下：</span>
+    <span class="en-content">Parameters explained as follows:</span>
 </p>
 <ol>
     <li>
-        painter：WebGLRenderingContext类型
+        painter：WebGLRenderingContext
+        <span class="zh-content">类型</span>
+        <span class="en-content">type</span>
     </li>
     <li>
-        isElement：boolean类型，默认false，表示不是索引缓冲区
+        isElement：boolean
+        <span class="zh-content">类型，默认false，表示不是索引缓冲区</span>
+        <span class="en-content">type, default false, indicates not an index buffer</span>
     </li>
 </ol>
 <h2>
-    方法
+    <span class="zh-content">方法</span>
+    <span class="en-content">Methods</span>
 </h2>
 <h3>
     use
 </h3>
 <p>
-    使用这个缓冲区对象：
+    <span class="zh-content">使用这个缓冲区对象：</span>
+    <span class="en-content">Use this buffer object:</span>
 </p>
 <pre tag="javascript">
     buffer.use()
 </pre>
 <div class="warn">
-    温馨提示：应该先于写入write和分配divide。
+    <span class="zh-content">温馨提示：应该先于写入write和分配divide。</span>
+    <span class="en-content">Note: Should be called before write and divide.</span>
 </div>
 <h3>
     write
 </h3>
 <p>
-    写入数据，数据data类型可以是 Uint8Array | Int16Array | Uint16Array | Int32Array | Uint32Array | Float32Array：
+    <span class="zh-content">写入数据，数据data类型可以是 Uint8Array | Int16Array | Uint16Array | Int32Array | Uint32Array | Float32Array：</span>
+    <span class="en-content">Write data. Data type can be Uint8Array | Int16Array | Uint16Array | Int32Array | Uint32Array | Float32Array:</span>
 </p>
 <pre tag="javascript">
     buffer.write(data)
@@ -58,25 +72,35 @@
     divide
 </h3>
 <p>
-    分配使用
+    <span class="zh-content">分配使用</span>
+    <span class="en-content">Allocate for use</span>
 </p>
 <pre tag="javascript">
     buffer.divide(location, size, stride, offset)
 </pre>
 <p>
-    其中参数解释如下：
+    <span class="zh-content">其中参数解释如下：</span>
+    <span class="en-content">Parameters explained as follows:</span>
 </p>
 <ol>
     <li>
-        location：number类型，表示变量位置
+        location：number
+        <span class="zh-content">类型，表示变量位置</span>
+        <span class="en-content">type, represents variable location</span>
     </li>
     <li>
-        size：number类型，表示一个数据的长度
+        size：number
+        <span class="zh-content">类型，表示一个数据的长度</span>
+        <span class="en-content">type, represents length of one data</span>
     </li>
     <li>
-        stride：number类型，表示一组数据的长度(可能包含多组)
+        stride：number
+        <span class="zh-content">类型，表示一组数据的长度(可能包含多组)</span>
+        <span class="en-content">type, represents length of one set of data (may contain multiple sets)</span>
     </li>
     <li>
-        offset：number类型，表示读取位置偏移，可选，默认0
+        offset：number
+        <span class="zh-content">类型，表示读取位置偏移，可选，默认0</span>
+        <span class="en-content">type, represents read position offset, optional, default 0</span>
     </li>
 </ol>

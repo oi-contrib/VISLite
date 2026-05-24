@@ -1,46 +1,57 @@
 <header>
-    Hermite
+    <span class="zh-content">Hermite</span>
+    <span class="en-content">Hermite</span>
 </header>
 <h2>
-    引入
+    <span class="zh-content">引入</span>
+    <span class="en-content">Import</span>
 </h2>
 <pre tag="javascript">
 import { Hermite } from "vislite"
 </pre>
 <h2>
-    语法
+    <span class="zh-content">语法</span>
+    <span class="en-content">Syntax</span>
 </h2>
 <pre tag="javascript">
 let hermite = new Hermite(u = 0.5)
 </pre>
 <p>
-    其中u表示张弛系数。
+    <span class="zh-content">其中u表示张弛系数。</span>
+    <span class="en-content">Where u represents the tension coefficient.</span>
 </p>
 <h3>
-    setP
+    <span class="zh-content">setP</span>
+    <span class="en-content">setP</span>
 </h3>
 <p>
-    设置点的位置和斜率：
+    <span class="zh-content">设置点的位置和斜率：</span>
+    <span class="en-content">Set point positions and slopes:</span>
 </p>
 <pre tag="javascript">
 hermite.setP(x1, y1, x2, y2, s1, s2) 
 </pre>
 <ol>
     <li>
-        x1，y1：左边点的位置
+        <span class="zh-content">x1，y1：左边点的位置</span>
+        <span class="en-content">x1, y1: Position of the left point</span>
     </li>
     <li>
-        x2，y2：右边点的位置
+        <span class="zh-content">x2，y2：右边点的位置</span>
+        <span class="en-content">x2, y2: Position of the right point</span>
     </li>
     <li>
-        s1，s2：两个点的斜率
+        <span class="zh-content">s1，s2：两个点的斜率</span>
+        <span class="en-content">s1, s2: Slopes at both points</span>
     </li>
 </ol>
 <h3>
-    use
+    <span class="zh-content">use</span>
+    <span class="en-content">use</span>
 </h3>
 <p>
-    根据x值返回y值：
+    <span class="zh-content">根据x值返回y值：</span>
+    <span class="en-content">Return y value based on x:</span>
 </p>
 <pre tag="javascript">
 hermite.use(x)

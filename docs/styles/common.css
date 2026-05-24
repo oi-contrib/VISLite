@@ -240,6 +240,23 @@ body>div.nav>span.github {
     transition: all 0.3s ease;
 }
 
+body>div.nav>span#lang-toggle {
+    font-weight: 600;
+    font-size: 12px;
+    border: 1px solid #607D8B;
+    background-color: #607D8B;
+    color: white;
+    padding: 4px 0;
+    border-radius: 4px;
+    width: 70px;
+    text-align: center;
+    line-height: 1.4em;
+}
+
+body>div.nav>span#lang-toggle:hover {
+    text-decoration: underline;
+}
+
 body>div.nav>span {
     line-height: 40px;
     padding: 0 16px;
@@ -550,7 +567,11 @@ body>div.fixed {
     background-position: 0 center;
     background-size: 16px auto;
     padding-left: 20px;
-    font-weight: 600;
+}
+
+.menu span {
+    font-weight: 600 !important;
+    font-size: 14px !important;
 }
 
 .menu li[is-open='no']>ul {
@@ -580,6 +601,10 @@ body>div.fixed {
     background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
     transform: translateY(-2px);
     box-shadow: 0 8px 15px rgba(30, 64, 175, 0.3);
+}
+
+.menu .more>span {
+    background-color: transparent !important;
 }
 
 
@@ -680,7 +705,6 @@ body>div.fixed {
     font-size: 16px;
     line-height: 1.7;
     margin-left: 1.5em;
-    margin: 16px 0;
 }
 
 .content ol>li {
@@ -782,6 +806,84 @@ body>div.fixed {
     color: #0c5cbc;
     margin: 0 20px;
     text-indent: 1em;
+}
+
+/* 语言切换样式 */
+/* 中文内容 - 默认显示 */
+.content .zh-content {
+    display: inline;
+}
+
+/* 英文内容 - 默认隐藏 */
+.content .en-content {
+    display: none;
+}
+
+/* 英文模式下隐藏中文，显示英文 */
+body.show-en .content .zh-content {
+    display: none;
+}
+
+body.show-en .content .en-content {
+    display: inline;
+}
+
+/* 菜单中的中英文 */
+.menu .zh-menu {
+    display: inline;
+}
+
+.menu .en-menu {
+    display: none;
+    font-weight: 400;
+    font-size: 12px;
+    color: var(--gray-600);
+}
+
+body.show-en .menu .zh-menu {
+    display: none;
+}
+
+body.show-en .menu .en-menu {
+    display: inline;
+}
+
+/* 顶部导航栏中的中英文 */
+.nav .zh-menu {
+    display: inline;
+}
+
+.nav .en-menu {
+    display: none;
+}
+
+body.show-en .nav .zh-menu {
+    display: none;
+}
+
+body.show-en .nav .en-menu {
+    display: inline;
+}
+
+/* 右侧导航栏中的中英文 */
+.fixed .zh-menu,
+.fixed .zh-content {
+    display: inline;
+}
+
+.fixed .en-menu,
+.fixed .en-content {
+    display: none;
+}
+
+body.show-en .fixed .zh-menu,
+body.show-en .fixed .zh-content {
+    display: none;
+}
+
+body.show-en .fixed .en-menu,
+body.show-en .fixed .en-content {
+    display: inline;
 }
 
 .content table {

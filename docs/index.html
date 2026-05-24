@@ -18,6 +18,11 @@
         // 控制是否需要缓存
         var host = window.location.host;
         window.needCache = !(/^127\.0\.0\.1/.test(host) || /^localhost/.test(host) || host == "");
+
+        // 初始化英文状态
+        window.addEventListener('DOMContentLoaded', function() {
+            initEnglishStatus();
+        });
     </script>
 </head>
 
@@ -42,25 +47,42 @@
 
     <!-- 导航 -->
     <div class="nav" id="nav">
-        <span onclick="changeNav('begin')" id="nav-begin" title="写在前面和一些说明、介绍等">开始</span>
+        <span onclick="changeNav('begin')" id="nav-begin" title="写在前面和一些说明、介绍等">
+            <span class="zh-menu">开始</span>
+            <span class="en-menu">Started</span>
+        </span>
         <span onclick="changeNav('course')" id="nav-course" title="教会你本项目如何使用以及一些经验之谈">
-            教程
+            <span class="zh-menu">教程</span>
+            <span class="en-menu">Tutorials</span>
             <span
-                style="position: absolute;background-color: red;color: white;font-size: 12px;padding: 0 4px;border-radius: 16px 0;transform: scale(.7);margin-top: -9px;margin-left: -10px;height: 24px;line-height: 24px;">
-                丰富中
+                style="white-space: nowrap;position: absolute;background-color: red;color: white;font-size: 12px;padding: 0 4px;border-radius: 16px 0;transform: scale(.7);margin-top: -9px;margin-left: -10px;height: 24px;line-height: 24px;">
+                <span class="zh-menu">丰富中</span>
+                <span class="en-menu">In Progress</span>
             </span>
         </span>
-        <span onclick="changeNav('api')" id="nav-api" title="接口文档">文档</span>
+        <span onclick="changeNav('api')" id="nav-api" title="接口文档">
+            <span class="zh-menu">文档</span>
+            <span class="en-menu">API</span>
+        </span>
         <span onclick="changeNav('example')" id="nav-example" title="基于本项目开发的一些例子">
-            用例
+            <span class="zh-menu">用例</span>
+            <span class="en-menu">Examples</span>
             <span
-                style="position: absolute;background-color: red;color: white;font-size: 12px;padding: 0 4px;border-radius: 16px 0;transform: scale(.7);margin-top: -9px;margin-left: -10px;height: 24px;line-height: 24px;">
-                丰富中
+                style="white-space: nowrap;position: absolute;background-color: red;color: white;font-size: 12px;padding: 0 4px;border-radius: 16px 0;transform: scale(.7);margin-top: -9px;margin-left: -10px;height: 24px;line-height: 24px;">
+                <span class="zh-menu">丰富中</span>
+                <span class="en-menu">In Progress</span>
             </span>
         </span>
-        <span onclick="changeNav('question')" id="nav-question" title="使用本项目的时候需要注意的点，以及遇到问题如何解决">答疑</span>
+        <span onclick="changeNav('question')" id="nav-question" title="使用本项目的时候需要注意的点，以及遇到问题如何解决">
+            <span class="zh-menu">答疑</span>
+            <span class="en-menu">FAQ</span>
+        </span>
         <span class="github link" onclick="openBlankPage('https://github.com/oi-contrib/VISLite')"
             title="项目仓库地址，包含源码、文档、例子、测试等">GitHub</span>
+        <span id="lang-toggle" onclick="toggleEnglish()" title="切换英文显示">
+            <span class="zh-menu">English</span>
+            <span class="en-menu">中文</span>
+        </span>
     </div>
 
     <!-- 菜单 -->

@@ -1,38 +1,44 @@
 <header>
-    变换矩阵
+    <span class="zh-content">变换矩阵</span>
+    <span class="en-content">Matrix4</span>
 </header>
 <h2>
-    引入
+    <span class="zh-content">引入</span>
+    <span class="en-content">Import</span>
 </h2>
 <pre tag="javascript">
 import { Matrix4 } from "vislite"
 </pre>
 <h2>
-    语法
+    <span class="zh-content">语法</span>
+    <span class="en-content">Syntax</span>
 </h2>
 <p>
-    Matrix4是一个列主序存储的4x4矩阵，使用该矩阵对象的第一步是像下面这样获取该对象，参数initMatrix4可选，你可以传递一个初始化矩阵或默认采用单位矩阵E初始化：
+    <span class="zh-content">Matrix4是一个列主序存储的4x4矩阵，使用该矩阵对象的第一步是像下面这样获取该对象，参数initMatrix4可选，你可以传递一个初始化矩阵或默认采用单位矩阵E初始化：</span>
+    <span class="en-content">Matrix4 is a column-major 4x4 matrix. The first step is to create the object as shown below. The initMatrix4 parameter is optional; you can pass an initialization matrix or use the identity matrix E by default:</span>
 </p>
 <pre tag="javascript">
 let matrix4 = new Matrix4(initMatrix4)
 </pre>
 <p>
-    变换不是直接作用在具体的点上，而是先求解出一系列变换的变换矩阵，最后应用在具体点上。
+    <span class="zh-content">变换不是直接作用在具体的点上，而是先求解出一系列变换的变换矩阵，最后应用在具体点上。</span>
+    <span class="en-content">Transformations are not applied directly to specific points. Instead, a series of transformation matrices are first computed and then applied to the specific points.</span>
 </p>
 <h3>
-    基本运算
+    <span class="zh-content">基本运算</span>
+    <span class="en-content">Basic Operations</span>
 </h3>
-<h4>
-    value
-</h4>
+<h4>value</h4>
 <p>
-    返回matrix4当前记录的内部矩阵：
+    <span class="zh-content">返回matrix4当前记录的内部矩阵：</span>
+    <span class="en-content">Returns the internal matrix currently stored in matrix4:</span>
 </p>
 <pre tag="javascript">
     let val=matrix4.value()
 </pre>
 <p>
-    比如采用默认值初始化的矩阵对象，打印结果如下：
+    <span class="zh-content">比如采用默认值初始化的矩阵对象，打印结果如下：</span>
+    <span class="en-content">For example, a matrix object initialized with default values will print as follows:</span>
 </p>
 <pre tag="javascript">
 [
@@ -42,77 +48,77 @@ let matrix4 = new Matrix4(initMatrix4)
     0, 0, 0, 1
 ]
 </pre>
-<h4>
-    multiply
-</h4>
+<h4>multiply</h4>
 <p>
-    两个矩阵相乘：
+    <span class="zh-content">两个矩阵相乘：</span>
+    <span class="en-content">Multiply two matrices:</span>
 </p>
 <pre tag="javascript">
     matrix4.multiply(newMatrix4[, flag])
 </pre>
 <p>
-    第一个参数应该是一个和value打印出来一样格式的一维数组，列主序存储。flag默认false，可不传，表示左乘，即newMatrix4 × matrix4，如果设置flag为true，表示右乘。
+    <span class="zh-content">第一个参数应该是一个和value打印出来一样格式的一维数组，列主序存储。flag默认false，可不传，表示左乘，即newMatrix4 × matrix4，如果设置flag为true，表示右乘。</span>
+    <span class="en-content">The first parameter should be a one-dimensional array in the same format as printed by value(), stored in column-major order. The flag parameter defaults to false (left multiplication: newMatrix4 × matrix4). If flag is set to true, it performs right multiplication.</span>
 </p>
-<h4>
-    use
-</h4>
+<h4>use</h4>
 <p>
-    把变换矩阵作用在具体的点上：
+    <span class="zh-content">把变换矩阵作用在具体的点上：</span>
+    <span class="en-content">Apply the transformation matrix to a specific point:</span>
 </p>
 <pre tag="javascript">
     let position=matrix4.use(x, y, z, w)
 </pre>
 <p>
-    矩阵的目的是对坐标进行变换，use方法返回齐次坐标(x, y, z, w)经过matrix4矩阵变换后的坐标值。其中z和w可以不传递，默认0和1，返回的坐标值是一个齐次坐标。
+    <span class="zh-content">矩阵的目的是对坐标进行变换，use方法返回齐次坐标(x, y, z, w)经过matrix4矩阵变换后的坐标值。其中z和w可以不传递，默认0和1，返回的坐标值是一个齐次坐标。</span>
+    <span class="en-content">The purpose of a matrix is to transform coordinates. The use() method returns the transformed coordinate values of the homogeneous coordinate (x, y, z, w) after applying the matrix4 transformation. z and w are optional, defaulting to 0 and 1 respectively. The returned coordinate is a homogeneous coordinate.</span>
 </p>
-<h4>
-    setValue
-</h4>
+<h4>setValue</h4>
 <p>
-    设置内置矩阵，参数initMatrix4可选，默认重置成一个单位矩阵：
+    <span class="zh-content">设置内置矩阵，参数initMatrix4可选，默认重置成一个单位矩阵：</span>
+    <span class="en-content">Set the internal matrix. The initMatrix4 parameter is optional; defaults to resetting to an identity matrix:</span>
 </p>
 <pre tag="javascript">
     matrix4.setValue(initMatrix4)
 </pre>
 <h3>
-    坐标变换
+    <span class="zh-content">坐标变换</span>
+    <span class="en-content">Coordinate Transformations</span>
 </h3>
-<h4>
-    move
-</h4>
+<h4>move</h4>
 <p>
-    沿着向量(a, b, c)方向移动距离dis（其中c可以不传，默认0）：
+    <span class="zh-content">沿着向量(a, b, c)方向移动距离dis（其中c可以不传，默认0）：</span>
+    <span class="en-content">Move a distance 'dis' along the vector (a, b, c). c is optional, defaulting to 0:</span>
 </p>
 <pre tag="javascript">
     matrix4.move(dis, a, b, c)
 </pre>
-<h4>
-    scale
-</h4>
+<h4>scale</h4>
 <p>
-    以点(cx, cy, cz)为中心，分别在x、y和z方向上缩放xTimes、yTimes和zTimes倍（其中cx、cy和cz都可以不传递，默认0）：
+    <span class="zh-content">以点(cx, cy, cz)为中心，分别在x、y和z方向上缩放xTimes、yTimes和zTimes倍（其中cx、cy和cz都可以不传递，默认0）：</span>
+    <span class="en-content">Scale by xTimes, yTimes, and zTimes in the x, y, and z directions respectively, centered at point (cx, cy, cz). cx, cy, and cz are optional, defaulting to 0:</span>
 </p>
 <pre tag="javascript">
     matrix4.scale(xTimes, yTimes, zTimes, cx, cy, cz)
 </pre>
-<h4>
-    rotate
-</h4>
+<h4>rotate</h4>
 <p>
-    围绕射线(a1, b1, c1) -> (a2, b2, c2)旋转deg度（方向由右手法则确定）：
+    <span class="zh-content">围绕射线(a1, b1, c1) -> (a2, b2, c2)旋转deg度（方向由右手法则确定）：</span>
+    <span class="en-content">Rotate deg degrees around the ray from (a1, b1, c1) to (a2, b2, c2) (direction determined by the right-hand rule):</span>
 </p>
 <pre tag="javascript">
     matrix4.rotate(deg, a1, b1, c1, a2, b2, c2)
 </pre>
 <p>
-    a1、b1、c1、a2、b2和c2这六个值在设置的时候，不是一定需要全部设置，还有以下可选：
+    <span class="zh-content">a1、b1、c1、a2、b2和c2这六个值在设置的时候，不是一定需要全部设置，还有以下可选：</span>
+    <span class="en-content">The six values a1, b1, c1, a2, b2, and c2 don't all need to be set. The following options are available:</span>
 </p>
 <ol>
     <li>
-        只设置了a1和b1，表示在xoy平面围绕（a1, b1）旋转；
+        <span class="zh-content">只设置了a1和b1，表示在xoy平面围绕（a1, b1）旋转；</span>
+        <span class="en-content">Only a1 and b1 are set, meaning rotation in the xoy plane around (a1, b1);</span>
     </li>
     <li>
-        设置三个点(设置不足六个点都认为只设置了三个点)，表示围绕从原点出发的射线旋转。
+        <span class="zh-content">设置三个点(设置不足六个点都认为只设置了三个点)，表示围绕从原点出发的射线旋转。</span>
+        <span class="en-content">Three values are set (fewer than six are considered three values), meaning rotation around a ray starting from the origin.</span>
     </li>
 </ol>

@@ -1,27 +1,35 @@
 <header>
-    使用索引坐标
+    <span class="zh-content">使用索引坐标</span>
+    <span class="en-content">Using Indexed Coordinates</span>
 </header>
 <h2>
-    非索引写法
+    <span class="zh-content">非索引写法</span>
+    <span class="en-content">Non-indexed Writing</span>
 </h2>
 <p>
-    比如我们现在想绘制两个三角形，怎么办？肯定是设置六个点，然后前三个点和后三个点分别连成一个三角形，就像这样：
+    <span class="zh-content">比如我们现在想绘制两个三角形，怎么办？肯定是设置六个点，然后前三个点和后三个点分别连成一个三角形，就像这样：</span>
+    <span class="en-content">For example, if we want to draw two triangles, what should we do? We definitely set six points, then the first three points and the last three points form a triangle respectively, like this:</span>
 </p>
 <example tag="course/webgl-index_1" height="340px"></example>
 <p>
-    具体的代码解释和上一节类似，这里就不赘述了。
+    <span class="zh-content">具体的代码解释和上一节类似，这里就不赘述了。</span>
+    <span class="en-content">The specific code explanation is similar to the previous section, so we won't repeat it here.</span>
 </p>
 <p>
-    聪明的你肯定可以发现，第二个点和第四个点一样，第三个点和第五个点一样，其实这里还好，只重复了两个点，如果使用三角形拼接立方体，其实立方体就八个点，如果按照上面的写法，就需要设置三十六个点，太浪费了，怎么办？
+    <span class="zh-content">聪明的你肯定可以发现，第二个点和第四个点一样，第三个点和第五个点一样，其实这里还好，只重复了两个点，如果使用三角形拼接立方体，其实立方体就八个点，如果按照上面的写法，就需要设置三十六个点，太浪费了，怎么办？</span>
+    <span class="en-content">Smart you must have noticed that the second point is the same as the fourth point, and the third point is the same as the fifth point. Actually it's okay here, only two points are repeated. If we use triangles to assemble a cube, the cube only has 8 points, but following the above method, we would need 36 points, which is too wasteful. What to do?</span>
 </p>
 <h2>
-    使用索引
+    <span class="zh-content">使用索引</span>
+    <span class="en-content">Using Index</span>
 </h2>
 <h3>
-    基础点
+    <span class="zh-content">基础点</span>
+    <span class="en-content">Basic Points</span>
 </h3>
 <p>
-    首先，和非索引写法类似的设置所有未重复的点：
+    <span class="zh-content">首先，和非索引写法类似的设置所有未重复的点：</span>
+    <span class="en-content">First, set all non-repeated points similar to the non-indexed writing:</span>
 </p>
 <pre tag="javascript">
 var buffer = new Buffer(painter).use().write(new Float32Array([
@@ -32,13 +40,16 @@ var buffer = new Buffer(painter).use().write(new Float32Array([
 ]));
 </pre>
 <p>
-    没有重复的点一共四个，第四和第五个点和前面的重复了，删除掉。
+    <span class="zh-content">没有重复的点一共四个，第四和第五个点和前面的重复了，删除掉。</span>
+    <span class="en-content">There are four non-repeated points. The fourth and fifth points are duplicates of the previous ones, so we delete them.</span>
 </p>
 <h3>
-    定义点
+    <span class="zh-content">定义点</span>
+    <span class="en-content">Define Points</span>
 </h3>
 <p>
-    不同于普通的点坐标，借助索引缓冲区可以基于普通点来“丰富出”更多的点，先看这里的代码：
+    <span class="zh-content">不同于普通的点坐标，借助索引缓冲区可以基于普通点来"丰富出"更多的点，先看这里的代码：</span>
+    <span class="en-content">Unlike ordinary point coordinates, using index buffer can "enrich" more points based on ordinary points. First look at the code here:</span>
 </p>
 <pre tag="javascript">
 new Buffer(painter, true).use()
@@ -48,18 +59,22 @@ new Buffer(painter, true).use()
     ]));
 </pre>
 <p>
-    前面的三个数据表示一个点，这里不同，这里一个数据表示一个点，比如第一个点值是0，就表示前面设置的普通点中的第一个点作为这里的第一个点，以此类推。
+    <span class="zh-content">前面的三个数据表示一个点，这里不同，这里一个数据表示一个点，比如第一个点值是0，就表示前面设置的普通点中的第一个点作为这里的第一个点，以此类推。</span>
+    <span class="en-content">The previous three data represent one point, but here it's different. Here one data represents one point. For example, the first point value is 0, which means the first point of the previously set ordinary points is used as the first point here, and so on.</span>
 </p>
 <h2>
-    绘制
+    <span class="zh-content">绘制</span>
+    <span class="en-content">Drawing</span>
 </h2>
 <p>
-    因为点来自索引缓冲区，所以画笔需要使用索引方法：
+    <span class="zh-content">因为点来自索引缓冲区，所以画笔需要使用索引方法：</span>
+    <span class="en-content">Because points come from the index buffer, the painter needs to use the index method:</span>
 </p>
 <pre tag="javascript">
     painter.drawElements(painter.TRIANGLES, 6, painter.UNSIGNED_BYTE, 0);
 </pre>
 <p>
-    下面是完整的例子代码：
+    <span class="zh-content">下面是完整的例子代码：</span>
+    <span class="en-content">Here is the complete example code:</span>
 </p>
 <example tag="course/webgl-index_2" height="340px"></example>

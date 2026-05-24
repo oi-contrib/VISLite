@@ -1,27 +1,33 @@
 <header>
-    uni-app / Vue3.js版本
+    <span class="zh-content">uni-app / Vue3.js版本</span>
+    <span class="en-content">uni-app / Vue3.js Version</span>
 </header>
 <h2>
-    文件未声明
+    <span class="zh-content">文件未声明</span>
+    <span class="en-content">File Not Declared</span>
 </h2>
 <p>
-    比如你使用如下语句引入ui-canvas组件：
+    <span class="zh-content">比如你使用如下语句引入ui-canvas组件：</span>
+    <span class="en-content">For example, if you import the ui-canvas component like this:</span>
 </p>
 <pre tag="javascript">
     import uiCanvas from "vislite/uni-app/ui-canvas.vue";
 </pre>
 <p>
-    你可能会看见如下错误提示：
+    <span class="zh-content">你可能会看见如下错误提示：</span>
+    <span class="en-content">You may see the following error:</span>
 </p>
 <p class="important">
     Could not find a declaration file for module 'vislite/uni-app/ui-canvas.vue'.
 </p>
 <p>
-    怎么办？你可以在项目中找到
+    <span class="zh-content">怎么办？你可以在项目中找到</span>
+    <span class="en-content">What to do? You can find the</span>
     <span class="special">
         tsconfig.json
     </span>
-    文件，然后在里面添加这样的配置：
+    <span class="zh-content">文件，然后在里面添加这样的配置：</span>
+    <span class="en-content">file in your project and add the following configuration:</span>
 </p>
 <pre tag="javascript">
 {
@@ -31,11 +37,13 @@
 }
 </pre>
 <p>
-    如此就不会报错了。当然，你也可以直接使用
+    <span class="zh-content">如此就不会报错了。当然，你也可以直接使用</span>
+    <span class="en-content">This will eliminate the error. Alternatively, you can use</span>
     <span class="special">
         easycom
     </span>
-    的方式进行配置，这将不会有任何错误：
+    <span class="zh-content">的方式进行配置，这将不会有任何错误：</span>
+    <span class="en-content">for configuration, which will not cause any errors:</span>
 </p>
 <pre tag="javascript">
 {

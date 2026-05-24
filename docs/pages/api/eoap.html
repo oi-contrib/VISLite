@@ -1,23 +1,28 @@
 <header>
-    等角斜方位投影
+    <span class="zh-content">等角斜方位投影</span>
+    <span class="en-content">Equidistant Oblique Azimuthal Projection</span>
 </header>
 <h2>
-    引入
+    <span class="zh-content">引入</span>
+    <span class="en-content">Import</span>
 </h2>
 <pre tag="javascript">
 import { Eoap } from 'vislite'
 </pre>
 <h2>
-    使用
+    <span class="zh-content">使用</span>
+    <span class="en-content">Usage</span>
 </h2>
 <p>
-    通过传递一个配置信息即可获取最终的实例函数：
+    <span class="zh-content">通过传递一个配置信息即可获取最终的实例函数：</span>
+    <span class="en-content">Pass configuration to get the final instance function:</span>
 </p>
 <pre tag="javascript">
 let eoap = new Eoap(scale = 7, center = [107, 36])
 </pre>
 <p>
-    传递一个点的经纬度即可返回该点的绘图坐标：
+    <span class="zh-content">传递一个点的经纬度即可返回该点的绘图坐标：</span>
+    <span class="en-content">Pass longitude and latitude to get the drawing coordinates:</span>
 </p>
 <pre tag="javascript">
 // 特别需要注意，计算出来的位置是偏离中心点的距离

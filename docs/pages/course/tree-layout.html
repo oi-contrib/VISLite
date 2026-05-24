@@ -1,11 +1,14 @@
 <header>
-    树布局
+    <span class="zh-content">树布局</span>
+    <span class="en-content">Tree Layout</span>
 </header>
 <h2>
-    基础用法
+    <span class="zh-content">基础用法</span>
+    <span class="en-content">Basic Usage</span>
 </h2>
 <p>
-    首先，我们需要创建布局对象，并配置意图：
+    <span class="zh-content">首先，我们需要创建布局对象，并配置意图：</span>
+    <span class="en-content">First, we need to create a layout object and configure it:</span>
 </p>
 <pre tag="javascript">
 import { TreeLayout } from 'vislite';
@@ -24,13 +27,16 @@ treeLayout.setOption({
 });
 </pre>
 <p>
-    我们这里想绘制一个从上往下的树，大小为500*260，所以根在顶部中心，也就是(250,20)。
+    <span class="zh-content">我们这里想绘制一个从上往下的树，大小为500*260，所以根在顶部中心，也就是(250,20)。</span>
+    <span class="en-content">We want to draw a top-to-bottom tree with size 500*260, so the root is at the top center, which is (250, 20).</span>
 </p>
 <div class="warn">
-    温馨提示：为什么根的位置不是(250,0)？这是因为结点是个球，球心稍微下一点，不然绘制不全。
+    <span class="zh-content">温馨提示：为什么根的位置不是(250,0)？这是因为结点是个球，球心稍微下一点，不然绘制不全。</span>
+    <span class="en-content">Note: Why isn't the root position (250,0)? Because the node is a circle, the center is slightly lower, otherwise it wouldn't be drawn completely.</span>
 </div>
 <p>
-    然后我们就可以把需要的数据变成方便绘图的格式了：
+    <span class="zh-content">然后我们就可以把需要的数据变成方便绘图的格式了：</span>
+    <span class="en-content">Then we can convert the data into a format suitable for drawing:</span>
 </p>
 <pre tag="javascript">
 var data = {
@@ -56,14 +62,17 @@ var data = {
 var tree = treeLayout.use(data);
 </pre>
 <p>
-    这里的tree就是我们要的绘图数据，看一下内容：
+    <span class="zh-content">这里的tree就是我们要的绘图数据，看一下内容：</span>
+    <span class="en-content">The tree variable contains the drawing data we need. Let's check its content:</span>
 </p>
 <img src="./images/docs/tree_data1.jpg">
 <p>
-    可以看到，这是一个json，其中有个属性node，里面包含了所有结点的信息，其中最重要的就是left和top，表示当前结点的位置。
+    <span class="zh-content">可以看到，这是一个json，其中有个属性node，里面包含了所有结点的信息，其中最重要的就是left和top，表示当前结点的位置。</span>
+    <span class="en-content">As you can see, it's a JSON object with a `node` property containing all node information. The most important properties are `left` and `top`, which represent the position of each node.</span>
 </p>
 <p>
-    那么我们应该怎么样？是的，把一个个结点按照这个位置绘制出来（也就是一个个小球）：
+    <span class="zh-content">那么我们应该怎么样？是的，把一个个结点按照这个位置绘制出来（也就是一个个小球）：</span>
+    <span class="en-content">So what should we do? Yes, draw each node at its position (as small circles):</span>
 </p>
 <pre tag="javascript">
 for (var key in tree.node) {
@@ -71,20 +80,25 @@ for (var key in tree.node) {
 }
 </pre>
 <p>
-    当然，为了好看，你应该在小球旁边画上结点名称、然后把自己和父结点连接起来。
+    <span class="zh-content">当然，为了好看，你应该在小球旁边画上结点名称、然后把自己和父结点连接起来。</span>
+    <span class="en-content">Of course, for better visualization, you should draw the node names next to the circles and connect each node with its parent.</span>
 </p>
 <div class="warn">
-    温馨提示：通过pid就知道自己的父结点是谁了，如果pid=null，说明是根结点，没有父结点，自然什么也不用做。
+    <span class="zh-content">温馨提示：通过pid就知道自己的父结点是谁了，如果pid=null，说明是根结点，没有父结点，自然什么也不用做。</span>
+    <span class="en-content">Note: Through pid you can know who your parent node is. If pid=null, it's the root node, no parent node, so nothing to do.</span>
 </div>
 <p>
-    最终效果如下：
+    <span class="zh-content">最终效果如下：</span>
+    <span class="en-content">The final result is as follows:</span>
 </p>
 <example tag="course/tree-layout_1" height="320px"></example>
 <h2>
-    添加交互
+    <span class="zh-content">添加交互</span>
+    <span class="en-content">Add Interaction</span>
 </h2>
 <p>
-    因为是需要交互（也就是点击结点可以控制孩子结点显示和隐藏），我们就不能直接使用返回的数据tree来绘制了，而是需要告诉布局如何绘制，如何告诉？如下：
+    <span class="zh-content">因为是需要交互（也就是点击结点可以控制孩子结点显示和隐藏），我们就不能直接使用返回的数据tree来绘制了，而是需要告诉布局如何绘制，如何告诉？如下：</span>
+    <span class="en-content">Since we need interaction (clicking a node to show/hide its children), we cannot directly use the returned tree data for drawing. Instead, we need to tell the layout how to draw. Here's how:</span>
 </p>
 <pre tag="javascript">
 treeLayout.bind(data, function (tree) {
@@ -92,29 +106,38 @@ treeLayout.bind(data, function (tree) {
 });
 </pre>
 <p>
-    第二个参数的写法和上面的类似，只不过有一点不同：你需要判断当前结点是否应该显示。如何判断？
+    <span class="zh-content">第二个参数的写法和上面的类似，只不过有一点不同：你需要判断当前结点是否应该显示。如何判断？</span>
+    <span class="en-content">The second parameter is similar to the previous usage, but with one difference: you need to determine whether each node should be displayed. How?</span>
 </p>
 <p>
-    非常幸运的是，我们提供了两个属性来告诉你当前结点显示情况（可以上滑一下看看上面的数据截图）：
-    <span class="special">isOpen来记录当前结点的孩子结点是否显示，show来记录当前结点是否显示</span>。
+    <span class="zh-content">非常幸运的是，我们提供了两个属性来告诉你当前结点显示情况（可以上滑一下看看上面的数据截图）：</span>
+    <span class="en-content">Fortunately, we provide two properties to indicate the display status of each node:</span>
+    <span class="zh-content special">isOpen来记录当前结点的孩子结点是否显示，show来记录当前结点是否显示</span>
+    <span class="en-content special">`isOpen` records whether the children of the current node are displayed, and `show` records whether the current node itself is displayed</span>
+    <span class="zh-content">。</span>
 </p>
 <p>
-    所以你在具体绘制的时候，需要多些判断，别的也就并无差别了。
+    <span class="zh-content">所以你在具体绘制的时候，需要多些判断，别的也就并无差别了。</span>
+    <span class="en-content">So when drawing, you just need to add these checks. Everything else remains the same.</span>
 </p>
 <p>
-    聪明的你肯定可以猜到，默认这两个属性一定都是true，那如果我们可以动态修改它们的值，然后布局重新绘制，不就实现了交互了吗。是的，我们也是这样想的，因此提供了一个结点的孩子显示隐藏的方法：
+    <span class="zh-content">聪明的你肯定可以猜到，默认这两个属性一定都是true，那如果我们可以动态修改它们的值，然后布局重新绘制，不就实现了交互了吗，是的，我们也是这样想的，因此提供了一个结点的孩子显示隐藏的方法：</span>
+    <span class="en-content">Smart you must have guessed that both properties default to true. If we can dynamically modify their values and redraw the layout, we can achieve interaction. Yes, that's exactly what we thought. Therefore, we provide a method to toggle the visibility of a node's children:</span>
 </p>
 <pre tag="javascript">
     treeLayout.toggleNode(id);
 </pre>
 <p>
-    其中id就是需要显示隐藏孩子结点的结点id。
+    <span class="zh-content">其中id就是需要显示隐藏孩子结点的结点id。</span>
+    <span class="en-content">Where `id` is the ID of the node whose children you want to show/hide.</span>
 </p>
 <p>
-    当然，我们这里是用canvas绘制的，所以最终控制代码应该如下：
+    <span class="zh-content">当然，我们这里是用canvas绘制的，所以最终控制代码应该如下：</span>
+    <span class="en-content">Since we're using Canvas for drawing, the final control code should be as follows:</span>
 </p>
 <div class="warn">
-    温馨提示：绘制的时候，别忘了记录区域哦~
+    <span class="zh-content">温馨提示：绘制的时候，别忘了记录区域哦~</span>
+    <span class="en-content">Note: When drawing, don't forget to record regions~</span>
 </div>
 <pre tag="javascript">
 el.addEventListener('click', function (event) {
@@ -126,14 +149,17 @@ el.addEventListener('click', function (event) {
 });
 </pre>
 <p>
-    最终效果如下：
+    <span class="zh-content">最终效果如下：</span>
+    <span class="en-content">The final result is as follows:</span>
 </p>
 <example tag="course/tree-layout_2" height="320px"></example>
 <h2>
-    特殊数据格式
+    <span class="zh-content">特殊数据格式</span>
+    <span class="en-content">Special Data Format</span>
 </h2>
 <p>
-    你可能会想，我们用来绘图的原始数据，一定要按照例子的给出吗？答案当然是否定的，比如我们现在的原始数据如下：
+    <span class="zh-content">你可能会想，我们用来绘图的原始数据，一定要按照例子的给出吗？答案当然是否定的，比如我们现在的原始数据如下：</span>
+    <span class="en-content">You might wonder if the raw data must follow the example format. The answer is no. For example, our raw data could be as follows:</span>
 </p>
 <pre tag="javascript">
 var data = [
@@ -150,17 +176,20 @@ var data = [
 ];
 </pre>
 <p>
-    怎么办？我们只需要在创建布局的时候告诉布局对象我们的数据格式如何解析即可：
+    <span class="zh-content">怎么办？我们只需要在创建布局的时候告诉布局对象我们的数据格式如何解析即可：</span>
+    <span class="en-content">What to do? We just need to tell the layout object how to parse our data format when creating it:</span>
 </p>
 <pre tag="javascript">
 var treeLayout = new TreeLayout({
 
     // 根结点是谁
+    // who is the root node
     root: function (initTree) {
         return initTree[0];
     },
 
     // 已知当前结点，如何知道它的孩子结点是谁
+    // given current node, how to know its children
     children: function (parentTree, initTree) {
         var children = [];
         for (var i = 0; i < initTree.length; i++) {
@@ -171,12 +200,14 @@ var treeLayout = new TreeLayout({
     },
 
     // 当前结点的id如何生成
+    // how to generate id for current node
     id: function (initTree) {
         return initTree[0];
     }
 });
 </pre>
 <p>
-    最终效果如下：
+    <span class="zh-content">最终效果如下：</span>
+    <span class="en-content">The final result is as follows:</span>
 </p>
 <example tag="course/tree-layout_3" height="320px"></example>

@@ -1,36 +1,46 @@
 <header>
-    VISLite 贡献指南
+    <span class="zh-content">VISLite 贡献指南</span>
+    <span class="en-content">VISLite Contribution Guide</span>
 </header>
 <h2>
-    环境搭建
+    <span class="zh-content">环境搭建</span>
+    <span class="en-content">Environment Setup</span>
 </h2>
 <ul>
     <li>
-        需要安装 <a href="http://nodejs.org/" target="_blank">Node.js</a> 。
+        <span class="zh-content">需要安装 <a href="http://nodejs.org/" target="_blank">Node.js</a> 。</span>
+        <span class="en-content">Need to install <a href="http://nodejs.org/" target="_blank">Node.js</a>.</span>
     </li>
     <li>
-        克隆仓库到本地后，执行 <span class="special">npm install</span> 安装开发依赖。
+        <span class="zh-content">克隆仓库到本地后，执行 <span class="special">npm install</span> 安装开发依赖。</span>
+        <span class="en-content">After cloning the repository locally, run <span class="special">npm install</span> to install development dependencies.</span>
     </li>
     <li>
-        安装EditorConfig插件来规范编辑器。
+        <span class="zh-content">安装EditorConfig插件来规范编辑器。</span>
+        <span class="en-content">Install the EditorConfig plugin to standardize the editor.</span>
     </li>
 </ul>
 <h2>
-    开发
+    <span class="zh-content">开发</span>
+    <span class="en-content">Development</span>
 </h2>
 <p>
-    直接执行 <span class="special">npm run dev</span> 即可启动开发环境。
+    <span class="zh-content">直接执行 <span class="special">npm run dev</span> 即可启动开发环境。</span>
+    <span class="en-content">Run <span class="special">npm run dev</span> to start the development environment.</span>
 </p>
 <ul>
     <li>
-        如果是编辑文档，访问： http://127.0.0.1:20000/docs/index.html 。
+        <span class="zh-content">如果是编辑文档，访问： http://127.0.0.1:20000/docs/index.html 。</span>
+        <span class="en-content">If editing documentation, visit: http://127.0.0.1:20000/docs/index.html.</span>
     </li>
     <li>
-        如果是调试功能，访问： http://127.0.0.1:20000/test/example 后选择对应的用例即可。
+        <span class="zh-content">如果是调试功能，访问： http://127.0.0.1:20000/test/example 后选择对应的用例即可。</span>
+        <span class="en-content">If debugging features, visit: http://127.0.0.1:20000/test/example and select the corresponding test case.</span>
     </li>
 </ul>
 <p>
-    新增调试页面，只需要在test项目中新建即可，比如：
+    <span class="zh-content">新增调试页面，只需要在test项目中新建即可，比如：</span>
+    <span class="en-content">To add a new debug page, simply create it in the test project, for example:</span>
 </p>
 <pre>
 - test
@@ -40,10 +50,12 @@
             - index.ts
 </pre>
 <h3>
-    新增功能
+    <span class="zh-content">新增功能</span>
+    <span class="en-content">Add New Feature</span>
 </h3>
 <p>
-    主体代码写在 <span class="special">src</span> 目录中，按照功能分类，对外暴露则在 <span class="special">package</span> 目录中，结构如下：
+    <span class="zh-content">主体代码写在 <span class="special">src</span> 目录中，按照功能分类，对外暴露则在 <span class="special">package</span> 目录中，结构如下：</span>
+    <span class="en-content">The main code is written in the <span class="special">src</span> directory, categorized by functionality. Exposed APIs are placed in the <span class="special">package</span> directory with the following structure:</span>
 </p>
 <pre>
 - package
@@ -51,10 +63,12 @@
         - index.ts
 </pre>
 <p>
-    此外，还需要在 <span class="special">package/index.ts</span> 中进行注册。
+    <span class="zh-content">此外，还需要在 <span class="special">package/index.ts</span> 中进行注册。</span>
+    <span class="en-content">Additionally, you need to register it in <span class="special">package/index.ts</span>.</span>
 </p>
 <p>
-    接着，在 <span class="special">types/index.d.ts</span> 中定义类型，大体格式如下：
+    <span class="zh-content">接着，在 <span class="special">types/index.d.ts</span> 中定义类型，大体格式如下：</span>
+    <span class="en-content">Then, define types in <span class="special">types/index.d.ts</span>, roughly as follows:</span>
 </p>
 <pre tag="javascript">
 export default class VISLite {
@@ -64,48 +78,62 @@ export default class VISLite {
 export let newApi: newApiType
 </pre>
 <p>
-    比如，上面的具体类型 <span class="special">newApiType</span> 或相关参数的类型可以在 <span class="special">types</span> 中独立定义，方便项目中引入。
+    <span class="zh-content">比如，上面的具体类型 <span class="special">newApiType</span> 或相关参数的类型可以在 <span class="special">types</span> 中独立定义，方便项目中引入。</span>
+    <span class="en-content">For example, the specific type <span class="special">newApiType</span> or related parameter types can be defined independently in <span class="special">types</span> for easy import in the project.</span>
 </p>
 <p>
-    一切完毕后，最后在 <span class="special">docs</span> 中添加文档，并在 <span class="special">CHANGELOG</span> 中登记就完成了所有内容。
+    <span class="zh-content">一切完毕后，最后在 <span class="special">docs</span> 中添加文档，并在 <span class="special">CHANGELOG</span> 中登记就完成了所有内容。</span>
+    <span class="en-content">After everything is done, add documentation in <span class="special">docs</span> and record it in <span class="special">CHANGELOG</span> to complete all tasks.</span>
 </p>
 <h2>
-    测试
+    <span class="zh-content">测试</span>
+    <span class="en-content">Testing</span>
 </h2>
 <p>
-    除了开发时候的调试外，还需要添加如下测试：
+    <span class="zh-content">除了开发时候的调试外，还需要添加如下测试：</span>
+    <span class="en-content">In addition to debugging during development, the following tests need to be added:</span>
 </p>
 <ul>
     <li>
-        （可选）基准测试：在 <span class="special">test/benchmark/index.ts</span> 中添加。
+        <span class="zh-content">（可选）基准测试：在 <span class="special">test/benchmark/index.ts</span> 中添加。</span>
+        <span class="en-content">(Optional) Benchmark test: Add in <span class="special">test/benchmark/index.ts</span>.</span>
     </li>
     <li>
-        （可选）单元测试：直接新建文件 <span class="special">test/unit/newApi.spec.ts</span> 即可。
+        <span class="zh-content">（可选）单元测试：直接新建文件 <span class="special">test/unit/newApi.spec.ts</span> 即可。</span>
+        <span class="en-content">(Optional) Unit test: Create a new file <span class="special">test/unit/newApi.spec.ts</span>.</span>
     </li>
     <li>
-        （必选）ESLint：直接运行 <span class="special">npm run lint</span> 并保证没有报错。
+        <span class="zh-content">（必选）ESLint：直接运行 <span class="special">npm run lint</span> 并保证没有报错。</span>
+        <span class="en-content">(Required) ESLint: Run <span class="special">npm run lint</span> and ensure no errors.</span>
     </li>
 </ul>
 <p>
-    除了调试的测试文件和必选项外，上述测试都根据实际情况添加即可。
+    <span class="zh-content">除了调试的测试文件和必选项外，上述测试都根据实际情况添加即可。</span>
+    <span class="en-content">Except for debugging test files and required items, the above tests can be added according to actual needs.</span>
 </p>
 <h2>
-    提交 PR
+    <span class="zh-content">提交 PR</span>
+    <span class="en-content">Submit PR</span>
 </h2>
 <ul>
     <li>
-        fork 本仓库，在自己仓库基于 dev 分支创建专用分支用于提交更改。
+        <span class="zh-content">fork 本仓库，在自己仓库基于 dev 分支创建专用分支用于提交更改。</span>
+        <span class="en-content">Fork this repository and create a dedicated branch based on the dev branch in your own repository for submitting changes.</span>
     </li>
     <li>
-        commit 内容请说明清楚本次 PR 的主要目的和改动，描述清楚即可。
+        <span class="zh-content">commit 内容请说明清楚本次 PR 的主要目的和改动，描述清楚即可。</span>
+        <span class="en-content">The commit message should clearly describe the main purpose and changes of this PR.</span>
     </li>
     <li>
-        提交之前尽力确保进行了完整的测试。
+        <span class="zh-content">提交之前尽力确保进行了完整的测试。</span>
+        <span class="en-content">Make sure to run complete tests before submitting.</span>
     </li>
     <li>
-        确保 PR 提交到 dev 分支。
+        <span class="zh-content">确保 PR 提交到 dev 分支。</span>
+        <span class="en-content">Ensure the PR is submitted to the dev branch.</span>
     </li>
     <li>
-        修复 Bug 请提供详细的描述信息，或链接到对应的 issue。
+        <span class="zh-content">修复 Bug 请提供详细的描述信息，或链接到对应的 issue。</span>
+        <span class="en-content">When fixing a bug, provide detailed description or link to the corresponding issue.</span>
     </li>
 </ul>

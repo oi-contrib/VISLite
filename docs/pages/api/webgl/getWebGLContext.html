@@ -1,46 +1,67 @@
 <header>
-    画笔
+    <span class="zh-content">画笔</span>
+    <span class="en-content">Painter</span>
 </header>
 <div class="version">
-    0.3.0 新增，且只支持Web端，如果后续有需要会进行兼容扩展
+    <span class="zh-content">0.3.0 新增，且只支持Web端，如果后续有需要会进行兼容扩展</span>
+    <span class="en-content">Added in 0.3.0, only supported on Web. Will be extended if needed.</span>
 </div>
 <h2>
-    引入
+    <span class="zh-content">引入</span>
+    <span class="en-content">Import</span>
 </h2>
 <pre tag="javascript">
     import { getWebGLContext } from 'vislite'
 </pre>
 <h2>
-    语法
+    <span class="zh-content">语法</span>
+    <span class="en-content">Syntax</span>
 </h2>
 <p>
-    获取画笔实例，其中el就是挂载点，比如一个div：
+    <span class="zh-content">获取画笔实例，其中el就是挂载点，比如一个div：</span>
+    <span class="en-content">Get painter instance, where el is the mount point, such as a div:</span>
 </p>
 <pre tag="javascript">
     let painter = getWebGLContext(el, scale, mode)
 </pre>
 <p>
-    其中参数解释如下：
+    <span class="zh-content">其中参数解释如下：</span>
+    <span class="en-content">Parameters explained as follows:</span>
 </p>
 <ol>
     <li>
-        el：页面挂载点，比如DIV节点
+        el：
+        <span class="zh-content">页面挂载点，比如DIV节点</span>
+        <span class="en-content">Page mount point, such as DIV node</span>
     </li>
     <li>
-        scale：画布缩放倍数，可选，默认1
+        scale：
+        <span class="zh-content">画布缩放倍数，可选，默认1</span>
+        <span class="en-content">Canvas scale ratio, optional, default 1</span>
     </li>
     <li>
-        mode：设置画布缩放模式，可选（v0.8.0开始支持）
+        mode：
+        <span class="zh-content">设置画布缩放模式，可选（v0.8.0开始支持）</span>
+        <span class="en-content">Set canvas scale mode, optional (supported from v0.8.0)</span>
     </li>
 </ol>
 <p>
-    返回的画笔painter类型是WebGLRenderingContext，此画笔上具体方法你可以
-    <button tag="WebGLRenderingContext" type="explain">点击查看</button>。
+    <span class="zh-content">返回的画笔painter类型是WebGLRenderingContext，此画笔上具体方法你可以</span>
+    <span class="en-content">The returned painter type is WebGLRenderingContext. For specific methods on this painter, you can</span>
+    <button tag="WebGLRenderingContext" type="explain">
+        <span class="zh-content">点击查看</span>
+        <span class="en-content">click to view</span>
+    </button>
+    <span class="zh-content">。</span>
 </p>
 <h3>
     mode
 </h3>
 <p>
-    画布缩放模式表示，如果画布和页面存放位置大小比例不一致的时候，如何出来，具体的可以查看：
+    <span class="zh-content">画布缩放模式表示，如果画布和页面存放位置大小比例不一致的时候，如何出来，具体的可以查看：</span>
+    <span class="en-content">Canvas scale mode indicates how to handle it when the ratio between canvas and page position is inconsistent. For details:</span>
 </p>
-<button tag="WebGL-mode" type="explain">WebGL画布缩放模式（mode）</button>
+<button tag="WebGL-mode" type="explain">
+    <span class="zh-content">WebGL画布缩放模式（mode）</span>
+    <span class="en-content">WebGL Canvas Scale Mode</span>
+</button>

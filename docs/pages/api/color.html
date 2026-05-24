@@ -1,40 +1,49 @@
 <header>
-    颜色
+    <span class="zh-content">颜色</span>
+    <span class="en-content">Color</span>
 </header>
 <h2>
-    getLoopColors
+    <span class="zh-content">getLoopColors</span>
+    <span class="en-content">getLoopColors</span>
 </h2>
 <h3>
-    引入
+    <span class="zh-content">引入</span>
+    <span class="en-content">Import</span>
 </h3>
 <pre tag="javascript">
 import { getLoopColors } from "vislite"
 </pre>
 <h3>
-    语法
+    <span class="zh-content">语法</span>
+    <span class="en-content">Syntax</span>
 </h3>
 <p>
-    获取一组循环色彩：
+    <span class="zh-content">获取一组循环色彩：</span>
+    <span class="en-content">Get a set of looping colors:</span>
 </p>
 <pre tag="javascript">
 let colors = getLoopColors(num, alpha=1)
 </pre>
 <h3>
-    基础色
+    <span class="zh-content">基础色</span>
+    <span class="en-content">Base Colors</span>
 </h3>
 <p>
-    默认循环色基础颜色为（透明度可以修改）：
+    <span class="zh-content">默认循环色基础颜色为（透明度可以修改）：</span>
+    <span class="en-content">Default looping base colors (opacity can be modified):</span>
 </p>
 <pre tag="javascript">
     ['#5470c6', '#91cc75', '#fac858', '#ee6666', '#73c0de', '#3ba272', '#fc8452', '#9a60b4', '#ea7ccc']
 </pre>
 <p>
-    你可以通过下面的方法进行修改：
+    <span class="zh-content">你可以通过下面的方法进行修改：</span>
+    <span class="en-content">You can modify them using the following method:</span>
 </p>
 <pre tag="javascript">
 let colors = getLoopColors(num, alpha, function(alpha){
 
     // 返回一组的颜色值数组（透明度不可修改）
+    // Return an array of color values (opacity cannot be modified)
     return []
 })
 </pre>

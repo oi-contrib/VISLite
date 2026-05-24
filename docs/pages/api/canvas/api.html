@@ -1,128 +1,165 @@
 <header>
-    接口文档
+    <span class="zh-content">接口文档</span>
+    <span class="en-content">API Documentation</span>
 </header>
 <h2>
-    配置画笔
+    <span class="zh-content">配置画笔</span>
+    <span class="en-content">Configure Painter</span>
 </h2>
 <h3>
-    可配置项
+    <span class="zh-content">可配置项</span>
+    <span class="en-content">Configurable Options</span>
 </h3>
 <pre tag="javascript">
 painter.config({
     // 填充色或图案
+    // fill color or pattern
     "fillStyle": 'black',
 
     // 轮廓色或图案
+    // stroke color or pattern
     "strokeStyle": 'black',
 
     // 线条宽度(单位px，下同)
+    // line width (in px, same below)
     "lineWidth": 1,
 
-    // 线的端点类型，（"butt"平直边缘、"round"半圆和"square"矩形）（1.2.0 新增）
+    // 线的端点类型
+    // line cap: "butt", "round", "square" (1.2.0+)
     "lineCap": "butt",
 
-    // 线的拐角连接方式，（"miter"连接处边缘延长相接、"bevel"对角线斜角和"round"圆）（1.2.0 新增）
+    // 线的拐角连接方式
+    // line join: "miter", "bevel", "round" (1.2.0+)
     "lineJoin": "miter",
 
-    // 设置线条虚线，应该是一个数组[number,...]
+    // 设置线条虚线
+    // line dash pattern
     "lineDash": [],
 
-    // 文字水平对齐方式（"left"左对齐、"center"居中和"right"右对齐）
+    // 文字水平对齐方式
+    // text horizontal alignment: "left", "center", "right"
     "textAlign": 'left',
 
-    // 文字垂直对齐方式（"middle"垂直居中、"top"上对齐和"bottom"下对齐）
+    // 文字垂直对齐方式
+    // text vertical alignment: "middle", "top", "bottom"
     "textBaseline": 'middle',
 
-    // 阴影的模糊系数，默认0，也就是无阴影
+    // 阴影的模糊系数，默认0
+    // shadow blur, default 0
     "shadowBlur": 0,
 
     // 阴影的颜色
+    // shadow color
     "shadowColor": "black",
 
     // 文字大小
+    // font size
     "fontSize": 16,
 
     // 字体
+    // font family
     "fontFamily": "sans-serif",
 
     // 字重
+    // font weight
     "fontWeight": 400,
 
     // 字类型
+    // font style
     "fontStyle": "normal",
 
-    // 圆弧开始端闭合方式（"butt"直线闭合、"round"圆帽闭合和"-round"反圆帽闭合）（-round 0.3.0 新增）
+    // 圆弧开始端闭合方式
+    // arc start cap: "butt", "round", "-round" (-round 0.3.0+)
     "arcStartCap": 'butt',
 
-    // 圆弧结束端闭合方式，和上一个类似
+    // 圆弧结束端闭合方式
+    // arc end cap
     "arcEndCap": 'butt',
 
-    // 矩形圆角半径（1.3.0 新增）
+    // 矩形圆角半径
+    // rectangle corner radius (1.3.0+)
     "rectRadius": Array&lt;number&gt;
 })
 </pre>
 <h3>
-    渐变色
+    <span class="zh-content">渐变色</span>
+    <span class="en-content">Gradient Colors</span>
 </h3>
 <div class="version">
-    0.3.0 新增
+    <span class="zh-content">0.3.0 新增</span>
+    <span class="en-content">Added in 0.3.0</span>
 </div>
 <p>
-    上述配置颜色的地方，除了可以配置纯色外，还可以使用下面的渐变色。
+    <span class="zh-content">上述配置颜色的地方，除了可以配置纯色外，还可以使用下面的渐变色。</span>
+    <span class="en-content">In addition to solid colors, you can also use the following gradient colors for color configurations.</span>
 </p>
 <h4>
-    线性渐变
+    <span class="zh-content">线性渐变</span>
+    <span class="en-content">Linear Gradient</span>
 </h4>
 <p>
-    使用画笔的createLinearGradient创建线性渐变对象，四个参数分别表示渐变的起点P(x1, y1)和终点P(x2, y2)：
+    <span class="zh-content">使用画笔的createLinearGradient创建线性渐变对象，四个参数分别表示渐变的起点P(x1, y1)和终点P(x2, y2)：</span>
+    <span class="en-content">Use the painter's createLinearGradient to create a linear gradient object. The four parameters represent the start point P(x1, y1) and end point P(x2, y2):</span>
 </p>
 <pre tag="javascript">
     let gradient = painter.createLinearGradient(x1, y1, x2, y2)
 </pre>
 <div class="warn">
-    温馨提示：画笔上述参数的单位是px（下同）。
+    <span class="zh-content">温馨提示：画笔上述参数的单位是px（下同)。</span>
+    <span class="en-content">Note: The painter parameters are in px (same below).</span>
 </div>
 <h4>
-    环形渐变
+    <span class="zh-content">环形渐变</span>
+    <span class="en-content">Radial Gradient</span>
 </h4>
 <p>
-    使用画笔的createRadialGradient创建环形渐变对象，三个参数分别表示渐变的圆心P(cx, cy)和半径r：
+    <span class="zh-content">使用画笔的createRadialGradient创建环形渐变对象，三个参数分别表示渐变的圆心P(cx, cy)和半径r：</span>
+    <span class="en-content">Use the painter's createRadialGradient to create a radial gradient object. The three parameters represent the center P(cx, cy) and radii r1, r2:</span>
 </p>
 <pre tag="javascript">
     let gradient = painter.createRadialGradient(cx, cy, r1, r2)
 </pre>
 <div class="warn">
-    温馨提示：渐变的起点是圆心。
+    <span class="zh-content">温馨提示：渐变的起点是圆心。</span>
+    <span class="en-content">Note: The starting point of the gradient is the center.</span>
 </div>
 <h4>
-    角度渐变
+    <span class="zh-content">角度渐变</span>
+    <span class="en-content">Conic Gradient</span>
 </h4>
 <div class="version">
-    1.2.0 新增
+    <span class="zh-content">1.2.0 新增</span>
+    <span class="en-content">Added in 1.2.0</span>
 </div>
 <p>
-    使用画笔的createConicGradient创建角度渐变对象，四个参数分别表示渐变的圆心P(cx, cy)、开始弧度beginDeg和跨越弧度deg：
+    <span class="zh-content">使用画笔的createConicGradient创建角度渐变对象，四个参数分别表示渐变的圆心P(cx, cy)、开始弧度beginDeg和跨越弧度deg：</span>
+    <span class="en-content">Use the painter's createConicGradient to create a conic gradient object. The four parameters represent the center P(cx, cy), start angle beginDeg, and span angle deg:</span>
 </p>
 <pre tag="javascript">
     let gradient = painter.createConicGradient(cx, cy, beginDeg, deg)
 </pre>
 <div class="warn">
-    温馨提示：跨越弧度deg可选，默认2PI。
+    <span class="zh-content">温馨提示：跨越弧度deg可选，默认2PI。</span>
+    <span class="en-content">Note: The span angle deg is optional, default 2PI.</span>
 </div>
 <h4>
-    设置与使用
+    <span class="zh-content">设置与使用</span>
+    <span class="en-content">Setup and Usage</span>
 </h4>
 <p>
-    设置渐变范围以后，你需要在渐变范围中添加渐变色，可以添加任意多个：
+    <span class="zh-content">设置渐变范围以后，你需要在渐变范围中添加渐变色，可以添加任意多个：</span>
+    <span class="en-content">After setting the gradient range, you need to add gradient colors within the range. You can add as many as you want:</span>
 </p>
 <pre tag="javascript">
     gradient.setColor(deep, color)
 </pre>
 <p>
-    上述deep取值为闭区间[0, 1]，color可以是任意合法的颜色值。
+    <span class="zh-content">上述deep取值为闭区间[0, 1]，color可以是任意合法的颜色值。</span>
+    <span class="en-content">deep takes a value in the closed interval [0, 1], and color can be any valid color value.</span>
 </p>
 <p>
-    渐变如何使用，直接调用渐变的value方法即可：
+    <span class="zh-content">渐变如何使用，直接调用渐变的value方法即可：</span>
+    <span class="en-content">To use the gradient, call the gradient's value method:</span>
 </p>
 <pre tag="javascript">
 painter.config({
@@ -130,298 +167,374 @@ painter.config({
 })
 </pre>
 <p>
-    如上面，我们给画笔设置填充色就是使用了我们刚刚获取的渐变色。
+    <span class="zh-content">如上面，我们给画笔设置填充色就是使用了我们刚刚获取的渐变色。</span>
+    <span class="en-content">As shown above, we set the painter's fill color using the gradient we just obtained.</span>
 </p>
 <h3>
-    重置
+    <span class="zh-content">重置</span>
+    <span class="en-content">Reset</span>
 </h3>
 <div class="version">
-    1.2.0 新增
+    <span class="zh-content">1.2.0 新增</span>
+    <span class="en-content">Added in 1.2.0</span>
 </div>
 <p>
-    对画笔的配置重置为默认值（参数config可选，用于覆盖默认值，1.8.0新增）：
+    <span class="zh-content">对画笔的配置重置为默认值（参数config可选，用于覆盖默认值，1.8.0新增）：</span>
+    <span class="en-content">Reset the painter configuration to default values (config parameter is optional for overriding defaults, added in 1.8.0):</span>
 </p>
 <pre tag="javascript">painter.reset(config={})</pre>
 <h2>
-    画笔方法
+    <span class="zh-content">画笔方法</span>
+    <span class="en-content">Painter Methods</span>
 </h2>
 <h3>
-    文字
+    <span class="zh-content">文字</span>
+    <span class="en-content">Text</span>
 </h3>
 <p>
-    在点(x, y)处绘制填充的文字text；deg表示文字旋转角度，可选：
+    <span class="zh-content">在点(x, y)处绘制填充的文字text；deg表示文字旋转角度，可选：</span>
+    <span class="en-content">Draw filled text at point (x, y); deg is the rotation angle (optional):</span>
 </p>
 <pre tag="javascript">painter.fillText(text, x, y, deg)</pre>
 <div class="warn">
-    除非特别说明，角度全部采用弧度制。
+    <span class="zh-content">除非特别说明，角度全部采用弧度制。</span>
+    <span class="en-content">Unless otherwise specified, all angles are in radians.</span>
 </div>
 <p>
-    在点(x, y)处绘制轮廓的文字text；deg表示文字旋转角度，可选：
+    <span class="zh-content">在点(x, y)处绘制轮廓的文字text；deg表示文字旋转角度，可选：</span>
+    <span class="en-content">Draw stroked text at point (x, y); deg is the rotation angle (optional):</span>
 </p>
 <pre tag="javascript">painter.strokeText(text, x, y, deg)</pre>
 <p>
-    在点(x, y)处绘制轮廓并填充的文字text；deg表示文字旋转角度，可选：
+    <span class="zh-content">在点(x, y)处绘制轮廓并填充的文字text；deg表示文字旋转角度，可选：</span>
+    <span class="en-content">Draw filled and stroked text at point (x, y); deg is the rotation angle (optional):</span>
 </p>
 <pre tag="javascript">painter.fullText(text, x, y, deg)</pre>
 <h3>
-    多行文字
+    <span class="zh-content">多行文字</span>
+    <span class="en-content">Multi-line Text</span>
 </h3>
 <p>
-    简单的理解就是设置了文本显示的宽以后，如果文本超过一行，会自动换行显示。
+    <span class="zh-content">简单的理解就是设置了文本显示的宽以后，如果文本超过一行，会自动换行显示。</span>
+    <span class="en-content">Simply put, if the text exceeds the specified width, it will automatically wrap to the next line.</span>
 </p>
 <div class="version">
-    0.2.0 新增
+    <span class="zh-content">0.2.0 新增</span>
+    <span class="en-content">Added in 0.2.0</span>
 </div>
 <p>
-    在点(x, y)处绘制填充的文字contents，且其宽不超过width；lineHeight表示行高，默认1.2，可选；deg表示文字旋转角度，可选：
+    <span class="zh-content">在点(x, y)处绘制填充的文字contents，且其宽不超过width；lineHeight表示行高，默认1.2，可选；deg表示文字旋转角度，可选：</span>
+    <span class="en-content">Draw filled text at point (x, y) with width not exceeding width; lineHeight is the line height, default 1.2, optional; deg is the rotation angle, optional:</span>
 </p>
 <pre tag="javascript">painter.fillTexts(contents, x, y, width, lineHeight, deg)</pre>
 <p>
-    返回一个数字，表示实际文字所占的高。
+    <span class="zh-content">返回一个数字，表示实际文字所占的高。</span>
+    <span class="en-content">Returns a number representing the actual height of the text.</span>
 </p>
 <p>
-    在点(x, y)处绘制轮廓的文字contents，且其宽不超过width；lineHeight表示行高，默认1.2，可选；deg表示文字旋转角度，可选：
+    <span class="zh-content">在点(x, y)处绘制轮廓的文字contents，且其宽不超过width；lineHeight表示行高，默认1.2，可选；deg表示文字旋转角度，可选：</span>
+    <span class="en-content">Draw stroked text at point (x, y) with width not exceeding width; lineHeight is the line height, default 1.2, optional; deg is the rotation angle, optional:</span>
 </p>
 <pre tag="javascript">painter.strokeTexts(contents, x, y, width, lineHeight, deg)</pre>
 <p>
-    返回一个数字，表示实际文字所占的高。
+    <span class="zh-content">返回一个数字，表示实际文字所占的高。</span>
+    <span class="en-content">Returns a number representing the actual height of the text.</span>
 </p>
 <p>
-    在点(x, y)处绘制轮廓并填充的文字contents，且其宽不超过width；lineHeight表示行高，默认1.2，可选；deg表示文字旋转角度，可选：
+    <span class="zh-content">在点(x, y)处绘制轮廓并填充的文字contents，且其宽不超过width；lineHeight表示行高，默认1.2，可选；deg表示文字旋转角度，可选：</span>
+    <span class="en-content">Draw filled and stroked text at point (x, y) with width not exceeding width; lineHeight is the line height, default 1.2, optional; deg is the rotation angle, optional:</span>
 </p>
 <pre tag="javascript">painter.fullTexts(contents, x, y, width, lineHeight, deg)</pre>
 <p>
-    返回一个数字，表示实际文字所占的高。
+    <span class="zh-content">返回一个数字，表示实际文字所占的高。</span>
+    <span class="en-content">Returns a number representing the actual height of the text.</span>
 </p>
 <h3>
-    计算文字宽
+    <span class="zh-content">计算文字宽</span>
+    <span class="en-content">Calculate Text Width</span>
 </h3>
 <p>
-    返回当前画笔状态下，文本的宽：
+    <span class="zh-content">返回当前画笔状态下，文本的宽：</span>
+    <span class="en-content">Return the width of text under current painter state:</span>
 </p>
 <pre tag="javascript">let width = painter.textWidth(text)</pre>
 <h3>
-    弧
+    <span class="zh-content">弧</span>
+    <span class="en-content">Arc</span>
 </h3>
 <p>
-    以(cx, cy)为圆心，内外半径分别是r1和r2，从弧度beginDeg开始，跨越弧度deg，绘制填充圆弧：
+    <span class="zh-content">以(cx, cy)为圆心，内外半径分别是r1和r2，从弧度beginDeg开始，跨越弧度deg，绘制填充圆弧：</span>
+    <span class="en-content">Draw a filled arc with center (cx, cy), inner and outer radii r1 and r2, starting from beginDeg with span deg:</span>
 </p>
 <pre tag="javascript">painter.fillArc(cx, cy, r1, r2, beginDeg, deg)</pre>
 <p>
-    和fillArc方法类似，只不过绘制的是轮廓圆弧：
+    <span class="zh-content">和fillArc方法类似，只不过绘制的是轮廓圆弧：</span>
+    <span class="en-content">Similar to fillArc, but draws a stroked arc:</span>
 </p>
 <pre tag="javascript">painter.strokeArc(cx, cy, r1, r2, beginDeg, deg)</pre>
 <p>
-    和fillArc方法类似，只不过绘制的是轮廓并填充圆弧：
+    <span class="zh-content">和fillArc方法类似，只不过绘制的是轮廓并填充圆弧：</span>
+    <span class="en-content">Similar to fillArc, but draws a filled and stroked arc:</span>
 </p>
 <pre tag="javascript">painter.fullArc(cx, cy, r1, r2, beginDeg, deg)</pre>
 <h3>
-    圆形
+    <span class="zh-content">圆形</span>
+    <span class="en-content">Circle</span>
 </h3>
 <p>
-    以(cx, cy)为圆心，半径r绘制填充圆形：
+    <span class="zh-content">以(cx, cy)为圆心，半径r绘制填充圆形：</span>
+    <span class="en-content">Draw a filled circle with center (cx, cy) and radius r:</span>
 </p>
 <pre tag="javascript">painter.fillCircle(cx, cy, r)</pre>
 <p>
-    以(cx, cy)为圆心，半径r绘制轮廓圆形：
+    <span class="zh-content">以(cx, cy)为圆心，半径r绘制轮廓圆形：</span>
+    <span class="en-content">Draw a stroked circle with center (cx, cy) and radius r:</span>
 </p>
 <pre tag="javascript">painter.strokeCircle(cx, cy, r)</pre>
 <p>
-    以(cx, cy)为圆心，半径r绘制轮廓并填充圆形：
+    <span class="zh-content">以(cx, cy)为圆心，半径r绘制轮廓并填充圆形：</span>
+    <span class="en-content">Draw a filled and stroked circle with center (cx, cy) and radius r:</span>
 </p>
 <pre tag="javascript">painter.fullCircle(cx, cy, r)</pre>
 <h3>
-    矩形
+    <span class="zh-content">矩形</span>
+    <span class="en-content">Rectangle</span>
 </h3>
 <p>
-    以(x, y)为左上角，宽width，高height绘制填充矩形：
+    <span class="zh-content">以(x, y)为左上角，宽width，高height绘制填充矩形：</span>
+    <span class="en-content">Draw a filled rectangle with top-left corner at (x, y), width and height:</span>
 </p>
 <pre tag="javascript">
     painter.fillRect(x, y, width, height);
 </pre>
 <p>
-    以(x, y)为左上角，宽width，高height绘制轮廓矩形：
+    <span class="zh-content">以(x, y)为左上角，宽width，高height绘制轮廓矩形：</span>
+    <span class="en-content">Draw a stroked rectangle with top-left corner at (x, y), width and height:</span>
 </p>
 <pre tag="javascript">painter.strokeRect(x, y, width, height)</pre>
 <p>
-    以(x, y)为左上角，宽width，高height绘制轮廓并填充矩形：
+    <span class="zh-content">以(x, y)为左上角，宽width，高height绘制轮廓并填充矩形：</span>
+    <span class="en-content">Draw a filled and stroked rectangle with top-left corner at (x, y), width and height:</span>
 </p>
 <pre tag="javascript">painter.fullRect(x, y, width, height)</pre>
 <h3>
-    路径
+    <span class="zh-content">路径</span>
+    <span class="en-content">Path</span>
 </h3>
 <p>
-    基于路径可以绘制几乎大部分图形，非常类似画笔在纸上划动。
+    <span class="zh-content">基于路径可以绘制几乎大部分图形，非常类似画笔在纸上划动。</span>
+    <span class="en-content">Almost all shapes can be drawn based on paths, similar to drawing with a brush on paper.</span>
 </p>
 <h4>
-    基础
+    <span class="zh-content">基础</span>
+    <span class="en-content">Basic</span>
 </h4>
 <p>
-    开始一段独立的路径：
+    <span class="zh-content">开始一段独立的路径：</span>
+    <span class="en-content">Start an independent path:</span>
 </p>
 <pre tag="javascript">painter.beginPath()</pre>
 <p>
-    闭合当前路径，也就是路径首尾闭合：
+    <span class="zh-content">闭合当前路径，也就是路径首尾闭合：</span>
+    <span class="en-content">Close the current path (connect start and end):</span>
 </p>
 <pre tag="javascript">painter.closePath()</pre>
 <p>
-    画笔移动到点(x, y)，此时笔离开了画布：
+    <span class="zh-content">画笔移动到点(x, y)，此时笔离开了画布：</span>
+    <span class="en-content">Move the brush to point (x, y), the brush is now off the canvas:</span>
 </p>
 <pre tag="javascript">painter.moveTo(x, y)</pre>
 <p>
-    画笔移动到点(x, y)，此时笔没有离开画布：
+    <span class="zh-content">画笔移动到点(x, y)，此时笔没有离开画布：</span>
+    <span class="en-content">Move the brush to point (x, y), the brush stays on the canvas:</span>
 </p>
 <pre tag="javascript">painter.lineTo(x, y)</pre>
 <p>
-    以(cx, cy)为圆心，半径r，从弧度beginDeg开始，跨越弧度deg画弧，此时笔没有离开画布：
+    <span class="zh-content">以(cx, cy)为圆心，半径r，从弧度beginDeg开始，跨越弧度deg画弧，此时笔没有离开画布：</span>
+    <span class="en-content">Draw an arc with center (cx, cy), radius r, starting from beginDeg with span deg, the brush stays on the canvas:</span>
 </p>
 <pre tag="javascript">painter.arc(cx, cy, r, beginDeg, deg)</pre>
 <p>
-    把当前路径包裹的区域填充颜色：
+    <span class="zh-content">把当前路径包裹的区域填充颜色：</span>
+    <span class="en-content">Fill the area enclosed by the current path:</span>
 </p>
 <pre tag="javascript">painter.fill()</pre>
 <p>
-    把当前路径上色（轮廓线）：
+    <span class="zh-content">把当前路径上色（轮廓线）：</span>
+    <span class="en-content">Stroke the current path:</span>
 </p>
 <pre tag="javascript">painter.stroke()</pre>
 <p>
-    把当前路径画上轮廓线并填充颜色到当前路径所包裹的区域：
+    <span class="zh-content">把当前路径画上轮廓线并填充颜色到当前路径所包裹的区域：</span>
+    <span class="en-content">Stroke and fill the current path:</span>
 </p>
 <pre tag="javascript">painter.full()</pre>
 <h4>
-    贝塞尔曲线
+    <span class="zh-content">贝塞尔曲线</span>
+    <span class="en-content">Bezier Curve</span>
 </h4>
 <p>
-    二次贝塞尔曲线到：
+    <span class="zh-content">二次贝塞尔曲线到：</span>
+    <span class="en-content">Quadratic Bezier curve to:</span>
 </p>
 <pre tag="javascript">painter.quadraticCurveTo(cpx, cpy, x, y)</pre>
 <div class="warn">
-    只有一个控制点p(cpx, cpy),画笔当前的位置和p(x, y)分别是起点和终点。
+    <span class="zh-content">只有一个控制点p(cpx, cpy),画笔当前的位置和p(x, y)分别是起点和终点。</span>
+    <span class="en-content">There is only one control point p(cpx, cpy). The brush's current position and p(x, y) are the start and end points respectively.</span>
 </div>
 <p>
-    三次贝塞尔曲线到：
+    <span class="zh-content">三次贝塞尔曲线到：</span>
+    <span class="en-content">Cubic Bezier curve to:</span>
 </p>
 <pre tag="javascript">painter.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)</pre>
 <div class="warn">
-    有两个控制点p(cp1x, cp1y)和p(cp2x, cp2y),画笔当前的位置和p(x, y)分别是起点和终点。
+    <span class="zh-content">有两个控制点p(cp1x, cp1y)和p(cp2x, cp2y),画笔当前的位置和p(x, y)分别是起点和终点。</span>
+    <span class="en-content">There are two control points p(cp1x, cp1y) and p(cp2x, cp2y). The brush's current position and p(x, y) are the start and end points respectively.</span>
 </div>
 <h3>
-    记录
+    <span class="zh-content">记录</span>
+    <span class="en-content">Save/Restore</span>
 </h3>
 <p>
-    暂存当前状态：
+    <span class="zh-content">暂存当前状态：</span>
+    <span class="en-content">Save current state:</span>
 </p>
 <pre tag="javascript">painter.save()</pre>
 <p>
-    恢复上次暂存状态：
+    <span class="zh-content">恢复上次暂存状态：</span>
+    <span class="en-content">Restore the previously saved state:</span>
 </p>
 <pre tag="javascript">painter.restore()</pre>
 <h3>
-    转换画手
+    <span class="zh-content">转换画手</span>
+    <span class="en-content">Transform</span>
 </h3>
 <div class="version">
-    1.6.0 新增
+    <span class="zh-content">1.6.0 新增</span>
+    <span class="en-content">Added in 1.6.0</span>
 </div>
 <p>
-    将画手的笔原点向左右方向移动dx，向上下方向移动dy：
+    <span class="zh-content">将画手的笔原点向左右方向移动dx，向上下方向移动dy：</span>
+    <span class="en-content">Translate the painter's origin by dx horizontally and dy vertically:</span>
 </p>
 <pre tag="javascript">painter.translate(dx, dy)</pre>
 <p>
-    将画手姿势顺时针旋转deg弧度：
+    <span class="zh-content">将画手姿势顺时针旋转deg弧度：</span>
+    <span class="en-content">Rotate the painter clockwise by deg radians:</span>
 </p>
 <pre tag="javascript">painter.rotate(deg)</pre>
 <h3>
-    裁剪
+    <span class="zh-content">裁剪</span>
+    <span class="en-content">Clip</span>
 </h3>
 <div class="version">
-    0.3.0 新增
+    <span class="zh-content">0.3.0 新增</span>
+    <span class="en-content">Added in 0.3.0</span>
 </div>
 <p>
-    生成裁剪区域，后续只能在裁剪区域中渲染：
+    <span class="zh-content">生成裁剪区域，后续只能在裁剪区域中渲染：</span>
+    <span class="en-content">Create a clipping region. Subsequent rendering will only be visible within this region:</span>
 </p>
 <pre tag="javascript">painter.clip()</pre>
 <h3>
-    橡皮擦
+    <span class="zh-content">橡皮擦</span>
+    <span class="en-content">Eraser</span>
 </h3>
 <h4>
-    矩形橡皮擦
+    <span class="zh-content">矩形橡皮擦</span>
+    <span class="en-content">Rectangle Eraser</span>
 </h4>
 <pre tag="javascript">painter.clearRect(x, y, w, h)</pre>
 <h4>
-    圆形橡皮擦
+    <span class="zh-content">圆形橡皮擦</span>
+    <span class="en-content">Circle Eraser</span>
 </h4>
 <pre tag="javascript">painter.clearCircle(cx, cy, r)</pre>
 <h3>
-    drawImage
+    <span class="zh-content">drawImage</span>
+    <span class="en-content">Draw Image</span>
 </h3>
 <div class="version">
-    0.8.0 新增
+    <span class="zh-content">0.8.0 新增</span>
+    <span class="en-content">Added in 0.8.0</span>
 </div>
 <p>
-    绘制图片到画布：
+    <span class="zh-content">绘制图片到画布：</span>
+    <span class="en-content">Draw an image onto the canvas:</span>
 </p>
 <pre tag="javascript">painter.drawImage(img, x, y, w, h).then(()=>{
     // todo
 })</pre>
 <p>
-    其中img表示需要绘制的图片，可以是Image对象或url；(x,y)表示图片绘制到的位置，w和h分别表示绘制位置的宽和高。
+    <span class="zh-content">其中img表示需要绘制的图片，可以是Image对象或url；(x,y)表示图片绘制到的位置，w和h分别表示绘制位置的宽和高。</span>
+    <span class="en-content">img is the image to draw, can be an Image object or url; (x, y) is the position to draw the image; w and h are the width and height.</span>
 </p>
 <h3>
-    toDataURL
+    <span class="zh-content">toDataURL</span>
 </h3>
 <div class="version">
-    0.2.0 新增
+    <span class="zh-content">0.2.0 新增</span>
+    <span class="en-content">Added in 0.2.0</span>
 </div>
 <p>
-    获取画布的base64地址：
+    <span class="zh-content">获取画布的base64地址：</span>
+    <span class="en-content">Get the base64 URL of the canvas:</span>
 </p>
 <pre tag="javascript">painter.toDataURL().then(url=>{
     // todo
 })</pre>
 <h4>
-    格式和质量
+    <span class="zh-content">格式和质量</span>
+    <span class="en-content">Format and Quality</span>
 </h4>
 <div class="version">
-    1.6.0 新增，且只支持Web端
+    <span class="zh-content">1.6.0 新增，且只支持Web端</span>
+    <span class="en-content">Added in 1.6.0, Web only</span>
 </div>
 <pre tag="javascript">painter.toDataURL(type="image/png", encoderOptions=0.92).then(url=>{
     // todo
 })</pre>
 <ol>
     <li>
-        type：字符串类型，可选，表示要导出的图片格式，默认为 "image/png"（还可以设置为 "image/jpeg"、"image/webp" 等格式）。
+        <span class="zh-content">type：字符串类型，可选，表示要导出的图片格式，默认为 "image/png"（还可以设置为 "image/jpeg"、"image/webp" 等格式）。</span>
+        <span class="en-content">type: string, optional. Image format to export, default is "image/png" (can also be "image/jpeg", "image/webp", etc.).</span>
     </li>
     <li>
-        encoderOptions：数值类型，可选，用于指定图像的质量，默认0.92，如果设置了该参数，则只对 "image/jpeg" 和 "image/webp" 格式有效，取值范围是 0 到 1 之间，其中 1
-        表示最高质量，0 表示最低质量。对于 PNG 格式，此参数无效。
+        <span class="zh-content">encoderOptions：数值类型，可选，用于指定图像的质量，默认0.92，如果设置了该参数，则只对 "image/jpeg" 和 "image/webp" 格式有效，取值范围是 0 到 1 之间，其中 1 表示最高质量，0 表示最低质量。对于 PNG 格式，此参数无效。</span>
+        <span class="en-content">encoderOptions: number, optional. Image quality, default 0.92. Only valid for "image/jpeg" and "image/webp" formats. Range is 0 to 1, where 1 is highest quality and 0 is lowest. Not applicable for PNG format.</span>
     </li>
 </ol>
 <h3>
-    getColor
+    <span class="zh-content">getColor</span>
 </h3>
 <div class="version">
-    0.3.0 新增
+    <span class="zh-content">0.3.0 新增</span>
+    <span class="en-content">Added in 0.3.0</span>
 </div>
 <p>
-    获取画布上指定位置的颜色：
+    <span class="zh-content">获取画布上指定位置的颜色：</span>
+    <span class="en-content">Get the color at the specified position on the canvas:</span>
 </p>
 <pre tag="javascript">
     var rgba = painter.getColor(x, y)
 </pre>
 <h3>
-    getInfo
+    <span class="zh-content">getInfo</span>
 </h3>
 <div class="version">
-    0.6.0 新增
+    <span class="zh-content">0.6.0 新增</span>
+    <span class="en-content">Added in 0.6.0</span>
 </div>
 <p>
-    获取画布信息：
+    <span class="zh-content">获取画布信息：</span>
+    <span class="en-content">Get canvas information:</span>
 </p>
 <pre tag="javascript">
     var info = painter.getInfo()
 </pre>
 <p>
-    返回信息info格式如下：
+    <span class="zh-content">返回信息info格式如下：</span>
+    <span class="en-content">The returned info format is as follows:</span>
 </p>
 <pre tag="javascript">
 {
@@ -430,25 +543,31 @@ painter.config({
 }
 </pre>
 <h2>
-    区域管理
+    <span class="zh-content">区域管理</span>
+    <span class="en-content">Region Management</span>
 </h2>
 <p>
-    有时候，我们可能需要和绘制的图表进行交互，比如点击的时候，需要知道点击的是哪个区域，就可以借助下面的方法：
+    <span class="zh-content">有时候，我们可能需要和绘制的图表进行交互，比如点击的时候，需要知道点击的是哪个区域，就可以借助下面的方法：</span>
+    <span class="en-content">Sometimes we need to interact with drawn charts, for example, when clicking, we need to know which region was clicked. You can use the following methods:</span>
 </p>
 <h3>
-    设置区域
+    <span class="zh-content">设置区域</span>
+    <span class="en-content">Set Region</span>
 </h3>
 <p>
-    每次绘制一个区域前修改一下区域的名称，那么绘制的内容就会被记录起来：
+    <span class="zh-content">每次绘制一个区域前修改一下区域的名称，那么绘制的内容就会被记录起来：</span>
+    <span class="en-content">Set the region name before drawing, and the drawn content will be recorded:</span>
 </p>
 <pre tag="javascript">
 painter.setRegion(regionName)
 </pre>
 <h3>
-    获取区域
+    <span class="zh-content">获取区域</span>
+    <span class="en-content">Get Region</span>
 </h3>
 <p>
-    比如点击了画布后，传递点击的位置，就可以返回当前位置所在区域的名称：
+    <span class="zh-content">比如点击了画布后，传递点击的位置，就可以返回当前位置所在区域的名称：</span>
+    <span class="en-content">Pass the click position to get the region name at that location:</span>
 </p>
 <pre tag="javascript">
 painter.getRegion(x, y).then((regionName) => {
@@ -456,91 +575,111 @@ painter.getRegion(x, y).then((regionName) => {
 })
 </pre>
 <h3>
-    区域模式
+    <span class="zh-content">区域模式</span>
+    <span class="en-content">Region Mode</span>
 </h3>
 <p>
-    是否绘制的内容只需要进行区域记录：
+    <span class="zh-content">是否绘制的内容只需要进行区域记录：</span>
+    <span class="en-content">Whether drawn content only needs to be recorded in the region:</span>
 </p>
 <pre tag="javascript">
 painter.onlyRegion(flag)
 </pre>
 <p>
-    如果flag为true，那么后续所有的操作都不会同步到画布中，只会被区域记录，重新设置成false即可退出区域模式。
+    <span class="zh-content">如果flag为true，那么后续所有的操作都不会同步到画布中，只会被区域记录，重新设置成false即可退出区域模式。</span>
+    <span class="en-content">If flag is true, all subsequent operations will not be synchronized to the canvas, only recorded in the region. Set to false to exit region mode.</span>
 </p>
 <h3>
-    绘制模式
+    <span class="zh-content">绘制模式</span>
+    <span class="en-content">Draw Mode</span>
 </h3>
 <div class="version">
-    1.0.0 新增
+    <span class="zh-content">1.0.0 新增</span>
+    <span class="en-content">Added in 1.0.0</span>
 </div>
 <p>
-    是否只进行绘制而不影响区域相关操作：
+    <span class="zh-content">是否只进行绘制而不影响区域相关操作：</span>
+    <span class="en-content">Whether to only draw without affecting region operations:</span>
 </p>
 <pre tag="javascript">
 painter.onlyView(flag)
 </pre>
 <p>
-    如果flag为true，那么后续所有的操作都不会同步到区域中，只会被呈现到画布中，重新设置成false即可退出绘制模式。
+    <span class="zh-content">如果flag为true，那么后续所有的操作都不会同步到区域中，只会被呈现到画布中，重新设置成false即可退出绘制模式。</span>
+    <span class="en-content">If flag is true, all subsequent operations will not be synchronized to the region, only rendered to the canvas. Set to false to exit draw mode.</span>
 </p>
 <h2>
-    原生画笔
+    <span class="zh-content">原生画笔</span>
+    <span class="en-content">Native Painter</span>
 </h2>
 <div class="version">
-    0.2.0 新增
+    <span class="zh-content">0.2.0 新增</span>
+    <span class="en-content">Added in 0.2.0</span>
 </div>
 <p>
-    也就是canvas上的原生画笔，没有经过任何修饰的：
+    <span class="zh-content">也就是canvas上的原生画笔，没有经过任何修饰的：</span>
+    <span class="en-content">This is the native painter on canvas, without any modifications:</span>
 </p>
 <pre tag="javascript">
 let ctx = painter.getContext(isRegion = false)
 </pre>
 <p>
-    可以传递一个参数isRegion，默认false表示返回的是画布的，如果设置true返回的就是区域的。
+    <span class="zh-content">可以传递一个参数isRegion，默认false表示返回的是画布的，如果设置true返回的就是区域的。</span>
+    <span class="en-content">Pass isRegion parameter, default false returns the canvas context, true returns the region context.</span>
 </p>
 <h3>
-    如何配合区域控制？
+    <span class="zh-content">如何配合区域控制？</span>
+    <span class="en-content">How to Work with Region Control?</span>
 </h3>
 <p>
-    如果你使用此处的原生画笔绘制，默认是无法自动与区域管理机制配合运行的，不过，你可以手动使其一致。
+    <span class="zh-content">如果你使用此处的原生画笔绘制，默认是无法自动与区域管理机制配合运行的，不过，你可以手动使其一致。</span>
+    <span class="en-content">If you draw with this native painter, it won't automatically work with the region management mechanism by default. However, you can manually make them consistent.</span>
 </p>
 <p>
-    比如你用下面的方法获取了画布的原生画笔并绘制了一个矩形：
+    <span class="zh-content">比如你用下面的方法获取了画布的原生画笔并绘制了一个矩形：</span>
+    <span class="en-content">For example, you get the canvas's native painter and draw a rectangle:</span>
 </p>
 <pre tag="javascript">
 let ctx = painter.getContext()
 ctx.fillRect(0, 0, 100, 50)
 </pre>
 <p>
-    那么，你如果给画布添加了点击事件，并使用setRegion设置区域名称，然后在点击的时候通过getRegion来获取是否点击在这个矩形上的。
+    <span class="zh-content">那么，你如果给画布添加了点击事件，并使用setRegion设置区域名称，然后在点击的时候通过getRegion来获取是否点击在这个矩形上的。</span>
+    <span class="en-content">If you add a click event to the canvas, set the region name with setRegion, and then use getRegion to check if the click was on this rectangle.</span>
 </p>
 <p>
-    非常不幸，你会发现机制失灵了。
+    <span class="zh-content">非常不幸，你会发现机制失灵了。</span>
+    <span class="en-content">Unfortunately, you will find that the mechanism doesn't work.</span>
 </p>
 <p>
-    怎么办？非常简单，只需要再加一段代码：
+    <span class="zh-content">怎么办？非常简单，只需要再加一段代码：</span>
+    <span class="en-content">What to do? Very simple, just add another piece of code:</span>
 </p>
 <pre tag="javascript">
 let ctxRegion = painter.getContext(true)
 ctxRegion.fillRect(0, 0, 100, 50)
 </pre>
 <p>
-    下面是完整的例子代码：
+    <span class="zh-content">下面是完整的例子代码：</span>
+    <span class="en-content">Here is the complete example code:</span>
 </p>
 <example tag="api/oral-canvas" height="200px"></example>
 <div class="warn">
-    温馨提示：ctxRegion永远都不应该修改fillStyle、strokeStyle、shadowColor等色彩相关的属性。
+    <span class="zh-content">温馨提示：ctxRegion永远都不应该修改fillStyle、strokeStyle、shadowColor等色彩相关的属性。</span>
+    <span class="en-content">Note: ctxRegion should never modify color-related properties like fillStyle, strokeStyle, shadowColor, etc.</span>
 </div>
 <h2>
-    更多
+    <span class="zh-content">更多</span>
+    <span class="en-content">More</span>
 </h2>
-<h3>
-    install
-</h3>
+<h3>install</h3>
 <p>
-    扩展绘制方法：
+    <span class="zh-content">扩展绘制方法：</span>
+    <span class="en-content">Extend drawing methods:</span>
 </p>
 <div class="version">
-    1.6.0 新增
+    <span class="zh-content">1.6.0 新增</span>
+    <span class="en-content">Added in 1.6.0</span>
 </div>
 <pre tag="javascript">
 painter.install(methods: {

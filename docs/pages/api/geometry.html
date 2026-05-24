@@ -1,38 +1,47 @@
 <header>
-    立方体运算
+    <span class="zh-content">立方体运算</span>
+    <span class="en-content">Geometry Operations</span>
 </header>
 <div class="version">
-    0.5.0 新增
+    <span class="zh-content">0.5.0 新增</span>
+    <span class="en-content">Added in 0.5.0</span>
 </div>
 <h2>
-    引入
+    <span class="zh-content">引入</span>
+    <span class="en-content">Import</span>
 </h2>
 <pre tag="javascript">
 import { Geometry } from 'vislite'
 </pre>
 <h2>
-    语法
+    <span class="zh-content">语法</span>
+    <span class="en-content">Syntax</span>
 </h2>
 <pre tag="javascript">
 let geometry = new Geometry(option)
 </pre>
 <p>
-    返回立方体对象，其中option是一个json，可选，其属性如下：
+    <span class="zh-content">返回立方体对象，其中option是一个json，可选，其属性如下：</span>
+    <span class="en-content">Returns a geometry object. Option is an optional JSON with the following properties:</span>
 </p>
 <table>
     <thead>
         <tr>
             <td>
-                属性名
+                <span class="zh-content">属性名</span>
+                <span class="en-content">Property</span>
             </td>
             <td>
-                类型
+                <span class="zh-content">类型</span>
+                <span class="en-content">Type</span>
             </td>
             <td>
-                默认值
+                <span class="zh-content">默认值</span>
+                <span class="en-content">Default</span>
             </td>
             <td>
-                说明
+                <span class="zh-content">说明</span>
+                <span class="en-content">Description</span>
             </td>
         </tr>
     </thead>
@@ -48,7 +57,8 @@ let geometry = new Geometry(option)
                 0.1
             </td>
             <td>
-                精度
+                <span class="zh-content">精度</span>
+                <span class="en-content">Precision</span>
             </td>
         </tr>
         <tr>
@@ -62,86 +72,107 @@ let geometry = new Geometry(option)
                 false
             </td>
             <td>
-                是否需要法向量
+                <span class="zh-content">是否需要法向量</span>
+                <span class="en-content">Whether normal vector is needed</span>
             </td>
         </tr>
     </tbody>
 </table>
 <h2>
-    修改配置
+    <span class="zh-content">修改配置</span>
+    <span class="en-content">Modify Configuration</span>
 </h2>
 <p>
-    你创建对象的时候的属性值，后续都可以通过下面方法修改：
+    <span class="zh-content">你创建对象的时候的属性值，后续都可以通过下面方法修改：</span>
+    <span class="en-content">The property values set when creating the object can be modified later using the following method:</span>
 </p>
 <pre tag="javascript">
     geometry.config(option)
 </pre>
 <h2>
-    辅助方法
+    <span class="zh-content">辅助方法</span>
+    <span class="en-content">Helper Methods</span>
 </h2>
 <div class="version">
-    0.8.0 新增
+    <span class="zh-content">0.8.0 新增</span>
+    <span class="en-content">Added in 0.8.0</span>
 </div>
 <h3>
-    计算切割份数
+    <span class="zh-content">计算切割份数</span>
+    <span class="en-content">Calculate Split Count</span>
 </h3>
 <p>
-    根据圆半径和跨越弧度获取切割份数：
+    <span class="zh-content">根据圆半径和跨越弧度获取切割份数：</span>
+    <span class="en-content">Get the number of segments based on circle radius and arc span:</span>
 </p>
 <pre tag="javascript">
 let num = geometry.splitNum(radius, deg = Math.PI * 2)
 </pre>
 <h3>
-    物体方向转换
+    <span class="zh-content">物体方向转换</span>
+    <span class="en-content">Object Direction Transformation</span>
 </h3>
 <p>
-    返回一个点变换方法，变换按照射线(x1, y1, z1)旋转到(x2 - x1, y2 - y1, z2 - z1)方向进行：
+    <span class="zh-content">返回一个点变换方法，变换按照射线(x1, y1, z1)旋转到(x2 - x1, y2 - y1, z2 - z1)方向进行：</span>
+    <span class="en-content">Returns a point transformation method that rotates along the ray from (x1, y1, z1) to (x2 - x1, y2 - y1, z2 - z1):</span>
 </p>
 <pre tag="javascript">
 let rotateLine = geometry.rotateLine(x1, y1, z1, x2, y2, z2)
 </pre>
 <h2>
-    立方片段
+    <span class="zh-content">立方片段</span>
+    <span class="en-content">Geometry Fragments</span>
 </h2>
 <div class="version">
-    0.8.0 新增
+    <span class="zh-content">0.8.0 新增</span>
+    <span class="en-content">Added in 0.8.0</span>
 </div>
 <p>
-    所有的方法返回的
+    <span class="zh-content">所有的方法返回的</span>
+    <span class="en-content">All methods return</span>
     <span class="special">数据points</span>
-    的格式都一致，都是number类型的数组，表示点的位置或法向量值（连线用“LINES”，其余用“TRIANGLES”）。
+    <span class="zh-content">的格式都一致，都是number类型的数组，表示点的位置或法向量值（连线用"LINES"，其余用"TRIANGLES"）。</span>
+    <span class="en-content">in the same format: an array of numbers representing point positions or normal vector values ("LINES" for connections, "TRIANGLES" otherwise).</span>
 </p>
 <h3>
-    棱柱水平部分
+    <span class="zh-content">棱柱水平部分</span>
+    <span class="en-content">Prism Horizontal Part</span>
 </h3>
 <pre tag="javascript">
 let points = geometry.prismHorizontal(x, y, z, radius, num, d, beginDeg = 0, deg = Math.PI * 2)
 </pre>
 <p>
-    其中d表示水平是顶部(d = 1)还是底部(d = -1)。
+    <span class="zh-content">其中d表示水平是顶部(d = 1)还是底部(d = -1)。</span>
+    <span class="en-content">Where d indicates top (d = 1) or bottom (d = -1).</span>
 </p>
 <h3>
-    棱柱垂直部分
+    <span class="zh-content">棱柱垂直部分</span>
+    <span class="en-content">Prism Vertical Part</span>
 </h3>
 <pre tag="javascript">
 let points = geometry.prismVertical(x, y, z, radius, height, num, beginDeg = 0, deg = Math.PI * 2)
 </pre>
 <h3>
-    球体中的一瓣子
+    <span class="zh-content">球体中的一瓣子</span>
+    <span class="en-content">Sphere Segment</span>
 </h3>
 <p>
-    把一个球切割成num份，其中第index份的点数据：
+    <span class="zh-content">把一个球切割成num份，其中第index份的点数据：</span>
+    <span class="en-content">Divide a sphere into num segments and get point data for segment index:</span>
 </p>
 <pre tag="javascript">
 let points = geometry.sphereFragment(cx, cy, cz, radius, num, index)
 </pre>
 <h2>
-    立方体
+    <span class="zh-content">立方体</span>
+    <span class="en-content">Geometry Shapes</span>
 </h2>
 <p>
-    所有的方法返回的
+    <span class="zh-content">所有的方法返回的</span>
+    <span class="en-content">All methods return</span>
     <span class="special">数据result</span>
-    的格式都一致，如下：
+    <span class="zh-content">的格式都一致，如下：</span>
+    <span class="en-content">in the same format, as follows:</span>
 </p>
 <pre tag="javascript">
 Array&lt;{
@@ -149,51 +180,60 @@ Array&lt;{
     points: number[] // 点的位置或法向量值
     length: number // 点个数
 
-    // 当前点应该使用何种方法绘制（为了简化后续绘制优化，连线用“LINES”，其余用“TRIANGLES”）
+    // 当前点应该使用何种方法绘制（为了简化后续绘制优化，连线用"LINES"，其余用"TRIANGLES"）
     method: "LINES" | "TRIANGLES"
 }&gt;
 </pre>
 <h3>
-    饼柱体
+    <span class="zh-content">饼柱体</span>
+    <span class="en-content">Pie Cylinder</span>
 </h3>
 <div class="version">
-    0.8.0 新增
+    <span class="zh-content">0.8.0 新增</span>
+    <span class="en-content">Added in 0.8.0</span>
 </div>
 <pre tag="javascript">
 let result = geometry.pie(x, y, z, radius, height, beginDeg, deg)
 </pre>
 <h3>
-    圆柱体
+    <span class="zh-content">圆柱体</span>
+    <span class="en-content">Cylinder</span>
 </h3>
 <pre tag="javascript">
 let result = geometry.cylinder(x, y, z, radius, height)
 </pre>
 <p>
-    或者直接设置起终点：
+    <span class="zh-content">或者直接设置起终点：</span>
+    <span class="en-content">Or set start and end points directly:</span>
 </p>
 <div class="version">
-    0.7.0 新增
+    <span class="zh-content">0.7.0 新增</span>
+    <span class="en-content">Added in 0.7.0</span>
 </div>
 <pre tag="javascript">
 let result = geometry.cylinder(x, y, z, radius, x2, y2, z2)
 </pre>
 <h3>
-    棱柱体
+    <span class="zh-content">棱柱体</span>
+    <span class="en-content">Prism</span>
 </h3>
 <pre tag="javascript">
 let result = geometry.prism(x, y, z, radius, height, num)
 </pre>
 <p>
-    或者直接设置起终点：
+    <span class="zh-content">或者直接设置起终点：</span>
+    <span class="en-content">Or set start and end points directly:</span>
 </p>
 <div class="version">
-    0.7.0 新增
+    <span class="zh-content">0.7.0 新增</span>
+    <span class="en-content">Added in 0.7.0</span>
 </div>
 <pre tag="javascript">
 let result = geometry.prism(x, y, z, radius, x2, y2, z2, num)
 </pre>
 <h3>
-    球体
+    <span class="zh-content">球体</span>
+    <span class="en-content">Sphere</span>
 </h3>
 <pre tag="javascript">
 let result = geometry.sphere(cx, cy, cz, radius)
