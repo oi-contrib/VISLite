@@ -408,8 +408,29 @@ class Painter {
 
             if (typeof img == 'string' && !isImage) {
                 const imgInstance = new Image()
+
+                let mat: any = null // 变换矩阵
+                if (this.painter.getTransform) mat = this.painter.getTransform()
+
+                const alpha = this.painter.globalAlpha // 透明度
+                const compOp = this.painter.globalCompositeOperation // 混合模式
+                const smoothEnable = this.painter.imageSmoothingEnabled // 图像平滑开关
+                const smoothQuality = this.painter.imageSmoothingQuality // 图像平滑质量
+                
                 imgInstance.onload = () => {
+                    
+                    // 修复图片绘制和真正绘制时变换信息不一致问题
+                    // 2026年10月3日 于大理
+                    this.painter.save()
+                    if (mat) this.painter.setTransform(mat)
+                    this.painter.globalAlpha = alpha
+                    this.painter.globalCompositeOperation = compOp
+                    this.painter.imageSmoothingEnabled = smoothEnable
+                    this.painter.imageSmoothingQuality = smoothQuality
+
                     this.painter.drawImage(imgInstance, x, y, w, h)
+
+                    this.painter.restore()
                     resolve({})
                 }
                 imgInstance.src = img
