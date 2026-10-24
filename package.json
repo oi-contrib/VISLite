@@ -1,6 +1,6 @@
 {
   "name": "vislite",
-  "version": "1.11.0",
+  "version": "1.12.0",
   "description": "灵活、快速、简单的数据可视化交互式跨端前端库",
   "main": "./lib/index.umd.min.js",
   "typings": "./types/index.d.ts",
@@ -12,6 +12,9 @@
     "build": "oipage-cli disk -d ./lib && node ./build/pkg.js",
     "test": "karma start ./build/karma.config.js",
     "lint": "eslint src/**/*.ts --fix"
+  },
+  "bin": {
+    "vislite-cli": "bin/run"
   },
   "miniprogram": ".",
   "repository": {
@@ -54,9 +57,9 @@
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-typescript": "^11.1.0",
     "@types/jasmine": "^4.3.1",
-    "@typescript-eslint/eslint-plugin": "^6.14.0",
-    "@typescript-eslint/parser": "^6.14.0",
-    "eslint": "^8.56.0",
+    "@typescript-eslint/eslint-plugin": "^8.62.1",
+    "@typescript-eslint/parser": "^8.62.1",
+    "eslint": "^8.57.0",
     "karma": "^6.3.10",
     "karma-chrome-launcher": "^3.1.0",
     "karma-jasmine": "^4.0.1",
@@ -66,9 +69,9 @@
     "ts-loader": "^9.2.8",
     "tslib": "^2.5.0",
     "typescript": "^4.6.2",
-    "webpack": "^5.70.0",
-    "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.7.4"
+    "webpack": "^5.108.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^6.0.0"
   },
   "dependencies": {
     "oipage": "^2.1.0"

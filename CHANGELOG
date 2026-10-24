@@ -384,3 +384,20 @@ v1.11.0:
       - 新增功能
         1、添加skills技能
             * vislite-lib 说明本库如何使用
+v1.12.0:
+    date:2026-10-24
+    changes:
+      - 修复bug
+        1、修复 index.d.ts 中 module.d.ts 路径错误问题
+        2、修复SVG.toDataURL若干问题
+            * 未对data URI进行URL编码，遇到"#"/中文等字符导致出错的bug
+            * 使用固定 setTimeout(..., 100) 等待图片加载，复杂SVG在100ms内未渲染完成导致截图丢失的bug
+        3、修复Canvas.drawImage图片绘制和真正绘制时变换信息不一致问题
+      - 优化改造
+        1、优化mergeOption，返回合并后的配置项
+        2、完善 skills/vislite-lib
+        3、去掉TS编译头部提示
+        4、优化assemble累加逻辑，避免每次都做toFixed格式化，统一在返回前格式化
+      - 新增功能
+        1、vislite-cli命令
+            * skills相关操作

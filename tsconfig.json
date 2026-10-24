@@ -1,14 +1,21 @@
 {
   "compilerOptions": {
     "sourceMap": true,
-    "ignoreDeprecations": "5.0",
     "target": "ES5",
     "module": "ES6",
     "moduleResolution": "node",
     "strict": true,
     "strictPropertyInitialization": false,
-    "noImplicitThis": false
+    "noImplicitThis": false,
+    "ignoreDeprecations": "6.0"
   },
+  "include": [
+    "node_modules/@types",
+    "src/**/*",
+    "package/**/*",
+    "test/unit/**/*",
+    "module.d.ts"
+  ],
   "exclude": [
     "test/uniapp2",
     "test/uniapp3",

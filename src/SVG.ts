@@ -39,17 +39,26 @@ class SVG extends OralSVG implements SVGType {
     }
 
     toDataURL(): Promise<string> {
-        return new Promise(resolve => {
+        return new Promise((resolve, reject) => {
             const width = this.__el.clientWidth, height = this.__el.clientHeight
 
             const img = document.createElement('img');
 
             img.setAttribute('width', width + "");
             img.setAttribute('height', height + "");
-            const base64_svg = "data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' width='" + width + "' height='" + height + "'>" + this.__svg.innerHTML.replace(/"/g, "'") + "</svg>";
+
+            // 对SVG内容进行encodeURIComponent转义，避免"#"/中文等字符破坏data URI
+            // 2026年9月22日
+            const innerSVG = this.__svg.innerHTML.replace(/"/g, "'")
+            const base64_svg = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(
+                "<svg xmlns='http://www.w3.org/2000/svg' width='" + width + "' height='" + height + "'>" + innerSVG + "</svg>"
+            );
             img.setAttribute('src', base64_svg);
 
-            setTimeout(function () {
+            // 监听onload以替代之前的固定 setTimeout(..., 100)
+            // 复杂SVG在100ms内可能还未完成渲染，这里可以保证图片真正加载完成后才截图
+            // 2026年9月22日 于南宁
+            img.onload = () => {
 
                 // 准备画布
                 const canvas = document.createElement('canvas');
@@ -61,8 +70,16 @@ class SVG extends OralSVG implements SVGType {
                 // 绘制截图
                 if (painter) painter.drawImage(img, 0, 0, width, height);
 
-                resolve(canvas.toDataURL());
-            }, 100);
+                try {
+                    resolve(canvas.toDataURL());
+                } catch (e) {
+                    reject(e);
+                }
+            }
+
+            img.onerror = (e) => {
+                reject(e)
+            }
         })
     }
 }

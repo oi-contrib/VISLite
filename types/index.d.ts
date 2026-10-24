@@ -4,7 +4,6 @@
  */
 
 /// <reference path="./uni-canvas.d.ts" />
-/// <reference path="./module.d.ts" />
 
 import CardinalType from './Cardinal'
 import HermiteType from './Hermite'

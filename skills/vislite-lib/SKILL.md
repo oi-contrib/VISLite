@@ -48,7 +48,7 @@ npm install --save vislite
 
 ### 工具函数
 
-- [Utilities.md](Utilities.md) - ruler 刻度尺、animation 动画、getLoopColors 循环颜色、throttle 节流
+- [Utilities.md](Utilities.md) - ruler 刻度尺、animation 动画、getLoopColors 循环颜色、throttle 节流、initOption/mergeOption 配置处理
 
 ## 画笔平台支持说明
 
@@ -162,7 +162,11 @@ import {
     getWebGLContext,
     Shader,
     Texture,
-    Buffer
+    Buffer,
+
+    // 配置项
+    initOption,
+    mergeOption
 } from 'vislite';
 ```
 

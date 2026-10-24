@@ -34,6 +34,7 @@ let option = initOption(setOption, defaultOption)
 <pre tag="javascript">
 import { mergeOption } from "vislite"
 
-// 会把新配置合并到旧配置中
-mergeOption(oldOption, newOption)
+// 会把新配置合并到旧配置中（会修改旧配置）
+// v.12.0 新增返回option
+let option = mergeOption(oldOption, newOption)
 </pre>

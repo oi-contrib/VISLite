@@ -9,5 +9,5 @@ export interface initOptionType {
  * 合并配置
  */
 export interface mergeOptionType {
-    (oldOption: any, newOption: any): void
+    (oldOption: any, newOption: any): any
 }

@@ -27,4 +27,6 @@ export function mergeOption(oldOption: any, newOption: any) {
         }
 
     })(oldOption, newOption)
+
+    return oldOption
 }

@@ -175,3 +175,88 @@ import { assemble } from 'vislite';
 ```
 
 返回给定范围内的随机颜色值，用于 Canvas 区域检测功能。
+
+---
+
+## initOption 初始化配置
+
+**浅合并**用户配置到默认配置中，用于初始化组件选项。
+
+### 引入
+
+```js
+import { initOption } from 'vislite';
+```
+
+### 使用方法
+
+```js
+var option = initOption(setOption, defaultOption);
+```
+
+### 参数说明
+
+- **setOption**: 用户传入的配置对象
+- **defaultOption**: 默认配置对象
+
+### 返回值
+
+返回合并后的配置对象（会修改 defaultOption）。
+
+### 示例
+
+```js
+var defaultOption = { width: 100, height: 100, color: 'red' };
+var setOption = { width: 200, color: 'blue' };
+
+var option = initOption(setOption, defaultOption);
+console.log(option); // { width: 200, height: 100, color: 'blue' }
+```
+
+---
+
+## mergeOption 合并配置
+
+**深合并**两个配置对象，递归处理嵌套对象，用于更新组件选项。
+
+### 引入
+
+```js
+import { mergeOption } from 'vislite';
+```
+
+### 使用方法
+
+```js
+var option = mergeOption(oldOption, newOption);
+```
+
+### 参数说明
+
+- **oldOption**: 旧配置对象
+- **newOption**: 新配置对象
+
+### 返回值
+
+返回合并后的配置对象（会修改 oldOption）。
+
+### 示例
+
+```js
+var oldOption = {
+    size: { width: 100, height: 100 },
+    color: 'red'
+};
+var newOption = {
+    size: { width: 200 },
+    border: '1px solid black'
+};
+
+var option = mergeOption(oldOption, newOption);
+console.log(option);
+// {
+//     size: { width: 200, height: 100 },
+//     color: 'red',
+//     border: '1px solid black'
+// }
+```

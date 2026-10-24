@@ -8,7 +8,10 @@ export default function (begin: number, end: number, step: number, count: number
 
             // 如果当前位可以进1
             if (val[i] + step < end) {
-                val[i] = +(val[i] + step).toFixed(7)
+
+                // 直接累加，最后一次性格式化，避免每次都做toFixed+Number转换
+                // 2026年9月22日 于南宁
+                val[i] = val[i] + step
                 break
             }
 
@@ -16,6 +19,11 @@ export default function (begin: number, end: number, step: number, count: number
             else if (i < count - 1) {
                 val[i] = begin
             }
+        }
+
+        // 返回前对每一位做一次toFixed(7)，消除浮点累积误差
+        for (let k = 0; k < val.length; k++) {
+            val[k] = +val[k].toFixed(7)
         }
 
         return val

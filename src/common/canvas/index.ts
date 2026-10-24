@@ -119,7 +119,7 @@ class Canvas extends PainterRender {
             // 否则就是在Promise中
             else {
                 (imgData as any).then((data: Uint8ClampedArray) => {
-                    currentRGBA = data
+                    currentRGBA = data as any
                     doit()
                 })
             }

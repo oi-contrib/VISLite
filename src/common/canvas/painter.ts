@@ -416,9 +416,9 @@ class Painter {
                 const compOp = this.painter.globalCompositeOperation // 混合模式
                 const smoothEnable = this.painter.imageSmoothingEnabled // 图像平滑开关
                 const smoothQuality = this.painter.imageSmoothingQuality // 图像平滑质量
-                
+
                 imgInstance.onload = () => {
-                    
+
                     // 修复图片绘制和真正绘制时变换信息不一致问题
                     // 2026年10月3日 于大理
                     this.painter.save()

@@ -1,0 +1,22 @@
+#!/usr/bin/env node
+
+'use strict';
+
+process.title = 'vislite/cli';
+
+const formatArgv = require("./formatArgv.js");
+
+if (process.argv[2] === "skills") {
+
+    let argvObj = formatArgv(process.argv, {
+        "-f": "--force",
+        "-c": "--copy"
+    }, true);
+
+    require("./skills.js")(argvObj);
+}
+
+// 默认，帮助
+else {
+    require("./help.js")();
+}

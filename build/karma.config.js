@@ -1,7 +1,3 @@
-
-// 下列配置项解释：
-// https://zxl20070701.github.io/notebook/#/program/course/test/karma/config
-
 module.exports = function (config) {
     config.set({
         basePath: '',

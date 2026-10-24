@@ -48,8 +48,34 @@ module.exports = {
             forOf: false, // for (const x of array) { ... }
         },
     },
+    watchOptions: {
+        // 彻底忽略不需要监听的目录
+        ignored: [
+            'node_modules',
+            'dist',
+            '.git',
+            'build'
+        ],
+        aggregateTimeout: 500, // 延迟编译，减少频繁触发
+        poll: false
+    },
     devServer: {
-        static: './',
-        port: 20000
+        static: {
+            directory: join(__dirname, '../'),
+            watch: false
+        },
+        port: 20000,
+        hot: true,
+        compress: true,
+        // 只监听业务代码目录，不监听根目录所有文件
+        watchFiles: [
+            join(__dirname, '../src'),
+            join(__dirname, '../test/example'),
+            join(__dirname, '../test/benchmark')
+        ],
+        // 关闭 devMiddleware 多余文件监听
+        devMiddleware: {
+            stats: 'errors-warnings'
+        }
     }
 };
