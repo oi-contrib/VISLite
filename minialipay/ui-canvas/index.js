@@ -57,7 +57,7 @@ Component({
                                     panvas.toTempFilePath({
                                         x: 0,
                                         y: 0,
-                                        width: this.props.widht,
+                                        width: this.props.width,
                                         height: this.props.height,
                                         success(e) {
                                             resolveUrl(e.tempFilePath);
