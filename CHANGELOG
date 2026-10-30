@@ -401,8 +401,8 @@ v1.12.0:
       - 新增功能
         1、vislite-cli命令
             * skills相关操作
-v1.13.0:
-    date:
+v1.12.1:
+    date:2026-10-30
     changes:
       - 修复bug
         1、修复支付宝小程序toDataURL一个独立的宽度拼写错误
