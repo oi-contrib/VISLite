@@ -3,16 +3,39 @@ const path = require("path")
 const { rollup } = require('rollup')
 const { minify } = require("terser")
 const rollupConfig = require('./rollup.config.js')
-const package = require("../package.json")
+const packageJson = require("../package.json")
 
-let getFormat = (filename, format) => {
-    if (filename == "index.ts") {
-        return format
-    } else {
-        return "es"
+let banner = (bundleName) => `/*!
+* ${bundleName}VISLite JavaScript Library v${packageJson.version}
+* ${packageJson.repository.url}
+*/`
+
+// package/ 下每个子目录是一个对外模块；index.ts 与 index.esm.ts 是两个入口文件
+const moduleDirs = fs.readdirSync("./package", { withFileTypes: true })
+    .filter(entry => entry.isDirectory())
+    .map(entry => entry.name)
+    .sort()
+
+// 两个入口：index.ts 只导出默认聚合对象（UMD 全局必须是 VISLite.Canvas 这种结构），
+// index.esm.ts 追加具名导出，供 `import { Canvas } from "vislite"` 与摇树使用
+const entries = [
+    {
+        input: "./package/index.ts",
+        file: "./lib/index.umd.js",
+        format: "umd",
+        name: "VISLite",
+        banner: banner("")
+    },
+    {
+        input: "./package/index.esm.ts",
+        file: "./lib/index.es.js",
+        format: "es",
+        exports: "named",
+        banner: banner("")
     }
-}
+]
 
+// 生成 types/module.d.ts（供 "vislite/lib/xxx/index.es.js" 这种单独引入时使用）
 fs.writeFileSync(path.join("./types/module.d.ts"), `// VISLite 模块定义 （程序自动生成，请勿修改）
 `)
 function createModule(bundlename, filename) {
@@ -25,117 +48,105 @@ declare module "vislite/lib/${bundlename}/${filename}.js"{
 }
 
 fs.writeFileSync("./docs/js/system.js", `window.VISLite_system = {
-    "version": "${package.version}"
+    "version": "${packageJson.version}"
 };`)
-
-let banner = (bundleName) => bundleName === "" ? `/*!
-* ${bundleName}VISLite JavaScript Library v${package.version}
-* ${package.repository.url}
-*/`: ""
 
 console.log(`\x1b[31m
 > Rollup 打包
 \x1b[0m`)
 
-let sourceFiles = fs.readdirSync("./package")
-new Promise((resolve, reject) => {
-    (function doRollup(index) {
-        if (index >= sourceFiles.length) {
-            resolve()
-            return
-        }
-        let folder = sourceFiles[index]
+async function buildEntry(entry) {
+    const bundle = await rollup({
+        input: entry.input,
+        plugins: rollupConfig.plugins
+    })
 
-        let isMainBundle = folder == 'index.ts'
-        let folderPath = isMainBundle ? "" : (folder + "/")
+    await bundle.write({
+        name: entry.name,
+        format: entry.format,
+        exports: entry.exports,
+        banner: entry.banner,
+        file: entry.file
+    })
 
-        let sourceFile = "./package/" + folderPath + "index.ts"
-        let targetFile = "./lib/" + folderPath + "index." + getFormat(folder, rollupConfig.output.format) + ".js"
+    console.log(`✔ ${entry.input} → ${entry.file}`)
+}
 
-        rollup({
-            input: sourceFile,
-            plugins: rollupConfig.plugins
-        }).then(bundle => {
-            bundle.write({
-                name: "VISLite",
-                format: getFormat(folder, rollupConfig.output.format),
-                banner: banner(isMainBundle ? "" : (folder + " of ")),
-                file: targetFile
-            }).then(() => {
-                console.log(`✔ [${index}] ${sourceFile} → ${targetFile}`)
-                doRollup(index + 1)
-            }).catch((e) => {
-                console.log(e)
-                reject(`✘ [${index}] ${sourceFile} → ${targetFile} [2]`)
-            })
-        }).catch((e) => {
-            console.log(e)
-            reject(`✘ [${index}] ${sourceFile} → ${targetFile} [1]`)
-        })
-    })(0)
-}).then((msg) => {
+async function buildModule(folder, index) {
+    let sourceFile = "./package/" + folder + "/index.ts"
+    let targetFile = "./lib/" + folder + "/index.es.js"
 
+    const bundle = await rollup({
+        input: sourceFile,
+        plugins: rollupConfig.plugins
+    })
+
+    await bundle.write({
+        name: "VISLite",
+        format: "es",
+        banner: banner(folder + " of "),
+        file: targetFile
+    })
+
+    console.log(`✔ [${index}] ${sourceFile} → ${targetFile}`)
+}
+
+async function build() {
+    for (let index = 0; index < moduleDirs.length; index++) {
+        await buildModule(moduleDirs[index], index)
+    }
+
+    for (let index = 0; index < entries.length; index++) {
+        await buildEntry(entries[index])
+    }
+}
+
+async function compress() {
     console.log(`\x1b[31m
 > Terser 压缩混淆
 \x1b[0m`)
 
-    new Promise((resolve, reject) => {
+    for (let index = 0; index < moduleDirs.length; index++) {
+        let folder = moduleDirs[index]
+        let sourceFile = "./lib/" + folder + "/index.es.js"
+        let targetFile = "./lib/" + folder + "/index.es.min.js"
 
-        (function doTerser(index) {
-            if (index >= sourceFiles.length) {
-                resolve()
-                return
-            }
-
-            let folder = sourceFiles[index]
-
-            let folderPath = folder == 'index.ts' ? "" : (folder + "/")
-
-            let sourceFile = "./lib/" + folderPath + "index." + getFormat(folder, rollupConfig.output.format) + ".js"
-            let targetFile = "./lib/" + folderPath + "index." + getFormat(folder, rollupConfig.output.format) + ".min.js"
-
-            // 准备types文件
-            if (folder != 'index.ts') {
-
-                let typesCode = `import { ${folder} } from "../../types/index"
+        // 准备types文件
+        let typesCode = `import { ${folder} } from "../../types/index"
 
 export default ${folder}`
 
-                fs.writeFileSync("./lib/" + folderPath + "index." + getFormat(folder, rollupConfig.output.format) + ".d.ts", typesCode)
-                fs.writeFileSync("./lib/" + folderPath + "index." + getFormat(folder, rollupConfig.output.format) + ".min.d.ts", typesCode)
+        fs.writeFileSync("./lib/" + folder + "/index.es.d.ts", typesCode)
+        fs.writeFileSync("./lib/" + folder + "/index.es.min.d.ts", typesCode)
 
-                createModule(folder, "index.es")
-                createModule(folder, "index.es.min")
-            }
+        createModule(folder, "index.es")
+        createModule(folder, "index.es.min")
 
-            minify(fs.readFileSync(sourceFile, "utf-8"), {
-                toplevel: true,
-            }).then((data) => {
-                fs.writeFileSync(targetFile, data.code)
+        const data = await minify(fs.readFileSync(sourceFile, "utf-8"), {
+            toplevel: true,
+        })
 
-                console.log(`✔ [${index}] ${sourceFile} → ${targetFile}`)
-                doTerser(index + 1)
-            }).catch((e) => {
-                console.log(e)
-                error(`\x1b[31m✘ [${index}] ${sourceFile} → ${targetFile} [3]\x1b[0m`)
-                reject()
-            })
+        fs.writeFileSync(targetFile, data.code)
 
-        })(0)
+        console.log(`✔ [${index}] ${sourceFile} → ${targetFile}`)
+    }
 
-    }).then(() => {
+    // 主入口只压缩 UMD；index.es.js 保持可读，交给使用方构建工具处理
+    const umdData = await minify(fs.readFileSync("./lib/index.umd.js", "utf-8"), {
+        toplevel: true,
+    })
+    fs.writeFileSync("./lib/index.umd.min.js", umdData.code)
+    console.log(`✔ ./lib/index.umd.js → ./lib/index.umd.min.js`)
+}
 
-        console.log(`
+build().then(compress).then(() => {
+    console.log(`
 ✔ 完毕
 `)
-
-    }).catch((e) => {
-        console.log(`\x1b[31m
+}).catch((e) => {
+    console.log(`\x1b[31m
 ✘ 失败
 \x1b[0m`)
-        console.log(e)
-    })
-
-}).catch((e) => {
-    console.log(e)
+    console.error(e)
+    process.exitCode = 1
 })
