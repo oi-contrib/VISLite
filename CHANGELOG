@@ -409,3 +409,6 @@ v2.0.0:
       - 优化改造
         1、工程化
             * 修复 tsconfig 包含 node_modules/@types 导致 tsc 开箱报错
+            * 修复 npm test 未单次运行导致进程挂起
+            * 修复 lint 脚本在 sh 下只展开一层目录、漏检 src 根级文件
+            * 修复 build 脚本 terser 失败分支调用未定义函数

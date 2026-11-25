@@ -1,10 +1,12 @@
-const { readdirSync } = require('fs');
+const { readdirSync, statSync } = require('fs');
 const { join } = require("path");
 
 // 用例测试
 let example = {};
 for (let item of readdirSync(join(__dirname, '../test/example'))) {
-    example["example_" + item] = './test/example/' + item + '/index.ts';
+    if (statSync(join(__dirname, '../test/example', item)).isDirectory()) {
+        example["example_" + item] = './test/example/' + item + '/index.ts';
+    }
 }
 
 module.exports = {
@@ -37,7 +39,9 @@ module.exports = {
 
     },
     output: {
-        filename: pathData => './test/' + pathData.chunk.name.replace(/\_/g, '/') + '/dist.js',
+        filename: pathData => pathData.chunk.name === 'benchmark'
+            ? './test/benchmark/dist.js'
+            : './test/example/' + pathData.chunk.name.replace(/^example_/, '').replace(/\_/g, '/') + '/dist.js',
 
         // https://webpack.js.org/configuration/output/#outputenvironment
         environment: {
