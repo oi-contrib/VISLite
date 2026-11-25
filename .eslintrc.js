@@ -19,6 +19,14 @@ module.exports = {
     rules: {
         "@typescript-eslint/ban-types": "off",
         "@typescript-eslint/no-explicit-any": "off",
+        // 历史 API（install、渐变工厂等）大量使用 Function 作为回调类型，保持对外签名不变
+        "@typescript-eslint/no-unsafe-function-type": "off",
+        // 允许未使用的函数参数与 catch 变量（兼容各端差异实现）
+        "@typescript-eslint/no-unused-vars": ["error", {
+            "args": "none",
+            "caughtErrors": "none",
+            "ignoreRestSiblings": true
+        }],
         "@typescript-eslint/no-this-alias": ["error", {
             "allowedNames": ["_this"]
         }]

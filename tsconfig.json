@@ -7,10 +7,9 @@
     "strict": true,
     "strictPropertyInitialization": false,
     "noImplicitThis": false,
-    "ignoreDeprecations": "6.0"
+    "skipLibCheck": true
   },
   "include": [
-    "node_modules/@types",
     "src/**/*",
     "package/**/*",
     "test/unit/**/*",
@@ -21,6 +20,8 @@
     "test/uniapp3",
     "test/alipay",
     "test/miniprogram",
-    "test/script"
+    "test/example",
+    "test/benchmark",
+    "test/scriptTag"
   ]
 }

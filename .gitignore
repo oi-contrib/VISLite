@@ -7,3 +7,6 @@ dist
 miniprogram_npm
 types/module.d.ts
 *.tgz
+test/uniapp2/uni-app/
+test/alipay/components/vislite
+.vscode
