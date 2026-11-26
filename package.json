@@ -9,6 +9,19 @@
   "unpkg": "./lib/index.umd.min.js",
   "jsdelivr": "./lib/index.umd.min.js",
   "sideEffects": false,
+  "files": [
+    "lib",
+    "types",
+    "uni-app",
+    "miniprogram",
+    "minialipay",
+    "README.md",
+    "README-en.md",
+    "CHANGELOG",
+    "LICENSE",
+    "AUTHORS.txt",
+    ".mailmap"
+  ],
   "scripts": {
     "install:all": "npm install && npm run install:uniapp2 && npm run install:uniapp3 && npm run install:alipay && npm run install:miniprogram",
     "install:uniapp2": "npm --prefix test/uniapp2 install",
