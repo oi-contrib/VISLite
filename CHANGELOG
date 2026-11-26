@@ -416,6 +416,10 @@ v2.0.0:
             * 修复 translate、rotate 未同步区域画布，导致变换后区域命中偏移
         2、SVG画笔
             * 修复文字旋转参数 deg 被后续 transform 覆盖而失效
+        3、布局
+            * 修复 BarLayout 使用 || 0 导致全负数据的最大值、最小值被误归零
+            * 修复 BarLayout 所有值相同时除零得到 NaN
+            * 修复 BarLayout 过渡期间不刷新，画面停留在旧状态
       - 优化改造
         1、打包与分发
             * 新增具名 ESM 入口（module 字段）与 types 字段，Web 端支持按需引入和摇树优化
@@ -431,3 +435,5 @@ v2.0.0:
             * 新增 off、destroy，支持解绑事件与销毁画笔
             * bind 支持 touch 等没有 offsetX/offsetY 的事件
             * 补齐 fillTexts、strokeTexts、fullTexts 的类型定义
+        2、布局
+            * BarLayout 新增过渡插值，unbind 时停止动画

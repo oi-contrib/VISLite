@@ -35,6 +35,7 @@ class BarLayout implements BarLayoutType {
     private __rback: (bar: BarResultType) => void
     private __oralBar: any
     private __preBar: BarResultType | null
+    private __stopAnimation: any = null
 
     use(initBar: any) {
         const bar: BarResultType = {
@@ -77,7 +78,12 @@ class BarLayout implements BarLayoutType {
             throw new Error('No data leads to parsing errors')
         }
 
-        const rulerArray = ruler(maxValue || 0, minValue || 0, 5)
+        // 修复：使用 || 0 会把全负数据的最大值/最小值误归零
+        const rulerArray = ruler(
+            maxValue === void 0 ? 0 : maxValue,
+            minValue === void 0 ? 0 : minValue,
+            5
+        )
 
         let categoryLen // 分类轴长度
         let valueLen // 数值轴长度
@@ -130,8 +136,10 @@ class BarLayout implements BarLayoutType {
             }
         }
 
-        // 根据值获取长度
-        const singleValueLen = valueLen / (rulerArray[rulerArray.length - 1] - rulerArray[0])
+        // 根据值获取长度（所有值相同时刻度尺只有一个元素，避免除零得到 NaN）
+        const rulerMin = rulerArray[0]
+        const rulerMax = rulerArray[rulerArray.length - 1]
+        const singleValueLen = rulerMax === rulerMin ? 0 : valueLen / (rulerMax - rulerMin)
         const getLenByValue = (value: number) => {
             return singleValueLen * (value - rulerArray[0])
         }
@@ -219,27 +227,56 @@ class BarLayout implements BarLayoutType {
     }
 
     unbind() {
+        if (this.__stopAnimation) {
+            this.__stopAnimation.stop()
+            this.__stopAnimation = null
+        }
         this.__rback = () => null
         this.__oralBar = null
         this.__preBar = null
         return this
     }
 
+    // 按进度插值生成中间态（结构不一致时直接返回目标态，保证不会出现空白）
+    private __interpolate(from: BarResultType | null, to: BarResultType, deep: number): BarResultType {
+        const result = JSON.parse(JSON.stringify(to))
+
+        if (!from || !from.node || from.node.length !== result.node.length) return result
+
+        for (let i = 0; i < result.node.length; i++) {
+            const fromNode = from.node[i], toNode = result.node[i]
+            if (!fromNode || !fromNode.bar || fromNode.bar.length !== toNode.bar.length) return result
+
+            for (let j = 0; j < toNode.bar.length; j++) {
+                const fromBar: any = fromNode.bar[j], toBar: any = toNode.bar[j]
+
+                for (const key of ["x", "y", "width", "height"]) {
+                    if (typeof fromBar[key] === "number" && typeof toBar[key] === "number") {
+                        toBar[key] = fromBar[key] + (toBar[key] - fromBar[key]) * deep
+                    }
+                }
+            }
+        }
+
+        return result
+    }
+
     doUpdate() {
         const newBar = this.use(this.__oralBar)
 
-        const cacheBar = JSON.parse(JSON.stringify(newBar))
+        // 首次渲染或结构变化时直接展示最终结果
+        if (!this.__preBar) {
+            this.__preBar = newBar
+            this.__rback(JSON.parse(JSON.stringify(newBar)))
+            return this
+        }
 
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        animation((deep) => {
+        if (this.__stopAnimation) this.__stopAnimation.stop()
 
-            if (this.__preBar) {
-                // todo
-            } else {
-                this.__rback(cacheBar)
-            }
-
+        this.__stopAnimation = animation((deep) => {
+            this.__rback(this.__interpolate(this.__preBar, newBar, deep))
         }, this.__option.duration, () => {
+            this.__stopAnimation = null
             this.__preBar = newBar
             this.__rback(this.__preBar)
         })
