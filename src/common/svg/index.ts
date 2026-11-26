@@ -63,6 +63,14 @@ class SVG {
         return this.__useEl
     }
 
+    // 计算文字最终变换（合并当前变换与文字自身旋转）
+    // 修复：initText 写入的 rotate 会被后续 transform 覆盖，导致 deg 失效
+    // 2026年11月25日 于南京
+    private __textTransform(x: number, y: number, deg: number) {
+        return (this.__transform_current ? this.__transform_current + " " : "") +
+            "rotate(" + (deg % 360) + "," + x + "," + y + ")"
+    }
+
     // 追加节点
     // el可以是结点或字符串，字符串的话表示节点名称
     // context可选，表示追加位置，可选，默认根svg
@@ -134,7 +142,7 @@ class SVG {
     fillText(text: string, x: number, y: number, deg: number = 0) {
         initText(this.__useEl, this.__config, x, y, deg)
         this.attr({
-            transform: this.__transform_current
+            transform: this.__textTransform(x, y, deg)
         })
         this.__useEl.textContent = text
         fill(this.__useEl, this.__config)
@@ -143,7 +151,7 @@ class SVG {
     strokeText(text: string, x: number, y: number, deg: number = 0) {
         initText(this.__useEl, this.__config, x, y, deg)
         this.attr({
-            transform: this.__transform_current
+            transform: this.__textTransform(x, y, deg)
         })
         this.__useEl.textContent = text
         stroke(this.__useEl, this.__config)
@@ -152,7 +160,7 @@ class SVG {
     fullText(text: string, x: number, y: number, deg: number = 0) {
         initText(this.__useEl, this.__config, x, y, deg)
         this.attr({
-            transform: this.__transform_current
+            transform: this.__textTransform(x, y, deg)
         })
         this.__useEl.textContent = text
         full(this.__useEl, this.__config)

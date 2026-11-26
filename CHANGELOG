@@ -414,6 +414,8 @@ v2.0.0:
             * 修复 drawImage 图片加载失败时 Promise 永远挂起
             * 修复 strokeTexts、fullTexts 的区域记录错误调用了 fillTexts
             * 修复 translate、rotate 未同步区域画布，导致变换后区域命中偏移
+        2、SVG画笔
+            * 修复文字旋转参数 deg 被后续 transform 覆盖而失效
       - 优化改造
         1、打包与分发
             * 新增具名 ESM 入口（module 字段）与 types 字段，Web 端支持按需引入和摇树优化
