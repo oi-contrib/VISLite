@@ -411,6 +411,9 @@ v2.0.0:
             * 修复 getRegion 在小程序端读取失败（坐标越界、画布已销毁）时 Promise 永远挂起
             * 修复区域命中使用精确 rgb 比对导致抗锯齿边缘、细线区域不响应
             * 修复 clearCircle 修改合成模式后未恢复，影响后续绘制
+            * 修复 drawImage 图片加载失败时 Promise 永远挂起
+            * 修复 strokeTexts、fullTexts 的区域记录错误调用了 fillTexts
+            * 修复 translate、rotate 未同步区域画布，导致变换后区域命中偏移
       - 优化改造
         1、打包与分发
             * 新增具名 ESM 入口（module 字段）与 types 字段，Web 端支持按需引入和摇树优化

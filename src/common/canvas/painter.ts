@@ -136,7 +136,7 @@ class Painter {
     }
     strokeTexts(contents: string, x: number, y: number, width: number, lineHeight: number = 1.2, deg: number = 0) {
         let h = 0
-        if (this.__region && !this.__onlyView) h = this.__region.fillTexts(contents, x, y, width, lineHeight)
+        if (this.__region && !this.__onlyView) h = this.__region.strokeTexts(contents, x, y, width, lineHeight)
 
         if (this.__isPainter && this.__onlyRegion) return h
 
@@ -152,7 +152,7 @@ class Painter {
     }
     fullTexts(contents: string, x: number, y: number, width: number, lineHeight: number = 1.2, deg: number = 0) {
         let h = 0
-        if (this.__region && !this.__onlyView) h = this.__region.fillTexts(contents, x, y, width, lineHeight)
+        if (this.__region && !this.__onlyView) h = this.__region.fullTexts(contents, x, y, width, lineHeight)
 
         if (this.__isPainter && this.__onlyRegion) return h
 
@@ -418,6 +418,10 @@ class Painter {
                 const smoothEnable = this.painter.imageSmoothingEnabled // 图像平滑开关
                 const smoothQuality = this.painter.imageSmoothingQuality // 图像平滑质量
 
+                imgInstance.onerror = () => {
+                    resolve({})
+                }
+
                 imgInstance.onload = () => {
 
                     // 修复图片绘制和真正绘制时变换信息不一致问题
@@ -445,10 +449,14 @@ class Painter {
 
     // 转换画布
     translate(dx: number, dy: number) {
+        if (this.__region && !this.__onlyView) this.__region.translate(dx, dy)
+
         this.painter.translate(dx, dy)
         return this
     }
     rotate(deg: number) {
+        if (this.__region && !this.__onlyView) this.__region.rotate(deg)
+
         this.painter.rotate(deg)
         return this
     }
