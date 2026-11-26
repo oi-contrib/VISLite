@@ -293,12 +293,13 @@ class Painter {
 
         if (this.__isPainter && this.__onlyRegion) return this
 
+        this.painter.save()
         this.painter.beginPath()
         this.painter.globalCompositeOperation = "destination-out"
         this.painter.arc(cx, cy, r, 0, Math.PI * 2)
         this.painter.fill()
-        this.painter.globalCompositeOperation = "source-over"
         this.painter.closePath()
+        this.painter.restore()
         return this
     }
 
