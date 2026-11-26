@@ -25,27 +25,26 @@ class Canvas extends OralCanvas implements CanvasType {
         width = width || el.clientWidth
         height = height || el.clientHeight
 
-        let ViewCanvas: HTMLCanvasElement, RegionCanvas: HTMLCanvasElement | null = null
+        let ViewCanvas: HTMLCanvasElement | null = null, RegionCanvas: HTMLCanvasElement | null = null
 
         const _el = el as any
+        const cached = _el._vislite_canvas_
 
-        // 如果已经初始化过了
-        if (_el._vislite_canvas_) {
-            ViewCanvas = _el._vislite_canvas_[0]
-            RegionCanvas = _el._vislite_canvas_[1]
+        // 兼容历史缓存：可能是数组（Canvas 创建），也可能是单个画布（旧版 WebGL 创建）
+        if (Array.isArray(cached)) {
+            ViewCanvas = cached[0] || null
+            RegionCanvas = cached[1] || null
+        } else if (cached) {
+            ViewCanvas = cached
         }
 
-        // 否则就初始化
-        else {
+        // 缓存丢失，或画布已经被 WebGL 等其它画笔占用（无法再获取 2d 上下文），则重建
+        if (!ViewCanvas || !ViewCanvas.getContext || !ViewCanvas.getContext('2d')) {
             ViewCanvas = document.createElement('canvas')
             el.appendChild(ViewCanvas)
 
-            if (option.region) {
-                RegionCanvas = document.createElement('canvas')
-            }
-
+            RegionCanvas = option.region ? document.createElement('canvas') : null
             _el._vislite_canvas_ = [ViewCanvas, RegionCanvas]
-
             el.setAttribute('vislite', 'Canvas')
         }
 
@@ -77,12 +76,56 @@ class Canvas extends OralCanvas implements CanvasType {
         })
     }
 
+    // 事件绑定记录，用于解绑和销毁
+    private __listeners: Array<{ type: string, handler: (event: any) => void }> = []
+
     bind(eventName: string, callback: (regionName: string, x: number, y: number) => void) {
-        this.__el.addEventListener(eventName, (event: any) => {
-            this.getRegion(event.offsetX, event.offsetY).then(regionName => {
-                callback(regionName, event.offsetX, event.offsetY)
+        const handler = (event: any) => {
+            let x = event.offsetX, y = event.offsetY
+
+            // touch 等事件没有 offsetX/offsetY，根据鼠标或触点位置换算
+            if (typeof x !== "number" || typeof y !== "number") {
+                const point = (event.touches && event.touches[0]) ||
+                    (event.changedTouches && event.changedTouches[0]) || event
+                const rect = this.__canvas.getBoundingClientRect()
+                x = point.clientX - rect.left
+                y = point.clientY - rect.top
+            }
+
+            this.getRegion(x, y).then(regionName => {
+                callback(regionName, x, y)
             })
-        })
+        }
+
+        this.__el.addEventListener(eventName, handler)
+        this.__listeners.push({ type: eventName, handler })
+        return this
+    }
+
+    // 解绑事件，不传递名称表示全部解绑
+    off(eventName?: string) {
+        for (let index = this.__listeners.length - 1; index >= 0; index--) {
+            const item = this.__listeners[index]
+            if (!eventName || item.type === eventName) {
+                this.__el.removeEventListener(item.type, item.handler)
+                this.__listeners.splice(index, 1)
+            }
+        }
+        return this
+    }
+
+    // 销毁画笔：解绑事件、移除创建的画布
+    destroy() {
+        this.off()
+
+        if (this.__canvas && this.__canvas.parentNode) {
+            this.__canvas.parentNode.removeChild(this.__canvas)
+        }
+
+        const _el = this.__el as any
+        if (Array.isArray(_el._vislite_canvas_) && _el._vislite_canvas_[0] === this.__canvas) {
+            delete _el._vislite_canvas_
+        }
         return this
     }
 }

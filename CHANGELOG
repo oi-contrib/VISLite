@@ -415,3 +415,7 @@ v2.0.0:
             * 修复 npm test 未单次运行导致进程挂起
             * 修复 lint 脚本在 sh 下只展开一层目录、漏检 src 根级文件
             * 修复 build 脚本 terser 失败分支调用未定义函数
+      - 新增功能
+        1、Canvas画笔
+            * 新增 off、destroy，支持解绑事件与销毁画笔
+            * bind 支持 touch 等没有 offsetX/offsetY 的事件
