@@ -410,6 +410,7 @@ v2.0.0:
         1、Canvas画笔
             * 修复 getRegion 在小程序端读取失败（坐标越界、画布已销毁）时 Promise 永远挂起
             * 修复区域命中使用精确 rgb 比对导致抗锯齿边缘、细线区域不响应
+            * 修复同一个容器先后使用 Canvas 与 WebGL 画笔时，缓存互相覆盖导致的构造异常
             * 修复 clearCircle 修改合成模式后未恢复，影响后续绘制
             * 修复 drawImage 图片加载失败时 Promise 永远挂起
             * 修复 strokeTexts、fullTexts 的区域记录错误调用了 fillTexts

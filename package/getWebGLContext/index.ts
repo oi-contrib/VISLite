@@ -6,24 +6,30 @@ export default (el: HTMLElement | null, scale: number = 1, mode?: WebGLmodeType)
         throw new Error("VISLite getWebGLContext:The mount point requires an HTMLElement type but encountered null.")
     }
 
-    let width = el.clientWidth, height = el.clientHeight
+    const width = el.clientWidth, height = el.clientHeight
 
-    let ViewCanvas: HTMLCanvasElement
+    let ViewCanvas: HTMLCanvasElement | null = null
 
-    let _el = el as any
+    const _el = el as any
 
-    // 如果已经初始化过了
-    if (_el._vislite_canvas_) {
+    // 优先使用 WebGL 专属缓存，避免和 Canvas 画笔共用 _vislite_canvas_ 而互相覆盖
+    // 2026年11月25日 于南京
+    if (_el._vislite_webgl_canvas_) {
+        ViewCanvas = _el._vislite_webgl_canvas_
+    }
+
+    // 兼容旧版缓存：老版本把 WebGL 画布存放在 _vislite_canvas_ 上（单个元素，不是数组）
+    else if (_el._vislite_canvas_ && !Array.isArray(_el._vislite_canvas_)) {
         ViewCanvas = _el._vislite_canvas_
     }
 
     // 否则就初始化
-    else {
+    if (!ViewCanvas) {
 
         ViewCanvas = document.createElement('canvas')
         el.appendChild(ViewCanvas)
 
-        _el._vislite_canvas_ = ViewCanvas
+        _el._vislite_webgl_canvas_ = ViewCanvas
 
         el.setAttribute('vislite', 'WebGL')
 
