@@ -44,6 +44,39 @@ export default interface CanvasType {
     fullText(text: any, x: number, y: number, deg?: number): this
 
     /**
+     * 绘制多行实心文字
+     * @param contents 需要绘制的文字内容
+     * @param x 绘制位置的x坐标
+     * @param y 绘制位置的y坐标
+     * @param width 绘制区域的宽度，超出会自动换行
+     * @param lineHeight 可选，行高倍数，默认1.2
+     * @param deg 可选，文字旋转角度
+     */
+    fillTexts(contents: string, x: number, y: number, width: number, lineHeight?: number, deg?: number): number
+
+    /**
+     * 绘制多行空心文字
+     * @param contents 需要绘制的文字内容
+     * @param x 绘制位置的x坐标
+     * @param y 绘制位置的y坐标
+     * @param width 绘制区域的宽度，超出会自动换行
+     * @param lineHeight 可选，行高倍数，默认1.2
+     * @param deg 可选，文字旋转角度
+     */
+    strokeTexts(contents: string, x: number, y: number, width: number, lineHeight?: number, deg?: number): number
+
+    /**
+     * 绘制多行空实心文字
+     * @param contents 需要绘制的文字内容
+     * @param x 绘制位置的x坐标
+     * @param y 绘制位置的y坐标
+     * @param width 绘制区域的宽度，超出会自动换行
+     * @param lineHeight 可选，行高倍数，默认1.2
+     * @param deg 可选，文字旋转角度
+     */
+    fullTexts(contents: string, x: number, y: number, width: number, lineHeight?: number, deg?: number): number
+
+    /**
      * 计算文字宽
      * @param text 需要计算宽的文字
      */
@@ -274,6 +307,11 @@ export default interface CanvasType {
     getRegion(x: number, y: number): Promise<string>
 
     /**
+     * 清空区域映射与区域画布（清空后需要重新绘制才会重新记录区域）
+     */
+    clearRegion(): this
+
+    /**
      * 把画布变成url
      * @param type 【仅H5端有效】字符串类型，可选，表示要导出的图片格式，默认为 "image/png"（还可以设置为 "image/jpeg"、"image/webp" 等格式）
      * @param encoderOptions 【仅H5端有效】数值类型，可选，用于指定图像的质量，默认0.92，如果设置了该参数，则只对 "image/jpeg" 和 "image/webp" 格式有效，取值范围是 0 到 1 之间，其中 1 表示最高质量，0 表示最低质量。对于 PNG 格式，此参数无效。
@@ -337,7 +375,7 @@ export default interface CanvasType {
      * @param reserve 是否保留当前画布上的内容
      * @param callback 绘制完成后回调
      */
-    draw(reserve?: boolean, callback?: Function): void
+    draw(reserve?: boolean, callback?: Function): Promise<any>
 
     /**
      * 绘制图片
@@ -355,6 +393,17 @@ export default interface CanvasType {
      * @param callback 回调函数
      */
     bind(eventName: string, callback: (regionName: string, x: number, y: number) => void): this
+
+    /**
+     * 解绑事件（仅H5可用），不传递事件名称表示全部解绑
+     * @param eventName 事件名称
+     */
+    off(eventName?: string): this
+
+    /**
+     * 销毁画笔（仅H5可用），会解绑事件并移除创建的画布
+     */
+    destroy(): this
 
     /**
      * 将画布的坐标原点向左右方向移动dx，向上下方向移动dy

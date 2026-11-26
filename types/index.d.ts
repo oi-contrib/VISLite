@@ -21,6 +21,7 @@ import SVGType from './SVG'
 import CanvasType from './Canvas'
 
 import CanvasOptionType from './CanvasOption'
+import CanvasOptsType from './CanvasOpts'
 
 import getWebGLContextType from './getWebGLContext'
 import ShaderType from './Shader'
@@ -66,8 +67,9 @@ interface NewSVGType extends SVGType {
 interface NewCanvasType extends CanvasType {
     new(el: HTMLElement | null, option?: CanvasOptionType, width?: number, height?: number): CanvasType
 }
-interface NewRawCanvasType extends CanvasType {
-    new(canvas: any, region?: any, scaleSize?: number): CanvasType
+// RawCanvas 没有事件绑定、导出图片与销毁能力，避免类型上过度承诺
+interface NewRawCanvasType {
+    new(canvas: any, region?: any, opts?: CanvasOptsType, scaleSize?: number): Omit<CanvasType, "bind" | "off" | "destroy" | "toDataURL">
 }
 
 // WebGL构造函数类型

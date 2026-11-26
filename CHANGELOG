@@ -424,3 +424,4 @@ v2.0.0:
             * 新增 clearRegion（清空区域映射与区域画布）
             * 新增 off、destroy，支持解绑事件与销毁画笔
             * bind 支持 touch 等没有 offsetX/offsetY 的事件
+            * 补齐 fillTexts、strokeTexts、fullTexts 的类型定义
