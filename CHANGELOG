@@ -428,16 +428,19 @@ v2.0.0:
             * 使用 files 白名单替代 .npmignore，移除 src、package 等构建源码（文件数 262 → 171）
             * 随之不再支持 `vislite/package/index` 这类源码深引入（1.x 曾随包分发源码），需要源码请从仓库获取
             * oipage 调整为开发期依赖，避免小程序「构建 npm」重复打包
+            * 新增独立 @vislite/cli 包，vislite 不再随包分发 CLI 与 skills（命令与参数保持不变，需单独安装）
         2、工程化
             * 修复 tsconfig 包含 node_modules/@types 导致 tsc 开箱报错
             * 修复 npm test 未单次运行导致进程挂起
             * 修复 lint 脚本在 sh 下只展开一层目录、漏检 src 根级文件
             * 修复 build 脚本 terser 失败分支调用未定义函数
       - 新增功能
-        1、Canvas画笔
+        1、@vislite/cli
+            * skills 相关操作（--copy、--force）
+        2、Canvas画笔
             * 新增 clearRegion（清空区域映射与区域画布）
             * 新增 off、destroy，支持解绑事件与销毁画笔
             * bind 支持 touch 等没有 offsetX/offsetY 的事件
             * 补齐 fillTexts、strokeTexts、fullTexts 的类型定义
-        2、布局
+        3、布局
             * BarLayout 新增过渡插值，unbind 时停止动画

@@ -1,0 +1,54 @@
+{
+  "name": "@vislite/cli",
+  "version": "1.12.0",
+  "description": "VISLite 官方命令行工具：skills 文档分发、支付宝小程序组件构建",
+  "bin": {
+    "vislite-cli": "bin/run"
+  },
+  "files": [
+    "bin",
+    "skills",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "prepublishOnly": "node ../scripts/publish.js --mode=error"
+  },
+  "dependencies": {
+    "oipage": "^2.1.0"
+  },
+  "peerDependencies": {
+    "vislite": "^1.12.0"
+  },
+  "peerDependenciesMeta": {
+    "vislite": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oi-contrib/VISLite.git"
+  },
+  "keywords": [
+    "vislite",
+    "cli",
+    "skills",
+    "miniprogram",
+    "alipay",
+    "uniapp",
+    "canvas",
+    "visualization"
+  ],
+  "author": {
+    "name": "zxl20070701",
+    "url": "https://zxl20070701.github.io/notebook/home.html"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oi-contrib/VISLite/issues"
+  },
+  "homepage": "https://oi-contrib.github.io/VISLite"
+}
