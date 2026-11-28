@@ -427,6 +427,7 @@ v2.0.0:
             * 构建入口整理：具名 ESM 入口统一为 package/index.esm.ts，构建脚本改为「显式入口 + 目录扫描」
             * 使用 files 白名单替代 .npmignore，移除 src、package 等构建源码（文件数 262 → 171）
             * 随之不再支持 `vislite/package/index` 这类源码深引入（1.x 曾随包分发源码），需要源码请从仓库获取
+            * oipage 调整为开发期依赖，避免小程序「构建 npm」重复打包
         2、工程化
             * 修复 tsconfig 包含 node_modules/@types 导致 tsc 开箱报错
             * 修复 npm test 未单次运行导致进程挂起

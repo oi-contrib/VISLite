@@ -95,6 +95,7 @@
     "karma-chrome-launcher": "^3.1.0",
     "karma-jasmine": "^4.0.1",
     "karma-webpack": "^5.0.0",
+    "oipage": "^2.1.0",
     "rollup": "^3.20.6",
     "terser": "^5.17.1",
     "ts-loader": "^9.2.8",
@@ -106,8 +107,5 @@
   },
   "bin": {
     "vislite-cli": "bin/run"
-  },
-  "dependencies": {
-    "oipage": "^2.1.0"
   }
 }
